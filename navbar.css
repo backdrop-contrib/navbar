@@ -1,0 +1,87 @@
+/* @group Spark icons */
+
+[data-icon]:before {
+  font-family: 'Spark Icons', symbol;
+  margin-right: 5px;
+  content: attr(data-icon);
+  speak: none;
+}
+
+/* @group Toolbar */
+
+body {
+  padding-top: 3em;
+}
+
+#navbar {
+  font-weight: bold;
+  color: #ccc;
+  background-color: #010101;
+  padding: 8px 0;
+  zoom: 1;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+}
+#navbar:before, #navbar:after {
+  display: table;
+  content: "";
+}
+#navbar:after {
+  clear: both;
+}
+#navbar ul {
+  margin: 0;
+  padding: 0;
+}
+#navbar ul li {
+  list-style: none;
+  display: inline;
+  padding: 8px 12px;
+}
+#navbar ul li a {
+  color: #ccc;
+}
+#navbar ul li a:hover, #navbar ul li a:active, #navbar ul li.active a {
+  text-decoration: none;
+  color: #fff;
+}
+#navbar ul [data-icon]:before {
+  font-size: 180%;
+}
+#navbar ul#navbar-menu {
+  float: left;
+  width: 50%;
+}
+#navbar ul#navbar-menu .screen-reader-text {
+  position: relative;
+  bottom: 3px;
+}
+#navbar ul#navbar-user {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+#navbar ul#navbar-user .screen-reader-text {
+  position: relative;
+  bottom: 3px;
+}
+#navbar ul#navbar-user li.pulldown [data-icon]:before {
+  font-size: 100%;
+}
+#navbar ul#navbar-user li.pulldown .screen-reader-text {
+  display: none;
+  position: relative;
+  bottom: 0;
+}
+
+@media (max-width: 480px) {
+  #navbar .screen-reader-text {
+    display: none;
+  }
+}

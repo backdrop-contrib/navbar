@@ -1,0 +1,99 @@
+<?php
+
+/**
+ * @file
+ * Mobile friendly navigation toolbar functionality.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function navbar_permission() {
+  return array(
+    'access navbar' => array(
+      'title' => t('Use the navigation toolbar'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function navbar_theme($existing, $type, $theme, $path) {
+  $items['navbar'] = array(
+    'render element' => 'navbar',
+    'template' => 'navbar',
+    'path' => drupal_get_path('module', 'navbar'),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_page_build().
+ *
+ * Add navigation bar to the page_top region automatically.
+ */
+function navbar_page_build(&$page) {
+  $page['page_top']['navbar'] = array(
+    '#pre_render' => array('navbar_pre_render'),
+    '#access' => user_access('access navbar'),
+  );
+}
+
+/**
+ * Prerender function for the navigation bar.
+ *
+ * Since building the toolbar takes some time, it is done just prior to
+ * rendering to ensure that it is built only if it will be displayed.
+ */
+function navbar_pre_render($navbar) {
+  $navbar = array_merge($navbar, navbar_view());
+  return $navbar;
+}
+
+/**
+ * Implements hook_preprocess_html().
+ *
+ * Add some page classes, so global page theming can adjust to the toolbar.
+ */
+function navbar_preprocess_html(&$vars) {
+  if (isset($vars['page']['page_top']['navbar']) && user_access('access navbar')) {
+    $vars['classes_array'][] = 'navbar';
+  }
+}
+
+/**
+ * Implements hook_preprocess_navbar().
+ *
+ * Adding the 'overlay-displace-top' class to the toolbar pushes the overlay
+ * down, so it appears below the toolbar.
+ */
+function navbar_preprocess_toolbar(&$variables) {
+  $variables['classes_array'][] = "overlay-displace-top";
+}
+
+/**
+ * Builds the navigation bar as a structured array ready for drupal_render().
+ *
+ * @return
+ *   Array to render to display the navigation bar.
+ */
+function navbar_view() {
+  $module_path = drupal_get_path('module', 'navbar');
+  $build = array(
+    '#theme' => 'navbar',
+    '#attached'=> array(
+      'js' => array(
+        $module_path . '/navbar.js',
+        array(
+          'data' => array('tableHeaderOffset' => 'Drupal.navbar.height'),
+          'type' => 'setting'
+        ),
+      ),
+      'css' => array(
+        $module_path . '/navbar.css',
+      ),
+    ),
+  );
+  return $build;
+}
