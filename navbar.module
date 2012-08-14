@@ -93,6 +93,9 @@ function navbar_view() {
       'css' => array(
         $module_path . '/navbar.css',
       ),
+      'library' => array(
+        array('iconfonts', 'spark_icons'),
+      ),
     ),
   );
   return $build;

@@ -1,7 +1,7 @@
 /* @group Spark icons */
 
 [data-icon]:before {
-  font-family: 'Spark Icons', symbol;
+  font-family: 'spark_icons', symbol;
   margin-right: 5px;
   content: attr(data-icon);
   speak: none;
