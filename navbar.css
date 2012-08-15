@@ -89,7 +89,7 @@ body {
 /**
  * Tab bar.
  */
-#navbar-drawer .tabs.primary {
+#navbar-drawer {
   overflow: hidden;
   position: relative;
   background-color: #555;
@@ -97,6 +97,8 @@ body {
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   z-index: 100;
+}
+#navbar-drawer .tabs.primary {
   border: 0;
 }
 #navbar-drawer .tabs.secondary {

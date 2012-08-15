@@ -12,7 +12,15 @@ Drupal.behaviors.navbar = {
 };
 
 Drupal.navbar.height = function() {
-  var $navbar = $('#navbar');
+  return Drupal.navbar.heightOf('#navbar');
+}
+
+Drupal.navbar.drawerHeight = function() {
+  return Drupal.navbar.heightOf('#navbar-drawer');
+};
+
+Drupal.navbar.heightOf = function(selector) {
+  var $navbar = $(selector);
   var height = $navbar.outerHeight();
   // In modern browsers (including IE9), when box-shadow is defined, use the
   // normal height.
