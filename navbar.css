@@ -96,7 +96,7 @@ body {
   -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-  z-index: 100;
+  z-index: 999;
   width: 100%;
 }
 #navbar-drawer .tabs.primary {
