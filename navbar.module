@@ -63,6 +63,17 @@ function navbar_preprocess_html(&$vars) {
 }
 
 /**
+ * Implements hook_preprocess_page().
+ *
+ * Drop tabs from the page altogether. They are displayed in the navbar.
+ */
+function navbar_preprocess_page(&$vars) {
+  if (isset($vars['tabs'])) {
+    unset($vars['tabs']);
+  }
+}
+
+/**
  * Implements hook_preprocess_navbar().
  *
  * Adding the 'overlay-displace-top' class to the toolbar pushes the overlay
@@ -98,5 +109,17 @@ function navbar_view() {
       ),
     ),
   );
+
+  $build['navbar_drawer'] = array(
+    menu_local_tabs(),
+  );
+
+  // Prepare the drawer links CSS classes.
+  $navbar_drawer_classes = array(
+    'navbar-drawer',
+    'clearfix',
+  );
+  $build['navbar_drawer_classes'] = implode(' ', $navbar_drawer_classes);
+
   return $build;
 }

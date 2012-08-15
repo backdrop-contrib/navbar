@@ -85,3 +85,113 @@ body {
     display: none;
   }
 }
+
+/**
+ * Tab bar.
+ */
+#navbar-drawer .tabs.primary {
+  overflow: hidden;
+  position: relative;
+  background-color: #555;
+  -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  z-index: 100;
+  border: 0;
+}
+#navbar-drawer .tabs.secondary {
+  clear: both;
+  overflow: hidden;
+  position: relative;
+  background-color: #333;
+  -moz-box-shadow: 0 4px 3px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 4px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 3px rgba(0,0,0,0.2);
+  z-index: 150;
+  border: 0;
+}
+
+#navbar-drawer ul.primary li a:link,
+#navbar-drawer ul.primary li a.active,
+#navbar-drawer ul.primary li a:active,
+#navbar-drawer ul.primary li a:visited,
+#navbar-drawer ul.primary li a:hover,
+#navbar-drawer ul.primary li.active a {
+  border: 0;
+}
+
+/**
+ * Tabs.
+ */
+ul.primary {
+  /* float: right; */
+  font-size: 1em;
+  height: 2.6em;
+  margin: 0;
+  padding-top: 0;
+}
+ul.primary li {
+  float: left; /* LTR */
+  list-style: none;
+}
+ul.primary li a:link,
+ul.primary li a.active,
+ul.primary li a:active,
+ul.primary li a:visited,
+ul.primary li a:hover,
+ul.primary li.active a {
+  display: block;
+  float: left; /* LTR */
+  height: 100%;
+  line-height: 1.8em;
+  padding: 5px 15px 15px;
+  background: none;
+  color: #ccc;
+  font-weight: bold;
+}
+ul.primary li a {
+  background: none;
+}
+ul.primary li.active a,
+ul.primary li.active a.active,
+ul.primary li.active a:active,
+ul.primary li.active a:visited {
+  background-color: #333;
+  color: #fff;
+}
+ul.primary li a:hover {
+  color: #fff;
+}
+ul.primary li.active a:hover {
+  color: #eee;
+}
+ul.secondary {
+  font-size: 0.923em;
+  padding: 8px 0 8px;
+  line-height: 1.8em;
+  height: 100%;
+  overflow: hidden;
+  font-weight: bold;
+  margin: 0;
+}
+ul.secondary li {
+  display: block;
+  float: left; /* LTR */
+  border: 0;
+}
+ul.secondary li a {
+  color: #bbb;
+}
+ul.secondary li a,
+ul.secondary li a:hover,
+ul.secondary li.active a,
+ul.secondary li.active a.active {
+  padding: 10px 15px 15px;
+}
+ul.secondary li.active a,
+ul.secondary li.active a.active {
+  color: #fff;
+}
+ul.secondary li a:hover {
+  color: #eee;
+}

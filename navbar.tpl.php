@@ -8,6 +8,8 @@
  * - $classes: String of classes that can be used to style contextually through
  *   CSS. It can be manipulated through the variable $classes_array from
  *   preprocess functions.
+ * - $navbar['navbar_drawer_classes']: CSS classes to put on the drawer.
+ * - $navbar['navbar_drawer']: A place for extended toolbar content.
  *
  * Other variables:
  * - $classes_array: Array of html class attribute values. It is flattened
@@ -48,4 +50,8 @@
       </li>
     </ul>
   </div>
+</div>
+
+<div id="navbar-drawer" class="<?php echo $navbar['navbar_drawer_classes']; ?>">
+  <?php print render($navbar['navbar_drawer']); ?>
 </div>
