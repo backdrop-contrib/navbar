@@ -101,6 +101,7 @@ body {
 }
 #navbar-drawer .tabs.primary {
   border: 0;
+  overflow: hidden;
 }
 #navbar-drawer .tabs.secondary {
   clear: both;
