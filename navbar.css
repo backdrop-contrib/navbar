@@ -10,7 +10,7 @@
 /* @group Toolbar */
 
 body {
-  padding-top: 3em;
+  padding-top: 8em;
 }
 
 #navbar {
@@ -91,12 +91,13 @@ body {
  */
 #navbar-drawer {
   overflow: hidden;
-  position: relative;
+  position: fixed;
   background-color: #555;
   -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   z-index: 100;
+  width: 100%;
 }
 #navbar-drawer .tabs.primary {
   border: 0;

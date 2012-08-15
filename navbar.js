@@ -7,7 +7,8 @@ Drupal.navbar = Drupal.navbar || {};
  */
 Drupal.behaviors.navbar = {
   attach: function(context) {
-    $('body').css('paddingTop', Drupal.navbar.height());
+    $('body').css('paddingTop', Drupal.navbar.height() + Drupal.navbar.drawerHeight());
+    $('#navbar-drawer').css('top', Drupal.navbar.height());
   }
 };
 
