@@ -69,7 +69,7 @@ function navbar_preprocess_html(&$vars) {
  */
 function navbar_preprocess_page(&$vars) {
   if (isset($vars['tabs'])) {
-    $vars['tabs'] = '';
+    $vars['tabs'] = array('#primary' => array(), '#secondary' => array());
   }
 }
 
