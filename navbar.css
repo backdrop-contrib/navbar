@@ -14,23 +14,24 @@ body {
 }
 
 #navbar {
-  font-weight: bold;
-  color: #ccc;
   background-color: #010101;
-  padding: 8px 0;
-  zoom: 1;
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 0;
-  z-index: 1000;
   -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+  color: #ccc;
+  font-weight: bold;
+  left: 0;
+  padding: 8px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  zoom: 1;
 }
-#navbar:before, #navbar:after {
-  display: table;
+#navbar:before,
+#navbar:after {
   content: "";
+  display: table;
 }
 #navbar:after {
   clear: both;
@@ -40,44 +41,46 @@ body {
   padding: 0;
 }
 #navbar ul li {
-  list-style: none;
   display: inline;
+  list-style: none;
   padding: 8px 12px;
 }
 #navbar ul li a {
   color: #ccc;
 }
-#navbar ul li a:hover, #navbar ul li a:active, #navbar ul li.active a {
-  text-decoration: none;
+#navbar ul li a:hover,
+#navbar ul li a:active,
+#navbar ul li.active a {
   color: #fff;
+  text-decoration: none;
 }
 #navbar ul [data-icon]:before {
   font-size: 180%;
 }
-#navbar ul#navbar-menu {
+#navbar #navbar-menu {
   float: left;
   width: 50%;
 }
-#navbar ul#navbar-menu .screen-reader-text {
-  position: relative;
+#navbar #navbar-menu .screen-reader-text {
   bottom: 3px;
+  position: relative;
 }
-#navbar ul#navbar-user {
+#navbar #navbar-user {
   float: right;
-  width: 50%;
   text-align: right;
+  width: 50%;
 }
-#navbar ul#navbar-user .screen-reader-text {
-  position: relative;
+#navbar #navbar-user .screen-reader-text {
   bottom: 3px;
+  position: relative;
 }
-#navbar ul#navbar-user li.pulldown [data-icon]:before {
+#navbar #navbar-user .pulldown [data-icon]:before {
   font-size: 100%;
 }
-#navbar ul#navbar-user li.pulldown .screen-reader-text {
+#navbar #navbar-user .pulldown .screen-reader-text {
+  bottom: 0;
   display: none;
   position: relative;
-  bottom: 0;
 }
 
 @media (max-width: 480px) {
@@ -90,29 +93,29 @@ body {
  * Tab bar.
  */
 #navbar-drawer {
-  overflow: hidden;
-  position: fixed;
   background-color: #555;
   -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
   box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-  z-index: 999;
+  overflow: hidden;
+  position: fixed;
   width: 100%;
+  z-index: 999;
 }
 #navbar-drawer .tabs.primary {
   border: 0;
   overflow: hidden;
 }
 #navbar-drawer .tabs.secondary {
-  clear: both;
-  overflow: hidden;
-  position: relative;
   background-color: #333;
+  border: 0;
   -moz-box-shadow: 0 4px 3px rgba(0,0,0,0.2);
   -webkit-box-shadow: 0 4px 3px rgba(0,0,0,0.2);
   box-shadow: 0 5px 3px rgba(0,0,0,0.2);
+  clear: both;
+  overflow: hidden;
+  position: relative;
   z-index: 150;
-  border: 0;
 }
 
 #navbar-drawer ul.primary li a:link,
@@ -144,14 +147,14 @@ ul.primary li a:active,
 ul.primary li a:visited,
 ul.primary li a:hover,
 ul.primary li.active a {
-  display: block;
-  float: left; /* LTR */
-  height: 100%;
-  line-height: 1.8em;
-  padding: 5px 15px 15px;
   background: none;
   color: #ccc;
+  display: block;
+  float: left; /* LTR */
   font-weight: bold;
+  height: 100%;
+  line-height: 1.8em;
+  padding: 5px 15px;
 }
 ul.primary li a {
   background: none;
@@ -171,17 +174,17 @@ ul.primary li.active a:hover {
 }
 ul.secondary {
   font-size: 0.923em;
-  padding: 8px 0 8px;
-  line-height: 1.8em;
-  height: 100%;
-  overflow: hidden;
   font-weight: bold;
+  height: 100%;
+  line-height: 1.8em;
   margin: 0;
+  overflow: hidden;
+  padding: 8px 0 8px;
 }
 ul.secondary li {
+  border: 0;
   display: block;
   float: left; /* LTR */
-  border: 0;
 }
 ul.secondary li a {
   color: #bbb;
@@ -190,7 +193,7 @@ ul.secondary li a,
 ul.secondary li a:hover,
 ul.secondary li.active a,
 ul.secondary li.active a.active {
-  padding: 10px 15px 15px;
+  padding: 10px 15px;
 }
 ul.secondary li.active a,
 ul.secondary li.active a.active {
