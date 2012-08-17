@@ -1,6 +1,6 @@
 /* @group Spark icons */
 
-[data-icon]:before {
+#navbar [data-icon]:before {
   font-family: 'spark_icons', symbol;
   margin-right: 5px;
   content: attr(data-icon);
