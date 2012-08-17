@@ -12,7 +12,6 @@
 body {
   padding-top: 8em;
 }
-
 #navbar {
   background-color: #010101;
   -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
@@ -133,9 +132,9 @@ body {
 ul.primary {
   /* float: right; */
   font-size: 1em;
-  height: 2.6em;
+  height: 2.5em;
   margin: 0;
-  padding-top: 0;
+  padding: 0;
 }
 ul.primary li {
   float: left; /* LTR */
@@ -158,6 +157,7 @@ ul.primary li.active a {
 }
 ul.primary li a {
   background: none;
+  height: 2.5em;
 }
 ul.primary li.active a,
 ul.primary li.active a.active,
@@ -185,6 +185,7 @@ ul.secondary li {
   border: 0;
   display: block;
   float: left; /* LTR */
+  padding: 0;
 }
 ul.secondary li a {
   color: #bbb;
@@ -194,6 +195,7 @@ ul.secondary li a:hover,
 ul.secondary li.active a,
 ul.secondary li.active a.active {
   padding: 10px 15px;
+  border: 0;
 }
 ul.secondary li.active a,
 ul.secondary li.active a.active {
