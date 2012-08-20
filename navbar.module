@@ -96,9 +96,6 @@ function navbar_view() {
     '#attached'=> array(
       'js' => array(
         $module_path . '/js/navbar.js',
-        array(
-          'type' => 'setting'
-        ),
       ),
       'css' => array(
         $module_path . '/css/navbar.css',
