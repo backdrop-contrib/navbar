@@ -204,3 +204,110 @@ ul.secondary li.active a.active {
 ul.secondary li a:hover {
   color: #eee;
 }
+/**
+ * Admin toolbar overrides (admin.toolbar.css).
+ */
+div#admin-toolbar {
+  margin-top: 65px;
+}
+div#admin-toolbar * {
+  font: 1.03em 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Segoe UI', sans-serif;
+}
+div#admin-toolbar a {
+  font-weight: bold;
+}
+div#admin-toolbar ul.menu li.leaf, div#admin-toolbar ul.drilldown-active-menu li {
+  height: 34px;
+  border-bottom: 1px solid #ccc;
+}
+div#admin-toolbar ul.menu li a {
+  height: 18px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  color: black;
+  border-bottom: 0;
+}
+div#admin-toolbar ul.menu li a.active {
+  color: white;
+}
+div#admin-toolbar div.block-content {
+  left: 0;
+  right: 0;
+}
+div#admin-toolbar span.admin-toggle, body.admin-expanded div#admin-toolbar span.admin-toggle {
+  top: 50%;
+  width: 14px;
+  height: 37px;
+  background: #333 url('../images/pullout.png') no-repeat 0 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 3px 3px #999;
+  -moz-box-shadow: 0 3px 3px #999;
+  box-shadow: 0 3px 3px #999;
+}
+div#admin-toolbar span.admin-toggle {
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topleft: 0;
+  border-top-left-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -moz-border-radius-bottomleft: 0;
+  border-bottom-left-radius: 0;
+}
+body.admin-expanded div#admin-toolbar span.admin-toggle {
+  background-position: 0 -37px;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-topright: 0;
+  border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 0;
+  -moz-border-radius-bottomright: 0;
+  border-bottom-right-radius: 0;
+  left: 246px;
+}
+div#admin-toolbar .admin-tabs {
+  /* STOPGAP: Preprocess */
+  display: none;
+}
+/* Get rid of option to have vertical + horizontal? */
+div#admin-toolbar.vertical div.admin-blocks {
+  background-color: white !important;
+  width: 260px !important;
+}
+div#admin-toolbar.vertical div.admin-blocks-5 {
+  border-right: 1px solid #666;
+  background-image: none;
+}
+div#admin-toolbar.vertical div.admin-blocks-5 div.admin-block {
+  top: 25px;
+}
+div#admin-toolbar.vertical div.admin-block {
+  padding: 0;
+  width: auto;
+}
+div#admin-toolbar.vertical div.admin-block.drilldown {
+  display: block;
+}
+
+/* Update options. */
+div.admin-options {
+  background: #f8f8f8;
+  line-height: 30px;
+  height: 30px;
+  padding: 9px;
+  border: 1px solid #ccc;
+  margin: 0 0 10px;
+}
+div.admin-options label {
+  text-transform: uppercase;
+  font: 0.846em/1.875em Lucida Grande, Lucida Sans Unicode, sans-serif;
+}
+div.admin-options label,
+div.admin-options div.form-item {
+  margin-right: 10px; /* LTR */
+  float: left; /* LTR */
+}
+div.admin-options div.form-item {
+  padding: 0;
+  border: 0;
+}
