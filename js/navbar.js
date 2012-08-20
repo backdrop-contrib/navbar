@@ -9,6 +9,14 @@ Drupal.behaviors.navbar = {
   attach: function(context) {
     $('body').css('paddingTop', Drupal.navbar.height() + Drupal.navbar.drawerHeight());
     $('#navbar-drawer').css('top', Drupal.navbar.height());
+    // The following code is just for demo. Please rip it out fast.
+    $('#admin-toolbar ul.drilldown-active-menu li').once('navbar-menu-items', function (index, element) {
+      $(this).prepend(
+        $('<span>', {
+          'class': 'navbar-icon'
+        })
+      );
+    });
   }
 };
 

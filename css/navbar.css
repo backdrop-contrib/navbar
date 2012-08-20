@@ -217,19 +217,14 @@ div#admin-toolbar a {
   font-weight: bold;
 }
 div#admin-toolbar ul.menu li.leaf, div#admin-toolbar ul.drilldown-active-menu li {
-  height: 34px;
   border-bottom: 1px solid #ccc;
 }
 div#admin-toolbar ul.menu li a {
-  height: 18px;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
   color: black;
   border-bottom: 0;
-}
-div#admin-toolbar ul.menu li a.active {
-  color: white;
 }
 div#admin-toolbar div.block-content {
   left: 0;
@@ -310,4 +305,51 @@ div.admin-options div.form-item {
 div.admin-options div.form-item {
   padding: 0;
   border: 0;
+}
+/**
+ * Override for an admin module override of the admin_toolbar module.
+ * -- A morality tale of great !importance --
+ */
+
+.drilldown ul.menu li a {
+  display:block !important;
+}
+div#admin-toolbar ul.menu li a {
+  height: auto !important;
+  margin-left: 0;
+  padding-bottom: 1.25em !important;
+  padding-left: 35px !important;
+  padding-top: 1.25em !important;
+}
+#admin-toolbar ul.menu li a.active {
+  background-color: #eee;
+}
+#admin-toolbar ul.menu li.leaf,
+#admin-toolbar ul.drilldown-active-menu li {
+  height: auto;
+}
+#admin-toolbar ul.drilldown-active-menu li {
+  position: relative;
+}
+#admin-toolbar ul.drilldown-active-menu li,
+#admin-toolbar ul.drilldown-active-menu li.leaf {
+  background: none;
+}
+#admin-toolbar ul.drilldown-active-menu > li .navbar-icon {
+  display: block;
+  height: 15px;
+  left: 16px;
+  position: absolute;
+  top: 1.333333em;
+  width: 15px;
+}
+#admin-toolbar ul.drilldown-active-menu > .expanded .navbar-icon {
+  background: url(../images/sprite.png) -5px -90px no-repeat;
+}
+#admin-toolbar ul.drilldown-active-menu > .leaf .navbar-icon {
+  background: url(../images/sprite.png) -6px -116px no-repeat;
+}
+#admin-toolbar ul.menu li a:hover {
+  background: none !important;
+  background-color: #f8f8f8 !important;
 }
