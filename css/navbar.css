@@ -20,7 +20,7 @@ body {
   color: #ccc;
   font-weight: bold;
   left: 0;
-  padding: 8px 0;
+  padding: 8px 0 0;
   position: fixed;
   width: 100%;
   top: 0;
@@ -39,8 +39,8 @@ body {
   margin: 0;
   padding: 0;
 }
-#navbar ul li {
-  display: inline;
+#navbar .navbar-menu ul li {
+  display: inline-block;
   list-style: none;
   padding: 8px 12px;
 }
@@ -93,12 +93,8 @@ body {
  */
 #navbar-drawer {
   background-color: #555;
-  -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-  box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-  left: 0;
+  box-sizing: border-box; 
   overflow: hidden;
-  position: fixed;
   width: 100%;
   z-index: 999;
 }
@@ -130,8 +126,8 @@ body {
 /**
  * Tabs.
  */
-ul.primary {
-  /* float: right; */
+#navbar-drawer ul.primary {
+  float: left;
   font-size: 1em;
   height: 2.5em;
   margin: 0;

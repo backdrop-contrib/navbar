@@ -50,8 +50,7 @@
       </li>
     </ul>
   </div>
-</div>
-
-<div id="navbar-drawer" class="<?php echo $navbar['navbar_drawer_classes']; ?>">
-  <?php print render($navbar['navbar_drawer']); ?>
+  <div id="navbar-drawer" class="<?php echo $navbar['navbar_drawer_classes']; ?>">
+    <?php print render($navbar['navbar_drawer']); ?>
+  </div>
 </div>
