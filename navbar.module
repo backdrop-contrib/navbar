@@ -97,7 +97,6 @@ function navbar_view() {
       'js' => array(
         $module_path . '/js/navbar.js',
         array(
-          'data' => array('tableHeaderOffset' => 'Drupal.navbar.height'),
           'type' => 'setting'
         ),
       ),
