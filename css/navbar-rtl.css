@@ -1,0 +1,36 @@
+#navbar,
+#navbar * {
+  text-align: right;
+}
+#navbar ul li {
+  float: right;
+}
+#navbar ul li a {
+  display: inline-block;
+  float: none;
+  zoom: 1;
+}
+#navbar div.navbar-menu {
+  padding: 5px 50px 5px 50px;
+}
+#navbar-user {
+  float: left;
+}
+#navbar ul#navbar-user li {
+  float: none;
+  display: inline;
+}
+#navbar-menu {
+  float: none;
+}
+#navbar-home {
+  float: right;
+}
+#navbar ul li.home a {
+  position: absolute;
+  right: 10px;
+}
+#navbar div.navbar-menu a.toggle {
+  left: 10px;
+  right: auto;
+}

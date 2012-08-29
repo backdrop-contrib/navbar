@@ -1,352 +1,213 @@
-/* @group Spark icons */
 
-#navbar [data-icon]:before {
-  font-family: 'spark_icons', symbol;
-  margin-right: 5px;
-  content: attr(data-icon);
-  speak: none;
+body.navbar {
+  padding-top: 2.2em;
+}
+body.navbar-drawer {
+  padding-top: 5.3em;
 }
 
-/* @group Toolbar */
-
-body {
-  padding-top: 8em;
-}
-#navbar {
-  background-color: #010101;
-  -moz-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-  box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-  color: #ccc;
-  font-weight: bold;
-  left: 0;
-  padding: 8px 0 0;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  zoom: 1;
-}
-#navbar:before,
-#navbar:after {
-  content: "";
-  display: table;
-}
-#navbar:after {
-  clear: both;
-}
-#navbar ul {
-  margin: 0;
-  padding: 0;
-}
-#navbar .navbar-menu ul li {
-  display: inline-block;
+/**
+ * Aggressive resets so we can achieve a consistent look in hostile CSS
+ * environments.
+ */
+#navbar,
+#navbar * {
+  border: 0;
+  font-size: 100%;
+  line-height: inherit;
   list-style: none;
-  padding: 8px 12px;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  text-align: left; /* LTR */
+  vertical-align: baseline;
 }
-#navbar ul li a {
+
+/**
+ * Base styles.
+ *
+ * We use a keyword for the navbar font size to make it display consistently
+ * across different themes, while still allowing browsers to resize the text.
+ */
+#navbar {
+  background-color: #fff;
+  font: normal small "Lucida Grande", Verdana, sans-serif;
+}
+#navbar .navbar-bar {
+  background: #666;
   color: #ccc;
+  left: 0;
+  margin: 0 -20px;
+  padding: 0 20px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  box-shadow: 0 3px 20px #000;
+  z-index: 600;
 }
-#navbar ul li a:hover,
-#navbar ul li a:active,
-#navbar ul li.active a {
-  color: #fff;
+#navbar .navbar-tray {
+  background-color: #ffffff;
+  bottom: 0;
+  -moz-box-shadow: -10px 0 10px -10px black inset;
+  -webkit-box-shadow: -10px 0 10px -10px black inset;
+  box-shadow: -10px 0 10px -10px black inset;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  left: 0;
+  padding-right: 10px;
+  position: absolute;
+  top: 0;
+  z-index: 600;
+}
+#navbar div.collapsed {
+  display: none;
+  visibility: hidden;
+}
+#navbar a {
+  font-size: .846em;
   text-decoration: none;
 }
-#navbar ul [data-icon]:before {
-  font-size: 180%;
+#navbar .navbar-bar a {
+  color: #fff;
 }
-#navbar #navbar-menu {
-  float: left;
-  width: 50%;
+#navbar .navbar-bar ul li,
+#navbar .navbar-bar ul li a {
+  float: left; /* LTR */
 }
-#navbar #navbar-menu .screen-reader-text {
-  bottom: 3px;
+#navbar .navbar-tray ul li,
+#navbar .navbar-tray ul li a {
+
+}
+
+/**
+ * Administration menu.
+ */
+#navbar .navbar-menu {
+  background: #000;
+  line-height: 20px;
+  padding: 5px 50px 5px 10px; /* LTR */
   position: relative;
 }
-#navbar #navbar-user {
-  float: right;
-  text-align: right;
-  width: 50%;
+#navbar-home a span {
+  background: url(navbar.png) no-repeat 0 -45px;
+  display: block;
+  height: 14px;
+  margin: 3px 0px;
+  text-indent: -9999px;
+  vertical-align: text-bottom;
+  width: 11px;
 }
-#navbar #navbar-user .screen-reader-text {
-  bottom: 3px;
-  position: relative;
+#navbar-user {
+  float: right; /* LTR */
 }
-#navbar #navbar-user .pulldown [data-icon]:before {
-  font-size: 100%;
+.navbar-bar #navbar-menu {
+  float: left; /* LTR */
 }
-#navbar #navbar-user .pulldown .screen-reader-text {
+#navbar .navbar-menu a.toggle {
+  background: url(navbar.png) 0 -20px no-repeat;
   bottom: 0;
-  display: none;
-  position: relative;
+  cursor: pointer;
+  height: 25px;
+  overflow: hidden;
+  position: absolute;
+  right: 10px; /* LTR */
+  text-indent: -9999px;
+  width: 25px;
 }
-
-@media (max-width: 480px) {
-  #navbar .screen-reader-text {
-    display: none;
-  }
+#navbar div.navbar-menu a.toggle:focus,
+#navbar div.navbar-menu a.toggle:hover {
+  background-position:  -50px -20px;
+}
+#navbar div.navbar-menu a.toggle-active {
+  background-position:  -25px -20px;
+}
+#navbar div.navbar-menu a.toggle-active.toggle:focus,
+#navbar div.navbar-menu a.toggle-active.toggle:hover {
+  background-position:  -75px -20px;
+}
+#navbar div.navbar-menu ul li a {
+  padding: 0 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+#navbar div.navbar-menu ul li a:focus,
+#navbar div.navbar-menu ul li a:hover,
+#navbar div.navbar-menu ul li a:active,
+#navbar div.navbar-menu ul li a.active:focus {
+  background: #444;
+}
+#navbar div.navbar-menu ul li a.active:hover,
+#navbar div.navbar-menu ul li a.active:active,
+#navbar div.navbar-menu ul li a.active,
+#navbar div.navbar-menu ul li.active-trail a {
+  background: url(navbar.png) 0 0 repeat-x;
+  text-shadow: #333 0 1px 0;
 }
 
 /**
- * Tab bar.
+ * Collapsed drawer of shortcut navbar content.
  */
-#navbar-drawer {
-  background-color: #555;
-  box-sizing: border-box; 
-  overflow: hidden;
-  width: 100%;
-  z-index: 999;
+#navbar .navbar-drawer {
+  position: relative;
+  padding: 0 10px;
 }
-#navbar-drawer .tabs.primary {
-  border: 0;
-  overflow: hidden;
+
+/**
+ * Collapsed drawer of additional navbar content.
+ */
+#navbar a.navbar-toggle-tray {
+  float: left;
+  padding: 0 10px;
 }
-#navbar-drawer .tabs.secondary {
-  background-color: #333;
-  border: 0;
-  -moz-box-shadow: 0 4px 3px rgba(0,0,0,0.2);
-  -webkit-box-shadow: 0 4px 3px rgba(0,0,0,0.2);
-  box-shadow: 0 5px 3px rgba(0,0,0,0.2);
+#navbar .navbar-tray .filter-search {
+  border: 1px solid #ccc;
+  margin: 10px;
+}
+#navbar .navbar-tray ul li {
+  border-bottom: 1px solid #ccc;
+  display: block;
+}
+#navbar .navbar-tray ul
+#navbar .navbar-tray ul li.last {
+  border-bottom: 0 none;
+}
+#navbar .tray-menu {
   clear: both;
-  overflow: hidden;
-  position: relative;
-  z-index: 150;
 }
-
-#navbar-drawer ul.primary li a:link,
-#navbar-drawer ul.primary li a.active,
-#navbar-drawer ul.primary li a:active,
-#navbar-drawer ul.primary li a:visited,
-#navbar-drawer ul.primary li a:hover,
-#navbar-drawer ul.primary li.active a {
-  border: 0;
+#navbar .tray-menu a {
+  color: #000;
+  display: block;
+  padding: 10px;
 }
-
-/**
- * Tabs.
- */
-#navbar-drawer ul.primary {
+#navbar .tray-menu a:hover {
+  background-color: #fafafa;
+}
+#navbar .navbar-tray .filter {
+  color: #ccc;
   float: left;
   font-size: 1em;
-  height: 2.5em;
-  margin: 0;
-  padding: 0;
+  padding: 4px;
+  width: 10em;
 }
-ul.primary li {
-  float: left; /* LTR */
-  list-style: none;
+#navbar .navbar-tray .form-item {
+  float: left;
 }
-ul.primary li a:link,
-ul.primary li a.active,
-ul.primary li a:active,
-ul.primary li a:visited,
-ul.primary li a:hover,
-ul.primary li.active a {
-  background: none;
-  color: #ccc;
+#navbar .navbar-tray span.close {
+  float: left;
+  margin: 3px 4px 0 0;
+}
+#navbar .navbar-tray .filter-search a {
+  background-image: url("navbar.png");
+  border-color: #E4E4E4 #D2D2D2 #B4B4B4;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
   display: block;
-  float: left; /* LTR */
-  font-weight: bold;
-  height: 100%;
-  line-height: 1.8em;
-  padding: 5px 15px;
-}
-ul.primary li a {
-  background: none;
-  height: 2.5em;
-}
-ul.primary li.active a,
-ul.primary li.active a.active,
-ul.primary li.active a:active,
-ul.primary li.active a:visited {
-  background-color: #333;
-  color: #fff;
-}
-ul.primary li a:hover {
-  color: #fff;
-}
-ul.primary li.active a:hover {
-  color: #eee;
-}
-ul.secondary {
-  font-size: 0.923em;
-  font-weight: bold;
-  height: 100%;
-  line-height: 1.8em;
-  margin: 0;
+  float: left;
+  height: 16px;
+  margin: 13px 0 0;
+  -moz-border-radius: 10px;
   overflow: hidden;
-  padding: 8px 0 8px;
-}
-ul.secondary li {
-  border: 0;
-  display: block;
-  float: left; /* LTR */
-  padding: 0;
-}
-ul.secondary li a {
-  color: #bbb;
-}
-ul.secondary li a,
-ul.secondary li a:hover,
-ul.secondary li.active a,
-ul.secondary li.active a.active {
-  padding: 10px 15px;
-  border: 0;
-}
-ul.secondary li.active a,
-ul.secondary li.active a.active {
-  color: #fff;
-}
-ul.secondary li a:hover {
-  color: #eee;
-}
-/**
- * Admin toolbar overrides (admin.toolbar.css).
- */
-div#admin-toolbar {
-  margin-top: 65px;
-}
-div#admin-toolbar * {
-  font: 1.03em 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Segoe UI', sans-serif;
-}
-div#admin-toolbar a {
-  font-weight: bold;
-}
-div#admin-toolbar ul.menu li.leaf, div#admin-toolbar ul.drilldown-active-menu li {
-  border-bottom: 1px solid #ccc;
-}
-div#admin-toolbar ul.menu li a {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  color: black;
-  border-bottom: 0;
-}
-div#admin-toolbar div.block-content {
-  left: 0;
-  right: 0;
-}
-div#admin-toolbar span.admin-toggle, body.admin-expanded div#admin-toolbar span.admin-toggle {
-  top: 50%;
-  width: 14px;
-  height: 37px;
-  background: #333 url('../images/pullout.png') no-repeat 0 0;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 3px 3px #999;
-  -moz-box-shadow: 0 3px 3px #999;
-  box-shadow: 0 3px 3px #999;
-}
-div#admin-toolbar span.admin-toggle {
-  -webkit-border-top-left-radius: 0;
-  -moz-border-radius-topleft: 0;
-  border-top-left-radius: 0;
-  -webkit-border-bottom-left-radius: 0;
-  -moz-border-radius-bottomleft: 0;
-  border-bottom-left-radius: 0;
-}
-body.admin-expanded div#admin-toolbar span.admin-toggle {
-  background-position: 0 -37px;
-  -webkit-border-top-right-radius: 0;
-  -moz-border-radius-topright: 0;
-  border-top-right-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
-  -moz-border-radius-bottomright: 0;
-  border-bottom-right-radius: 0;
-  left: 246px;
-}
-div#admin-toolbar .admin-tabs {
-  /* STOPGAP: Preprocess */
-  display: none;
-}
-/* Get rid of option to have vertical + horizontal? */
-div#admin-toolbar.vertical div.admin-blocks {
-  background-color: white !important;
-  width: 260px !important;
-}
-div#admin-toolbar.vertical div.admin-blocks-5 {
-  border-right: 1px solid #666;
-  background-image: none;
-}
-div#admin-toolbar.vertical div.admin-blocks-5 div.admin-block {
-  top: 25px;
-}
-div#admin-toolbar.vertical div.admin-block {
-  padding: 0;
-  width: auto;
-}
-div#admin-toolbar.vertical div.admin-block.drilldown {
-  display: block;
-}
-
-/* Update options. */
-div.admin-options {
-  background: #f8f8f8;
-  line-height: 30px;
-  height: 30px;
-  padding: 9px;
-  border: 1px solid #ccc;
-  margin: 0 0 10px;
-}
-div.admin-options label {
-  text-transform: uppercase;
-  font: 0.846em/1.875em Lucida Grande, Lucida Sans Unicode, sans-serif;
-}
-div.admin-options label,
-div.admin-options div.form-item {
-  margin-right: 10px; /* LTR */
-  float: left; /* LTR */
-}
-div.admin-options div.form-item {
-  padding: 0;
-  border: 0;
-}
-/**
- * Override for an admin module override of the admin_toolbar module.
- * -- A morality tale of great !importance --
- */
-
-.drilldown ul.menu li a {
-  display:block !important;
-}
-div#admin-toolbar ul.menu li a {
-  height: auto !important;
-  margin-left: 0;
-  padding-bottom: 1.25em !important;
-  padding-left: 35px !important;
-  padding-top: 1.25em !important;
-}
-#admin-toolbar ul.menu li a.active {
-  background-color: #eee;
-}
-#admin-toolbar ul.menu li.leaf,
-#admin-toolbar ul.drilldown-active-menu li {
-  height: auto;
-}
-#admin-toolbar ul.drilldown-active-menu li {
-  position: relative;
-}
-#admin-toolbar ul.drilldown-active-menu li,
-#admin-toolbar ul.drilldown-active-menu li.leaf {
-  background: none;
-}
-#admin-toolbar ul.drilldown-active-menu > li .navbar-icon {
-  display: block;
-  height: 15px;
-  left: 16px;
-  position: absolute;
-  top: 1.333333em;
-  width: 15px;
-}
-#admin-toolbar ul.drilldown-active-menu > .expanded .navbar-icon {
-  background: url(../images/sprite.png) -5px -90px no-repeat;
-}
-#admin-toolbar ul.drilldown-active-menu > .leaf .navbar-icon {
-  background: url(../images/sprite.png) -6px -116px no-repeat;
-}
-#admin-toolbar ul.menu li a:hover {
-  background: none !important;
-  background-color: #f8f8f8 !important;
+  padding: 2px 10px;
 }

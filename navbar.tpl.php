@@ -2,55 +2,42 @@
 
 /**
  * @file
- * Default template for mobile friendly navigation toolbar.
+ * Default template for admin navbar.
  *
  * Available variables:
- * - $classes: String of classes that can be used to style contextually through
- *   CSS. It can be manipulated through the variable $classes_array from
- *   preprocess functions.
- * - $navbar['navbar_drawer_classes']: CSS classes to put on the drawer.
- * - $navbar['navbar_drawer']: A place for extended toolbar content.
- *
- * Other variables:
- * - $classes_array: Array of html class attribute values. It is flattened
- *   into a string within the variable $classes.
+ * - $attributes: An instance of Attributes class that can be manipulated as an
+ *    array and printed as a string.
+ *    It includes the 'class' information, which includes:
+ *   - navbar: The current template type, i.e., "theming hook".
+ * - $navbar['navbar_user']: User account / logout links.
+ * - $navbar['navbar_menu']: Top level management menu links.
+ * - $navbar['navbar_drawer']: A place for extended navbar content.
  *
  * @see template_preprocess()
  * @see template_preprocess_navbar()
  */
 ?>
-<div id="navbar" class="<?php print $classes; ?> clearfix">
-  <div class="navbar-menu">
-    <ul id="navbar-menu">
-      <li class="home">
-        <a href="<?php print url('<front>'); ?>">
-          <span aria-hidden="true" data-icon="&#xe00e;"></span>
-          <span class="home-link screen-reader-text"><?php print t('Home'); ?></span>
-        </a>
-      </li>
-      <li class="administration">
-        <a href="<?php print url('admin'); ?>">
-          <span aria-hidden="true" data-icon="&#xe011;"></span>
-          <span class="admin-link screen-reader-text"><?php print t('Administration'); ?></span>
-        </a>
-      </li>
-    </ul>
-    <ul id="navbar-user">
-      <li class="account">
-        <a href="<?php print url('user'); ?>">
-          <span aria-hidden="true" data-icon="&#xe010;"></span>
-          <span class="account-link screen-reader-text"><?php print check_plain($user->name); ?></span>
-        </a>
-      </li>
-      <li class="pulldown">
-        <a href="<?php print url('user'); ?>">
-          <span aria-hidden="true" data-icon="&#xe024;"></span>
-          <span class="pulldown-link screen-reader-text"><?php print t('More'); ?></span>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="navbar-drawer" class="<?php echo $navbar['navbar_drawer_classes']; ?>">
+<nav id="navbar" role="navigation" class="<?php print $attributes['class']; ?> clearfix" <?php print $attributes; ?>>
+  <div class="navbar-bar">
+    <div class="navbar-menu clearfix">
+      <?php print render($navbar['navbar_tray_toggle']); ?>
+      <?php print render($navbar['navbar_home']); ?>
+      <?php print render($navbar['navbar_user']); ?>
+      <?php //print render($navbar['navbar_menu']); ?>
+      <?php if ($navbar['navbar_drawer']):?>
+        <?php print render($navbar['navbar_toggle']); ?>
+      <?php endif; ?>
+    </div>
     <?php print render($navbar['navbar_drawer']); ?>
   </div>
-</div>
+
+  <div class="navbar-tray">
+    <div class="filter-search clearfix">
+      <?php print render($navbar['navbar_filter']); ?>
+      <span class="close"><?php print t('x'); ?></span>
+    </div>
+    <div class="tray-menu clearfix">
+      <?php print render($navbar['navbar_menu']); ?>
+    </div>
+  </div>
+</nav>
