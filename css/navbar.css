@@ -90,7 +90,7 @@ body.navbar-drawer {
   position: relative;
 }
 #navbar-home a span {
-  background: url(navbar.png) no-repeat 0 -45px;
+  background: url("../images/navbar.png") no-repeat 0 -45px;
   display: block;
   height: 14px;
   margin: 3px 0px;
@@ -105,7 +105,7 @@ body.navbar-drawer {
   float: left; /* LTR */
 }
 #navbar .navbar-menu a.toggle {
-  background: url(navbar.png) 0 -20px no-repeat;
+  background: url("../images/navbar.png") 0 -20px no-repeat;
   bottom: 0;
   cursor: pointer;
   height: 25px;
@@ -141,7 +141,7 @@ body.navbar-drawer {
 #navbar div.navbar-menu ul li a.active:active,
 #navbar div.navbar-menu ul li a.active,
 #navbar div.navbar-menu ul li.active-trail a {
-  background: url(navbar.png) 0 0 repeat-x;
+  background: url("../images/navbar.png") 0 0 repeat-x;
   text-shadow: #333 0 1px 0;
 }
 
@@ -198,7 +198,7 @@ body.navbar-drawer {
   margin: 3px 4px 0 0;
 }
 #navbar .navbar-tray .filter-search a {
-  background-image: url("navbar.png");
+  background-image: url("../images/navbar.png");
   border-color: #E4E4E4 #D2D2D2 #B4B4B4;
   border-radius: 10px;
   color: #fff;

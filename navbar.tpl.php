@@ -17,7 +17,7 @@
  * @see template_preprocess_navbar()
  */
 ?>
-<nav id="navbar" role="navigation" class="<?php print $attributes['class']; ?> clearfix" <?php print $attributes; ?>>
+<nav id="navbar" role="navigation" class="<?php print $classes; ?> clearfix" <?php print $attributes; ?>>
   <div class="navbar-bar">
     <div class="navbar-menu clearfix">
       <?php print render($navbar['navbar_tray_toggle']); ?>
