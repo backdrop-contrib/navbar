@@ -197,6 +197,7 @@ function navbar_view() {
       ),
       'css' => array(
         $module_path . '/css/navbar.css',
+        $module_path . '/css/navbar-shortcut.css',
       ),
       'library' => array(array('system', 'jquery.cookie')),
     ),
