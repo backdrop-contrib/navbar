@@ -12,11 +12,11 @@ function navbar_help($path, $arg) {
   switch ($path) {
     case 'admin/help#navbar':
       $output = '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Navbar module displays links to top-level administration menu items and links from other modules at the top of the screen. For more information, see the online handbook entry for <a href="@navbar">Navbar module</a>.', array('@navbar' => 'http://drupal.org/documentation/modules/navbar')) . '</p>';
+      $output .= '<p>' . t('The navbar module displays links to top-level administration menu items and links from other modules at the top of the screen. For more information, see the online handbook entry for <a href="@navbar">navbar module</a>.', array('@navbar' => 'http://drupal.org/documentation/modules/navbar')) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Displaying administrative links') . '</dt>';
-      $output .= '<dd>' . t('The Navbar module displays a bar containing top-level administrative links across the top of the screen. Below that, the Navbar module has a <em>drawer</em> section where it displays links provided by other modules, such as the core <a href="@shortcuts-help">Shortcut module</a>. The drawer can be hidden/shown by using the show/hide shortcuts link at the end of the navbar.', array('@shortcuts-help' => url('admin/help/shortcut'))) . '</dd>';
+      $output .= '<dd>' . t('The navbar module displays a bar containing top-level administrative links across the top of the screen. Below that, the navbar module has a <em>drawer</em> section where it displays links provided by other modules, such as the core <a href="@shortcuts-help">Shortcut module</a>. The drawer can be hidden/shown by using the show/hide shortcuts link at the end of the navbar.', array('@shortcuts-help' => url('admin/help/shortcut'))) . '</dd>';
       $output .= '</dl>';
       return $output;
   }
@@ -42,75 +42,7 @@ function navbar_theme($existing, $type, $theme, $path) {
     'template' => 'navbar',
     'path' => drupal_get_path('module', 'navbar'),
   );
-  $items['navbar_toggle'] = array(
-    'variables' => array(
-      'collapsed' => NULL,
-      'attributes' => array(),
-    ),
-  );
   return $items;
-}
-
-/**
- * Implements hook_menu().
- */
-function navbar_menu() {
-  $items['navbar/toggle'] = array(
-    'title' => 'Toggle drawer visibility',
-    'type' => MENU_CALLBACK,
-    'page callback' => 'navbar_toggle_page',
-    'access arguments' => array('access navbar'),
-  );
-  return $items;
-}
-
-/**
- * Page callback: Toggles the visibility of the navbar drawer.
- *
- * @see navbar_menu().
- */
-function navbar_toggle_page() {
-  global $base_path;
-  // Toggle the value in the cookie.
-  setcookie('Drupal.navbar.collapsed', !_navbar_is_collapsed(), NULL, $base_path);
-  // Redirect the user from where he used the toggle element.
-  drupal_goto();
-}
-
-/**
- * Formats an element used to toggle the navbar drawer's visibility.
- *
- * @param $variables
- *   An associative array containing:
- *   - collapsed: A boolean value representing the navbar drawer's visibility.
- *   - attributes: An associative array of HTML attributes.
- *
- * @return
- *   An HTML string representing the element for toggling.
- *
- * @ingroup themable
- */
-function theme_navbar_toggle($variables) {
-  if ($variables['collapsed']) {
-    $toggle_text = t('Show shortcuts');
-  }
-  else {
-    $toggle_text = t('Hide shortcuts');
-    $variables['attributes']['class'][] = 'toggle-active';
-  }
-  return l($toggle_text, 'navbar/toggle', array('query' => drupal_get_destination(), 'attributes' => array('title' => $toggle_text) + $variables['attributes']));
-}
-
-/**
- * Determines the current state of the navbar drawer's visibility.
- *
- * @return
- *   TRUE when drawer is collapsed, FALSE when it is expanded.
- */
-function _navbar_is_collapsed() {
-  // PHP converts dots into underscores in cookie names to avoid problems with
-  // its parser, so we use a converted cookie name.
-  return isset($_COOKIE['Drupal_navbar_collapsed']) ? $_COOKIE['Drupal_navbar_collapsed'] : 0;
 }
 
 /**
@@ -122,7 +54,6 @@ function navbar_page_build(&$page) {
   $page['page_bottom']['navbar'] = array(
     '#pre_render' => array('navbar_pre_render'),
     '#access' => user_access('access navbar'),
-    'navbar_drawer' => array(),
   );
 }
 
@@ -147,9 +78,6 @@ function navbar_pre_render($navbar) {
 function navbar_preprocess_html(&$vars) {
   if (isset($vars['page']['page_bottom']['navbar']) && user_access('access navbar')) {
     $vars['attributes']['class'][] = 'navbar';
-    if (!_navbar_is_collapsed()) {
-      $vars['attributes']['class'][] = 'navbar-drawer';
-    }
   }
 }
 
@@ -188,57 +116,13 @@ function navbar_system_info_alter(&$info, $file, $type) {
 function navbar_view() {
   global $user;
 
-  $module_path = drupal_get_path('module', 'navbar');
   $build = array(
     '#theme' => 'navbar',
     '#attached'=> array(
-      'js' => array(
-        $module_path . '/js/navbar.js',
+      'library' => array(
+        array('navbar', 'navbar.init',),
       ),
-      'css' => array(
-        $module_path . '/css/navbar.css',
-        $module_path . '/css/navbar-shortcut.css',
-      ),
-      'library' => array(array('system', 'jquery.cookie')),
     ),
-  );
-
-  // Retrieve the admin menu from the database.
-  $links = navbar_menu_navigation_links(navbar_get_menu_tree());
-
-  $build['navbar_tray_toggle'] = array(
-    '#heading' => array('text' => t('Administrative tray toggle'), 'level' => 'h2', 'class' => 'element-invisible'),
-    '#theme' => 'link',
-    '#path' => 'admin',
-    '#text' => t('Admin tray'),
-    '#options' => array(
-      'attributes' => array(
-        'class' => 'navbar-toggle-tray',
-      ),
-      'html' => FALSE,
-    ),
-    
-  );
-
-  $build['navbar_filter'] = array(
-    '#type' => 'textfield',
-    '#value' => t('Search'),
-    '#attributes' => array(
-      'class' => array('filter')
-    ),
-  );
-
-  $build['navbar_filter_button'] = array(
-    '#theme' => 'link',
-    '#path' => '#',
-    '#text' => t('Search'),
-  );
-
-  $build['navbar_menu'] = array(
-    '#theme' => 'links__navbar_menu',
-    '#links' => $links,
-    '#attributes' => array('id' => 'navbar-menu'),
-    '#heading' => array('text' => t('Administrative navbar'), 'level' => 'h2', 'class' => 'element-invisible'),
   );
 
   // Add logout & user account links or login link.
@@ -248,11 +132,17 @@ function navbar_view() {
         'title' => t('Hello <strong>@username</strong>', array('@username' => format_username($user))),
         'href' => 'user',
         'html' => TRUE,
-        'attributes' => array('title' => t('User account')),
+        'attributes' => array(
+          'title' => t('User account'),
+          'class' => array('tab'),
+        ),
       ),
       'logout' => array(
         'title' => t('Log out'),
         'href' => 'user/logout',
+        'attributes' => array(
+          'class' => array('tab'),
+        ),
       ),
     );
   }
@@ -261,49 +151,98 @@ function navbar_view() {
       'login' => array(
         'title' => t('Log in'),
         'href' => 'user',
+        'attributes' => array(
+          'class' => array('tab'),
+        ),
       ),
     );
   }
+
   $build['navbar_user'] = array(
     '#theme' => 'links__navbar_user',
     '#links' => $links,
-    '#attributes' => array('id' => 'navbar-user'),
+    '#attributes' => array(
+      'id' => 'navbar-user',
+      'class' => array('menu'),
+    ),
+    '#heading' => array('text' => t('navbar user actions'), 'level' => 'h2', 'class' => 'element-invisible'),
   );
 
-  // Add a "home" link.
-  $link = array(
+  // Build the default navbar navigation links.
+  $links = array(
+    'navbar_tray_toggle' => array(
+      'title' => t('Menu'),
+      'href' => '',
+      'html' => FALSE,
+      'attributes' => array(
+        'class' => array('tab', 'toggle', 'toggle-tray'),
+        'role' => 'button',
+      ),
+    ),
     'home' => array(
-      'title' => '<span class="home-link">Home</span>',
+      'title' => t('Home'),
       'href' => '<front>',
-      'html' => TRUE,
-      'attributes' => array('title' => t('Home')),
+      'html' => FALSE,
+      'attributes' => array(
+        'title' => t('Home'),
+        'class' => array('tab', 'home-link'),
+      ),
     ),
   );
-  $build['navbar_home'] = array(
+
+  // navbar navigation links.
+  $build['navbar_navigation'] = array(
     '#theme' => 'links',
-    '#links' => $link,
-    '#attributes' => array('id' => 'navbar-home'),
+    '#links' => $links,
+    '#attributes' => array(
+      'id' => 'navbar-actions',
+      'class' => array('menu'),
+    ),
+    '#heading' => array('text' => t('navbar navigation'), 'level' => 'h2', 'class' => 'element-invisible'),
   );
 
-  // Add an anchor to be able to toggle the visibility of the drawer.
-  $build['navbar_toggle'] = array(
-    '#theme' => 'navbar_toggle',
-    '#collapsed' => _navbar_is_collapsed(),
-    '#attributes' => array('class' => array('toggle')),
-  );
+  // Retrieve the admin menu from the database.
+  $tree = navbar_get_menu_tree();
+  // Add attributes to the links before rendering.
+  navbar_menu_navigation_links($tree);
+  $build['navbar_menu'] = menu_tree_output($tree);
 
-  // Prepare the drawer links CSS classes.
-  $navbar_drawer_classes = array(
-    'navbar-drawer',
-    'clearfix',
+  // Shortcuts.
+  $build['navbar_shortcuts'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'navbar-shortcuts',
+        'clearfix',
+      ),
+    ),
   );
-  if (_navbar_is_collapsed()) {
-    $navbar_drawer_classes[] = 'collapsed';
-  }
-  $build['navbar_drawer']['#type'] = 'container';
-  $build['navbar_drawer']['#attributes']['class'] = $navbar_drawer_classes;
 
   return $build;
+}
+
+/**
+ * Translate menu_local_action links to standard links for theme_links.
+ *
+ *
+ * The function theme_menu_local_actions expects a the properties of the link to
+ * be stored under a #link property. The function theme_links expects the
+ * properties of the link to be direct children of the link array. So unset the
+ * #theme property and move the properties under #link to the parent property of
+ * #link.
+ *
+ * @see theme_menu_local_action
+ * @see theme_links
+ */
+function navbar_convert_action_links_to_standard_links($links = array()) {
+  foreach ($links as $key => $link) {
+    unset($links[$key]['#theme']);
+    foreach ($link['#link'] as $prop => $value) {
+      $links[$key][$prop] = $value;
+    }
+    unset($links[$key]['#link']);
+  }
+  return $links;
 }
 
 /**
@@ -316,14 +255,13 @@ function navbar_get_menu_tree() {
   $tree = array();
   $admin_link = db_query('SELECT * FROM {menu_links} WHERE menu_name = :menu_name AND module = :module AND link_path = :path', array(':menu_name' => 'management', ':module' => 'system', ':path' => 'admin'))->fetchAssoc();
   if ($admin_link) {
-    $tree = menu_build_tree('management', array(
-      'expanded' => array($admin_link['mlid']),
-      'min_depth' => $admin_link['depth'] + 1,
-      'max_depth' => $admin_link['depth'] + 1,
-    ));
+    $tree = menu_tree_all_data('management');
   }
-
-  return $tree;
+  // Return the sub-menus of the management menu root.
+  foreach ($tree as $key => $menu) {
+    return (!empty($tree[$key]['below'])) ? $tree[$key]['below'] : array();
+  }
+  return array();
 }
 
 /**
@@ -335,34 +273,16 @@ function navbar_get_menu_tree() {
  * @return
  *   An array of links as defined above.
  */
-function navbar_menu_navigation_links($tree) {
-  $links = array();
-  foreach ($tree as $item) {
-    if (!$item['link']['hidden'] && $item['link']['access']) {
-      // Make sure we have a path specific ID in place, so we can attach icons
-      // and behaviors to the items.
-      $id = str_replace(array('/', '<', '>'), array('-', '', ''), $item['link']['href']);
-
-      $link = $item['link']['localized_options'];
-      $link['href'] = $item['link']['href'];
-      // Add icon placeholder.
-      $link['title'] = '<span class="icon"></span>' . check_plain($item['link']['title']);
-      // Add admin link ID.
-      $link['attributes'] = array('id' => 'navbar-link-' . $id);
-      if (!empty($item['link']['description'])) {
-        $link['title'] .= ' <span class="element-invisible">(' . $item['link']['description'] . ')</span>';
-        $link['attributes']['title'] = $item['link']['description'];
-      }
-      $link['html'] = TRUE;
-
-      $class = ' path-' . $id;
-      if (navbar_in_active_trail($item['link']['href'])) {
-        $class .= ' active-trail';
-      }
-      $links['menu-' . $item['link']['mlid'] . $class] = $link;
+function navbar_menu_navigation_links(&$tree) {
+  foreach ($tree as $key => $item) {
+    // Configure sub-items.
+    if (!empty($item['below'])) {
+      navbar_menu_navigation_links($tree[$key]['below']);
     }
+    // Make sure we have a path specific ID in place, so we can attach icons
+    // and behaviors to the items.
+    $tree[$key]['link']['localized_options']['attributes']['id'] = 'navbar-link-' . str_replace(array('/', '<', '>'), array('-', '', ''), $item['link']['link_path']);
   }
-  return $links;
 }
 
 /**
@@ -394,26 +314,54 @@ function navbar_in_active_trail($path) {
 }
 
 /**
- * Point the shortcut module to the Navbar instead of the toolbar
+ * Implements hook_library().
+ */
+function navbar_library() {
+  $libraries = array();
+  $libraries['navbar.init'] = array(
+    'title' => 'Navbar',
+    'version' => VERSION,
+    'js' => array(
+      drupal_get_path('module', 'navbar') . '/js/navbar.js' => array(),
+    ),
+    'css' => array(
+      drupal_get_path('module', 'navbar') . '/css/navbar.base.css',
+      drupal_get_path('module', 'navbar') . '/css/navbar.theme.css',
+    ),
+    'dependencies' => array(
+      array('system', 'jquery'),
+      array('system', 'jquery.once'),
+      array('system', 'jquery.cookie'),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ *
  */
 /**
  * Implements hook_page_alter().
+ *
+ * Pull the shortcuts into the navbar.
  */
 function navbar_page_alter(&$page) {
-  if (module_exists('shortcut')) {
-    // If the navbar is available, add a pre-render function to display the
-    // current shortcuts in the navbar drawer.
+  if (module_exists('shortcut') && isset($page['page_bottom']['navbar'])) {
+    // If the toolbar is available, add a pre-render function to display the
+    // current shortcuts in the toolbar drawer.
     $page['page_bottom']['navbar']['#pre_render'][] = 'navbar_shortcut_pre_render';
   }
 }
 
 /**
- * Pre-render function for adding shortcuts to the toolbar drawer.
+ * Modified from shortcut_toolbar_pre_render().
+ *
+ * Renders user shorcut links into the navbar. 
  */
 function navbar_shortcut_pre_render($navbar) {
   $links = shortcut_renderable_links();
-  $links['#attached'] = array('css' => array(drupal_get_path('module', 'shortcut') . '/shortcut.css'));
-  $links['#prefix'] = '<div class="toolbar-shortcuts">';
+  $links['#prefix'] = '<div class="shortcuts-list">';
   $links['#suffix'] = '</div>';
   $shortcut_set = shortcut_current_displayed_set();
   $configure_link = NULL;
@@ -431,6 +379,6 @@ function navbar_shortcut_pre_render($navbar) {
     'configure' => $configure_link,
   );
 
-  $navbar['navbar_drawer'][] = $drawer;
+  $navbar['navbar_shortcuts'][] = $drawer;
   return $navbar;
 }
