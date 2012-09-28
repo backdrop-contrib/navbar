@@ -59,7 +59,10 @@ body.navbar {
   min-height: 2.875em;
   min-height: 2.875rem;
 }
-#navbar .col-half {
+#navbar .columns-8 .col-2 {
+  width: 25%;
+}
+#navbar .columns-8 .col-4 {
   width: 50%;
 }
 #navbar .navbar-bar .menu li {

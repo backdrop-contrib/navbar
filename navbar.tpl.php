@@ -20,17 +20,17 @@
  */
 ?>
 <nav id="navbar" role="navigation" class="<?php print $classes; ?> clearfix" <?php print $attributes; ?>>
-  <div class="navbar-bar clearfix">
-    <div class="section col-half">
+  <div class="navbar-bar clearfix columns-8">
+    <div class="section col-2">
       <?php print render($navbar['navbar_navigation']); ?>
     </div>
-    <div class="section col-half">
+    <div class="section col-4 page-controls"></div>
+    <div class="section col-2">
       <?php if (!empty($navbar['navbar_user'])) : ?>
         <?php print render($navbar['navbar_user']); ?>
       <?php endif; ?>
     </div>
   </div>
-
   <div class="navbar-tray" name="navbar-tray">
     <div class="lining slider">
       <?php if (!empty($navbar['navbar_shortcuts'])) : ?>
