@@ -269,10 +269,9 @@
   }
 }
 @media screen and (max-width:800px) {
-  #navbar .navbar-tray .level-1 > li > .box > a,
   #navbar #navbar-actions a,
   #navbar #navbar-user a {
-    height: 3em;
+    height: 3.3333em;
     padding: 0;
     text-indent: -9999px;
     width: 3em;
