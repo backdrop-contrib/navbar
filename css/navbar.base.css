@@ -176,8 +176,12 @@ body.navbar {
   position: absolute;
   right: 10px;
   top: 0;
+  -moz-transform: rotate(0deg);
+  -moz-transition: -webkit-transform 0.1s ease-in;
   -webkit-transform: rotate(0deg);
   -webkit-transition: -webkit-transform 0.1s ease-in;
+  transform: rotate(0deg);
+  transition: -webkit-transform 0.1s ease-in;
   width: 2em;
   z-index: 1;
 }
@@ -193,15 +197,21 @@ body.navbar {
   width: 2px;
 }
 #navbar .handle::before {
+  -moz-transform: rotate(-145deg);
   -webkit-transform: rotate(-145deg);
+  transform: rotate(-145deg);
   top: 1.1em;
 }
 #navbar .handle::after {
+  -moz-transform: rotate(145deg);
   -webkit-transform: rotate(145deg);
+  transform: rotate(145deg);
   top: 0.3em;
 }
 #navbar .handle.open {
+  -moz-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 #navbar .handle + * {
   margin-right: 60px;
