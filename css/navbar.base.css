@@ -170,11 +170,16 @@ body.navbar {
   white-space: nowrap;
 }
 #navbar .handle {
+  background-attachment: scroll;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTAwcHgiIGhlaWdodD0iMTAwcHgiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMDAgMTAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwb2x5Z29uIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBmaWxsPSIjNzc3Nzc3IiBwb2ludHM9IjIyLjUsODguNSAzMi4wMTUsOTkuNSA3Ny41LDUwIDMyLjAxNSwwLjUgMjIuNSwxMS41IA0KCTU3LjM2OSw1MCAiLz4NCjwvc3ZnPg0K);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 70%;
   bottom: 0;
   display: block;
-  height: 2em;
+  height: 100%;
   position: absolute;
-  right: 10px;
+  right: 0;
   top: 0;
   -moz-transform: rotate(0deg);
   -moz-transition: -webkit-transform 0.1s ease-in;
@@ -182,31 +187,8 @@ body.navbar {
   -webkit-transition: -webkit-transform 0.1s ease-in;
   transform: rotate(0deg);
   transition: -webkit-transform 0.1s ease-in;
-  width: 2em;
+  width: 6em;
   z-index: 1;
-}
-#navbar .handle::after,
-#navbar .handle::before {
-  background-color: #999;
-  border-radius: 0px;
-  content: " ";
-  display: block;
-  height: 1em;
-  left: 50%;
-  position: absolute;
-  width: 2px;
-}
-#navbar .handle::before {
-  -moz-transform: rotate(-145deg);
-  -webkit-transform: rotate(-145deg);
-  transform: rotate(-145deg);
-  top: 1.1em;
-}
-#navbar .handle::after {
-  -moz-transform: rotate(145deg);
-  -webkit-transform: rotate(145deg);
-  transform: rotate(145deg);
-  top: 0.3em;
 }
 #navbar .handle.open {
   -moz-transform: rotate(90deg);
@@ -214,7 +196,7 @@ body.navbar {
   transform: rotate(90deg);
 }
 #navbar .handle + * {
-  margin-right: 60px;
+  margin-right: 6em;
 }
 #navbar .handle:hover {
   cursor: pointer;
