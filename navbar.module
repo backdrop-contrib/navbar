@@ -609,7 +609,7 @@ function navbar_in_active_trail($path) {
 /**
  * Implements hook_library_info().
  */
-function navbar_library_info() {
+function navbar_library() {
   $libraries['navbar'] = array(
     'title' => 'Navbar',
     'version' => VERSION,
@@ -622,13 +622,12 @@ function navbar_library_info() {
       drupal_get_path('module', 'navbar') . '/css/navbar.icons.css',
     ),
     'dependencies' => array(
-      array('system', 'jquery'),
-      array('system', 'drupal'),
-      array('system', 'drupalSettings'),
-      array('system', 'matchmedia'),
-      array('system', 'jquery.once'),
-      array('system', 'drupal.debounce'),
-      array('navbar', 'navbar.menu'),
+     // array('system', 'jquery'),
+      //array('system', 'drupal'),
+      //array('navbar', 'matchmedia'),
+      //array('system', 'jquery.once'),
+      // array('system', 'drupal.debounce'),
+      //array('navbar', 'navbar.menu'),
     ),
   );
 
