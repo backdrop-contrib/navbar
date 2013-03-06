@@ -457,7 +457,7 @@ function navbar_navbar() {
       '#attributes' => array(
         'class' => array('navbar-menu-administration'),
       ),
-//      'administration_menu' => menu_tree_output($tree),
+      'administration_menu' => menu_tree_output($tree),
     ),
   );
 
