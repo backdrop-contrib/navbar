@@ -10,4 +10,5 @@
 1. Remove the array('system', 'drupal') dependency from the navbar and navbar.menu libraries.
 1. Add libraries for the matchemedia.js and debounce.js files from D8.
 1. Change instances of 'drupalSettings' in JS files to 'Drupal.settings'.
+1. Replace jQuery's .on() method with .live().
 1. Implement hook_toolbar() on behalf of User and Shortcut modules.
