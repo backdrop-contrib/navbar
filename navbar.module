@@ -212,21 +212,18 @@ function navbar_pre_render($element) {
 
   // Get the configured breakpoints to switch from vertical to horizontal
   // navbar presentation.
-// $breakpoints = entity_load('breakpoint_group', 'module.navbar.navbar');
-// if (!empty($breakpoints)) {
-//   $media_queries = array();
-//   $media_queries['navbar']['breakpoints'] = array_map(
-//     function ($object) {
-//       return $object->mediaQuery;
-//     },
-//     $breakpoints->breakpoints
-//   );
-
-//   $element['#attached']['js'][] = array(
-//     'data' => $media_queries,
-//     'type' => 'setting',
-//   );
-// }
+  $media_queries = array();
+  foreach (breakpoints_breakpoint_load_all() as $breakpoint) {
+    if ($breakpoint->source_type  === 'module' && $breakpoint->source === 'navbar') {
+      $media_queries['navbar']['breakpoints'][$breakpoint->name] = $breakpoint->breakpoint;
+    }
+  }
+  if (!empty($media_queries)) {
+    $element['#attached']['js'][] = array(
+      'data' => $media_queries,
+      'type' => 'setting',
+    );
+  }
 
   // Get navbar items from all modules that implement hook_navbar().
   $items = module_invoke_all('navbar');

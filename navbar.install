@@ -1,0 +1,35 @@
+<?php
+/**
+ * @file
+ * navbar.install
+ */
+
+/**
+ * Implements hook_install().
+ */
+function navbar_install() {
+  // Add a breakpoint for switching between horizontal and vertical tray
+  // orientation.
+  $breakpoint = new stdClass();
+  $breakpoint->disabled = FALSE;
+  $breakpoint->api_version = 1;
+  $breakpoint->name = 'wide';
+  $breakpoint->breakpoint = 'only screen and (min-width: 50em)';
+  $breakpoint->source = 'navbar';
+  $breakpoint->source_type = 'module';
+  $breakpoint->status = 1;
+  $breakpoint->weight = 0;
+  $breakpoint->multipliers = array();
+  breakpoints_breakpoint_save($breakpoint);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function navbar_uninstall() {
+  foreach (breakpoints_breakpoint_load_all() as $breakpoint) {
+    if ($breakpoint->machine_name === 'breakpoints.module.navbar.wide') {
+      breakpoints_breakpoint_delete($breakpoint);
+    }
+  }
+}
