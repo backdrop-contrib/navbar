@@ -132,7 +132,7 @@ var activeItem = Drupal.settings.basePath + Drupal.settings.currentPath;
     }
     // Bind event handlers.
     $(document)
-      .live('click.navbar', '.handle', toggleClickHandler);
+      .bind('click.navbar', '.handle', toggleClickHandler);
     // Return the jQuery object.
     return this.each(function (selector) {
       var $menu = $(this).once('navbar-menu');

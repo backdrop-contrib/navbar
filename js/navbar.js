@@ -68,11 +68,9 @@ Drupal.behaviors.navbar = {
         // Add the tray orientation toggles.
         .find('.lining')
         .append(Drupal.theme('navbarOrientationToggle'));
-      // Store media queries.
-      mql.standard = window.matchMedia(options.breakpoints['module.navbar.standard']);
       // Set up switching between the vertical and horizontal presentation
       // of the navbar trays based on a breakpoint.
-      mql.wide = window.matchMedia(options.breakpoints['module.navbar.wide']);
+      mql.wide = window.matchMedia(options.breakpoints.wide);
       mql.wide.addListener(Drupal.navbar.mediaQueryChangeHandler);
       // Set the orientation of the tray.
       // If the tray is set to vertical in localStorage, persist the vertical
@@ -86,11 +84,11 @@ Drupal.behaviors.navbar = {
       var setHeight = Drupal.debounce(Drupal.navbar.setHeight, 200);
       // Attach behavior to the window.
       $(window)
-        .live('resize.navbar', setHeight);
+        .bind('resize.navbar', setHeight);
       // Attach behaviors to the navbar.
       $navbar
-        .live('click.navbar', '.bar a', Drupal.navbar.toggleTray)
-        .live('click.navbar', '.toggle-orientation button', Drupal.navbar.orientationChangeHandler);
+        .bind('click.navbar', '.bar a', Drupal.navbar.toggleTray)
+        .bind('click.navbar', '.toggle-orientation button', Drupal.navbar.orientationChangeHandler);
       // Restore the open tab. Only open the tab on wide screens.
       if (activeTab && window.matchMedia(options.breakpoints['module.navbar.standard']).matches) {
         $navbar.find('[data-navbar-tray="' + activeTab + '"]').trigger('click.navbar');
@@ -104,8 +102,7 @@ Drupal.behaviors.navbar = {
   // Default options.
   options: {
     breakpoints: {
-      'module.navbar.standard': '',
-      'module.navbar.wide': ''
+      wide: ''
     }
   }
 };

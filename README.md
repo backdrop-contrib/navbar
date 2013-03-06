@@ -6,6 +6,7 @@
 1. Add a widee breakpoint to navbar.install in hook_install.
 1. Removed the breakpoing in hook_uninstall().
 1. Alter the breakpoing retrieval code in navbar_pre_render() so that it uses breakpoints_breakpoint_load_all() instead of entities like in D8.
+1. Change the references in navbar.js from 'module.navbar.wide' to just 'wide' for the breakpoint.
 1. Change hook_library_info() to hook_library().
 1. Remove the array('system', 'drupal') dependency from the navbar and navbar.menu libraries.
 1. Add libraries for the matchemedia.js and debounce.js files from D8.
