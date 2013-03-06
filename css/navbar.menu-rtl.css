@@ -1,0 +1,19 @@
+/**
+ * @file navbar.menu-rtl.css
+ */
+.navbar .vertical .handle + a {
+  margin-left: 3em;
+  margin-right: 0;
+}
+
+/**
+ * Handle.
+ */
+.navbar .icon.handle {
+  left: 0;
+  right: auto;
+}
+.navbar .icon.handle:before {
+  left: auto;
+  right: 0;
+}

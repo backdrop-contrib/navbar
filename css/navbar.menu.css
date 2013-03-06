@@ -1,0 +1,102 @@
+
+/**
+ * @file navbar.menu.css
+ */
+.navbar .menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar .box {
+  display: block;
+  line-height: 1em; /* this prevents the value "normal" from being returned as the line-height */
+  position: relative;
+  width: auto;
+}
+.navbar .horizontal .menu .handle,
+.navbar .horizontal .menu ul,
+.navbar .vertical .menu ul {
+  display: none;
+}
+.navbar .vertical li.open > ul {
+  display: block; /* Show the sub-menus */
+}
+.navbar .vertical .handle + a {
+  margin-right: 3em; /* LTR */
+}
+.navbar .tray .active-trail > .box a,
+.navbar .tray a.active {
+  color: #000;
+  font-weight: bold;
+}
+
+/**
+ * Items.
+ */
+.navbar .level-2 > ul {
+  background-color: #fafafa;
+  border-bottom-color: #cccccc;
+  border-top-color: #e5e5e5;
+}
+.navbar .level-3 > ul {
+  background-color: #f5f5f5;
+  border-bottom-color: #c5c5c5;
+  border-top-color: #dddddd;
+}
+.navbar .level-4 > ul {
+  background-color: #eeeeee;
+  border-bottom-color: #bbbbbb;
+  border-top-color: #d5d5d5;
+}
+.navbar .level-5 > ul {
+  background-color: #e5e5e5;
+  border-bottom-color: #b5b5b5;
+  border-top-color: #cccccc;
+}
+.navbar .level-6 > ul {
+  background-color: #eeeeee;
+  border-bottom-color: #aaaaaa;
+  border-top-color: #c5c5c5;
+}
+.navbar .level-7 > ul {
+  background-color: #fafafa;
+  border-bottom-color: #b5b5b5;
+  border-top-color: #cccccc;
+}
+.navbar .level-8 > ul {
+  background-color: #dddddd;
+  border-bottom-color: #cccccc;
+  border-top-color: #dddddd;
+}
+
+/**
+ * Handle.
+ */
+.navbar .handle:hover {
+  cursor: pointer;
+}
+.navbar .icon.handle {
+  bottom: 0;
+  display: block;
+  height: 100%;
+  padding: 0;
+  position: absolute;
+  right: 0; /* LTR */
+  text-indent: -9999px;
+  top: 0;
+  width: 3em;
+  z-index: 1;
+}
+.navbar .icon.handle:before {
+  background-image: url("../images/icon-open.png");
+  left: 0; /* LTR */
+}
+.navbar .icon.handle.open:before {
+  background-image: url("../images/icon-collapse.png");
+}
+.navbar .menu .menu .icon.handle:before {
+  background-image: url("../images/icon-child-open.png");
+}
+.navbar .menu .menu .icon.handle.open:before {
+  background-image: url("../images/icon-child-collapse.png");
+}
