@@ -445,7 +445,7 @@ function navbar_navbar() {
   );
 
   // Retrieve the administration menu from the database.
-// $tree = navbar_get_menu_tree();
+  $tree = navbar_get_menu_tree();
 
   // Add attributes to the links before rendering.
 // navbar_menu_navigation_links($tree);
@@ -498,21 +498,15 @@ function navbar_navbar() {
  */
 function navbar_get_menu_tree() {
   $tree = array();
-  $query = entity_query('menu_link')
-    ->condition('menu_name', 'admin')
-    ->condition('module', 'system')
-    ->condition('link_path', 'admin');
-  $result = $query->execute();
-  if (!empty($result)) {
-    $admin_link = menu_link_load(reset($result));
-    $tree = menu_build_tree('admin', array(
-      'expanded' => array($admin_link['mlid']),
-      'min_depth' => $admin_link['depth'] + 1,
-      'max_depth' => $admin_link['depth'] + 1,
-    ));
+  $admin_link = db_query('SELECT * FROM {menu_links} WHERE menu_name = :menu_name AND module = :module AND link_path = :path', array(':menu_name' => 'management', ':module' => 'system', ':path' => 'admin'))->fetchAssoc();
+  if ($admin_link) {
+    $tree = menu_tree_all_data('management');
   }
-
-  return $tree;
+  // Return the sub-menus of the management menu root.
+  foreach ($tree as $key => $menu) {
+    return (!empty($tree[$key]['below'])) ? $tree[$key]['below'] : array();
+  }
+  return array();
 }
 
 /**
