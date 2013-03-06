@@ -448,7 +448,7 @@ function navbar_navbar() {
   $tree = navbar_get_menu_tree();
 
   // Add attributes to the links before rendering.
-// navbar_menu_navigation_links($tree);
+  navbar_menu_navigation_links($tree);
 
   $menu = array(
     '#heading' => t('Administration menu'),
