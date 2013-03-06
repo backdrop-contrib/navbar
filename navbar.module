@@ -622,12 +622,11 @@ function navbar_library() {
       drupal_get_path('module', 'navbar') . '/css/navbar.icons.css',
     ),
     'dependencies' => array(
-     // array('system', 'jquery'),
-      //array('system', 'drupal'),
+      array('system', 'jquery'),
       //array('navbar', 'matchmedia'),
-      //array('system', 'jquery.once'),
+      array('system', 'jquery.once'),
       // array('system', 'drupal.debounce'),
-      //array('navbar', 'navbar.menu'),
+      array('navbar', 'navbar.menu'),
     ),
   );
 
@@ -642,7 +641,6 @@ function navbar_library() {
     ),
     'dependencies' => array(
       array('system', 'jquery'),
-      array('system', 'drupal'),
       array('system', 'jquery.once'),
     ),
   );
