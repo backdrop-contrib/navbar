@@ -610,22 +610,25 @@ function navbar_in_active_trail($path) {
  * Implements hook_library_info().
  */
 function navbar_library() {
+
+  $path = drupal_get_path('module', 'navbar');
+
   $libraries['navbar'] = array(
     'title' => 'Navbar',
     'version' => VERSION,
     'js' => array(
-      drupal_get_path('module', 'navbar') . '/js/navbar.js' => array(),
+      $path . '/js/navbar.js' => array(),
     ),
     'css' => array(
-      drupal_get_path('module', 'navbar') . '/css/navbar.base.css',
-      drupal_get_path('module', 'navbar') . '/css/navbar.theme.css',
-      drupal_get_path('module', 'navbar') . '/css/navbar.icons.css',
+      $path . '/css/navbar.base.css',
+      $path . '/css/navbar.theme.css',
+      $path . '/css/navbar.icons.css',
     ),
     'dependencies' => array(
       array('system', 'jquery'),
-      //array('navbar', 'matchmedia'),
+      array('navbar', 'navbar.matchmedia'),
       array('system', 'jquery.once'),
-      // array('system', 'drupal.debounce'),
+      array('navbar', 'navbar.debounce'),
       array('navbar', 'navbar.menu'),
     ),
   );
@@ -634,14 +637,33 @@ function navbar_library() {
     'title' => 'Navbar nested accordion menus.',
     'version' => VERSION,
     'js' => array(
-      drupal_get_path('module', 'navbar') . '/js/navbar.menu.js' => array(),
+      $path . '/js/navbar.menu.js' => array(),
     ),
     'css' => array(
-      drupal_get_path('module', 'navbar') . '/css/navbar.menu.css',
+      $path . '/css/navbar.menu.css',
     ),
     'dependencies' => array(
       array('system', 'jquery'),
       array('system', 'jquery.once'),
+    ),
+  );
+
+  // Backport of D8 matchMedia polyfill.
+  $libraries['navbar.matchmedia'] = array(
+    'title' => 'window.matchMedia polyfill',
+    'website' => 'http://drupal.org/node/1815602',
+    'version' => VERSION,
+    'js' => array(
+      $path . '/js/matchmedia.js' => array(),
+    ),
+  );
+
+  // A utility function to limit calls to a function with a given time.
+  $libraries['navbar.debounce'] = array(
+    'title' => 'Drupal debounce',
+    'version' => VERSION,
+    'js' => array(
+      $path . '/js/debounce.js' => array('group' => JS_LIBRARY),
     ),
   );
 
