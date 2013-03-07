@@ -490,56 +490,95 @@ function navbar_navbar() {
   );
 
   // Add logout & user account links or login link.
-  if ($user->uid) {
-    $links = array(
-      'account' => array(
-        'title' => t('View profile'),
-        'href' => 'user',
-        'html' => TRUE,
-        'attributes' => array(
-          'title' => t('User account'),
+  if (module_exists('user')) {
+    if ($user->uid) {
+      $links = array(
+        'account' => array(
+          'title' => t('View profile'),
+          'href' => 'user',
+          'html' => TRUE,
+          'attributes' => array(
+            'title' => t('User account'),
+          ),
+        ),
+        'logout' => array(
+          'title' => t('Log out'),
+          'href' => 'user/logout',
+        ),
+      );
+    }
+    else {
+       $links = array(
+        'login' => array(
+          'title' => t('Log in'),
+          'href' => 'user',
+        ),
+      );
+    }
+
+    $items['user'] = array(
+      '#type' => 'navbar_item',
+      'tab' => array(
+        '#type' => 'link',
+        '#title' => format_username($user),
+        '#href' => 'user',
+        '#options' => array(
+          'attributes' => array(
+            'title' => t('My account'),
+            'class' => array('icon', 'icon-user'),
+          ),
         ),
       ),
-      'logout' => array(
-        'title' => t('Log out'),
-        'href' => 'user/logout',
+      'tray' => array(
+        '#heading' => t('User account actions'),
+        'user_links' => array(
+          '#theme' => 'links__navbar_user',
+          '#links' => $links,
+          '#attributes' => array(
+            'class' => array('menu'),
+          ),
+        ),
       ),
-    );
-  }
-  else {
-     $links = array(
-      'login' => array(
-        'title' => t('Log in'),
-        'href' => 'user',
-      ),
+      '#weight' => 100,
     );
   }
 
-  $items['user'] = array(
-    '#type' => 'navbar_item',
-    'tab' => array(
-      '#type' => 'link',
-      '#title' => format_username($user),
-      '#href' => 'user',
-      '#options' => array(
-        'attributes' => array(
-          'title' => t('My account'),
-          'class' => array('icon', 'icon-user'),
+  // Add a shortcuts tab.
+  if (module_exists('shortcut')) {
+    $links = shortcut_renderable_links();
+    $shortcut_set = shortcut_current_displayed_set();
+    $configure_link = NULL;
+    if (shortcut_set_edit_access($shortcut_set)) {
+      $configure_link = array(
+        '#type' => 'link',
+        '#title' => t('Edit shortcuts'),
+        '#href' => 'admin/config/user-interface/shortcut/' . $shortcut_set->set_name,
+        '#options' => array('attributes' => array('class' => array('edit-shortcuts'))),
+      );
+    }
+    if (!empty($links) || !empty($configure_link)) {
+      $items['shortcuts'] = array(
+        '#type' => 'navbar_item',
+        'tab' => array(
+          '#type' => 'link',
+          '#title' => t('Shortcuts'),
+          '#href' => 'admin/config/user-interface/shortcut',
+          '#options' => array(
+            'attributes' => array(
+              'title' => t('Shortcuts'),
+              'class' => array('icon', 'icon-shortcut'),
+            ),
+          ),
         ),
-      ),
-    ),
-    'tray' => array(
-      '#heading' => t('User account actions'),
-      'user_links' => array(
-        '#theme' => 'links__navbar_user',
-        '#links' => $links,
-        '#attributes' => array(
-          'class' => array('menu'),
+        'tray' => array(
+          '#heading' => t('User-defined shortcuts'),
+          'shortcuts' => $links,
+          'configure' => $configure_link,
         ),
-      ),
-    ),
-    '#weight' => 100,
-  );
+        '#weight' => -10,
+      );
+    }
+  }
 
   return $items;
 }

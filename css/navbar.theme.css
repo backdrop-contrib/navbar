@@ -148,3 +148,21 @@
 .navbar .toggle-orientation [value="horizontal"]:before {
   background-image: url('../images/icon-toggle-horizontal.png');
 }
+
+/**
+ * Shortcut.
+ */
+.navbar .tray.horizontal.shortcuts .menu {
+  float: left;
+}
+.edit-shortcuts {
+  display: block;
+}
+.navbar .vertical .edit-shortcuts {
+  text-align: right;
+  padding: 1em;
+}
+.navbar .horizontal .edit-shortcuts {
+  display: inline-block;
+  float: left; /* LTR */
+}

@@ -124,6 +124,17 @@
   background-image: url("../images/icon-user-active.png");
 }
 
+/**
+ * Shortcut icon.
+ */
+.icon-shortcut:before {
+  background-image: url("../images/shortcut.png");
+}
+.icon-shortcut:active:before,
+.icon-shortcut.active:before {
+  background-image: url("../images/shortcut-active.png");
+}
+
 @media only screen and (min-width: 16.5em) {
   .navbar .bar .icon {
     margin-left: 0;

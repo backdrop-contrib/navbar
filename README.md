@@ -13,4 +13,6 @@
 1. Change instances of 'drupalSettings' in JS files to 'Drupal.settings'.
 1. Replace jQuery's .on() method with .live().
 1. Implement hook_toolbar() on behalf of User and Shortcut modules.
+1. Change '$shortcut_set->id()' to '$shortcut_set->set_name'
 1. Add the user and shorcut icons to navbar.icons.css.
+1. Move CSS from shortcut and user modules to navbar.
