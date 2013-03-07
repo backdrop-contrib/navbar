@@ -85,11 +85,11 @@
 .icon-people.active:before {
   background-image: url("../images/icon-people-active.png");
 }
-.icon-extend:before {
+.icon-modules:before {
   background-image: url("../images/icon-extend.png");
 }
-.icon-extend:active:before,
-.icon-extend.active:before {
+.icon-modules:active:before,
+.icon-modules.active:before {
   background-image: url("../images/icon-extend-active.png");
 }
 .icon-configuration:before {
