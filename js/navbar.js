@@ -87,8 +87,8 @@ Drupal.behaviors.navbar = {
         .bind('resize.navbar', setHeight);
       // Attach behaviors to the navbar.
       $navbar
-        .bind('click.navbar', '.bar a', Drupal.navbar.toggleTray)
-        .bind('click.navbar', '.toggle-orientation button', Drupal.navbar.orientationChangeHandler);
+        .delegate('.bar a', 'click.navbar', Drupal.navbar.toggleTray)
+        .delegate('.toggle-orientation button', 'click.navbar', Drupal.navbar.orientationChangeHandler);
       // Restore the open tab. Only open the tab on wide screens.
       if (activeTab && window.matchMedia(options.breakpoints['module.navbar.standard']).matches) {
         $navbar.find('[data-navbar-tray="' + activeTab + '"]').trigger('click.navbar');
