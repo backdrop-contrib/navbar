@@ -113,6 +113,16 @@
 .icon-help.active:before {
   background-image: url("../images/icon-help-active.png");
 }
+/**
+ * User icon.
+ */
+.icon-user:before {
+  background-image: url("../images/icon-user.png");
+}
+.icon-user:active:before,
+.icon-user.active:before {
+  background-image: url("../images/icon-user-active.png");
+}
 
 @media only screen and (min-width: 16.5em) {
   .navbar .bar .icon {

@@ -425,6 +425,8 @@ function navbar_system_info_alter(&$info, $file, $type) {
  * Implements hook_navbar().
  */
 function navbar_navbar() {
+  global $user;
+
   $items = array();
 
   // The 'Home' tab is a simple link, with no corresponding tray.
@@ -485,6 +487,58 @@ function navbar_navbar() {
     ),
     'tray' => $menu,
     '#weight' => -15,
+  );
+
+  // Add logout & user account links or login link.
+  if ($user->uid) {
+    $links = array(
+      'account' => array(
+        'title' => t('View profile'),
+        'href' => 'user',
+        'html' => TRUE,
+        'attributes' => array(
+          'title' => t('User account'),
+        ),
+      ),
+      'logout' => array(
+        'title' => t('Log out'),
+        'href' => 'user/logout',
+      ),
+    );
+  }
+  else {
+     $links = array(
+      'login' => array(
+        'title' => t('Log in'),
+        'href' => 'user',
+      ),
+    );
+  }
+
+  $items['user'] = array(
+    '#type' => 'navbar_item',
+    'tab' => array(
+      '#type' => 'link',
+      '#title' => format_username($user),
+      '#href' => 'user',
+      '#options' => array(
+        'attributes' => array(
+          'title' => t('My account'),
+          'class' => array('icon', 'icon-user'),
+        ),
+      ),
+    ),
+    'tray' => array(
+      '#heading' => t('User account actions'),
+      'user_links' => array(
+        '#theme' => 'links__navbar_user',
+        '#links' => $links,
+        '#attributes' => array(
+          'class' => array('menu'),
+        ),
+      ),
+    ),
+    '#weight' => 100,
   );
 
   return $items;
