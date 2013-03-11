@@ -1,4 +1,9 @@
-=== D8 to D7 backporting considerations
+# Attention
+
+The Navbar module is incompatible with Drupal 7 core's Toolbar module. Toolbar
+module should be disabled before the Navbar module is enabled.
+
+# D8 to D7 backporting considerations
 
 1. Change all instances of 'toolbar' to 'navbar'
 1. Remove any PHP 'use' statements from the top of the navbar.module file.
