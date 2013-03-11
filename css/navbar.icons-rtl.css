@@ -4,7 +4,7 @@
  * RTL styles for navbar.icons.css
  */
 .navbar .icon {
-  padding-left: 0;
+  padding-left: 1.3333em;
   padding-right: 2.75em;
 }
 .navbar .icon:before {
