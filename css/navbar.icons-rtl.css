@@ -1,8 +1,10 @@
 /**
- * @file navbar.icons-rtl.css
+ * @file navbar.icons.css
+ *
+ * RTL styles for navbar.icons.css
  */
 .navbar .icon {
-  padding-left: 1.3333em;
+  padding-left: 0;
   padding-right: 2.75em;
 }
 .navbar .icon:before {
@@ -24,7 +26,6 @@
 
 @media only screen and (min-width: 16.5em) {
   .navbar .bar .icon:before {
-    background-size: auto auto;
     left: auto;
     right: 0;
   }
@@ -37,7 +38,7 @@
     padding-right: 2.75em;
   }
   .navbar .bar .icon:before {
-    left: 0;
+    left: auto;
     right: 0.6667em;
   }
 }
