@@ -37,6 +37,7 @@ html.js .navbar {
   list-style-image: none;
 }
 .navbar .menu li {
+  margin: 0;
   padding-top: 0;
 }
 .js .navbar .bar .tab,
