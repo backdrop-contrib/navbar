@@ -2,5 +2,4 @@ name = Mobile friendly navigation toolbar
 description = A very simple mobile friendly toolbar that lets you switch between frontend and backend.
 core = 7.x
 
-dependencies[] = jquery_update
 dependencies[] = breakpoints
