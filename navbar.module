@@ -98,7 +98,8 @@ function navbar_element_info() {
       '#heading' => t('Navbar items'),
       '#attributes' => array(
         'id' => 'navbar-bar',
-        'class' => array('bar', 'overlay-displace-top', 'clearfix'),
+        'class' => array('bar', 'clearfix'),
+        'data-offset-top' => array(),
       ),
     ),
   );
@@ -691,7 +692,7 @@ function navbar_in_active_trail($path) {
 }
 
 /**
- * Implements hook_library_info().
+ * Implements hook_library().
  */
 function navbar_library() {
 
@@ -770,6 +771,9 @@ function navbar_library() {
   $libraries['navbar.overlay'] = array(
     'title' => 'Overlay method overrides to support D8 viewport displacement.',
     'version' => VERSION,
+    'css' => array(
+      $path . '/css/navbar-overlay.css',
+    ),
     'js' => array(
       // Load this file well after Overlay code has loaded.
       $path . '/js/navbar-overlay.js' => array('weight' => 100),
@@ -781,6 +785,19 @@ function navbar_library() {
   );
 
   return $libraries;
+}
+
+/**
+ * Implements hook_library_alter().
+ */
+function navbar_library_alter(&$libraries, $module) {
+  if ($module === 'overlay' && !empty($libraries)) {
+    // Unset the child CSS file from Overlay and add our own.
+    if (!empty($libraries['child']['css'])) {
+      unset($libraries['child']['css']['modules/overlay/overlay-child.css']);
+    }
+    $libraries['child']['css'][drupal_get_path('module', 'navbar') . '/css/navbar-overlay-child.css'] = array();
+  }
 }
 
 /**
