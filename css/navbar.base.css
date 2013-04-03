@@ -92,7 +92,7 @@ html.js .navbar {
   position: absolute;
 }
 .navbar .tray {
-  z-index: 250;
+  z-index: 1200;
 }
 .navbar .horizontal {
   width: 100%;
