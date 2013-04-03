@@ -715,6 +715,7 @@ function navbar_library() {
       array('navbar', 'navbar.debounce'),
       array('navbar', 'navbar.displace'),
       array('navbar', 'navbar.menu'),
+      array('navbar', 'navbar.overlay'),
     ),
   );
 
@@ -745,16 +746,16 @@ function navbar_library() {
 
   // A utility function to limit calls to a function with a given time.
   $libraries['navbar.debounce'] = array(
-    'title' => 'Drupal debounce',
+    'title' => 'Navbar debounce',
     'version' => VERSION,
     'js' => array(
       $path . '/js/debounce.js' => array('group' => JS_LIBRARY),
     ),
   );
 
-  // A utility function to limit calls to a function with a given time.
+  // A utility function determine viewport offset distances.
   $libraries['navbar.displace'] = array(
-    'title' => 'Drupal displace',
+    'title' => 'Navbar displace',
     'version' => VERSION,
     'js' => array(
       $path . '/js/displace.js' => array('group' => JS_LIBRARY),
@@ -762,6 +763,20 @@ function navbar_library() {
     'dependencies' => array(
       array('system', 'jquery'),
       array('navbar', 'navbar.debounce'),
+    ),
+  );
+
+  // Override Overlay methods to support displacement.
+  $libraries['navbar.overlay'] = array(
+    'title' => 'Overlay method overrides to support D8 viewport displacement.',
+    'version' => VERSION,
+    'js' => array(
+      // Load this file well after Overlay code has loaded.
+      $path . '/js/navbar-overlay.js' => array('weight' => 100),
+    ),
+    'dependencies' => array(
+      array('system', 'jquery'),
+      array('navbar', 'navbar.displace'),
     ),
   );
 
