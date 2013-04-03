@@ -79,12 +79,9 @@ Drupal.behaviors.navbar = {
       changeOrientation((locked) ? 'vertical' : ((mql.wide.matches) ? 'horizontal' : 'vertical'), locked);
       // Render the main menu as a nested, collapsible accordion.
       $navbar.find('.navbar-menu-administration > .menu').navbarMenu();
-      // Call setHeight on screen resize. Wrap it in debounce to prevent
-      // setHeight from being called too frequently.
-      var setHeight = Drupal.debounce(Drupal.navbar.setHeight, 200);
-      // Attach behavior to the window.
-      $(window)
-        .bind('resize.navbar', setHeight);
+      // Attach behaviors to the document.
+      $(document)
+        .bind('drupalViewportOffsetChange.toolbar', Drupal.navbar.adjustPlacement);
       // Attach behaviors to the navbar.
       $navbar
         .delegate('.bar a', 'click.navbar', Drupal.navbar.toggleTray)
@@ -161,12 +158,16 @@ Drupal.navbar.toggleTray = function (event) {
 };
 
 /**
- * The height of the navbar offsets the top of the page content.
+ * Repositions trays and sets body padding according to the height of the bar.
  *
- * Page components can register with the offsettopchange event to know when
- * the height of the navbar changes.
+ * @param {Event} event
+ *   - jQuery Event object.
+ *
+ * @param {Object} offsets
+ *   - Contains for keys -- top, right, bottom and left -- that indicate the
+ *   viewport offset distances calculated by Drupal.displace().
  */
-Drupal.navbar.setHeight = function () {
+Drupal.navbar.adjustPlacement = function (event, offsets) {
   // Set the top of the all the trays to the height of the bar.
   var barHeight = $navbar.find('.bar').outerHeight();
   var height = barHeight;
@@ -178,20 +179,27 @@ Drupal.navbar.setHeight = function () {
       tray.style.top = bhpx;
     }
   }
-  /**
-   * Get the height of the active tray and include it in the total
-   * height of the navbar.
-   */
-  height += $trays.filter('.active.horizontal').outerHeight() || 0;
-  // Indicate the height of the navbar in the attribute data-offset-top.
-  var offset = parseInt($navbar.attr('data-offset-top'), 10);
-  if (offset !== height) {
-    $navbar.attr('data-offset-top', height);
-    // Alter the padding on the top of the body element.
-    $('body').css('padding-top', height);
-    $(document).trigger('offsettopchange', height);
-    $(window).trigger('resize');
-  }
+  // Alter the padding on the top of the body element.
+  $('body').css('padding-top', offsets.top);
+};
+
+/**
+ * Sets the width of a vertical tray in a data attribute.
+ *
+ * If the width of the tray changed, Drupal.displace is called so that elements
+ * can adjust to the placement of the tray.
+ */
+Drupal.navbar.setTrayWidth = function () {
+  var dir = document.documentElement.dir;
+  var edge = (dir === 'rtl') ? 'right' : 'left';
+  // Remove the left offset from the trays.
+  $navbar.find('.tray').removeAttr('data-offset-' + edge).removeAttr('data-offset-top');
+  // If an active vertical tray exists, mark it as an offset element.
+  $navbar.find('.tray.vertical.active').attr('data-offset-' + edge, '');
+  // If an active horizontal tray exists, mark it as an offset element.
+  $navbar.find('.tray.horizontal.active').attr('data-offset-top', '');
+  // Trigger a recalculation of viewport displacing elements.
+  Drupal.displace();
 };
 
 /**
@@ -291,8 +299,8 @@ function toggleOrientationToggle (orientation) {
 function updatePeripherals () {
   // Adjust the body to accommodate trays.
   setBodyState();
-  // Adjust the height of the navbar.
-  Drupal.navbar.setHeight();
+  // Adjust the tray width for vertical trays.
+  Drupal.navbar.setTrayWidth();
 }
 
 /**
