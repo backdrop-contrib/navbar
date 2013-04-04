@@ -19,6 +19,8 @@
   }
  };
 
+ Drupal.overlay = Drupal.overlay || {};
+
 $.extend(Drupal.overlay, {
   /**
    * Responds to the drupalViewportOffsetChange event.
