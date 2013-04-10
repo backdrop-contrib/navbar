@@ -139,7 +139,7 @@ function navbar_subtrees_jsonp($hash) {
   _navbar_initialize_page_cache();
   $subtrees = navbar_get_rendered_subtrees();
   $response = new JsonResponse($subtrees);
-  $response->setCallback('Drupal.navbar.setSubtrees');
+  $response->setCallback('Drupal.navbar.setSubtrees.resolve');
   return $response;
 }
 
@@ -464,6 +464,9 @@ function navbar_navbar() {
     ),
   );
 
+  // This flow is commented out until we figure out how to returne a JSONP
+  // response in Drupal 7.
+  //
   // To conserve bandwidth, we only include the top-level links in the HTML.
   // The subtrees are included in a JSONP script, cached by the browser. Here we
   // add that JSONP script. We add it as an external script, because it's a
@@ -482,7 +485,7 @@ function navbar_navbar() {
       '#options' => array(
         'attributes' => array(
           'title' => t('Admin menu'),
-          'class' => array('icon', 'icon-menu'),
+          'class' => array('icon', 'icon-menu', 'navbar-tab',),
         ),
       ),
     ),
@@ -526,7 +529,7 @@ function navbar_navbar() {
         '#options' => array(
           'attributes' => array(
             'title' => t('My account'),
-            'class' => array('icon', 'icon-user'),
+            'class' => array('icon', 'icon-user', 'navbar-tab',),
           ),
         ),
       ),
@@ -567,7 +570,7 @@ function navbar_navbar() {
           '#options' => array(
             'attributes' => array(
               'title' => t('Shortcuts'),
-              'class' => array('icon', 'icon-shortcut'),
+              'class' => array('icon', 'icon-shortcut', 'navbar-tab',),
             ),
           ),
         ),

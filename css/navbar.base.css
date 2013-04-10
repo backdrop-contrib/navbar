@@ -85,13 +85,10 @@ html.js .navbar {
  */
 .js .navbar .tray {
   display: none;
-  position: fixed;
-}
-/* Make vertical navbar tray scroll with page for touch devices. */
-.touch .navbar .tray {
-  position: absolute;
 }
 .navbar .tray {
+  bottom: 0;
+  position: absolute;
   z-index: 1200;
 }
 .navbar .horizontal {
@@ -113,7 +110,7 @@ html.js .navbar {
   /* Set one higher than the contextual links gear. */
   z-index: 1000;
 }
-.toolar .tray .lining {
+.navbar .tray .lining {
   position: relative;
 }
 .navbar .vertical > .lining,
@@ -148,7 +145,6 @@ html.js .navbar {
 }
 .navbar .vertical.active,
 .navbar .vertical.active > .lining {
-  bottom: 0;
   left: 0; /* LTR */
   top: 0;
 }
@@ -164,15 +160,11 @@ html.js .navbar {
 @media only screen {
   .navbar .vertical,
   .navbar .vertical > .lining:before {
-    bottom: auto;
     width: 100%;
   }
 }
 
 @media only screen and (min-width: 16.5em) {
-  .navbar .vertical {
-    bottom: 0;
-  }
   .navbar .vertical,
   .navbar .vertical > .lining:before {
     width: 240px;
@@ -184,8 +176,12 @@ html.js .navbar {
   }
 }
 @media only screen and (min-width: 28.125em) {
-  .navbar .tray.horizontal {
+  .navbar .tray.horizontal,
+  .navbar .tray.vertical {
     position: fixed;
+  }
+  .navbar .tray.vertical {
+    bottom: 0;
   }
 }
 /**

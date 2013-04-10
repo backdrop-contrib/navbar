@@ -2,7 +2,7 @@
  * Builds a nested accordion widget.
  *
  * Invoke on an HTML list element with the jQuery plugin pattern.
- * - For example, $('.menu').navbarMenu();
+ * - For example, $('.menu').drupalNavbarMenu();
  */
 
 (function ($, Drupal) {
@@ -14,7 +14,7 @@
  */
 var activeItem = Drupal.settings.basePath + Drupal.settings.currentPath;
 
-  $.fn.navbarMenu = function () {
+  $.fn.drupalNavbarMenu = function () {
 
     var ui = {
       'handleOpen': Drupal.t('Extend'),
