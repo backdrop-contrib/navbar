@@ -37,3 +37,27 @@ function navbar_uninstall() {
     }
   }
 }
+
+/**
+ * Implements hook_requirements().
+ */
+function navbar_requirements($phase) {
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    $requirements['navbar_backbone'] = array(
+      'title' => t('Navbar Backbone requirement'),
+      'value' => t('The Backbone library is not present'),
+      'severity' => REQUIREMENT_ERROR,
+    );
+    if (function_exists('libraries_get_path')) {
+      $path = libraries_get_path('backbone');
+      if (!empty($path) && file_exists($path . '/backbone-min.js')) {
+        $requirements['navbar_backbone']['value'] = t('The Backbone library is present');
+        $requirements['navbar_backbone']['severity'] = REQUIREMENT_OK;
+      }
+    }
+  }
+
+  return $requirements;
+}
