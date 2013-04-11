@@ -714,6 +714,8 @@ function navbar_library() {
     ),
     'dependencies' => array(
       array('system', 'jquery'),
+      array('navbar', 'underscore'),
+      array('navbar', 'backbone'),
       array('navbar', 'navbar.matchmedia'),
       array('system', 'jquery.once'),
       array('navbar', 'navbar.debounce'),
@@ -787,6 +789,29 @@ function navbar_library() {
     ),
   );
 
+  // Underscore.
+  $libraries['underscore'] = array(
+    'title' => 'Underscore',
+    'website' => 'http://underscorejs.org/',
+    'version' => '1.4.4',
+    'js' => array(
+      libraries_get_path('underscore') . '/underscore.js' => array('group' => JS_LIBRARY, 'weight' => -20),
+    ),
+  );
+
+  // Backbone.
+  $libraries['backbone'] = array(
+    'title' => 'Backbone',
+    'website' => 'http://backbonejs.org/',
+    'version' => '1.0.0',
+    'js' => array(
+      libraries_get_path('backbone') . '/backbone.js' => array('group' => JS_LIBRARY, 'weight' => -19),
+    ),
+    'dependencies' => array(
+      array('navbar', 'underscore'),
+    ),
+  );
+
   return $libraries;
 }
 
@@ -801,6 +826,39 @@ function navbar_library_alter(&$libraries, $module) {
     }
     $libraries['child']['css'][drupal_get_path('module', 'navbar') . '/css/navbar-overlay-child.css'] = array();
   }
+}
+
+/**
+ * Implements hook_library_info().
+ *
+ * @see Libraries module.
+ */
+function navbar_library_info() {
+  $libraries = array();
+
+  $libraries['underscore'] = array(
+    'name' => 'Underscore',
+    'vendor url' => 'http://documentcloud.github.io/backbone/',
+    'download url' => 'https://github.com/documentcloud/underscore/tags',
+    'files' => array(
+      'js' => array(
+        'underscore.js',
+      ),
+    ),
+  );
+
+  $libraries['backbone'] = array(
+    'name' => 'Backbone',
+    'vendor url' => 'http://documentcloud.github.io/backbone/',
+    'download url' => 'https://github.com/documentcloud/backbone/tags',
+    'files' => array(
+      'js' => array(
+        'backbone.js',
+      ),
+    ),
+  );
+
+  return $libraries;
 }
 
 /**
