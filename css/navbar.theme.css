@@ -19,6 +19,9 @@
   padding: 1em 1.3333em;
   text-decoration: none;
 }
+.navbar .tray .menu li a {
+  padding-right: 1.3333em;
+}
 .navbar a:hover {
   text-decoration: underline;
 }
