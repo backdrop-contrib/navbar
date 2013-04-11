@@ -87,7 +87,7 @@ html.js .navbar {
   display: none;
 }
 .navbar .tray {
-  bottom: 0;
+  bottom: auto;
   position: absolute;
   z-index: 1200;
 }
