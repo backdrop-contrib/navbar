@@ -23,7 +23,7 @@ Drupal.behaviors.navbar = {
       var options = $.extend(defaults, Drupal.settings.navbar);
       // Set up switching between the vertical and horizontal presentation
       // of the navbar trays based on a breakpoint.
-      var mql = window.matchMedia(options.breakpoints['module.navbar.wide']);
+      var mql = window.matchMedia(options.breakpoints['wide']);
       var model = new Drupal.navbar.Model({
         locked: JSON.parse(localStorage.getItem('Drupal.navbar.trayVerticalLocked')) || false,
         activeTab: document.getElementById(JSON.parse(localStorage.getItem('Drupal.navbar.activeTabID'))),
@@ -91,7 +91,7 @@ Drupal.behaviors.navbar = {
   // Default options.
   defaults: {
     breakpoints: {
-      'module.navbar.wide': ''
+      'wide': ''
     },
     strings: {
       opened: Drupal.t('opened'),
@@ -217,15 +217,13 @@ Drupal.navbar = Drupal.navbar || {
         .find('.lining')
         .append(Drupal.theme('navbarOrientationToggle'));
 
-      // Update the tray orientation.
-      var orientation = this._checkOrientationLock(this._getTrayOrientation(this.model.get('mqMatches')));
-      // This model change is silent because it will be triggered below when
-      // change:activeTab is triggered.
-      this.model.set('orientation', orientation, {silent: true});
-
       // Trigger an activeTab change so that listening scripts can respond on
       // page load. This will call render.
       this.model.trigger('change:activeTab');
+
+      // Update the tray orientation.
+      var orientation = this._checkOrientationLock(this._getTrayOrientation(this.model.get('mqMatches')));
+      this.model.set('orientation', orientation);
 
       // Invoke Drupal.displace() to get the current viewport offset values.
       Drupal.displace();
