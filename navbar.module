@@ -789,28 +789,17 @@ function navbar_library() {
     ),
   );
 
-  // Underscore.
-  $libraries['underscore'] = array(
-    'title' => 'Underscore',
-    'website' => 'http://underscorejs.org/',
-    'version' => '1.4.4',
-    'js' => array(
-      libraries_get_path('underscore') . '/underscore.js' => array('group' => JS_LIBRARY, 'weight' => -20),
-    ),
-  );
+  // Underscore
+  $libraries['underscore'] = navbar_convert_libraries_to_library(libraries_load('underscore'), array(
+    'group' => JS_LIBRARY,
+    'weight' => -20,
+  ));
 
-  // Backbone.
-  $libraries['backbone'] = array(
-    'title' => 'Backbone',
-    'website' => 'http://backbonejs.org/',
-    'version' => '1.0.0',
-    'js' => array(
-      libraries_get_path('backbone') . '/backbone.js' => array('group' => JS_LIBRARY, 'weight' => -19),
-    ),
-    'dependencies' => array(
-      array('navbar', 'underscore'),
-    ),
-  );
+  // Backbone
+  $libraries['backbone'] = navbar_convert_libraries_to_library(libraries_load('backbone'), array(
+    'group' => JS_LIBRARY,
+    'weight' => -19,
+  ));
 
   return $libraries;
 }
@@ -829,11 +818,11 @@ function navbar_library_alter(&$libraries, $module) {
 }
 
 /**
- * Implements hook_library_info().
+ * Implements hook_libraries_info().
  *
  * @see Libraries module.
  */
-function navbar_library_info() {
+function navbar_libraries_info() {
   $libraries = array();
 
   $libraries['underscore'] = array(
@@ -842,9 +831,10 @@ function navbar_library_info() {
     'download url' => 'https://github.com/documentcloud/underscore/tags',
     'files' => array(
       'js' => array(
-        'underscore.js',
+        'underscore-min.js',
       ),
     ),
+    'version' => '1.4.4',
   );
 
   $libraries['backbone'] = array(
@@ -853,9 +843,11 @@ function navbar_library_info() {
     'download url' => 'https://github.com/documentcloud/backbone/tags',
     'files' => array(
       'js' => array(
-        'backbone.js',
+        'backbone-min.js',
       ),
     ),
+    'version' => '1.0.0',
+    'dependencies' => array('underscore'),
   );
 
   return $libraries;
@@ -883,4 +875,35 @@ function _navbar_get_subtree_hash() {
     cache('navbar')->set($cid, $hash);
   }
   return $hash;
+}
+
+/**
+ * Converts a libraries module array to a hook_library array.
+ *
+ * What is this necessary? I don't see any way from the Libraries module API
+ * to get an array that corresponds to what hook_library expects.
+ */
+function navbar_convert_libraries_to_library($library, $options) {
+
+  // If the library wasn't loaded, don't bother converting it.
+  if (!$library['loaded']) {
+    return array();
+  }
+
+  $converted = array(
+    'title' => $library['name'],
+    'website' => $library['vendor url'],
+    'version' => $library['version'],
+  );
+
+  // This is not ideal, but I don't see any other way to convert these files.
+  // It's a bit hard-coded to expect just one file, but that's all we have for
+  // now, so it stays.
+  $filename = array_keys($library['files']['js']);
+  $converted['js'][$library['library path'] . '/' . $filename[0]] = array(
+    'group' => $options['group'],
+    'weight' => $options['weight'],
+  );
+
+  return $converted;
 }
