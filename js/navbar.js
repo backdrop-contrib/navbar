@@ -251,13 +251,19 @@ Drupal.navbar = Drupal.navbar || {
      * @param jQuery.Event event
      */
     onTabClick: function (event) {
-      var tab = this.model.get('activeTab');
+      // The polyfilled on and off events on the jQuery fn obect are not working
+      // perfectly with Backbone views. All click events within the view's el
+      // are being delegated, so we need to check here that we have the right
+      // element before acting with it.
+      if ($(event.target).is('.navbar-tab')) {
+        var tab = this.model.get('activeTab');
 
-      // Set the event target as the active item if it is not already.
-      this.model.set('activeTab', (!tab || event.target !== tab) ? event.target : null);
+        // Set the event target as the active item if it is not already.
+        this.model.set('activeTab', (!tab || event.target !== tab) ? event.target : null);
 
-      event.preventDefault();
-      event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+      }
     },
 
     /**
@@ -266,25 +272,31 @@ Drupal.navbar = Drupal.navbar || {
      * @param jQuery.Event event
      */
     onOrientationToggleClick: function (event) {
-      var orientation = this.model.get('orientation');
-      // Determine the toggle-to orientation.
-      var antiOrientation = (orientation === 'vertical') ? 'horizontal' : 'vertical';
-      var locked = (antiOrientation === 'vertical') ? true : false;
-      // Remember the locked state.
-      if (locked) {
-        localStorage.setItem('Drupal.navbar.trayVerticalLocked', 'true');
-      }
-      else {
-        localStorage.removeItem('Drupal.navbar.trayVerticalLocked');
-      }
-      // Update the model.
-      this.model.set({
-        locked: locked,
-        orientation: antiOrientation
-      });
+      // The polyfilled on and off events on the jQuery fn obect are not working
+      // perfectly with Backbone views. All click events within the view's el
+      // are being delegated, so we need to check here that we have the right
+      // element before acting with it.
+      if ($(event.target).is('.toggle-orientation button')) {
+        var orientation = this.model.get('orientation');
+        // Determine the toggle-to orientation.
+        var antiOrientation = (orientation === 'vertical') ? 'horizontal' : 'vertical';
+        var locked = (antiOrientation === 'vertical') ? true : false;
+        // Remember the locked state.
+        if (locked) {
+          localStorage.setItem('Drupal.navbar.trayVerticalLocked', 'true');
+        }
+        else {
+          localStorage.removeItem('Drupal.navbar.trayVerticalLocked');
+        }
+        // Update the model.
+        this.model.set({
+          locked: locked,
+          orientation: antiOrientation
+        });
 
-      event.preventDefault();
-      event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+      }
     },
 
     /**
