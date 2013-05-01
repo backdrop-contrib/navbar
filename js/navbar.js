@@ -204,8 +204,8 @@ Drupal.navbar = Drupal.navbar || {
     /**
      * Implements Backbone.View.prototype.initialize().
      */
-    initialize: function () {
-      this.strings = this.options.strings;
+    initialize: function (options) {
+      this.strings = options.strings;
 
       this.model.bind('change:activeTab', this.render, this);
       this.model.bind('change:orientation', this.render, this);
