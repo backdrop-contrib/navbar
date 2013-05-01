@@ -3,41 +3,41 @@
  *
  * RTL styles for navbar.icons.css
  */
-.navbar .icon {
+.drupal-navbar .icon {
   padding-left: 1.3333em;
   padding-right: 2.75em;
 }
-.navbar .icon:before {
+.drupal-navbar .icon:before {
   left: auto;
   right: 0.6667em;
 }
-.navbar .menu ul .icon {
+.drupal-navbar .menu ul .icon {
   padding-left: 0;
   padding-right: 1.3333em;
 }
-.navbar .vertical .menu ul {
+.drupal-navbar .vertical .menu ul {
   margin-left: 0;
   margin-right: 1.5em;
 }
-.navbar .vertical .menu ul ul {
+.drupal-navbar .vertical .menu ul ul {
   margin-left: 0;
   margin-right: 0.75em;
 }
 
 @media only screen and (min-width: 16.5em) {
-  .navbar .bar .icon:before {
+  .drupal-navbar .bar .icon:before {
     left: auto;
     right: 0;
   }
 }
 
 @media only screen and (min-width: 36em) {
-  .navbar .bar .icon {
+  .drupal-navbar .bar .icon {
     background-position: right center;
     padding-left: 1.3333em;
     padding-right: 2.75em;
   }
-  .navbar .bar .icon:before {
+  .drupal-navbar .bar .icon:before {
     left: auto;
     right: 0.6667em;
   }

@@ -1,7 +1,7 @@
 /**
  * @file navbar.theme.css
  */
-.navbar {
+.drupal-navbar {
   font-family: "Source Sans Pro", "Lucida Grande", Verdana, sans-serif;
   /* Set base font size to 13px based on root ems. */
   font-size: 0.8125rem;
@@ -14,38 +14,38 @@
   -webkit-touch-callout: none;
   touch-callout: none;
 }
-.navbar a {
+.drupal-navbar a {
   cursor: pointer;
   padding: 1em 1.3333em;
   text-decoration: none;
 }
-.navbar .tray .menu li a {
+.drupal-navbar .tray .menu li a {
   padding-right: 1.3333em;
 }
-.navbar a:hover {
+.drupal-navbar a:hover {
   text-decoration: underline;
 }
 
 /**
  * navbar bar.
  */
-.navbar .bar {
+.drupal-navbar .bar {
   background-color: #0f0f0f;
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3333);
   color: #dddddd;
 }
-.navbar .bar a {
+.drupal-navbar .bar a {
   color: #ffffff;
 }
-.navbar .bar .tab > a {
+.drupal-navbar .bar .tab > a {
   font-weight: bold;
 }
-.navbar .bar .tab > a:hover {
+.drupal-navbar .bar .tab > a:hover {
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.125) 20%, transparent 200%);
   background-image: linear-gradient(rgba(255, 255, 255, 0.125) 20%, transparent 200%);
   text-decoration: none;
 }
-.navbar .bar .tab > a.active {
+.drupal-navbar .bar .tab > a.active {
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.25) 20%, transparent 200%);
   background-image: linear-gradient(rgba(255, 255, 255, 0.25) 20%, transparent 200%);
 }
@@ -53,88 +53,88 @@
 /**
  * navbar tray.
  */
-.navbar .tray > .lining {
+.drupal-navbar .tray > .lining {
   background-color: #ffffff;
 }
-.navbar .horizontal > .lining {
+.drupal-navbar .horizontal > .lining {
   padding-right: 5em; /* LTR */
 }
-.navbar .vertical > .lining,
-.navbar .vertical > .lining:before {
+.drupal-navbar .vertical > .lining,
+.drupal-navbar .vertical > .lining:before {
   background-color: #ffffff;
   border-right: 1px solid #aaaaaa; /* LTR */
 }
-.navbar .vertical > .lining:before {
+.drupal-navbar .vertical > .lining:before {
   box-shadow: -1px 0 5px 2px rgba(0, 0, 0, 0.3333); /* LTR */
 }
-.navbar .horizontal {
+.drupal-navbar .horizontal {
   border-bottom: 1px solid #aaaaaa;
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3333);
 }
-.navbar .horizontal .tray {
+.drupal-navbar .horizontal .tray {
   background-color: #f5f5f5;
 }
-.navbar .tray a {
+.drupal-navbar .tray a {
   color: #707070;
 }
-.navbar .tray a:hover,
-.navbar .tray a:active,
-.navbar .tray a.active {
+.drupal-navbar .tray a:hover,
+.drupal-navbar .tray a:active,
+.drupal-navbar .tray a.active {
   color: #000;
 }
-.navbar .horizontal .menu {
+.drupal-navbar .horizontal .menu {
   background-color: #ffffff;
 }
-.navbar .horizontal .menu li + li {
+.drupal-navbar .horizontal .menu li + li {
   border-left: 1px solid #dddddd; /* LTR */
 }
-.navbar .horizontal .menu li:last-child {
+.drupal-navbar .horizontal .menu li:last-child {
   border-right: 1px solid #dddddd; /* LTR */
 }
-.navbar .vertical .menu li + li {
+.drupal-navbar .vertical .menu li + li {
   border-top: 1px solid #dddddd;
 }
-.navbar .vertical .menu li:last-child {
+.drupal-navbar .vertical .menu li:last-child {
   border-bottom: 1px solid #dddddd;
 }
-.navbar .vertical .menu .menu li {
+.drupal-navbar .vertical .menu .menu li {
   border: 0 none;
 }
-.navbar .vertical .menu ul ul {
+.drupal-navbar .vertical .menu ul ul {
   border-bottom: 1px solid #dddddd;
   border-top: 1px solid #dddddd;
 }
-.navbar .vertical .menu li:last-child > ul {
+.drupal-navbar .vertical .menu li:last-child > ul {
   border-bottom: 0;
 }
-.navbar .vertical .menu .menu .menu {
+.drupal-navbar .vertical .menu .menu .menu {
   margin-left: 1.3333em; /* LTR */
 }
-.navbar .vertical .menu .menu .menu .menu {
+.drupal-navbar .vertical .menu .menu .menu .menu {
   margin-left: 0.25em; /* LTR */
 }
-.navbar .menu .menu a {
+.drupal-navbar .menu .menu a {
   color: #434343;
 }
-.navbar .vertical .menu .menu .menu a {
+.drupal-navbar .vertical .menu .menu .menu a {
   padding-left: 0.6667em; /* LTR */
 }
 
 /**
  * Orientation toggle.
  */
-.navbar .toggle-orientation {
+.drupal-navbar .toggle-orientation {
   background-color: #f5f5f5;
   padding: 0.6667em;
 }
-.navbar .horizontal .toggle-orientation {
+.drupal-navbar .horizontal .toggle-orientation {
   border-left: 1px solid #c9c9c9; /* LTR */
 }
-.navbar .toggle-orientation > .lining {
+.drupal-navbar .toggle-orientation > .lining {
   float: right; /* LTR */
   padding: 0.1667em;
 }
-.navbar .toggle-orientation button {
+.drupal-navbar .toggle-orientation button {
   cursor: pointer;
   display: inline-block;
   height: 16px;
@@ -142,30 +142,30 @@
   text-indent: -999em;
   width: 20px;
 }
-.navbar .toggle-orientation button:before {
+.drupal-navbar .toggle-orientation button:before {
   left: 0; /* LTR */
 }
-.navbar .toggle-orientation [value="vertical"]:before {
+.drupal-navbar .toggle-orientation [value="vertical"]:before {
   background-image: url('../images/icon-toggle-vertical.png'); /* LTR */
 }
-.navbar .toggle-orientation [value="horizontal"]:before {
+.drupal-navbar .toggle-orientation [value="horizontal"]:before {
   background-image: url('../images/icon-toggle-horizontal.png');
 }
 
 /**
  * Shortcut.
  */
-.navbar .tray.horizontal.shortcuts .menu {
+.drupal-navbar .tray.horizontal.shortcuts .menu {
   float: left;
 }
 .edit-shortcuts {
   display: block;
 }
-.navbar .vertical .edit-shortcuts {
+.drupal-navbar .vertical .edit-shortcuts {
   text-align: right;
   padding: 1em;
 }
-.navbar .horizontal .edit-shortcuts {
+.drupal-navbar .horizontal .edit-shortcuts {
   display: inline-block;
   float: left; /* LTR */
 }

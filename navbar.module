@@ -90,7 +90,7 @@ function navbar_element_info() {
       'id' => 'navbar-administration',
       // The 'overlay-displace-top' class pushes the overlay down, so it appears
       // below the navbar.
-      'class' => array('navbar', 'overlay-displace-top'),
+      'class' => array('drupal-navbar', 'overlay-displace-top'),
       'role' => 'navigation',
     ),
     // Metadata for the administration bar.

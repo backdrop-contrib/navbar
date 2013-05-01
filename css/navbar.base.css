@@ -6,7 +6,7 @@
  * environments.
  */
 html.js #navbar-administration,
-html .navbar * {
+html .drupal-navbar * {
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -19,7 +19,7 @@ html.js #navbar-administration {
   font-size: small;
   line-height: 1;
 }
-html.js .navbar {
+html.js .drupal-navbar {
   left: 0; /* LTR */
   position: absolute;
   top: 0;
@@ -28,34 +28,34 @@ html.js .navbar {
 /**
  * Very specific overrides for Drupal system CSS.
  */
-.navbar li,
-.navbar .menu li,
-.navbar .item-list,
-.navbar .item-list li,
-.navbar .menu li.expanded {
+.drupal-navbar li,
+.drupal-navbar .menu li,
+.drupal-navbar .item-list,
+.drupal-navbar .item-list li,
+.drupal-navbar .menu li.expanded {
   list-style-type: none;
   list-style-image: none;
 }
-.navbar .menu li {
+.drupal-navbar .menu li {
   margin: 0;
   padding-top: 0;
 }
-.js .navbar .bar .tab,
-.js .navbar .menu li {
+.js .drupal-navbar .bar .tab,
+.js .drupal-navbar .menu li {
   display: block;
 }
-.js .navbar .bar .tab,
-.js .navbar .horizontal .tab  {
+.js .drupal-navbar .bar .tab,
+.js .drupal-navbar .horizontal .tab  {
   float: left; /* LTR */
 }
-.js .navbar a {
+.js .drupal-navbar a {
   display: block;
   line-height: 1;
 }
 /**
  * Administration menu.
  */
-.js .navbar .bar {
+.js .drupal-navbar .bar {
   left: 0; /* LTR */
   position: absolute;
   top: 0;
@@ -63,19 +63,19 @@ html.js .navbar {
   width: 100%;
 }
 @media only screen {
-  .js .navbar .bar .tab,
-  .js .navbar .tray li {
+  .js .drupal-navbar .bar .tab,
+  .js .drupal-navbar .tray li {
     float: none; /* LTR */
   }
 }
 @media only screen and (min-width: 16.5em) {
-  .js .navbar .bar .tab,
-  .js .navbar .horizontal li {
+  .js .drupal-navbar .bar .tab,
+  .js .drupal-navbar .horizontal li {
     float: left; /* LTR */
   }
 }
 @media only screen and (min-width: 28.125em) {
-  .js .navbar .bar {
+  .js .drupal-navbar .bar {
     position: fixed;
   }
 }
@@ -83,38 +83,38 @@ html.js .navbar {
 /**
  * navbar tray.
  */
-.js .navbar .tray {
+.js .drupal-navbar .tray {
   display: none;
 }
-.navbar .tray {
+.drupal-navbar .tray {
   bottom: auto;
   position: absolute;
   z-index: 1200;
 }
-.navbar .horizontal {
+.drupal-navbar .horizontal {
   width: 100%;
 }
-.navbar .vertical,
-.navbar .vertical > .lining:before {
+.drupal-navbar .vertical,
+.drupal-navbar .vertical > .lining:before {
   bottom: 0;
   width: 240px;
   width: 15rem;
 }
-.navbar .vertical {
+.drupal-navbar .vertical {
   left: -100%; /* LTR */
   position: absolute;
 }
-.navbar .horizontal {
+.drupal-navbar .horizontal {
   left: 0; /* LTR */
   height: 0;
   /* Set one higher than the contextual links gear. */
   z-index: 1000;
 }
-.navbar .tray .lining {
+.drupal-navbar .tray .lining {
   position: relative;
 }
-.navbar .vertical > .lining,
-.navbar .vertical > .lining:before {
+.drupal-navbar .vertical > .lining,
+.drupal-navbar .vertical > .lining:before {
   left: -100%; /* LTR */
   min-height: 100%;
   overflow-x: hidden;
@@ -122,7 +122,7 @@ html.js .navbar {
   position: absolute;
   width: 100%;
 }
-.navbar .vertical > .lining:before {
+.drupal-navbar .vertical > .lining:before {
   bottom: 0;
   -moz-box-sizing: content-box;
   -o-box-sizing: content-box;
@@ -137,50 +137,50 @@ html.js .navbar {
   top: 0;
   z-index: -1;
 }
-.navbar .tray.active {
+.drupal-navbar .tray.active {
   display: block;
 }
-.navbar .horizontal.active {
+.drupal-navbar .horizontal.active {
   height: auto;
 }
-.navbar .vertical.active,
-.navbar .vertical.active > .lining {
+.drupal-navbar .vertical.active,
+.drupal-navbar .vertical.active > .lining {
   left: 0; /* LTR */
   top: 0;
 }
 /* Make vertical navbar tray scroll with page for touch devices. */
-.touch .navbar .vertical.active,
-.touch .navbar .vertical.active > .lining {
+.touch .drupal-navbar .vertical.active,
+.touch .drupal-navbar .vertical.active > .lining {
   bottom: auto;
   top: auto;
 }
-.navbar .horizontal .menu li ul {
+.drupal-navbar .horizontal .menu li ul {
   display: none;
 }
 @media only screen {
-  .navbar .vertical,
-  .navbar .vertical > .lining:before {
+  .drupal-navbar .vertical,
+  .drupal-navbar .vertical > .lining:before {
     width: 100%;
   }
 }
 
 @media only screen and (min-width: 16.5em) {
-  .navbar .vertical,
-  .navbar .vertical > .lining:before {
+  .drupal-navbar .vertical,
+  .drupal-navbar .vertical > .lining:before {
     width: 240px;
     width: 15rem;
   }
-  .navbar .vertical.active > .lining:before {
+  .drupal-navbar .vertical.active > .lining:before {
     display: block;
     left: -1px; /* LTR */
   }
 }
 @media only screen and (min-width: 28.125em) {
-  .navbar .tray.horizontal,
-  .navbar .tray.vertical {
+  .drupal-navbar .tray.horizontal,
+  .drupal-navbar .tray.vertical {
     position: fixed;
   }
-  .navbar .tray.vertical {
+  .drupal-navbar .tray.vertical {
     bottom: 0;
   }
 }
@@ -199,26 +199,26 @@ html.js .navbar {
  * Hide the orientation toggle from browsers that do not interpret
  * media queries. They get a standard horizontal navbar.
  */
-.navbar .horizontal .toggle-orientation {
+.drupal-navbar .horizontal .toggle-orientation {
   display: none;
 }
 @media only screen {
-  .navbar .tray .toggle-orientation {
+  .drupal-navbar .tray .toggle-orientation {
     display: none;
   }
 }
 @media only screen and (min-width: 16.5em)   {
-  .navbar .tray .toggle-orientation {
+  .drupal-navbar .tray .toggle-orientation {
     display: block;
   }
 }
-.navbar .horizontal .toggle-orientation {
+.drupal-navbar .horizontal .toggle-orientation {
   bottom: 0;
   position: absolute;
   right: 0; /* LTR */
   top: 0;
 }
-.navbar .vertical .toggle-orientation {
+.drupal-navbar .vertical .toggle-orientation {
   float: right; /* LTR */
   width: 100%;
 }
