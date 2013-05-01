@@ -36,6 +36,8 @@ var activeItem = Drupal.settings.basePath + Drupal.settings.currentPath;
       toggleList($openItems, false);
       // Save link of the closest open item through a unique selector.
       var href = $toggle.siblings('a[href]').attr('href');
+
+      event.stopPropagation();
     }
     /**
      * Toggle the open/close state of a list is a menu.
@@ -130,9 +132,7 @@ var activeItem = Drupal.settings.basePath + Drupal.settings.currentPath;
         toggleList($activeTrail, true);
       }
     }
-    // Bind event handlers.
-    $(document)
-      .delegate('.handle', 'click.navbar', toggleClickHandler);
+
     // Return the jQuery object.
     return this.each(function (selector) {
       var $menu = $(this).once('navbar-menu');
@@ -140,6 +140,10 @@ var activeItem = Drupal.settings.basePath + Drupal.settings.currentPath;
         $menu.addClass('root');
         initItems($menu);
         markListLevels($menu);
+        // Attach handlers.
+        // Bind event handlers.
+        $menu
+          .delegate('.handle', 'click.navbar', toggleClickHandler);
         // Restore previous and active states.
         openActiveItem($menu);
       }

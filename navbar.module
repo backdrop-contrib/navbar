@@ -714,6 +714,7 @@ function navbar_library() {
     ),
     'dependencies' => array(
       array('system', 'jquery'),
+      array('navbar', 'navbar.jquery.on-off-shim'),
       array('navbar', 'underscore'),
       array('navbar', 'backbone'),
       array('navbar', 'navbar.matchmedia'),
@@ -786,6 +787,17 @@ function navbar_library() {
     'dependencies' => array(
       array('system', 'jquery'),
       array('navbar', 'navbar.displace'),
+    ),
+  );
+
+  $libraries['navbar.jquery.on-off-shim'] = array(
+    'title' => 'Shims the jQuery on and off methods for version previous to 1.7.',
+    'version' => VERSION,
+    'js' => array(
+      $path . '/js/jquery.on-off-shim.js' => array('group' => JS_LIBRARY),
+    ),
+    'dependencies' => array(
+      array('system', 'jquery'),
     ),
   );
 
