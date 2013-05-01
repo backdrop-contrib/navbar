@@ -828,7 +828,7 @@ function navbar_libraries_info() {
   $libraries['underscore'] = array(
     'name' => 'Underscore',
     'vendor url' => 'http://documentcloud.github.io/backbone/',
-    'download url' => 'https://github.com/documentcloud/underscore/tags',
+    'download url' => 'https://github.com/documentcloud/underscore/tree/1.4.4',
     'files' => array(
       'js' => array(
         'underscore-min.js',
@@ -840,7 +840,7 @@ function navbar_libraries_info() {
   $libraries['backbone'] = array(
     'name' => 'Backbone',
     'vendor url' => 'http://documentcloud.github.io/backbone/',
-    'download url' => 'https://github.com/documentcloud/backbone/tags',
+    'download url' => 'https://github.com/documentcloud/backbone/tree/1.0.0',
     'files' => array(
       'js' => array(
         'backbone-min.js',

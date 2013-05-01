@@ -3,4 +3,4 @@ description = A very simple mobile friendly toolbar that lets you switch between
 core = 7.x
 
 dependencies[] = breakpoints
-dependencies[] = libraries (>=2.x)
+dependencies[] = libraries

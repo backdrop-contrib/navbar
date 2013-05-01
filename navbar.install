@@ -45,18 +45,25 @@ function navbar_requirements($phase) {
   $requirements = array();
 
   if ($phase == 'runtime') {
-    $requirements = array(
-      'navbar_backbone' => array(
-        'title' => t('Navbar Backbone requirement'),
-        'value' => t('The Backbone library is not present'),
-        'severity' => REQUIREMENT_ERROR,
-      ),
-      'navbar_underscore' => array(
-        'title' => t('Navbar Underscore requirement'),
-        'value' => t('The Underscore library is not present'),
-        'severity' => REQUIREMENT_ERROR,
-      )
+    // Check for the libraries module.
+    if (module_exists('libraries')) {
+      $requirements['navbar_libraries'] = array(
+        'title' => t('Navbar Libraries requirement'),
+        'value' => t('Libraries is enabled. Version 2.x or higher is required. Please check your version if you are experiencing trouble with the Navbar module.'),
+        'severity' => REQUIREMENT_INFO,
+      );
+    }
+    $requirements['navbar_backbone'] = array(
+      'title' => t('Navbar Backbone requirement'),
+      'value' => t('The Backbone library is not present'),
+      'severity' => REQUIREMENT_ERROR,
     );
+    $requirements['navbar_underscore'] = array(
+      'title' => t('Navbar Underscore requirement'),
+      'value' => t('The Underscore library is not present'),
+      'severity' => REQUIREMENT_ERROR,
+    );
+
     if (function_exists('libraries_get_path')) {
       // Check for Underscore.
       $path = libraries_get_path('underscore');
