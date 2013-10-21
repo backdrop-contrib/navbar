@@ -722,9 +722,13 @@ function navbar_library() {
       array('navbar', 'navbar.debounce'),
       array('navbar', 'navbar.displace'),
       array('navbar', 'navbar.menu'),
-      array('navbar', 'navbar.overlay'),
     ),
   );
+
+  // Only load navbar.overlay if overlay is enabled.
+  if (module_exists('overlay')) {
+    $libraries['navbar']['dependencies'][] = array('navbar', 'navbar.overlay');
+  }
 
   $libraries['navbar.menu'] = array(
     'title' => 'Navbar nested accordion menus.',
