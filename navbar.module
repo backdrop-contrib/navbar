@@ -708,7 +708,7 @@ function navbar_library() {
       $path . '/js/navbar.js' => array(),
     ),
     'css' => array(
-      $path . '/css/navbar.base.css',
+      $path . '/css/navbar.module.css',
       $path . '/css/navbar.theme.css',
       $path . '/css/navbar.icons.css',
     ),
