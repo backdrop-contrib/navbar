@@ -98,7 +98,7 @@ function navbar_element_info() {
       '#heading' => t('Navbar items'),
       '#attributes' => array(
         'id' => 'navbar-bar',
-        'class' => array('bar', 'clearfix'),
+        'class' => array('navbar-bar', 'clearfix'),
         'data-offset-top' => array(),
       ),
     ),
@@ -539,7 +539,7 @@ function navbar_navbar() {
           '#theme' => 'links__navbar_user',
           '#links' => $links,
           '#attributes' => array(
-            'class' => array('navbar-menu'),
+            'class' => array('menu'),
           ),
         ),
       ),

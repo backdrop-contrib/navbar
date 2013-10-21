@@ -1,35 +1,35 @@
 /**
- * @file toolbar.menu.css
+ * @file navbar.menu.css
  */
-.navbar .menu,
-[dir="rtl"] .navbar .menu {
+.drupal-navbar .menu,
+[dir="rtl"] .drupal-navbar .menu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.navbar .navbar-box {
+.drupal-navbar .navbar-box {
   display: block;
   line-height: 1em; /* this prevents the value "normal" from being returned as the line-height */
   position: relative;
   width: auto;
 }
-.navbar .navbar-tray-horizontal .menu .navbar-handle,
-.navbar .navbar-tray-horizontal .menu ul,
-.navbar .navbar-tray-vertical .menu ul {
+.drupal-navbar .navbar-tray-horizontal .menu .navbar-handle,
+.drupal-navbar .navbar-tray-horizontal .menu ul,
+.drupal-navbar .navbar-tray-vertical .menu ul {
   display: none;
 }
-.navbar .navbar-tray-vertical li.open > ul {
+.drupal-navbar .navbar-tray-vertical li.open > ul {
   display: block; /* Show the sub-menus */
 }
-.navbar .navbar-tray-vertical .navbar-handle + a {
+.drupal-navbar .navbar-tray-vertical .navbar-handle + a {
   margin-right: 3em; /* LTR */
 }
-[dir="rtl"] .navbar .navbar-tray-vertical .navbar-handle + a {
+[dir="rtl"] .drupal-navbar .navbar-tray-vertical .navbar-handle + a {
   margin-left: 3em;
   margin-right: 0;
 }
-.navbar .navbar-tray .active-trail > .navbar-box a,
-.navbar .navbar-tray a.active {
+.drupal-navbar .navbar-tray .active-trail > .navbar-box a,
+.drupal-navbar .navbar-tray a.active {
   color: #000;
   font-weight: bold;
 }
@@ -37,37 +37,37 @@
 /**
  * Items.
  */
-.navbar .level-2 > ul {
+.drupal-navbar .level-2 > ul {
   background-color: #fafafa;
   border-bottom-color: #cccccc;
   border-top-color: #e5e5e5;
 }
-.navbar .level-3 > ul {
+.drupal-navbar .level-3 > ul {
   background-color: #f5f5f5;
   border-bottom-color: #c5c5c5;
   border-top-color: #dddddd;
 }
-.navbar .level-4 > ul {
+.drupal-navbar .level-4 > ul {
   background-color: #eeeeee;
   border-bottom-color: #bbbbbb;
   border-top-color: #d5d5d5;
 }
-.navbar .level-5 > ul {
+.drupal-navbar .level-5 > ul {
   background-color: #e5e5e5;
   border-bottom-color: #b5b5b5;
   border-top-color: #cccccc;
 }
-.navbar .level-6 > ul {
+.drupal-navbar .level-6 > ul {
   background-color: #eeeeee;
   border-bottom-color: #aaaaaa;
   border-top-color: #c5c5c5;
 }
-.navbar .level-7 > ul {
+.drupal-navbar .level-7 > ul {
   background-color: #fafafa;
   border-bottom-color: #b5b5b5;
   border-top-color: #cccccc;
 }
-.navbar .level-8 > ul {
+.drupal-navbar .level-8 > ul {
   background-color: #dddddd;
   border-bottom-color: #cccccc;
   border-top-color: #dddddd;
@@ -76,10 +76,10 @@
 /**
  * Handle.
  */
-.navbar .navbar-handle:hover {
+.drupal-navbar .navbar-handle:hover {
   cursor: pointer;
 }
-.navbar .navbar-icon.navbar-handle {
+.drupal-navbar .navbar-icon.navbar-handle {
   bottom: 0;
   display: block;
   height: 100%;
@@ -89,7 +89,7 @@
   top: 0;
   z-index: 1;
 }
-[dir="rtl"] .navbar .navbar-icon.navbar-handle {
+[dir="rtl"] .drupal-navbar .navbar-icon.navbar-handle {
   left: 0;
   right: auto;
 }
