@@ -296,7 +296,7 @@ function navbar_pre_render_item($element) {
     // Merge in module-provided attributes.
     $element['tab'] += array('#attributes' => array());
     $element['tab']['#attributes'] += $attributes;
-    $element['tab']['#attributes']['class'][] = 'trigger';
+    $element['tab']['#attributes']['class'][] = 'navbar-trigger';
 
     // Provide attributes for the tray theme wrapper.
     $attributes = array(
@@ -309,7 +309,7 @@ function navbar_pre_render_item($element) {
       $element['tray']['#wrapper_attributes'] = array();
     }
     $element['tray']['#wrapper_attributes'] += $attributes;
-    $element['tray']['#wrapper_attributes']['class'][] = 'tray';
+    $element['tray']['#wrapper_attributes']['class'][] = 'navbar-tray';
     $element['tray']['#wrapper_attributes']['class'][] = 'overlay-displace-top';
 
     if (!isset($element['tray']['#theme_wrappers'])) {
@@ -334,7 +334,7 @@ function template_preprocess_navbar_tab_wrapper(&$variables) {
   if (!isset($variables['element']['#wrapper_attributes'])) {
     $variables['element']['#wrapper_attributes'] = array();
   }
-  $variables['element']['#wrapper_attributes']['class'][] = 'tab';
+  $variables['element']['#wrapper_attributes']['class'][] = 'navbar-tab';
 }
 
 /**
@@ -387,7 +387,7 @@ function theme_navbar_tab_wrapper(&$variables) {
 function theme_navbar_tray_wrapper(&$variables) {
   if (!empty($variables['element']['#children'])) {
     $element = $variables['element'];
-    return '<div' . drupal_attributes($element['#wrapper_attributes']) . '><div class="lining clearfix">' . $element['#children'] . '</div></div>';
+    return '<div' . drupal_attributes($element['#wrapper_attributes']) . '><div class="navbar-lining clearfix">' . $element['#children'] . '</div></div>';
   }
 }
 
@@ -485,7 +485,7 @@ function navbar_navbar() {
       '#options' => array(
         'attributes' => array(
           'title' => t('Admin menu'),
-          'class' => array('icon', 'icon-menu', 'navbar-tab',),
+          'class' => array('navbar-icon', 'navbar-icon-menu', 'navbar-tab',),
         ),
       ),
     ),
@@ -529,7 +529,7 @@ function navbar_navbar() {
         '#options' => array(
           'attributes' => array(
             'title' => t('My account'),
-            'class' => array('icon', 'icon-user', 'navbar-tab',),
+            'class' => array('navbar-icon', 'navbar-icon-user', 'navbar-tab',),
           ),
         ),
       ),
@@ -539,7 +539,7 @@ function navbar_navbar() {
           '#theme' => 'links__navbar_user',
           '#links' => $links,
           '#attributes' => array(
-            'class' => array('menu'),
+            'class' => array('navbar-menu'),
           ),
         ),
       ),
@@ -570,7 +570,7 @@ function navbar_navbar() {
           '#options' => array(
             'attributes' => array(
               'title' => t('Shortcuts'),
-              'class' => array('icon', 'icon-shortcut', 'navbar-tab',),
+              'class' => array('navbar-icon', 'navbar-icon-shortcut', 'navbar-tab',),
             ),
           ),
         ),
@@ -626,8 +626,8 @@ function navbar_menu_navigation_links(&$tree) {
     $tree[$key]['link']['localized_options']['attributes'] = array(
       'id' => 'navbar-link-' . str_replace(array('/', '<', '>'), array('-', '', ''), $item['link']['link_path']),
       'class' => array(
-        'icon',
-        'icon-' . strtolower(str_replace(' ', '-', $item['link']['link_title'])),
+        'navbar-icon',
+        'navbar-icon-' . strtolower(str_replace(' ', '-', $item['link']['link_title'])),
       ),
     );
   }

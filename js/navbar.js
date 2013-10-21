@@ -517,7 +517,10 @@ Drupal.navbar = {
       var dir = document.documentElement.dir;
       var edge = (dir === 'rtl') ? 'right' : 'left';
       // Remove data-offset attributes from the trays so they can be refreshed.
-      $trays.removeAttr('data-offset-left data-offset-right data-offset-top');
+      $trays
+        .removeAttr('data-offset-left')
+        .removeAttr('data-offset-right')
+        .removeAttr('data-offset-top');
       // If an active vertical tray exists, mark it as an offset element.
       $trays.filter('.navbar-tray-vertical.active').attr('data-offset-' + edge, '');
       // If an active horizontal tray exists, mark it as an offset element.
