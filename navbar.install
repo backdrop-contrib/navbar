@@ -67,13 +67,13 @@ function navbar_requirements($phase) {
     if (function_exists('libraries_get_path')) {
       // Check for Underscore.
       $path = libraries_get_path('underscore');
-      if (!empty($path) && file_exists($path . '/underscore.js')) {
+      if (!empty($path) && file_exists($path . '/underscore-min.js')) {
         $requirements['navbar_underscore']['value'] = t('The Underscore library is present');
         $requirements['navbar_underscore']['severity'] = REQUIREMENT_OK;
       }
     // Check for Backbone.
       $path = libraries_get_path('backbone');
-      if (!empty($path) && file_exists($path . '/backbone.js')) {
+      if (!empty($path) && file_exists($path . '/backbone-min.js')) {
         $requirements['navbar_backbone']['value'] = t('The Backbone library is present');
         $requirements['navbar_backbone']['severity'] = REQUIREMENT_OK;
       }
