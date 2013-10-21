@@ -84,6 +84,10 @@ Drupal.behaviors.navbar = {
         // Indicate on the navbarModel that subtrees are now loaded.
         model.set('areSubtreesLoaded', true);
       });
+      // Resolve this immediately since we're simply loading all the submenu
+      // items right from the server each time until we can resolve the JSONP
+      // loading issue in Drupal 7.
+      Drupal.navbar.setSubtrees.resolve({});
 
       // Attach a listener to the configured media query breakpoints.
       for (var label in options.breakpoints) {

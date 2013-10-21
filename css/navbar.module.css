@@ -1,219 +1,243 @@
 /**
- * @file navbar.base.css
+ * @file toolbar.module.css
  *
  *
  * Aggressive resets so we can achieve a consistent look in hostile CSS
  * environments.
  */
-html.js #navbar-administration,
-html .drupal-navbar * {
+#navbar-administration,
+#navbar-administration * {
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#navbar-administration {
+  font-size: small;
+  line-height: 1;
   margin: 0;
   padding: 0;
   vertical-align: baseline;
 }
-html.js #navbar-administration {
-  font-size: small;
-  line-height: 1;
-}
-html.js .drupal-navbar {
-  left: 0; /* LTR */
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
+
 /**
  * Very specific overrides for Drupal system CSS.
  */
-.drupal-navbar li,
-.drupal-navbar .menu li,
-.drupal-navbar .item-list,
-.drupal-navbar .item-list li,
-.drupal-navbar .menu li.expanded {
+.navbar li,
+.navbar .menu li,
+.navbar .item-list,
+.navbar .item-list li,
+.navbar .menu li.expanded {
   list-style-type: none;
   list-style-image: none;
 }
-.drupal-navbar .menu li {
-  margin: 0;
+.navbar .menu li {
   padding-top: 0;
 }
-.js .drupal-navbar .bar .tab,
-.js .drupal-navbar .menu li {
+.navbar .navbar-bar .navbar-tab,
+.navbar .menu li {
   display: block;
 }
-.js .drupal-navbar .bar .tab,
-.js .drupal-navbar .horizontal .tab  {
-  float: left; /* LTR */
-}
-.js .drupal-navbar a {
+.navbar a {
   display: block;
   line-height: 1;
 }
+
 /**
  * Administration menu.
  */
-.js .drupal-navbar .bar {
-  left: 0; /* LTR */
-  position: absolute;
-  top: 0;
+.navbar .navbar-bar,
+.navbar .navbar-tray {
+  position: relative;
   z-index: 1250;
-  width: 100%;
 }
-@media only screen {
-  .js .drupal-navbar .bar .tab,
-  .js .drupal-navbar .tray li {
-    float: none; /* LTR */
-  }
-}
-@media only screen and (min-width: 16.5em) {
-  .js .drupal-navbar .bar .tab,
-  .js .drupal-navbar .horizontal li {
-    float: left; /* LTR */
-  }
-}
-@media only screen and (min-width: 28.125em) {
-  .js .drupal-navbar .bar {
-    position: fixed;
-  }
-}
-
-/**
- * navbar tray.
- */
-.js .drupal-navbar .tray {
-  display: none;
-}
-.drupal-navbar .tray {
-  bottom: auto;
+/* Position the admin toolbar absolutely when the configured standard breakpoint
+ * is active. The toolbar container, that contains the bar and the trays, is
+ * position absolutely so that it scrolls with the page. Otherwise, on smaller
+ * screens, the components of the admin toolbar are positioned statically. */
+body.navbar-fixed .navbar-oriented,
+.navbar-oriented .navbar-bar,
+.navbar-oriented .navbar-tray {
+  left: 0;
   position: absolute;
-  z-index: 1200;
+  right: 0;
+  top: 0;
 }
-.drupal-navbar .horizontal {
-  width: 100%;
+/* Layer the bar just above the trays and above contextual link triggers. */
+.navbar-oriented .navbar-bar {
+  z-index: 502;
 }
-.drupal-navbar .vertical,
-.drupal-navbar .vertical > .lining:before {
+/* Position the admin toolbar fixed when the configured standard breakpoint is
+ * active. */
+body.navbar-fixed .navbar-oriented .navbar-bar {
+  position: fixed;
+}
+/* When the configured narrow breakpoint is active, the toolbar is sized to wrap
+ * around the trays in order to provide a context for scrolling tray content
+ * that is taller than the viewport. */
+body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
   bottom: 0;
   width: 240px;
   width: 15rem;
 }
-.drupal-navbar .vertical {
-  left: -100%; /* LTR */
-  position: absolute;
+/* Present the admin toolbar tabs horizontally as a default on user agents that
+ * do not understand media queries or on user agents where JavaScript is
+ * disabled. */
+.navbar .navbar-bar .navbar-tab,
+.navbar .navbar-tray-horizontal li {
+  float: left; /* LTR */
 }
-.drupal-navbar .horizontal {
-  left: 0; /* LTR */
-  height: 0;
-  /* Set one higher than the contextual links gear. */
-  z-index: 1000;
+[dir="rtl"] .navbar .navbar-bar .navbar-tab,
+[dir="rtl"] .navbar .navbar-tray-horizontal li {
+  float: right;
 }
-.drupal-navbar .tray .lining {
-  position: relative;
-}
-.drupal-navbar .vertical > .lining,
-.drupal-navbar .vertical > .lining:before {
-  left: -100%; /* LTR */
-  min-height: 100%;
-  position: absolute;
-  width: 100%;
-}
-.drupal-navbar .vertical > .lining:before {
-  bottom: 0;
-  content: '';
-  display: none;
-  height: 100%;
-  /* Support for devices that do not support position fixed. */
-  position: absolute;
-  position: fixed;
-  top: 0;
-  z-index: -1;
-}
-.drupal-navbar .tray.active {
-  display: block;
-}
-.drupal-navbar .horizontal.active {
-  height: auto;
-}
-.drupal-navbar .vertical.active,
-.drupal-navbar .vertical.active > .lining {
-  left: 0; /* LTR */
-  top: 0;
-}
-/* Make vertical navbar tray scroll with page for touch devices. */
-.touch .drupal-navbar .vertical.active,
-.touch .drupal-navbar .vertical.active > .lining {
-  bottom: auto;
-  top: auto;
-}
-.drupal-navbar .horizontal .menu li ul {
-  display: none;
-}
+/* Present the admin toolbar tabs vertically by default on user agents that
+ * that understand media queries. This will be the small screen default. */
 @media only screen {
-  .drupal-navbar .vertical,
-  .drupal-navbar .vertical > .lining:before {
-    width: 100%;
+  .navbar .navbar-bar .navbar-tab,
+  .navbar .navbar-tray-horizontal li {
+    float: none; /* LTR */
   }
+  [dir="rtl"] .navbar .navbar-bar .navbar-tab,
+  [dir="rtl"] .navbar .navbar-tray-horizontal li {
+    float: none;
+  }
+}
+/* This min-width media query is meant to provide basic horizontal layout to
+ * the main menu tabs when JavaScript is disabled on user agents that understand
+ * media queries. */
+@media (min-width:16.5em) {
+  .navbar .navbar-bar .navbar-tab,
+  .navbar .navbar-tray-horizontal li {
+    float: left; /* LTR */
+  }
+  [dir="rtl"] .navbar .navbar-bar .navbar-tab,
+  [dir="rtl"] .navbar .navbar-tray-horizontal li {
+    float: right;
+  }
+}
+/* Present the admin toolbar tabs horizontally when the configured narrow
+ * breakpoint is active. */
+.navbar-oriented .navbar-bar .navbar-tab,
+.navbar-oriented .navbar-tray-horizontal li {
+  float: left; /* LTR */
+}
+[dir="rtl"] .navbar-oriented .navbar-bar .navbar-tab,
+[dir="rtl"] .navbar-oriented .navbar-tray-horizontal li {
+  float: right;
 }
 
-@media only screen and (min-width: 16.5em) {
-  .drupal-navbar .vertical,
-  .drupal-navbar .vertical > .lining:before {
-    width: 240px;
-    width: 15rem;
-  }
-  .drupal-navbar .vertical.active > .lining:before {
-    display: block;
-    left: -1px; /* LTR */
-  }
-}
-@media only screen and (min-width: 28.125em) {
-  .drupal-navbar .tray.horizontal,
-  .drupal-navbar .tray.vertical {
-    position: fixed;
-  }
-  .drupal-navbar .tray.vertical {
-    bottom: 0;
-  }
-  .drupal-navbar .vertical {
-    overflow: auto;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-}
 /**
- * At larger screen sizes, the tray pushes the page content.
+ * Toolbar tray.
  */
-@media only screen and (min-width: 38.125em) {
-  body.navbar-tray-open.navbar-vertical {
-    margin-left: 240px; /* LTR */
-    margin-left: 15rem; /* LTR */
-  }
+.navbar .navbar-tray {
+  display: none;
+  z-index: 501;
 }
-/**
- * navbar tray orientation toggle.
- *
- * Hide the orientation toggle from browsers that do not interpret
- * media queries. They get a standard horizontal navbar.
- */
-.drupal-navbar .horizontal .toggle-orientation {
+.toolar .navbar-tray > .navbar-lining {
+  position: relative;
+}
+.navbar-oriented .navbar-tray-vertical {
+  left: -100%; /* LTR */
+  position: absolute;
+  width: 240px;
+  width: 15rem;
+}
+[dir="rtl"] .navbar-oriented .navbar-tray-vertical {
+  left: auto;
+  right: -100%;
+}
+.navbar .navbar-tray-vertical > .navbar-lining {
+  min-height: 100%;
+}
+.navbar .navbar-tray-vertical > .navbar-lining:before {
+  width: 100%;
+}
+.navbar-oriented .navbar-tray-vertical > .navbar-lining:before {
+  bottom: 0;
+  content: '';
+  display: block;
+  left: 0; /* LTR */
+  position: fixed;
+  top: 0;
+  width: 240px;
+  width: 15rem;
+  z-index: -1;
+}
+[dir="rtl"] .navbar .navbar-tray-vertical > .navbar-lining:before {
+  left: auto;
+  right: 0;
+}
+/* Hide secondary menus when the tray is horizontal. */
+.navbar-oriented .navbar-tray-horizontal .menu li ul {
   display: none;
 }
-@media only screen {
-  .drupal-navbar .tray .toggle-orientation {
-    display: none;
-  }
+/* When the configured standard breakpoint is active and the tray is in a
+ * horizontal position, the tray is fixed to the top of the viewport and does
+ * not scroll with the page contents. */
+body.navbar-fixed .navbar .navbar-tray-horizontal {
+  position: fixed;
 }
-@media only screen and (min-width: 16.5em)   {
-  .drupal-navbar .tray .toggle-orientation {
-    display: block;
-  }
+/* When the configured standard breakpoint is active and the tray is in a
+ * vertical position, the tray does not scroll with the page. The contents of
+ * the tray scroll within the confines of the viewport. */
+body.navbar-fixed .navbar .navbar-tray-vertical {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
 }
-.drupal-navbar .horizontal .toggle-orientation {
+.navbar .navbar-tray.active {
+  display: block;
+}
+/* Bring the tray into the viewport. By default it is just off-screen. */
+.navbar-oriented .navbar-tray-vertical.active {
+  left: 0; /* LTR */
+}
+[dir="rtl"] .navbar-oriented .navbar-tray-vertical.active {
+  left: auto;
+  right: 0;
+}
+/* When the configured standard breakpoint is active, the tray appears to push
+ * the page content away from the edge of the viewport. */
+body.navbar-tray-open.navbar-vertical.navbar-fixed {
+  margin-left: 240px; /* LTR */
+  margin-left: 15rem; /* LTR */
+}
+[dir="rtl"] body.navbar-tray-open.navbar-vertical.navbar-fixed {
+  margin-left: auto;
+  margin-left: auto;
+  margin-right: 240px;
+  margin-right: 15rem;
+}
+
+/**
+ * ToolBar tray orientation toggle.
+ */
+/* Hide the orientation toggle when the configured narrow breakpoint is not
+ * active. */
+.navbar .navbar-tray .navbar-toggle-orientation {
+  display: none;
+}
+/* Show the orientation toggle when the configured narrow breakpoint is
+ * active. */
+.navbar-oriented .navbar-tray .navbar-toggle-orientation {
+  display: block;
+}
+.navbar-oriented .navbar-tray-horizontal .navbar-toggle-orientation {
   bottom: 0;
   position: absolute;
   right: 0; /* LTR */
-  top: 0;
+  top: auto;
 }
-.drupal-navbar .vertical .toggle-orientation {
+[dir="rtl"] .navbar-oriented .navbar-tray-horizontal .navbar-toggle-orientation {
+  left: 0;
+  right: auto;
+}
+.navbar-oriented .navbar-tray-vertical .navbar-toggle-orientation {
   float: right; /* LTR */
   width: 100%;
+}
+[dir="rtl"] .navbar-oriented .navbar-tray-vertical .navbar-toggle-orientation {
+  float: left;
 }

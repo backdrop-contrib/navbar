@@ -464,7 +464,7 @@ function navbar_navbar() {
     ),
   );
 
-  // This flow is commented out until we figure out how to returne a JSONP
+  // This flow is commented out until we figure out how to return a JSONP
   // response in Drupal 7.
   //
   // To conserve bandwidth, we only include the top-level links in the HTML.
