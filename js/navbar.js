@@ -32,9 +32,9 @@ Drupal.behaviors.navbar = {
       var options = $.extend(
         {
           breakpoints: {
-            'narrow': '',
-            'standard': '',
-            'wide': ''
+            'module.navbar.narrow': '',
+            'module.navbar.standard': '',
+            'module.navbar.wide': ''
           }
         },
         Drupal.settings.navbar,

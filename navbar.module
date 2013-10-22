@@ -216,7 +216,7 @@ function navbar_pre_render($element) {
   $media_queries = array();
   foreach (breakpoints_breakpoint_load_all() as $breakpoint) {
     if ($breakpoint->source_type  === 'module' && $breakpoint->source === 'navbar') {
-      $media_queries['navbar']['breakpoints'][$breakpoint->name] = $breakpoint->breakpoint;
+      $media_queries['navbar']['breakpoints'][$breakpoint->source_type . '.' . $breakpoint->source . '.' . $breakpoint->name] = $breakpoint->breakpoint;
     }
   }
   if (!empty($media_queries)) {
