@@ -9,19 +9,26 @@
  */
 function navbar_install() {
   if (module_exists('breakpoints')) {
-    // Add a breakpoint for switching between horizontal and vertical tray
-    // orientation.
-    $breakpoint = new stdClass();
-    $breakpoint->disabled = FALSE;
-    $breakpoint->api_version = 1;
-    $breakpoint->name = 'wide';
-    $breakpoint->breakpoint = 'only screen and (min-width: 50em)';
-    $breakpoint->source = 'navbar';
-    $breakpoint->source_type = 'module';
-    $breakpoint->status = 1;
-    $breakpoint->weight = 0;
-    $breakpoint->multipliers = array();
-    breakpoints_breakpoint_save($breakpoint);
+    $counter = 0;
+    $bps = array(
+      'narrow' => 'only screen and (min-width: 16.5em)',
+      'standard' => 'only screen and (min-width: 38.125em)',
+      'wide' => 'only screen and (min-width: 50em)',
+    );
+    // Create breakpoints with the breakpoints module API.
+    foreach($bps as $name => $mq) {
+      $breakpoint = new stdClass();
+      $breakpoint->disabled = FALSE;
+      $breakpoint->api_version = 1;
+      $breakpoint->name = $name;
+      $breakpoint->breakpoint = $mq;
+      $breakpoint->source = 'navbar';
+      $breakpoint->source_type = 'module';
+      $breakpoint->status = 1;
+      $breakpoint->weight = $counter++;
+      $breakpoint->multipliers = array();
+      breakpoints_breakpoint_save($breakpoint);
+    }
   }
 }
 
