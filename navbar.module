@@ -717,6 +717,7 @@ function navbar_library() {
       $path . '/css/navbar.icons.css',
     ),
     'dependencies' => array(
+      array('navbar', 'modernizr'),
       array('system', 'jquery'),
       array('navbar', 'navbar.jquery.on-off-shim'),
       array('navbar', 'underscore'),
@@ -809,6 +810,12 @@ function navbar_library() {
     ),
   );
 
+  // Modernizr
+  $libraries['modernizr'] = navbar_convert_libraries_to_library(libraries_load('modernizr'), array(
+    'group' => JS_LIBRARY,
+    'weight' => -100,
+  ));
+
   // Underscore
   $libraries['underscore'] = navbar_convert_libraries_to_library(libraries_load('underscore'), array(
     'group' => JS_LIBRARY,
@@ -844,6 +851,18 @@ function navbar_library_alter(&$libraries, $module) {
  */
 function navbar_libraries_info() {
   $libraries = array();
+
+  $libraries['modernizr'] = array(
+    'name' => 'Modernizr (custome build, see download URL)',
+    'vendor url' => 'https://github.com/Modernizr/Modernizr',
+    'download url' => 'http://modernizr.com/download/#-inputtypes-svg-touch-cssclasses-addtest-teststyles-prefixes-elem_details',
+    'files' => array(
+      'js' => array(
+        'modernizr.min.js',
+      ),
+    ),
+    'version' => '2.6.2',
+  );
 
   $libraries['underscore'] = array(
     'name' => 'Underscore',

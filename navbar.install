@@ -62,6 +62,11 @@ function navbar_requirements($phase) {
         'severity' => REQUIREMENT_INFO,
       );
     }
+    $requirements['navbar_modernizr'] = array(
+      'title' => t('Navbar Modernizr requirement'),
+      'value' => t('The Modernizr library is not present'),
+      'severity' => REQUIREMENT_ERROR,
+    );
     $requirements['navbar_backbone'] = array(
       'title' => t('Navbar Backbone requirement'),
       'value' => t('The Backbone library is not present'),
@@ -74,13 +79,19 @@ function navbar_requirements($phase) {
     );
 
     if (function_exists('libraries_get_path')) {
+      // Check for Modernizr.
+      $path = libraries_get_path('modernizr');
+      if (!empty($path) && file_exists($path . '/modernizr.min.js')) {
+        $requirements['navbar_modernizr']['value'] = t('The Modernizr library is present');
+        $requirements['navbar_modernizr']['severity'] = REQUIREMENT_OK;
+      }
       // Check for Underscore.
       $path = libraries_get_path('underscore');
       if (!empty($path) && file_exists($path . '/underscore-min.js')) {
         $requirements['navbar_underscore']['value'] = t('The Underscore library is present');
         $requirements['navbar_underscore']['severity'] = REQUIREMENT_OK;
       }
-    // Check for Backbone.
+      // Check for Backbone.
       $path = libraries_get_path('backbone');
       if (!empty($path) && file_exists($path . '/backbone-min.js')) {
         $requirements['navbar_backbone']['value'] = t('The Backbone library is present');
