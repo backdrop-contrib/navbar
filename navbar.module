@@ -488,7 +488,7 @@ function navbar_navbar() {
       '#options' => array(
         'attributes' => array(
           'title' => t('Admin menu'),
-          'class' => array('navbar-icon', 'navbar-icon-menu', 'navbar-tab',),
+          'class' => array('navbar-icon', 'navbar-icon-menu',),
         ),
       ),
     ),
@@ -532,7 +532,7 @@ function navbar_navbar() {
         '#options' => array(
           'attributes' => array(
             'title' => t('My account'),
-            'class' => array('navbar-icon', 'navbar-icon-user', 'navbar-tab',),
+            'class' => array('navbar-icon', 'navbar-icon-user',),
           ),
         ),
       ),
@@ -573,7 +573,7 @@ function navbar_navbar() {
           '#options' => array(
             'attributes' => array(
               'title' => t('Shortcuts'),
-              'class' => array('navbar-icon', 'navbar-icon-shortcut', 'navbar-tab',),
+              'class' => array('navbar-icon', 'navbar-icon-shortcut',),
             ),
           ),
         ),
@@ -632,6 +632,7 @@ function navbar_menu_navigation_links(&$tree) {
         'navbar-icon',
         'navbar-icon-' . strtolower(str_replace(' ', '-', $item['link']['link_title'])),
       ),
+      'title' => check_plain($item['link']['description']),
     );
   }
 }
