@@ -444,7 +444,7 @@ function navbar_navbar() {
       '#options' => array(
         'attributes' => array(
           'title' => t('Home page'),
-          'class' => array('icon', 'icon-home'),
+          'class' => array('navbar-icon', 'navbar-icon-home'),
         ),
       ),
     ),
