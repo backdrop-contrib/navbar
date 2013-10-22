@@ -400,9 +400,13 @@ function theme_navbar_tray_wrapper(&$variables) {
  *     the tray. Properties used: #children and #heading.
  */
 function theme_navbar_tray_heading_wrapper(&$variables) {
-  if (!empty($variables['element']['#children'])) {
-    $element = $variables['element'];
-    return '<h3 class="element-invisible">' . $element['#heading'] . '</h3>' . $element['#children'];
+  $element = $variables['element'];
+  if (!empty($element['#children'])) {
+    $heading = '';
+    if (!empty($element['#heading'])) {
+      $heading = '<h3 class="navbar-tray-name element-invisible">' . $element['#heading'] . '</h3>';
+    }
+    return $heading . $element['#children'];
   }
 }
 
