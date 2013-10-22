@@ -406,28 +406,30 @@ Drupal.navbar = {
      * @param jQuery.Event event
      */
     onOrientationToggleClick: function (event) {
-      var orientation = this.model.get('orientation');
-      // Determine the toggle-to orientation.
-      var antiOrientation = (orientation === 'vertical') ? 'horizontal' : 'vertical';
-      var locked = (antiOrientation === 'vertical') ? true : false;
-      // Remember the locked state.
-      if (locked) {
-        localStorage.setItem('Drupal.navbar.trayVerticalLocked', 'true');
-      }
-      else {
-        localStorage.removeItem('Drupal.navbar.trayVerticalLocked');
-      }
-      // Update the model.
-      this.model.set({
-        locked: locked,
-        orientation: antiOrientation
-      }, {
-        validate: true,
-        override: true
-      });
+      if ($(event.target).hasClass('navbar-toggle')) {
+        var orientation = this.model.get('orientation');
+        // Determine the toggle-to orientation.
+        var antiOrientation = (orientation === 'vertical') ? 'horizontal' : 'vertical';
+        var locked = (antiOrientation === 'vertical') ? true : false;
+        // Remember the locked state.
+        if (locked) {
+          localStorage.setItem('Drupal.navbar.trayVerticalLocked', 'true');
+        }
+        else {
+          localStorage.removeItem('Drupal.navbar.trayVerticalLocked');
+        }
+        // Update the model.
+        this.model.set({
+          locked: locked,
+          orientation: antiOrientation
+        }, {
+          validate: true,
+          override: true
+        });
 
-      event.preventDefault();
-      event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
+      }
     },
 
     /**
@@ -681,7 +683,7 @@ Drupal.navbar = {
  */
 Drupal.theme.navbarOrientationToggle = function () {
   return '<div class="navbar-toggle-orientation"><div class="navbar-lining">' +
-    '<button class="navbar-icon" type="button"></button>' +
+    '<button class="navbar-icon navbar-toggle" type="button"></button>' +
     '</div></div>';
 };
 
