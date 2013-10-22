@@ -31,7 +31,9 @@ function navbar_install() {
 function navbar_uninstall() {
   if (module_exists('breakpoints')) {
     foreach (breakpoints_breakpoint_load_all() as $breakpoint) {
-      if ($breakpoint->machine_name === 'breakpoints.module.navbar.wide') {
+      $identifiers = explode('.', $breakpoint->machine_name);
+      // Delete all of the breakpionts associated with the navbar.
+      if ($identifiers[1] === 'module' && $identifiers[2] === 'navbar') {
         breakpoints_breakpoint_delete($breakpoint);
       }
     }
