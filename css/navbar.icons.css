@@ -66,162 +66,198 @@
  * Top level icons.
  */
 .navbar-bar .navbar-icon-home:before {
-  background-image: url("../../../misc/icons/bebebe/house.svg");
+  background-image: url("../icons/bebebe/house.svg");
 }
 .no-svg .navbar-bar .navbar-icon-home:before {
-  background-image: url("../../../misc/icons/bebebe/house.png");
+  background-image: url("../icons/bebebe/house.png");
 }
 .navbar-bar .navbar-icon-home:active:before,
 .navbar-bar .navbar-icon-home.active:before {
-  background-image: url("../../../misc/icons/ffffff/house.svg");
+  background-image: url("../icons/ffffff/house.svg");
 }
 .no-svg .navbar-bar .navbar-icon-home:active:before,
 .no-svg .navbar-bar .navbar-icon-home.active:before {
-  background-image: url("../../../misc/icons/ffffff/house.png");
+  background-image: url("../icons/ffffff/house.png");
 }
 .navbar-bar .navbar-icon-menu:before {
-  background-image: url("../../../misc/icons/bebebe/hamburger.svg");
+  background-image: url("../icons/bebebe/hamburger.svg");
 }
 .no-svg .navbar-bar .navbar-icon-menu:before {
-  background-image: url("../../../misc/icons/bebebe/hamburger.png");
+  background-image: url("../icons/bebebe/hamburger.png");
 }
 .navbar-bar .navbar-icon-menu:active:before,
 .navbar-bar .navbar-icon-menu.active:before {
-  background-image: url("../../../misc/icons/ffffff/hamburger.svg");
+  background-image: url("../icons/ffffff/hamburger.svg");
 }
 .no-svg .navbar-bar .navbar-icon-menu:active:before,
 .no-svg .navbar-bar .navbar-icon-menu.active:before {
-  background-image: url("../../../misc/icons/ffffff/hamburger.png");
+  background-image: url("../icons/ffffff/hamburger.png");
 }
 .navbar-bar .navbar-icon-help:before {
-  background-image: url("../../../misc/icons/bebebe/questionmark-disc.svg");
+  background-image: url("../icons/bebebe/questionmark-disc.svg");
 }
 .no-svg .navbar-bar .navbar-icon-help:before {
-  background-image: url("../../../misc/icons/bebebe/questionmark-disc.png");
+  background-image: url("../icons/bebebe/questionmark-disc.png");
 }
 .navbar-bar .navbar-icon-help:active:before,
 .navbar-bar .navbar-icon-help.active:before {
-  background-image: url("../../../misc/icons/ffffff/questionmark-disc.svg");
+  background-image: url("../icons/ffffff/questionmark-disc.svg");
 }
 .no-svg .navbar-bar .navbar-icon-help:active:before,
 .no-svg .navbar-bar .navbar-icon-help.active:before {
-  background-image: url("../../../misc/icons/ffffff/questionmark-disc.png");
+  background-image: url("../icons/ffffff/questionmark-disc.png");
+}
+
+/**
+ * Shortcut icon.
+ */
+.navbar-bar .navbar-icon-shortcut:before {
+  background-image: url("../icons/bebebe/star.svg");
+}
+.no-svg .navbar-bar .navbar-icon-shortcut:before {
+  background-image: url("../icons/bebebe/star.png");
+}
+.navbar-bar .navbar-icon-shortcut:active:before,
+.navbar-bar .navbar-icon-shortcut.active:before {
+  background-image: url("../icons/ffffff/star.svg");
+}
+.no-svg .navbar-bar .navbar-icon-shortcut:active:before,
+.no-svg .navbar-bar .navbar-icon-shortcut.active:before {
+  background-image: url("../icons/ffffff/star.png");
+}
+
+/**
+ * User icon.
+ */
+.navbar-bar .navbar-icon-user:before {
+  background-image: url("../icons/bebebe/person.svg");
+}
+.no-svg .navbar-bar .navbar-icon-user:before {
+  background-image: url("../icons/bebebe/person.png");
+}
+.navbar-bar .navbar-icon-user:active:before,
+.navbar-bar .navbar-icon-user.active:before {
+  background-image: url("../icons/ffffff/person.svg");
+}
+.no-svg .navbar-bar .navbar-icon-user:active:before,
+.no-svg .navbar-bar .navbar-icon-user.active:before {
+  background-image: url("../icons/ffffff/person.png");
 }
 
 /**
  * Main menu icons.
  */
 .navbar-icon-content:before {
-  background-image: url("../../../misc/icons/787878/file.svg");
+  background-image: url("../icons/787878/file.svg");
 }
 .no-svg .navbar-icon-content:before {
-  background-image: url("../../../misc/icons/787878/file.png");
+  background-image: url("../icons/787878/file.png");
 }
 .navbar-icon-content:active:before,
 .navbar-icon-content.active:before {
-  background-image: url("../../../misc/icons/000000/file.svg");
+  background-image: url("../icons/000000/file.svg");
 }
 .no-svg .navbar-icon-content:active:before,
 .no-svg .navbar-icon-content.active:before {
-  background-image: url("../../../misc/icons/000000/file.png");
+  background-image: url("../icons/000000/file.png");
 }
 .navbar-icon-structure:before {
-  background-image: url("../../../misc/icons/787878/orgchart.svg");
+  background-image: url("../icons/787878/orgchart.svg");
 }
 .no-svg .navbar-icon-structure:before {
-  background-image: url("../../../misc/icons/787878/orgchart.png");
+  background-image: url("../icons/787878/orgchart.png");
 }
 .navbar-icon-structure:active:before,
 .navbar-icon-structure.active:before {
-  background-image: url("../../../misc/icons/000000/orgchart.svg");
+  background-image: url("../icons/000000/orgchart.svg");
 }
 .no-svg .navbar-icon-structure:active:before,
 .no-svg .navbar-icon-structure.active:before {
-  background-image: url("../../../misc/icons/000000/orgchart.png");
+  background-image: url("../icons/000000/orgchart.png");
 }
 .navbar-icon-appearance:before {
-  background-image: url("../../../misc/icons/787878/paintbrush.svg");
+  background-image: url("../icons/787878/paintbrush.svg");
 }
 .no-svg .navbar-icon-appearance:before {
-  background-image: url("../../../misc/icons/787878/paintbrush.png");
+  background-image: url("../icons/787878/paintbrush.png");
 }
 .navbar-icon-appearance:active:before,
 .navbar-icon-appearance.active:before {
-  background-image: url("../../../misc/icons/000000/paintbrush.svg");
+  background-image: url("../icons/000000/paintbrush.svg");
 }
 .no-svg .navbar-icon-appearance:active:before,
 .no-svg .navbar-icon-appearance.active:before {
-  background-image: url("../../../misc/icons/000000/paintbrush.png");
+  background-image: url("../icons/000000/paintbrush.png");
 }
 .navbar-icon-people:before {
-  background-image: url("../../../misc/icons/787878/people.svg");
+  background-image: url("../icons/787878/people.svg");
 }
 .no-svg .navbar-icon-people:before {
-  background-image: url("../../../misc/icons/787878/people.png");
+  background-image: url("../icons/787878/people.png");
 }
 .navbar-icon-people:active:before,
 .navbar-icon-people.active:before {
-  background-image: url("../../../misc/icons/000000/people.svg");
+  background-image: url("../icons/000000/people.svg");
 }
 .no-svg .navbar-icon-people:active:before,
 .no-svg .navbar-icon-people.active:before {
-  background-image: url("../../../misc/icons/000000/people.png");
+  background-image: url("../icons/000000/people.png");
 }
-.navbar-icon-extend:before {
-  background-image: url("../../../misc/icons/787878/puzzlepiece.svg");
+.navbar-icon-modules:before {
+  background-image: url("../icons/787878/puzzlepiece.svg");
 }
-.no-svg .navbar-icon-extend:before {
-  background-image: url("../../../misc/icons/787878/puzzlepiece.png");
+.no-svg .navbar-icon-modules:before {
+  background-image: url("../icons/787878/puzzlepiece.png");
 }
-.navbar-icon-extend:active:before,
-.navbar-icon-extend.active:before {
-  background-image: url("../../../misc/icons/000000/puzzlepiece.svg");
+.navbar-icon-modules:active:before,
+.navbar-icon-modules.active:before {
+  background-image: url("../icons/000000/puzzlepiece.svg");
 }
-.no-svg .navbar-icon-extend:active:before,
-.no-svg .navbar-icon-extend.active:before {
-  background-image: url("../../../misc/icons/000000/puzzlepiece.png");
+.no-svg .navbar-icon-modules:active:before,
+.no-svg .navbar-icon-modules.active:before {
+  background-image: url("../icons/000000/puzzlepiece.png");
 }
 .navbar-icon-configuration:before {
-  background-image: url("../../../misc/icons/787878/wrench.svg");
+  background-image: url("../icons/787878/wrench.svg");
 }
 .no-svg .navbar-icon-configuration:before {
-  background-image: url("../../../misc/icons/787878/wrench.png");
+  background-image: url("../icons/787878/wrench.png");
 }
 .navbar-icon-configuration:active:before,
 .navbar-icon-configuration.active:before {
-  background-image: url("../../../misc/icons/000000/wrench.svg");
+  background-image: url("../icons/000000/wrench.svg");
 }
 .no-svg .navbar-icon-configuration:active:before,
 .no-svg .navbar-icon-configuration.active:before {
-  background-image: url("../../../misc/icons/000000/wrench.png");
+  background-image: url("../icons/000000/wrench.png");
 }
 .navbar-icon-reports:before {
-  background-image: url("../../../misc/icons/787878/barchart.svg");
+  background-image: url("../icons/787878/barchart.svg");
 }
 .no-svg .navbar-icon-reports:before {
-  background-image: url("../../../misc/icons/787878/barchart.png");
+  background-image: url("../icons/787878/barchart.png");
 }
 .navbar-icon-reports:active:before,
 .navbar-icon-reports.active:before {
-  background-image: url("../../../misc/icons/000000/barchart.svg");
+  background-image: url("../icons/000000/barchart.svg");
 }
 .no-svg .navbar-icon-reports:active:before,
 .no-svg .navbar-icon-reports.active:before {
-  background-image: url("../../../misc/icons/000000/barchart.png");
+  background-image: url("../icons/000000/barchart.png");
 }
 .navbar-icon-help:before {
-  background-image: url("../../../misc/icons/787878/questionmark-disc.svg");
+  background-image: url("../icons/787878/questionmark-disc.svg");
 }
 .no-svg .navbar-icon-help:before {
-  background-image: url("../../../misc/icons/787878/questionmark-disc.png");
+  background-image: url("../icons/787878/questionmark-disc.png");
 }
 .navbar-icon-help:active:before,
 .navbar-icon-help.active:before {
-  background-image: url("../../../misc/icons/000000/questionmark-disc.svg");
+  background-image: url("../icons/000000/questionmark-disc.svg");
 }
 .no-svg .navbar-icon-help:active:before,
 .no-svg .navbar-icon-help.active:before {
-  background-image: url("../../../misc/icons/000000/questionmark-disc.png");
+  background-image: url("../icons/000000/questionmark-disc.png");
 }
 
 @media only screen and (min-width: 16.5em) {
@@ -282,11 +318,11 @@
   text-indent: -9999px;
 }
 .drupal-navbar .navbar-icon.navbar-handle:before {
-  background-image: url("../../../misc/icons/5181c6/chevron-disc-down.svg");
+  background-image: url("../icons/5181c6/chevron-disc-down.svg");
   left: 0; /* LTR */
 }
 .no-svg .drupal-navbar .navbar-icon.navbar-handle:before {
-  background-image: url("../../../misc/icons/5181c6/chevron-disc-down.png");
+  background-image: url("../icons/5181c6/chevron-disc-down.png");
   left: 0; /* LTR */
 }
 [dir="rtl"] .drupal-navbar .navbar-icon.navbar-handle:before {
@@ -298,25 +334,25 @@
   right: 0;
 }
 .drupal-navbar .navbar-icon.navbar-handle.open:before {
-  background-image: url("../../../misc/icons/787878/chevron-disc-up.svg");
+  background-image: url("../icons/787878/chevron-disc-up.svg");
 }
 .no-svg .drupal-navbar .navbar-icon.navbar-handle.open:before {
-  background-image: url("../../../misc/icons/787878/chevron-disc-up.png");
+  background-image: url("../icons/787878/chevron-disc-up.png");
 }
 .drupal-navbar .menu .menu .navbar-icon.navbar-handle:before {
-  background-image: url("../../../misc/icons/5181c6/twistie-down.svg");
+  background-image: url("../icons/5181c6/twistie-down.svg");
   background-size: 75%;
 }
 .no-svg .drupal-navbar .menu .menu .navbar-icon.navbar-handle:before {
-  background-image: url("../../../misc/icons/5181c6/twistie-down.png");
+  background-image: url("../icons/5181c6/twistie-down.png");
   background-size: auto auto;
 }
 .drupal-navbar .menu .menu .navbar-icon.navbar-handle.open:before {
-  background-image: url("../../../misc/icons/787878/twistie-up.svg");
+  background-image: url("../icons/787878/twistie-up.svg");
   background-size: 75%;
 }
 .no-svg .drupal-navbar .menu .menu .navbar-icon.navbar-handle.open:before {
-  background-image: url("../../../misc/icons/787878/twistie-up.png");
+  background-image: url("../icons/787878/twistie-up.png");
   background-size: auto auto;
 }
 
@@ -345,39 +381,39 @@
  * specific targeting, setting and unsetting.
  */
 .drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
-  background-image: url("../../../misc/icons/bebebe/push-left.svg"); /* LTR */
+  background-image: url("../icons/bebebe/push-left.svg"); /* LTR */
 }
 .drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
-  background-image: url("../../../misc/icons/787878/push-left.svg"); /* LTR */
+  background-image: url("../icons/787878/push-left.svg"); /* LTR */
 }
 .no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
-  background-image: url("../../../misc/icons/bebebe/push-left.png"); /* LTR */
+  background-image: url("../icons/bebebe/push-left.png"); /* LTR */
 }
 .no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
-  background-image: url("../../../misc/icons/787878/push-left.png"); /* LTR */
+  background-image: url("../icons/787878/push-left.png"); /* LTR */
 }
 [dir="rtl"] .drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
-  background-image: url("../../../misc/icons/bebebe/push-right.svg");
+  background-image: url("../icons/bebebe/push-right.svg");
 }
 [dir="rtl"] .drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
-  background-image: url("../../../misc/icons/787878/push-right.svg");
+  background-image: url("../icons/787878/push-right.svg");
 }
 [dir="rtl"].no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
-  background-image: url("../../../misc/icons/bebebe/push-right.png");
+  background-image: url("../icons/bebebe/push-right.png");
 }
 [dir="rtl"].no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
-  background-image: url("../../../misc/icons/787878/push-right.png");
+  background-image: url("../icons/787878/push-right.png");
 }
 .drupal-navbar .navbar-toggle-orientation [value="horizontal"]:before {
-  background-image: url("../../../misc/icons/bebebe/push-up.svg");
+  background-image: url("../icons/bebebe/push-up.svg");
 }
 .drupal-navbar .navbar-toggle-orientation [value="horizontal"]:hover:before {
-  background-image: url("../../../misc/icons/787878/push-up.svg");
+  background-image: url("../icons/787878/push-up.svg");
 }
 .no-svg .drupal-navbar .navbar-toggle-orientation [value="horizontal"]:before {
-  background-image: url("../../../misc/icons/bebebe/push-up.png");
+  background-image: url("../icons/bebebe/push-up.png");
 }
 .no-svg .drupal-navbar .navbar-toggle-orientation [value="horizontal"]:hover:before {
-  background-image: url("../../../misc/icons/787878/push-up.png");
+  background-image: url("../icons/787878/push-up.png");
 }
 
