@@ -90,7 +90,7 @@ function navbar_element_info() {
       'id' => 'navbar-administration',
       // The 'overlay-displace-top' class pushes the overlay down, so it appears
       // below the navbar.
-      'class' => array('drupal-navbar', 'overlay-displace-top'),
+      'class' => array('drupal-navbar'),
       'role' => 'navigation',
     ),
     // Metadata for the administration bar.
@@ -99,7 +99,6 @@ function navbar_element_info() {
       '#attributes' => array(
         'id' => 'navbar-bar',
         'class' => array('navbar-bar', 'clearfix'),
-        'data-offset-top' => array(),
       ),
     ),
   );
@@ -277,40 +276,42 @@ function theme_navbar(&$variables) {
  *   A renderable array.
  */
 function navbar_pre_render_item($element) {
+  // Assign each item a unique ID.
+  $id = drupal_html_id('toolbar-item');
+
+  // Provide attributes for a toolbar item.
+  $attributes = array(
+    'id' => $id,
+  );
 
   // If tray content is present, markup the tray and its associated trigger.
   if (!empty($element['tray'])) {
-
-    // Trays are associated with their trigger by a unique ID.
-    $id = drupal_html_id('navbar-tray');
-    $element['tab']['#tray_id'] = $id;
-
-    // Provide attributes for a tray trigger.
-    $attributes = array(
-      'id' => 'navbar-tab-' . $id,
-      'data-navbar-tray' => $id,
+    // Provide attributes necessary for trays.
+    $attributes += array(
+      'data-navbar-tray' => $id . '-tray',
       'aria-owns' => $id,
       'role' => 'button',
       'aria-pressed' => 'false',
     );
+
     // Merge in module-provided attributes.
     $element['tab'] += array('#attributes' => array());
     $element['tab']['#attributes'] += $attributes;
-    $element['tab']['#attributes']['class'][] = 'navbar-trigger';
+    $element['tab']['#attributes']['class'][] = 'trigger';
 
     // Provide attributes for the tray theme wrapper.
     $attributes = array(
-      'id' => $id,
-      'data-navbar-tray' => $id,
-      'aria-owned-by' => 'navbar-tab-' . $id,
+      'id' => $id . '-tray',
+      'data-navbar-tray' => $id . '-tray',
+      'aria-owned-by' => $id,
     );
+
     // Merge in module-provided attributes.
     if (!isset($element['tray']['#wrapper_attributes'])) {
       $element['tray']['#wrapper_attributes'] = array();
     }
     $element['tray']['#wrapper_attributes'] += $attributes;
     $element['tray']['#wrapper_attributes']['class'][] = 'navbar-tray';
-    $element['tray']['#wrapper_attributes']['class'][] = 'overlay-displace-top';
 
     if (!isset($element['tray']['#theme_wrappers'])) {
       $element['tray']['#theme_wrappers'] = array();
@@ -319,9 +320,7 @@ function navbar_pre_render_item($element) {
     array_unshift($element['tray']['#theme_wrappers'], 'navbar_tray_wrapper');
     // If a #heading is provided for the tray, provided a #theme_wrapper
     // function to append it.
-    if (!empty($element['tray']['#heading'])) {
-      array_unshift($element['tray']['#theme_wrappers'], 'navbar_tray_heading_wrapper');
-    }
+    array_unshift($element['tray']['#theme_wrappers'], 'navbar_tray_heading_wrapper');
   }
 
   return $element;
