@@ -9,25 +9,6 @@
 
 Drupal.announce = function () {};
 
-// Merge run-time settings with the defaults.
-var options = $.extend(
-  {
-    breakpoints: {
-      'module.navbar.narrow': '',
-      'module.navbar.standard': '',
-      'module.navbar.wide': ''
-    }
-  },
-  Drupal.settings.navbar,
-  // Merge strings on top of drupalSettings so that they are not mutable.
-  {
-    strings: {
-      horizontal: Drupal.t('Horizontal orientation'),
-      vertical: Drupal.t('Vertical orientation')
-    }
-  }
-);
-
 /**
  * Registers tabs with the navbar.
  *
@@ -46,6 +27,25 @@ Drupal.behaviors.navbar = {
     }
     // Process the administrative navbar.
     $(context).find('#navbar-administration').once('navbar', function () {
+
+      // Merge run-time settings with the defaults.
+      var options = $.extend(
+        {
+          breakpoints: {
+            'narrow': '',
+            'standard': '',
+            'wide': ''
+          }
+        },
+        Drupal.settings.navbar,
+        // Merge strings on top of drupalSettings so that they are not mutable.
+        {
+          strings: {
+            horizontal: Drupal.t('Horizontal orientation'),
+            vertical: Drupal.t('Vertical orientation')
+          }
+        }
+      );
 
       // Establish the navbar models and views.
       var model = Drupal.navbar.models.navbarModel = new Drupal.navbar.NavbarModel({

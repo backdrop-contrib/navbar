@@ -82,3 +82,19 @@ function navbar_requirements($phase) {
 
   return $requirements;
 }
+
+/**
+ * Update the breakpoints.
+ *
+ * narrow: 'only screen and (min-width: 16.5em)'
+ * standard: 'only screen and (min-width: 38.125em)'
+ * wide: 'only screen and (min-width: 52em)'
+ *
+ * The D8 Toolbar changes introduced two new breakpoints. We need to update
+ * the existing Navbar installs with these two new breakpoints.
+ *
+ * @todo Update navbar_uninstall() to remove the two new breakpoints.
+ */
+function navbar_update_0001() {
+
+}
