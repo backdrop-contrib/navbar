@@ -92,9 +92,37 @@ function navbar_requirements($phase) {
  *
  * The D8 Toolbar changes introduced two new breakpoints. We need to update
  * the existing Navbar installs with these two new breakpoints.
- *
- * @todo Update navbar_uninstall() to remove the two new breakpoints.
  */
-function navbar_update_0001() {
-
+function navbar_update_00001() {
+  if (module_exists('breakpoints')) {
+    // Increase the weight of the wide breakpoint.
+    $wide = breakpoints_breakpoint_load('wide', 'navbar', 'module');
+    debug($wide);
+    $wide->weight = 2;
+    breakpoints_breakpoint_save($wide);
+    // Add a breakpoint for narrow screens.
+    $breakpoint = new stdClass();
+    $breakpoint->disabled = FALSE;
+    $breakpoint->api_version = 1;
+    $breakpoint->name = 'narrow';
+    $breakpoint->breakpoint = 'only screen and (min-width: 16.5em)';
+    $breakpoint->source = 'navbar';
+    $breakpoint->source_type = 'module';
+    $breakpoint->status = 1;
+    $breakpoint->weight = 0;
+    $breakpoint->multipliers = array();
+    breakpoints_breakpoint_save($breakpoint);
+    // Add a breakpoint for standard screens.
+    $breakpoint = new stdClass();
+    $breakpoint->disabled = FALSE;
+    $breakpoint->api_version = 1;
+    $breakpoint->name = 'standard';
+    $breakpoint->breakpoint = 'only screen and (min-width: 38.125em)';
+    $breakpoint->source = 'navbar';
+    $breakpoint->source_type = 'module';
+    $breakpoint->status = 1;
+    $breakpoint->weight = 1;
+    $breakpoint->multipliers = array();
+    breakpoints_breakpoint_save($breakpoint);
+  }
 }
