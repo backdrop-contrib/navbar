@@ -51,10 +51,10 @@
   position: relative;
   z-index: 1250;
 }
-/* Position the admin toolbar absolutely when the configured standard breakpoint
- * is active. The toolbar container, that contains the bar and the trays, is
+/* Position the admin navbar absolutely when the configured standard breakpoint
+ * is active. The navbar container, that contains the bar and the trays, is
  * position absolutely so that it scrolls with the page. Otherwise, on smaller
- * screens, the components of the admin toolbar are positioned statically. */
+ * screens, the components of the admin navbar are positioned statically. */
 body.navbar-fixed .navbar-oriented,
 .navbar-oriented .navbar-bar,
 .navbar-oriented .navbar-tray {
@@ -67,12 +67,12 @@ body.navbar-fixed .navbar-oriented,
 .navbar-oriented .navbar-bar {
   z-index: 502;
 }
-/* Position the admin toolbar fixed when the configured standard breakpoint is
+/* Position the admin navbar fixed when the configured standard breakpoint is
  * active. */
 body.navbar-fixed .navbar-oriented .navbar-bar {
   position: fixed;
 }
-/* When the configured narrow breakpoint is active, the toolbar is sized to wrap
+/* When the configured narrow breakpoint is active, the navbar is sized to wrap
  * around the trays in order to provide a context for scrolling tray content
  * that is taller than the viewport. */
 body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
@@ -80,7 +80,7 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
   width: 240px;
   width: 15rem;
 }
-/* Present the admin toolbar tabs horizontally as a default on user agents that
+/* Present the admin navbar tabs horizontally as a default on user agents that
  * do not understand media queries or on user agents where JavaScript is
  * disabled. */
 .drupal-navbar .navbar-bar .navbar-tab,
@@ -91,7 +91,7 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
 [dir="rtl"] .drupal-navbar .navbar-tray-horizontal li {
   float: right;
 }
-/* Present the admin toolbar tabs vertically by default on user agents that
+/* Present the admin navbar tabs vertically by default on user agents that
  * that understand media queries. This will be the small screen default. */
 @media only screen {
   .drupal-navbar .navbar-bar .navbar-tab,
@@ -116,7 +116,7 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
     float: right;
   }
 }
-/* Present the admin toolbar tabs horizontally when the configured narrow
+/* Present the admin navbar tabs horizontally when the configured narrow
  * breakpoint is active. */
 .navbar-oriented .navbar-bar .navbar-tab,
 .navbar-oriented .navbar-tray-horizontal li {
@@ -128,7 +128,7 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
 }
 
 /**
- * Toolbar tray.
+ * Navbar tray.
  */
 .drupal-navbar .navbar-tray {
   display: none;
