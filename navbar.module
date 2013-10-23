@@ -279,9 +279,9 @@ function theme_navbar(&$variables) {
  */
 function navbar_pre_render_item($element) {
   // Assign each item a unique ID.
-  $id = drupal_html_id('toolbar-item');
+  $id = drupal_html_id('navbar-item');
 
-  // Provide attributes for a toolbar item.
+  // Provide attributes for a navbar item.
   $attributes = array(
     'id' => $id,
   );
