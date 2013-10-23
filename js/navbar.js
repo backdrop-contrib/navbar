@@ -28,6 +28,11 @@ Drupal.behaviors.navbar = {
     // Process the administrative navbar.
     $(context).find('#navbar-administration').once('navbar', function () {
 
+      // Add a class to the body indicating that the navbar is present on the
+      // page.
+      // @see https://drupal.org/node/1940104
+      $('body').addClass('navbar-administration');
+
       // Merge run-time settings with the defaults.
       var options = $.extend(
         {
