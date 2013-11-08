@@ -727,6 +727,7 @@ function navbar_library() {
       array('navbar', 'navbar.matchmedia'),
       array('system', 'jquery.once'),
       array('navbar', 'navbar.debounce'),
+      array('navbar', 'navbar.announce'),
       array('navbar', 'navbar.displace'),
       array('navbar', 'navbar.menu'),
     ),
@@ -780,6 +781,18 @@ function navbar_library() {
     ),
     'dependencies' => array(
       array('system', 'jquery'),
+      array('navbar', 'navbar.debounce'),
+    ),
+  );
+
+    // A utility for writing text to a common aria-live region.
+  $libraries['navbar.announce'] = array(
+    'title' => 'Navbar announce',
+    'version' => VERSION,
+    'js' => array(
+      $path . '/js/announce.js' => array('group' => JS_LIBRARY),
+    ),
+    'dependencies' => array(
       array('navbar', 'navbar.debounce'),
     ),
   );

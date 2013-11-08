@@ -7,8 +7,6 @@
 
 "use strict";
 
-Drupal.announce = function () {};
-
 /**
  * Registers tabs with the navbar.
  *
