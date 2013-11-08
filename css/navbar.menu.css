@@ -24,7 +24,7 @@
 .drupal-navbar .navbar-tray-vertical .navbar-handle + a {
   margin-right: 3em; /* LTR */
 }
-[dir="rtl"] .drupal-navbar .navbar-tray-vertical .navbar-handle + a {
+.drupal-navbar .navbar-tray-vertical .navbar-handle + a {
   margin-left: 3em;
   margin-right: 0;
 }
@@ -89,7 +89,7 @@
   top: 0;
   z-index: 1;
 }
-[dir="rtl"] .drupal-navbar .navbar-icon.navbar-handle {
+.drupal-navbar .navbar-icon.navbar-handle {
   left: 0;
   right: auto;
 }
