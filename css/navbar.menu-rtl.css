@@ -16,5 +16,6 @@ html .drupal-navbar .menu {
  */
 .drupal-navbar .navbar-icon.navbar-handle {
   left: 0;
+  padding: 0;
   right: auto;
 }

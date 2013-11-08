@@ -7,7 +7,7 @@
   padding-left: 2.75em; /* LTR */
   position: relative;
 }
-[dir="rtl"] .drupal-navbar .navbar-icon {
+ .drupal-navbar .navbar-icon {
   padding-left: 1.3333em;
   padding-right: 2.75em;
 }
@@ -28,7 +28,7 @@
 .no-svg .drupal-navbar .navbar-icon:before {
   background-size: auto auto;
 }
-[dir="rtl"] .drupal-navbar .navbar-icon:before {
+.drupal-navbar .navbar-icon:before {
   left: auto;
   right: 0.6667em;
 }
@@ -40,7 +40,7 @@
 .drupal-navbar .menu ul .navbar-icon {
   padding-left: 1.3333em; /* LTR */
 }
-[dir="rtl"] .drupal-navbar .menu ul .navbar-icon {
+.drupal-navbar .menu ul .navbar-icon {
   padding-left: 0;
   padding-right: 1.3333em;
 }
@@ -50,14 +50,14 @@
 .drupal-navbar .navbar-tray-vertical .menu ul {
   margin-left: 1.5em; /* LTR */
 }
-[dir="rtl"] .drupal-navbar .navbar-tray-vertical .menu ul {
+.drupal-navbar .navbar-tray-vertical .menu ul {
   margin-left: 0;
   margin-right: 1.5em;
 }
 .drupal-navbar .navbar-tray-vertical .menu ul ul {
   margin-left: 0.75em; /* LTR */
 }
-[dir="rtl"] .drupal-navbar .navbar-tray-vertical .menu ul ul {
+.drupal-navbar .navbar-tray-vertical .menu ul ul {
   margin-left: 0;
   margin-right: 0.75em;
 }
@@ -277,7 +277,7 @@
   .no-svg .drupal-navbar .navbar-bar .navbar-icon:before {
     background-size: auto auto;
   }
-  [dir="rtl"] .drupal-navbar .navbar-bar .navbar-icon:before {
+  .drupal-navbar .navbar-bar .navbar-icon:before {
     left: auto;
     right: 0;
   }
@@ -291,7 +291,7 @@
     text-indent: 0;
     width: auto;
   }
-  [dir="rtl"] .drupal-navbar .navbar-bar .navbar-icon {
+  .drupal-navbar .navbar-bar .navbar-icon {
     background-position: right center;
     padding-left: 1.3333em;
     padding-right: 2.75em;
@@ -304,7 +304,7 @@
   .no-svg .drupal-navbar .navbar-bar .navbar-icon:before {
     background-size: auto auto;
   }
-  [dir="rtl"] .drupal-navbar .navbar-bar .navbar-icon:before {
+  .drupal-navbar .navbar-bar .navbar-icon:before {
     left: 0;
     right: 0.6667em;
   }
@@ -325,11 +325,11 @@
   background-image: url("../icons/5181c6/chevron-disc-down.png");
   left: 0; /* LTR */
 }
-[dir="rtl"] .drupal-navbar .navbar-icon.navbar-handle:before {
+.drupal-navbar .navbar-icon.navbar-handle:before {
   left: auto;
   right: 0;
 }
-[dir="rtl"].no-svg .drupal-navbar .navbar-icon.navbar-handle:before {
+.no-svg .drupal-navbar .navbar-icon.navbar-handle:before {
   left: auto;
   right: 0;
 }
@@ -368,11 +368,11 @@
 .drupal-navbar .navbar-toggle-orientation button:before {
   left: 0; /* LTR */
 }
-[dir="rtl"] .drupal-navbar .navbar-toggle-orientation button:before {
+.drupal-navbar .navbar-toggle-orientation button:before {
   left: auto;
   right: 0;
 }
-[dir="rtl"] .drupal-navbar .navbar-toggle-orientation .navbar-icon {
+.drupal-navbar .navbar-toggle-orientation .navbar-icon {
   padding-right: 0;
 }
 /**
@@ -392,16 +392,16 @@
 .no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
   background-image: url("../icons/787878/push-left.png"); /* LTR */
 }
-[dir="rtl"] .drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
+.drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
   background-image: url("../icons/bebebe/push-right.svg");
 }
-[dir="rtl"] .drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
+.drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
   background-image: url("../icons/787878/push-right.svg");
 }
-[dir="rtl"].no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
+.no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:before {
   background-image: url("../icons/bebebe/push-right.png");
 }
-[dir="rtl"].no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
+.no-svg .drupal-navbar .navbar-toggle-orientation [value="vertical"]:hover:before {
   background-image: url("../icons/787878/push-right.png");
 }
 .drupal-navbar .navbar-toggle-orientation [value="horizontal"]:before {
