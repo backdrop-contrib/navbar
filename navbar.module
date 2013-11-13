@@ -581,6 +581,9 @@ function navbar_navbar() {
         ),
         'tray' => array(
           '#heading' => t('User-defined shortcuts'),
+          '#wrapper_attributes' => array(
+            'class' => array('navbar-tray-shortcuts'),
+          ),
           'shortcuts' => $links,
           'configure' => $configure_link,
         ),

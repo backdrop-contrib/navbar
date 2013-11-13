@@ -57,3 +57,9 @@
 .drupal-navbar .navbar-toggle-orientation > .navbar-lining {
   float: left;
 }
+/**
+ * Fix Shortcuts Edit link
+ */
+.drupal-navbar .navbar-tray-horizontal .edit-shortcuts {
+  float: right;
+}

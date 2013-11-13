@@ -146,6 +146,23 @@ Drupal.behaviors.navbar = {
 };
 
 /**
+ * Removes the clearfix class automatically added menus by Drupal.
+ *
+ * It's very difficult to remove this class on a case-by-case basis, so
+ * we just do it with JavaScript here.
+ */
+Drupal.behaviors.navbarShortcuts = {
+
+  attach: function (context) {
+    var $shortcutsTray = $('.navbar-tray-shortcuts').once('navbar');
+
+    if ($shortcutsTray.length) {
+      $shortcutsTray.find('.menu.clearfix').removeClass('clearfix');
+    }
+  }
+};
+
+/**
  * Navbar Backbone objects.
  */
 Drupal.navbar = {
