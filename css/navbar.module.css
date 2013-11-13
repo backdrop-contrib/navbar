@@ -88,20 +88,12 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
 .drupal-navbar .navbar-tray-horizontal li {
   float: left; /* LTR */
 }
-[dir="rtl"] .drupal-navbar .navbar-bar .navbar-tab,
-[dir="rtl"] .drupal-navbar .navbar-tray-horizontal li {
-  float: right;
-}
 /* Present the admin navbar tabs vertically by default on user agents that
  * that understand media queries. This will be the small screen default. */
 @media only screen {
   .drupal-navbar .navbar-bar .navbar-tab,
   .drupal-navbar .navbar-tray-horizontal li {
     float: none; /* LTR */
-  }
-  [dir="rtl"] .drupal-navbar .navbar-bar .navbar-tab,
-  [dir="rtl"] .drupal-navbar .navbar-tray-horizontal li {
-    float: none;
   }
 }
 /* This min-width media query is meant to provide basic horizontal layout to
@@ -112,20 +104,12 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
   .drupal-navbar .navbar-tray-horizontal li {
     float: left; /* LTR */
   }
-  [dir="rtl"] .drupal-navbar .navbar-bar .navbar-tab,
-  [dir="rtl"] .drupal-navbar .navbar-tray-horizontal li {
-    float: right;
-  }
 }
 /* Present the admin navbar tabs horizontally when the configured narrow
  * breakpoint is active. */
 .navbar-oriented .navbar-bar .navbar-tab,
 .navbar-oriented .navbar-tray-horizontal li {
   float: left; /* LTR */
-}
-[dir="rtl"] .navbar-oriented .navbar-bar .navbar-tab,
-[dir="rtl"] .navbar-oriented .navbar-tray-horizontal li {
-  float: right;
 }
 
 /**
@@ -144,10 +128,6 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
   width: 240px;
   width: 15rem;
 }
-[dir="rtl"] .navbar-oriented .navbar-tray-vertical {
-  left: auto;
-  right: -100%;
-}
 .drupal-navbar .navbar-tray-vertical > .navbar-lining {
   min-height: 100%;
 }
@@ -164,10 +144,6 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical .navbar-oriented {
   width: 240px;
   width: 15rem;
   z-index: -1;
-}
-[dir="rtl"] .drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
-  left: auto;
-  right: 0;
 }
 /* Hide secondary menus when the tray is horizontal. */
 .navbar-oriented .navbar-tray-horizontal .menu li ul {
@@ -195,21 +171,11 @@ body.navbar-fixed .drupal-navbar .navbar-tray-vertical {
 .navbar-oriented .navbar-tray-vertical.active {
   left: 0; /* LTR */
 }
-[dir="rtl"] .navbar-oriented .navbar-tray-vertical.active {
-  left: auto;
-  right: 0;
-}
 /* When the configured standard breakpoint is active, the tray appears to push
  * the page content away from the edge of the viewport. */
 body.navbar-tray-open.navbar-vertical.navbar-fixed {
   margin-left: 240px; /* LTR */
   margin-left: 15rem; /* LTR */
-}
-[dir="rtl"] body.navbar-tray-open.navbar-vertical.navbar-fixed {
-  margin-left: auto;
-  margin-left: auto;
-  margin-right: 240px;
-  margin-right: 15rem;
 }
 
 /**
@@ -231,14 +197,7 @@ body.navbar-tray-open.navbar-vertical.navbar-fixed {
   right: 0; /* LTR */
   top: auto;
 }
-[dir="rtl"] .navbar-oriented .navbar-tray-horizontal .navbar-toggle-orientation {
-  left: 0;
-  right: auto;
-}
 .navbar-oriented .navbar-tray-vertical .navbar-toggle-orientation {
   float: right; /* LTR */
   width: 100%;
-}
-[dir="rtl"] .navbar-oriented .navbar-tray-vertical .navbar-toggle-orientation {
-  float: left;
 }
