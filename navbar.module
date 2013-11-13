@@ -190,6 +190,9 @@ function _navbar_initialize_page_cache() {
  * Add admin navbar to the page_top region automatically.
  */
 function navbar_page_build(&$page) {
+  if (navbar_suppress(FALSE)) {
+    return;
+  }
   $page['page_top']['navbar'] = array(
     '#type' => 'navbar',
     '#access' => user_access('access navbar'),
@@ -963,4 +966,26 @@ function navbar_convert_libraries_to_library($library, $options) {
   );
 
   return $converted;
+}
+
+/**
+ * Implementation of hook_suppress()
+ *
+ * Allows other modules to suppress display of Navbar
+ *
+ * This function should be called from within another module's page callback
+ * (preferably using module_invoke()) when the navbar should not be displayed.
+ * This is useful for modules that implement popup pages or other special
+ * pages where the navbar would be distracting or break the layout.
+ *
+ * @param $set
+ *   Defaults to TRUE. If called before hook_footer(), the navbar will not be
+ *   displayed. If FALSE is passed, the suppression state is returned.
+ **/
+function navbar_suppress($set = TRUE) {
+  static $suppress = FALSE;
+  if (!empty($set) && $suppress === FALSE) {
+    $suppress = TRUE;
+  }
+  return $suppress;
 }
