@@ -2,7 +2,7 @@
  * @file navbar.menu.css
  */
 .drupal-navbar .menu,
-.drupal-navbar .menu li {
+[dir="rtl"] .drupal-navbar .menu {
   list-style: none;
   margin: 0;
   padding: 0;
