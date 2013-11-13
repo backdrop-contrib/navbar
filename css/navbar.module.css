@@ -30,6 +30,7 @@
 .drupal-navbar .menu li.expanded {
   list-style-type: none;
   list-style-image: none;
+  padding: 0;
 }
 .drupal-navbar .menu li {
   padding-top: 0;
