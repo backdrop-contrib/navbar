@@ -4,6 +4,10 @@
  * RTL styling for navbar.base.css
  */
 
+/* Override core system.menus.css */
+.drupal-navbar ul.menu li {
+  margin-right: 0;
+}
 /* Present the admin navbar tabs horizontally as a default on user agents that
  * do not understand media queries or on user agents where JavaScript is
  * disabled. */

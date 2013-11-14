@@ -32,6 +32,10 @@
   list-style-image: none;
   padding: 0;
 }
+/* Override core system.menus.css */
+.drupal-navbar ul.menu li {
+  margin-left: 0; /* LTR */
+}
 .drupal-navbar .menu li {
   padding-top: 0;
 }
