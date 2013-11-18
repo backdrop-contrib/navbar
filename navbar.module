@@ -481,7 +481,6 @@ function navbar_navbar() {
   // Drupal path, not a file available via a stream wrapper.
   // @see navbar_subtrees_jsonp()
   // $menu['navbar_administration']['#attached']['js'][url('navbar/subtrees/' . _navbar_get_subtree_hash())] = array('type' => 'external');
-
   // The administration element has a link that is themed to correspond to
   // a navbar tray. The tray contains the full administrative menu of the site.
   $items['administration'] = array(
@@ -520,7 +519,7 @@ function navbar_navbar() {
       );
     }
     else {
-       $links = array(
+      $links = array(
         'login' => array(
           'title' => t('Log in'),
           'href' => 'user',
@@ -658,7 +657,7 @@ function navbar_get_rendered_subtrees() {
         $query = db_select('menu_links');
         $query->addField('menu_links', 'mlid');
         $query->condition('has_children', 1);
-        for ($i=1; $i <= $item['depth']; $i++) {
+        for ($i = 1; $i <= $item['depth']; $i++) {
           $query->condition('p' . $i, $item['p' . $i]);
         }
         $parents = $query->execute()->fetchCol();
