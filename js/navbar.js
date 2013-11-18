@@ -240,10 +240,10 @@ Drupal.navbar = {
     defaults: {
       // The active navbar tab. All other tabs should be inactive under
       // normal circumstances. It will remain active across page loads. The
-      // active item is stored as a DOM element, not a jQuery set.
+      // active item is stored as an ID selector e.g. '#navbar-item--1'.
       activeTab: null,
-      // Represents whether a tray is open or not. Stored as a DOM element, not
-      // a jQuery set.
+      // Represents whether a tray is open or not. Stored as an ID selector e.g.
+      // '#navbar-item--1-tray'.
       activeTray: null,
       // Indicates whether the navbar is displayed in an oriented fashion,
       // either horizontal or vertical.
@@ -412,8 +412,9 @@ Drupal.navbar = {
       // activatable tab.
       if (event.target.hasAttribute('data-navbar-tray')) {
         var tab = this.model.get('activeTab');
+        var id = '#' + event.target.id;
         // Set the event target as the active item if it is not already.
-        this.model.set('activeTab', (!tab || event.target !== tab) ? event.target : null);
+        this.model.set('activeTab', (!tab || id !== tab) ? id : null);
 
         event.preventDefault();
         event.stopPropagation();
