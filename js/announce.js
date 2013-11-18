@@ -31,7 +31,7 @@
       if (!liveElement) {
         liveElement = document.createElement('div');
         liveElement.id = 'drupal-live-announce';
-        liveElement.className = 'visually-hidden';
+        liveElement.className = 'element-invisible';
         liveElement.setAttribute('aria-live', 'polite');
         liveElement.setAttribute('aria-busy', 'false');
         document.body.appendChild(liveElement);
