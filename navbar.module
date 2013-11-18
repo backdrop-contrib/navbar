@@ -12,7 +12,7 @@ function navbar_help($path, $arg) {
   switch ($path) {
     case 'admin/help#navbar':
       $output = '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Navbar module displays links to top-level administration menu items and links from other modules at the top of the screen. For more information, see the online handbook entry for <a href="@navbar">Navbar module</a>.', array('@navbar' => 'http://drupal.org/documentation/modules/navbar')) . '</p>';
+      $output .= '<p>' . t('The Navbar module displays links to top-level administration menu items and links from other modules at the top of the screen. For more information, see the online handbook entry for <a href="@navbar">Navbar module</a>.', array('@navbar' => 'https://drupal.org/node/1993254')) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Displaying administrative links') . '</dt>';
