@@ -661,7 +661,7 @@ function navbar_get_rendered_subtrees() {
           $query->condition('p' . $i, $item['p' . $i]);
         }
         $parents = $query->execute()->fetchCol();
-        $subtree = menu_build_tree($item['menu_name'], array('expanded' => $parents, 'min_depth' => $item['depth']+1));
+        $subtree = menu_build_tree($item['menu_name'], array('expanded' => $parents, 'min_depth' => $item['depth'] + 1));
         navbar_menu_navigation_links($subtree);
         $subtree = menu_tree_output($subtree);
         $subtree = drupal_render($subtree);
