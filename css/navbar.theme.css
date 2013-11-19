@@ -128,9 +128,11 @@
   float: right; /* LTR */
   padding: 0.1667em;
 }
-.drupal-navbar .navbar-toggle-orientation button {
+.drupal-navbar .navbar-toggle-orientation .navbar-toggle {
   cursor: pointer;
   display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
 /**
