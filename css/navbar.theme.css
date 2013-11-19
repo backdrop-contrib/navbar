@@ -139,3 +139,13 @@
 .drupal-navbar .navbar-tray-horizontal .edit-shortcuts {
   float: left; /* LTR */
 }
+
+/**
+ * Undo overzealous theme resets.
+ */
+.drupal-navbar *:before,
+.drupal-navbar *:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
