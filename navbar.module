@@ -458,47 +458,52 @@ function navbar_navbar() {
   // Retrieve the administration menu from the database.
   $tree = navbar_get_menu_tree();
 
-  // Add attributes to the links before rendering.
-  navbar_menu_navigation_links($tree);
+  // If no menu links exist because the user does not have access to any, then
+  // don't render a menu tab.
+  if (!empty($tree)) {
 
-  $menu = array(
-    '#heading' => t('Administration menu'),
-    'navbar_administration' => array(
-      '#type' => 'container',
-      '#attributes' => array(
-        'class' => array('navbar-menu-administration'),
+    // Add attributes to the links before rendering.
+    navbar_menu_navigation_links($tree);
+
+    $menu = array(
+      '#heading' => t('Administration menu'),
+      'navbar_administration' => array(
+        '#type' => 'container',
+        '#attributes' => array(
+          'class' => array('navbar-menu-administration'),
+        ),
+        'administration_menu' => menu_tree_output($tree),
       ),
-      'administration_menu' => menu_tree_output($tree),
-    ),
-  );
+    );
 
-  // This flow is commented out until we figure out how to return a JSONP
-  // response in Drupal 7.
-  //
-  // To conserve bandwidth, we only include the top-level links in the HTML.
-  // The subtrees are included in a JSONP script, cached by the browser. Here we
-  // add that JSONP script. We add it as an external script, because it's a
-  // Drupal path, not a file available via a stream wrapper.
-  // @see navbar_subtrees_jsonp()
-  // $menu['navbar_administration']['#attached']['js'][url('navbar/subtrees/' . _navbar_get_subtree_hash())] = array('type' => 'external');
-  // The administration element has a link that is themed to correspond to
-  // a navbar tray. The tray contains the full administrative menu of the site.
-  $items['administration'] = array(
-    '#type' => 'navbar_item',
-    'tab' => array(
-      '#type' => 'link',
-      '#title' => t('Menu'),
-      '#href' => 'admin',
-      '#options' => array(
-        'attributes' => array(
-          'title' => t('Admin menu'),
-          'class' => array('navbar-icon', 'navbar-icon-menu',),
+    // This flow is commented out until we figure out how to return a JSONP
+    // response in Drupal 7.
+    //
+    // To conserve bandwidth, we only include the top-level links in the HTML.
+    // The subtrees are included in a JSONP script, cached by the browser. Here we
+    // add that JSONP script. We add it as an external script, because it's a
+    // Drupal path, not a file available via a stream wrapper.
+    // @see navbar_subtrees_jsonp()
+    // $menu['navbar_administration']['#attached']['js'][url('navbar/subtrees/' . _navbar_get_subtree_hash())] = array('type' => 'external');
+    // The administration element has a link that is themed to correspond to
+    // a navbar tray. The tray contains the full administrative menu of the site.
+    $items['administration'] = array(
+      '#type' => 'navbar_item',
+      'tab' => array(
+        '#type' => 'link',
+        '#title' => t('Menu'),
+        '#href' => 'admin',
+        '#options' => array(
+          'attributes' => array(
+            'title' => t('Admin menu'),
+            'class' => array('navbar-icon', 'navbar-icon-menu',),
+          ),
         ),
       ),
-    ),
-    'tray' => $menu,
-    '#weight' => -15,
-  );
+      'tray' => $menu,
+      '#weight' => -15,
+    );
+  }
 
   // Add logout & user account links or login link.
   if (module_exists('user')) {
