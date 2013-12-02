@@ -53,7 +53,7 @@ Drupal.behaviors.navbar = {
       // Establish the navbar models and views.
       var model = Drupal.navbar.models.navbarModel = new Drupal.navbar.NavbarModel({
         locked: JSON.parse(localStorage.getItem('Drupal.navbar.trayVerticalLocked')) || false,
-        activeTab: document.getElementById(JSON.parse(localStorage.getItem('Drupal.navbar.activeTabID')))
+        activeTab: JSON.parse(localStorage.getItem('Drupal.navbar.activeTab'))
       });
       Drupal.navbar.views.navbarVisualView = new Drupal.navbar.NavbarVisualView({
         el: this,
@@ -411,10 +411,10 @@ Drupal.navbar = {
       // If this tab has a tray associated with it, it is considered an
       // activatable tab.
       if (event.target.hasAttribute('data-navbar-tray')) {
-        var tab = this.model.get('activeTab');
-        var id = '#' + event.target.id;
+        var activeTab = this.model.get('activeTab');
+        var id = event.target.id;
         // Set the event target as the active item if it is not already.
-        this.model.set('activeTab', (!tab || id !== tab) ? id : null);
+        this.model.set('activeTab', (!activeTab || id !== activeTab) ? id : null);
 
         event.preventDefault();
         event.stopPropagation();
@@ -457,9 +457,9 @@ Drupal.navbar = {
      * Updates the display of the tabs: toggles a tab and the associated tray.
      */
     updateTabs: function () {
-      var $tab = $(this.model.get('activeTab'));
+      var $tab = $('#' + this.model.get('activeTab'));
       // Deactivate the previous tab.
-      $(this.model.previous('activeTab'))
+      $('#' + this.model.previous('activeTab'))
         .removeClass('active')
         .attr('aria-pressed', false);
       // Deactivate the previous tray.
@@ -476,7 +476,7 @@ Drupal.navbar = {
         // Store the active tab name or remove the setting.
         var id = $tab.get(0).id;
         if (id) {
-          localStorage.setItem('Drupal.navbar.activeTabID', JSON.stringify(id));
+          localStorage.setItem('Drupal.navbar.activeTab', JSON.stringify(id));
         }
         // Activate the associated tray.
         var $tray = this.$el.find('[data-navbar-tray="' + name + '"].navbar-tray');
@@ -492,7 +492,7 @@ Drupal.navbar = {
       else {
         // There is no active tray.
         this.model.set('activeTray', null);
-        localStorage.removeItem('Drupal.navbar.activeTabID');
+        localStorage.removeItem('Drupal.navbar.activeTab');
       }
     },
 
@@ -576,7 +576,7 @@ Drupal.navbar = {
      * admin menu subtrees cache has been invalidated.
      */
     loadSubtrees: function () {
-      var $activeTab = $(this.model.get('activeTab'));
+      var $activeTab = $('#' + this.model.get('activeTab'));
       var orientation = this.model.get('orientation');
       // Only load and render the admin menu subtrees if:
       //   (1) They have not been loaded yet.
