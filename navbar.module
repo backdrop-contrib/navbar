@@ -947,7 +947,7 @@ function _navbar_get_subtree_hash() {
  * What is this necessary? I don't see any way from the Libraries module API
  * to get an array that corresponds to what hook_library expects.
  */
-function navbar_convert_libraries_to_library($library, $options) {
+function navbar_convert_libraries_to_library($library, $options = array()) {
 
   // If the library wasn't loaded, don't bother converting it.
   if (!$library['loaded']) {
@@ -964,10 +964,7 @@ function navbar_convert_libraries_to_library($library, $options) {
   // It's a bit hard-coded to expect just one file, but that's all we have for
   // now, so it stays.
   $filename = array_keys($library['files']['js']);
-  $converted['js'][$library['library path'] . '/' . $filename[0]] = array(
-    'group' => $options['group'],
-    'weight' => $options['weight'],
-  );
+  $converted['js'][$library['library path'] . '/' . $filename[0]] = $options;
 
   return $converted;
 }
