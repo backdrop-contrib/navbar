@@ -878,12 +878,22 @@ function navbar_libraries_info() {
   $libraries = array();
 
   $libraries['modernizr'] = array(
-    'name' => 'Modernizr (custome build, see download URL)',
+    'name' => 'Modernizr (custom build, see download URL)',
     'vendor url' => 'https://github.com/Modernizr/Modernizr',
     'download url' => 'http://modernizr.com/download/#-inputtypes-svg-touch-cssclasses-addtest-teststyles-prefixes-elem_details',
     'files' => array(
       'js' => array(
-        'modernizr.min.js',
+        'modernizr.js',
+      ),
+    ),
+    'variants' => array(
+      // All properties defined for 'minified' override top-level properties.
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'modernizr.min.js',
+          ),
+        ),
       ),
     ),
     'version' => '2.6.2',
@@ -895,7 +905,17 @@ function navbar_libraries_info() {
     'download url' => 'https://github.com/documentcloud/underscore/tree/1.4.4',
     'files' => array(
       'js' => array(
-        'underscore-min.js',
+        'underscore.js',
+      ),
+    ),
+    'variants' => array(
+      // All properties defined for 'minified' override top-level properties.
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'underscore-min.js',
+          ),
+        ),
       ),
     ),
     'version' => '1.4.4',
@@ -907,7 +927,17 @@ function navbar_libraries_info() {
     'download url' => 'https://github.com/documentcloud/backbone/tree/1.0.0',
     'files' => array(
       'js' => array(
-        'backbone-min.js',
+        'backbone.js',
+      ),
+    ),
+    'variants' => array(
+      // All properties defined for 'minified' override top-level properties.
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'backbone-min.js',
+          ),
+        ),
       ),
     ),
     'version' => '1.0.0',
