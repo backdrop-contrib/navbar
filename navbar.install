@@ -108,7 +108,7 @@ function navbar_requirements($phase) {
  * The D8 Toolbar changes introduced two new breakpoints. We need to update
  * the existing Navbar installs with these two new breakpoints.
  */
-function navbar_update_00001() {
+function navbar_update_7000() {
   if (module_exists('breakpoints')) {
     // Increase the weight of the wide breakpoint.
     $wide = breakpoints_breakpoint_load('wide', 'navbar', 'module');
