@@ -52,6 +52,14 @@ function navbar_requirements($phase) {
   $requirements = array();
 
   if ($phase == 'runtime') {
+    // Check for the libraries module.
+    if (module_exists('libraries')) {
+      $requirements['navbar_libraries'] = array(
+        'title' => t('Navbar Libraries requirement'),
+        'value' => t('Libraries is enabled. Version 2.x or higher is required. Please check your version if you are experiencing trouble with the Navbar module.'),
+        'severity' => REQUIREMENT_INFO,
+      );
+    }
     $requirements['navbar_modernizr'] = array(
       'title' => t('Navbar Modernizr requirement'),
       'value' => t('The Modernizr library is not present'),
