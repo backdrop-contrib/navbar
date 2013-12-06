@@ -731,7 +731,6 @@ function navbar_library() {
     'dependencies' => array(
       array('navbar', 'modernizr'),
       array('system', 'jquery'),
-      array('navbar', 'navbar.jquery.on-off-shim'),
       array('navbar', 'underscore'),
       array('navbar', 'backbone'),
       array('navbar', 'navbar.matchmedia'),
@@ -824,17 +823,6 @@ function navbar_library() {
     ),
   );
 
-  $libraries['navbar.jquery.on-off-shim'] = array(
-    'title' => 'Shims the jQuery on and off methods for version previous to 1.7.',
-    'version' => VERSION,
-    'js' => array(
-      $path . '/js/jquery.on-off-shim.js' => array('group' => JS_LIBRARY),
-    ),
-    'dependencies' => array(
-      array('system', 'jquery'),
-    ),
-  );
-
   // Modernizr
   $libraries['modernizr'] = navbar_convert_libraries_to_library(libraries_load('modernizr'), array(
     'group' => JS_LIBRARY,
@@ -860,6 +848,19 @@ function navbar_library() {
  * Implements hook_library_alter().
  */
 function navbar_library_alter(&$libraries, $module) {
+  $jquery_version = &drupal_static(__FUNCTION__, NULL);
+
+  if ($module == 'system') {
+    $jquery_version = $libraries['jquery']['version'];
+  }
+  if ($jquery_version && $module == 'navbar') {
+    $path = drupal_get_path('module', 'navbar');
+    // If the version of jQuery is old, we need to add `on` and `off`.
+    if ($jquery_version < '1.7') {
+      $libraries['navbar']['js'][$path . '/js/jquery/ducktape.events.js'] = array('group' => JS_LIBRARY);
+    }
+  }
+
   if ($module === 'overlay' && !empty($libraries)) {
     // Unset the child CSS file from Overlay and add our own.
     if (!empty($libraries['child']['css'])) {
