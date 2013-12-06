@@ -109,13 +109,13 @@ function navbar_requirements($phase) {
  * the existing Navbar installs with these two new breakpoints.
  */
 function navbar_update_7000() {
-  if (module_exists('breakpoints')) {
-    // Increase the weight of the wide breakpoint.
-    $wide = breakpoints_breakpoint_load('wide', 'navbar', 'module');
-    debug($wide);
-    $wide->weight = 2;
-    breakpoints_breakpoint_save($wide);
-    // Add a breakpoint for narrow screens.
+  // Increase the weight of the wide breakpoint.
+  $wide = breakpoints_breakpoint_load('wide', 'navbar', 'module');
+  $wide->weight = 2;
+  breakpoints_breakpoint_save($wide);
+  // Add a breakpoint for narrow screens.
+  $narrow = breakpoints_breakpoint_load('narrow', 'navbar', 'module');
+  if (empty($narrow)) {
     $breakpoint = new stdClass();
     $breakpoint->disabled = FALSE;
     $breakpoint->api_version = 1;
@@ -127,6 +127,9 @@ function navbar_update_7000() {
     $breakpoint->weight = 0;
     $breakpoint->multipliers = array();
     breakpoints_breakpoint_save($breakpoint);
+  }
+  $standard = breakpoints_breakpoint_load('standard', 'navbar', 'module');
+  if (empty($standard)) {
     // Add a breakpoint for standard screens.
     $breakpoint = new stdClass();
     $breakpoint->disabled = FALSE;
