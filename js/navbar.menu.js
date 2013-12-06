@@ -27,13 +27,15 @@ var activeItem = Drupal.settings.basePath + Drupal.encodePath(Drupal.settings.cu
      *   A jQuery Event object.
      */
     function toggleClickHandler (event) {
-      var $toggle = $(event.target);
-      var $item = $toggle.closest('li');
-      // Toggle the list item.
-      toggleList($item);
-      // Close open sibling menus.
-      var $openItems = $item.siblings().filter('.open');
-      toggleList($openItems, false);
+      var $toggle = $(event.target).filter('.navbar-handle');
+      if ($toggle.length) {
+        var $item = $toggle.closest('li');
+        // Toggle the list item.
+        toggleList($item);
+        // Close open sibling menus.
+        var $openItems = $item.siblings().filter('.open');
+        toggleList($openItems, false);
+      }
     }
     /**
      * Toggle the open/close state of a list is a menu.
@@ -128,14 +130,13 @@ var activeItem = Drupal.settings.basePath + Drupal.encodePath(Drupal.settings.cu
         toggleList($activeTrail, true);
       }
     }
-    // Bind event handlers.
-    $(document)
-      .on('click.navbar', '.navbar-handle', toggleClickHandler);
     // Return the jQuery object.
     return this.each(function (selector) {
       var $menu = $(this).once('navbar-menu');
       if ($menu.length) {
-        $menu.addClass('root');
+        $menu
+          .addClass('root')
+          .on('click.navbar', toggleClickHandler);
         initItems($menu);
         markListLevels($menu);
         // Restore previous and active states.
