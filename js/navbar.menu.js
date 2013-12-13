@@ -12,9 +12,11 @@
 /**
  * Store the open menu tray.
  */
-var activeItem = Drupal.settings.basePath + Drupal.encodePath(Drupal.settings.currentPath);
 
   $.fn.drupalNavbarMenu = function () {
+
+    var pathRegex = /^(?:\/)*(.*)/;
+    var activeItem = Drupal.settings.basePath + Drupal.encodePath(pathRegex.exec(location.pathname)[1]);
 
     var ui = {
       'handleOpen': Drupal.t('Extend'),
@@ -122,7 +124,7 @@ var activeItem = Drupal.settings.basePath + Drupal.encodePath(Drupal.settings.cu
     function openActiveItem ($menu) {
       var pathItem = $menu.find('a[href="' + location.pathname + '"]');
       if (pathItem.length && !activeItem) {
-        activeItem = location.pathname;
+        activeItem = Drupal.encodePath(pathRegex.exec(location.pathname)[1]);
       }
       if (activeItem) {
         var $activeItem = $menu.find('a[href="' + activeItem + '"]').addClass('active');
