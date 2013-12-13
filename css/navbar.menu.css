@@ -13,11 +13,11 @@
   width: auto;
 }
 .drupal-navbar .navbar-tray-horizontal .menu .navbar-handle,
-.drupal-navbar .navbar-tray-horizontal .menu ul,
-.drupal-navbar .navbar-tray-vertical .menu ul {
+.drupal-navbar .navbar-tray-horizontal .menu .menu,
+.drupal-navbar .navbar-tray-vertical .menu > .navbar-twisty > .menu {
   display: none;
 }
-.drupal-navbar .navbar-tray-vertical li.open > ul {
+.drupal-navbar .navbar-tray-vertical .navbar-twisty.open > .menu {
   display: block; /* Show the sub-menus */
 }
 .drupal-navbar .navbar-tray-vertical .navbar-handle + a {

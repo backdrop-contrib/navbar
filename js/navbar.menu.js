@@ -13,10 +13,16 @@
  * Store the open menu tray.
  */
 
-  $.fn.drupalNavbarMenu = function () {
+  $.fn.drupalNavbarMenu = function (options) {
 
     var pathRegex = /^(?:\/)*(.*)/;
     var activeItem = Drupal.settings.basePath + Drupal.encodePath(pathRegex.exec(location.pathname)[1]);
+
+    // Merge options onto defaults.
+    var settings = $.extend({}, {
+      twisties: true,
+      activeTrail: true
+    }, options);
 
     var ui = {
       'handleOpen': Drupal.t('Extend'),
@@ -63,31 +69,39 @@
         .text((switcher) ?  ui.handleClose : ui.handleOpen);
     }
     /**
-     * Add markup to the menu elements.
+     * Add twisty markup to the menu elements.
      *
      * Items with sub-elements have a list toggle attached to them. Menu item
      * links and the corresponding list toggle are wrapped with in a div
      * classed with .navbar-box. The .navbar-box div provides a positioning
-     * context for the item list toggle.
+     * context for the item list toggle twisty.
      *
      * @param {jQuery} $menu
      *   The root of the menu to be initialized.
      */
-    function initItems ($menu) {
+    function addTwisties ($menu) {
       var options = {
         'class': 'navbar-icon navbar-handle',
         'action': ui.handleOpen,
         'text': ''
       };
       // Initialize items and their links.
-      $menu.find('li > a').wrap('<div class="navbar-box">');
+      $menu
+        .find('li > a')
+        .once('navbar-menu')
+        .wrap('<div class="navbar-box">');
         // Add a handle to each list item if it has a menu.
-      $menu.find('li').each(function (index, element) {
+      $menu
+        .find('li')
+        .each(function (index, element) {
           var $item = $(element);
-          if ($item.children('ul.menu').length) {
+          var $menus = $item.children('ul.menu').once('navbar-menu');
+          if ($menus.length) {
             var $box = $item.children('.navbar-box');
             options.text = Drupal.t('@label', {'@label': $box.find('a').text()});
-            $item.children('.navbar-box')
+            $item
+              .addClass('navbar-twisty')
+              .children('.navbar-box')
               .append(Drupal.theme('navbarMenuItemToggle', options));
           }
         });
@@ -134,15 +148,20 @@
     }
     // Return the jQuery object.
     return this.each(function (selector) {
-      var $menu = $(this).once('navbar-menu');
-      if ($menu.length) {
+      var $menu = $(this);
+      var rootNotProcessed = $menu.once('navbar-menu');
+      if (rootNotProcessed.length) {
         $menu
           .addClass('root')
           .on('click.navbar', toggleClickHandler);
-        initItems($menu);
         markListLevels($menu);
         // Restore previous and active states.
-        openActiveItem($menu);
+        if (settings.activeTrail) {
+          openActiveItem($menu);
+        }
+      }
+      if (settings.twisties) {
+        addTwisties($menu);
       }
     });
   };
