@@ -43,7 +43,8 @@
 .drupal-navbar .menu li {
   display: block;
 }
-.drupal-navbar a {
+.drupal-navbar .navbar-box a,
+.drupal-navbar .navbar-box span {
   display: block;
   line-height: 1;
 }

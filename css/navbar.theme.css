@@ -14,12 +14,13 @@
   -webkit-touch-callout: none;
   touch-callout: none;
 }
-.drupal-navbar a {
+.drupal-navbar .navbar-box a,
+.drupal-navbar .navbar-box span {
   cursor: pointer;
   padding: 1em 1.3333em;
   text-decoration: none;
 }
-.drupal-navbar a:hover {
+.drupal-navbar .navbar-box a:hover {
   text-decoration: underline;
 }
 

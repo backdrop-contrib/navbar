@@ -69,7 +69,7 @@
         .text((switcher) ?  ui.handleClose : ui.handleOpen);
     }
     /**
-     * Add twisty markup to the menu elements.
+     * Wrap menu links is standardized markup.
      *
      * Items with sub-elements have a list toggle attached to them. Menu item
      * links and the corresponding list toggle are wrapped with in a div
@@ -79,32 +79,35 @@
      * @param {jQuery} $menu
      *   The root of the menu to be initialized.
      */
-    function addTwisties ($menu) {
-      var options = {
-        'class': 'navbar-icon navbar-handle',
-        'action': ui.handleOpen,
-        'text': ''
-      };
+    function processMenuLinks ($menu, settings) {
       // Initialize items and their links.
       $menu
-        .find('li > a')
+        .find('li > a, li > span')
         .once('navbar-menu')
         .wrap('<div class="navbar-box">');
         // Add a handle to each list item if it has a menu.
-      $menu
-        .find('li')
-        .each(function (index, element) {
-          var $item = $(element);
-          var $menus = $item.children('ul.menu').once('navbar-menu');
-          if ($menus.length) {
-            var $box = $item.children('.navbar-box');
-            options.text = Drupal.t('@label', {'@label': $box.find('a').text()});
-            $item
-              .addClass('navbar-twisty')
-              .children('.navbar-box')
-              .append(Drupal.theme('navbarMenuItemToggle', options));
-          }
-        });
+
+      if (settings.twisties) {
+        var options = {
+          'class': 'navbar-icon navbar-handle',
+          'action': ui.handleOpen,
+          'text': ''
+        };
+        $menu
+          .find('li')
+          .each(function (index, element) {
+            var $item = $(element);
+            var $menus = $item.children('ul.menu').once('navbar-menu');
+            if ($menus.length) {
+              var $box = $item.children('.navbar-box');
+              options.text = Drupal.t('@label', {'@label': $box.find('a').text()});
+              $item
+                .addClass('navbar-twisty')
+                .children('.navbar-box')
+                .append(Drupal.theme('navbarMenuItemToggle', options));
+            }
+          });
+      }
     }
     /**
      * Adds a level class to each list based on its depth in the menu.
@@ -160,9 +163,8 @@
           openActiveItem($menu);
         }
       }
-      if (settings.twisties) {
-        addTwisties($menu);
-      }
+      // Process components of the menu.
+      processMenuLinks($menu, settings);
     });
   };
 
