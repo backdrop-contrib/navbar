@@ -14,13 +14,17 @@
   -webkit-touch-callout: none;
   touch-callout: none;
 }
-.drupal-navbar .navbar-box a,
-.drupal-navbar .navbar-box span {
-  cursor: pointer;
+.navbar-tab > *,
+.drupal-navbar .navbar-menu-item,
+/* On behalf of shortcut module */
+.drupal-navbar .navbar-tray .edit-shortcuts {
   padding: 1em 1.3333em;
+}
+.navbar-box a {
+  cursor: pointer;
   text-decoration: none;
 }
-.drupal-navbar .navbar-box a:hover {
+.navbar-box a:hover {
   text-decoration: underline;
 }
 
@@ -32,18 +36,16 @@
   box-shadow: -1px 0 3px 1px rgba(0, 0, 0, 0.3333); /* LTR */
   color: #dddddd;
 }
-.drupal-navbar .navbar-bar a {
+.drupal-navbar .navbar-tab > * {
   color: #ffffff;
-}
-.drupal-navbar .navbar-bar .navbar-tab > a {
   font-weight: bold;
 }
-.drupal-navbar .navbar-bar .navbar-tab > a:hover {
+.drupal-navbar .navbar-tab > *:hover {
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.125) 20%, transparent 200%);
   background-image: linear-gradient(rgba(255, 255, 255, 0.125) 20%, transparent 200%);
   text-decoration: none;
 }
-.drupal-navbar .navbar-bar .navbar-tab > a.active {
+.drupal-navbar .navbar-tab > *.navbar-active {
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.25) 20%, transparent 200%);
   background-image: linear-gradient(rgba(255, 255, 255, 0.25) 20%, transparent 200%);
 }
@@ -74,7 +76,7 @@
 }
 .drupal-navbar .navbar-tray a:hover,
 .drupal-navbar .navbar-tray a:active,
-.drupal-navbar .navbar-tray a.active {
+.drupal-navbar .navbar-tray a.navbar-active {
   color: #000;
 }
 .drupal-navbar .navbar-tray-horizontal .menu {

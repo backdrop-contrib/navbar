@@ -20,11 +20,13 @@
 .drupal-navbar .navbar-tray-vertical .navbar-twisty.open > .menu {
   display: block; /* Show the sub-menus */
 }
-.drupal-navbar .navbar-tray-vertical .navbar-handle + a {
+.drupal-navbar .navbar-tray-vertical .navbar-handle + .navbar-menu-item {
   margin-right: 3em; /* LTR */
 }
-.drupal-navbar .navbar-tray .active-trail > .navbar-box a,
-.drupal-navbar .navbar-tray a.active {
+.drupal-navbar .navbar-tray .navbar-active-trail > .navbar-box .navbar-menu-item,
+.drupal-navbar .navbar-tray .navbar-active
+/* Drupal's active menu item class. */
+.drupal-navbar .navbar-tray .active {
   color: #000;
   font-weight: bold;
 }
@@ -32,37 +34,37 @@
 /**
  * Items.
  */
-.drupal-navbar .level-2 > ul {
+.drupal-navbar .navbar-level-2 > ul {
   background-color: #fafafa;
   border-bottom-color: #cccccc;
   border-top-color: #e5e5e5;
 }
-.drupal-navbar .level-3 > ul {
+.drupal-navbar .navbar-level-3 > ul {
   background-color: #f5f5f5;
   border-bottom-color: #c5c5c5;
   border-top-color: #dddddd;
 }
-.drupal-navbar .level-4 > ul {
+.drupal-navbar .navbar-level-4 > ul {
   background-color: #eeeeee;
   border-bottom-color: #bbbbbb;
   border-top-color: #d5d5d5;
 }
-.drupal-navbar .level-5 > ul {
+.drupal-navbar .navbar-level-5 > ul {
   background-color: #e5e5e5;
   border-bottom-color: #b5b5b5;
   border-top-color: #cccccc;
 }
-.drupal-navbar .level-6 > ul {
+.drupal-navbar .navbar-level-6 > ul {
   background-color: #eeeeee;
   border-bottom-color: #aaaaaa;
   border-top-color: #c5c5c5;
 }
-.drupal-navbar .level-7 > ul {
+.drupal-navbar .navbar-level-7 > ul {
   background-color: #fafafa;
   border-bottom-color: #b5b5b5;
   border-top-color: #cccccc;
 }
-.drupal-navbar .level-8 > ul {
+.drupal-navbar .navbar-level-8 > ul {
   background-color: #dddddd;
   border-bottom-color: #cccccc;
   border-top-color: #dddddd;

@@ -43,8 +43,10 @@
 .drupal-navbar .menu li {
   display: block;
 }
-.drupal-navbar .navbar-box a,
-.drupal-navbar .navbar-box span {
+.navbar-tab > *,
+.navbar-menu-item,
+/* On behalf of shortcut module */
+.drupal-navbar .navbar-tray .edit-shortcuts {
   display: block;
   line-height: 1;
 }
@@ -166,11 +168,11 @@ body.navbar-fixed .drupal-navbar .navbar-tray-vertical {
   overflow-y: auto;
   position: fixed;
 }
-.drupal-navbar .navbar-tray.active {
+.drupal-navbar .navbar-tray.navbar-active {
   display: block;
 }
 /* Bring the tray into the viewport. By default it is just off-screen. */
-.navbar-oriented .navbar-tray-vertical.active {
+.navbar-oriented .navbar-tray-vertical.navbar-active {
   left: 0; /* LTR */
 }
 /* When the configured standard breakpoint is active, the tray appears to push

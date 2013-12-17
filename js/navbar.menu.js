@@ -15,13 +15,11 @@
 
   $.fn.drupalNavbarMenu = function (options) {
 
-    var pathRegex = /^(?:\/)*(.*)/;
-    var activeItem = Drupal.settings.basePath + Drupal.encodePath(pathRegex.exec(location.pathname)[1]);
-
     // Merge options onto defaults.
     var settings = $.extend({}, {
       twisties: true,
-      activeTrail: true
+      activeTrail: true,
+      listLevels: true
     }, options);
 
     var ui = {
@@ -84,6 +82,7 @@
       $menu
         .find('li > a, li > span')
         .once('navbar-menu')
+        .addClass('navbar-menu-item')
         .wrap('<div class="navbar-box">');
         // Add a handle to each list item if it has a menu.
 
@@ -123,8 +122,10 @@
      */
     function markListLevels ($lists, level) {
       level = (!level) ? 1 : level;
-      var $lis = $lists.children('li').addClass('level-' + level);
-      $lists = $lis.children('ul');
+      $lists = $lists.children('li')
+        .addClass('navbar-level-' + level)
+        // Retrieve child menus.
+        .children('ul');
       if ($lists.length) {
         markListLevels($lists, level + 1);
       }
@@ -139,14 +140,41 @@
      *   The root of the menu.
      */
     function openActiveItem ($menu) {
-      var pathItem = $menu.find('a[href="' + location.pathname + '"]');
-      if (pathItem.length && !activeItem) {
-        activeItem = Drupal.encodePath(pathRegex.exec(location.pathname)[1]);
-      }
-      if (activeItem) {
-        var $activeItem = $menu.find('a[href="' + activeItem + '"]').addClass('active');
-        var $activeTrail = $activeItem.parentsUntil('.root', 'li').addClass('active-trail');
+      var pathname = location.pathname;
+      // Get all menu items that start with the location path.
+      var $pathItem = $menu.find('a[href^="' + pathname + '"]');
+
+      // Clear any existing menu trails.
+      $menu.find('.navbar-active, .navbar-active-trail').removeClass('navbar-active navbar-active-trail');
+      /**
+       * Adds the navbar-active class active menu item.
+       *
+       * In addition a navbar-active-trail class is added to all parent menu
+       * list items.
+       *
+       * @param jQuery $pathItem
+       *   A jQuery object of the active menu item.
+       */
+      function markItemTrail ($pathItem) {
+        $pathItem.addClass('navbar-active');
+        var $activeTrail = $pathItem.parentsUntil('.navbar-root', 'li').addClass('navbar-active-trail');
         toggleList($activeTrail, true);
+      }
+
+      if ($pathItem.length) {
+        // If the path yields more than one match, try to narrow the items down
+        // by the params and hash.
+        if ($pathItem.length > 1) {
+          for (var i = 0, aspects = ['', location.search, location.hash, (location.search + location.hash)], len = aspects.length; i < len; i++) {
+            $pathItem = $menu.find('a[href="' + pathname + aspects[i] + '"]');
+            if ($pathItem.length === 1) {
+              break;
+            }
+          }
+        }
+        if ($pathItem.length === 1) {
+          markItemTrail($pathItem);
+        }
       }
     }
     // Return the jQuery object.
@@ -155,16 +183,19 @@
       var rootNotProcessed = $menu.once('navbar-menu');
       if (rootNotProcessed.length) {
         $menu
-          .addClass('root')
+          .addClass('navbar-root')
           .on('click.navbar', toggleClickHandler);
-        markListLevels($menu);
-        // Restore previous and active states.
-        if (settings.activeTrail) {
-          openActiveItem($menu);
-        }
       }
       // Process components of the menu.
       processMenuLinks($menu, settings);
+      // Add a menu level class to each menu item.
+      if (settings.listLevels) {
+        markListLevels($menu);
+      }
+      // Restore previous and active states.
+      if (settings.activeTrail) {
+        openActiveItem($menu);
+      }
     });
   };
 

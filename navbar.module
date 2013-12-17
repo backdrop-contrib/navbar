@@ -293,6 +293,7 @@ function navbar_pre_render_item($element) {
   if (!empty($element['tray'])) {
     // Provide attributes necessary for trays.
     $attributes += array(
+      'data-navbar-tab-trigger' => '',
       'data-navbar-tray' => $id . '-tray',
       'aria-owns' => $id,
       'role' => 'button',
@@ -302,7 +303,6 @@ function navbar_pre_render_item($element) {
     // Merge in module-provided attributes.
     $element['tab'] += array('#attributes' => array());
     $element['tab']['#attributes'] += $attributes;
-    $element['tab']['#attributes']['class'][] = 'trigger';
 
     // Provide attributes for the tray theme wrapper.
     $attributes = array(
@@ -551,7 +551,7 @@ function navbar_navbar() {
           '#theme' => 'links__navbar_user',
           '#links' => $links,
           '#attributes' => array(
-            'class' => array('menu'),
+            'class' => array('menu', 'navbar-menu-user'),
           ),
         ),
       ),
@@ -589,7 +589,7 @@ function navbar_navbar() {
         'tray' => array(
           '#heading' => t('User-defined shortcuts'),
           '#wrapper_attributes' => array(
-            'class' => array('navbar-tray-shortcuts'),
+            'class' => array('navbar-tray-shortcuts', 'navbar-menu-shortcuts'),
           ),
           'shortcuts' => $links,
           'configure' => $configure_link,

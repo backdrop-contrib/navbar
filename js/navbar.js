@@ -142,6 +142,10 @@ Drupal.behaviors.navbar = {
           $(document).trigger('drupalNavbarTrayChange', tray);
         });
     });
+
+    // Invoke the Navbar menu script for core modules.
+    $('.navbar-menu-user').drupalNavbarMenu();
+    $('.navbar-menu-shortcuts .navbar-lining > .menu').drupalNavbarMenu();
   }
 };
 
@@ -347,7 +351,7 @@ Drupal.navbar = {
   NavbarVisualView: Backbone.View.extend({
 
     events: {
-      'click .navbar-bar .navbar-tab': 'onTabClick',
+      'click .navbar-bar [data-navbar-tab-trigger]': 'onTabClick',
       'click .navbar-toggle-orientation button': 'onOrientationToggleClick'
     },
 
@@ -460,16 +464,16 @@ Drupal.navbar = {
       var $tab = $('#' + this.model.get('activeTab'));
       // Deactivate the previous tab.
       $('#' + this.model.previous('activeTab'))
-        .removeClass('active')
+        .removeClass('navbar-active')
         .attr('aria-pressed', false);
       // Deactivate the previous tray.
       $(this.model.previous('activeTray'))
-        .removeClass('active');
+        .removeClass('navbar-active');
 
       // Activate the selected tab.
       if ($tab.length > 0) {
         $tab
-          .addClass('active')
+          .addClass('navbar-active')
           // Mark the tab as pressed.
           .attr('aria-pressed', true);
         var name = $tab.attr('data-navbar-tray');
@@ -481,7 +485,7 @@ Drupal.navbar = {
         // Activate the associated tray.
         var $tray = this.$el.find('[data-navbar-tray="' + name + '"].navbar-tray');
         if ($tray.length) {
-          $tray.addClass('active');
+          $tray.addClass('navbar-active');
           this.model.set('activeTray', $tray.get(0));
         }
         else {
@@ -545,9 +549,9 @@ Drupal.navbar = {
         .removeAttr('data-offset-right')
         .removeAttr('data-offset-top');
       // If an active vertical tray exists, mark it as an offset element.
-      $trays.filter('.navbar-tray-vertical.active').attr('data-offset-' + edge, '');
+      $trays.filter('.navbar-tray-vertical.navbar-active').attr('data-offset-' + edge, '');
       // If an active horizontal tray exists, mark it as an offset element.
-      $trays.filter('.navbar-tray-horizontal.active').attr('data-offset-top', '');
+      $trays.filter('.navbar-tray-horizontal.navbar-active').attr('data-offset-top', '');
     },
 
     /**

@@ -50,7 +50,7 @@
   left: auto;
   right: 0;
 }
-.navbar-oriented .navbar-tray-vertical.active {
+.navbar-oriented .navbar-tray-vertical.navbar-active {
   left: auto;
   right: 0;
 }
