@@ -215,17 +215,19 @@ function navbar_page_build(&$page) {
  */
 function navbar_pre_render($element) {
 
-  // Get the configured breakpoints to switch from vertical to horizontal
+  // Get the breakpoints to switch from vertical to horizontal
   // navbar presentation.
-  $media_queries = array();
-  foreach (breakpoints_breakpoint_load_all() as $breakpoint) {
-    if ($breakpoint->source_type === 'module' && $breakpoint->source === 'navbar') {
-      $media_queries['navbar']['breakpoints'][$breakpoint->source_type . '.' . $breakpoint->source . '.' . $breakpoint->name] = $breakpoint->breakpoint;
-    }
-  }
-  if (!empty($media_queries)) {
+  $breakpoints = module_invoke_all('navbar_breakpoints');
+  // Allow for altering of hook_navbar_breakpoints().
+  drupal_alter('navbar_breakpoints', $breakpoints);
+
+  if (!empty($breakpoints)) {
     $element['#attached']['js'][] = array(
-      'data' => $media_queries,
+      'data' => array(
+        'navbar' => array(
+          'breakpoints' => $breakpoints,
+        ),
+      ),
       'type' => 'setting',
     );
   }
@@ -600,6 +602,17 @@ function navbar_navbar() {
   }
 
   return $items;
+}
+
+/**
+ * Implements hook_navbar_breakpoints().
+ */
+function navbar_navbar_breakpoints() {
+  return array(
+    'narrow' => 'only screen and (min-width: 16.5em)',
+    'standard' => 'only screen and (min-width: 38.125em)',
+    'wide' => 'only screen and (min-width: 50em)',
+  );
 }
 
 /**

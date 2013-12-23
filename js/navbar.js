@@ -35,9 +35,9 @@ Drupal.behaviors.navbar = {
       var options = $.extend(
         {
           breakpoints: {
-            'module.navbar.narrow': '',
-            'module.navbar.standard': '',
-            'module.navbar.wide': ''
+            'narrow': '',
+            'standard': '',
+            'wide': ''
           }
         },
         Drupal.settings.navbar,
@@ -206,7 +206,7 @@ Drupal.navbar = {
    */
   mediaQueryChangeHandler: function (model, label, mql) {
     switch (label) {
-      case 'module.navbar.narrow':
+      case 'narrow':
         model.set({
           'isOriented': mql.matches,
           'isTrayToggleVisible': false
@@ -218,12 +218,12 @@ Drupal.navbar = {
           model.set({'orientation': 'vertical'}, {validate: true});
         }
         break;
-      case 'module.navbar.standard':
+      case 'standard':
         model.set({
           'isFixed': mql.matches
         });
         break;
-      case 'module.navbar.wide':
+      case 'wide':
         model.set({
           'orientation': ((mql.matches) ? 'horizontal' : 'vertical')
         }, {validate: true});
