@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Hooks provided by the toolbar module.
+ * Hooks provided by the navbar module.
  */
 
 /**
@@ -11,45 +11,45 @@
  */
 
 /**
- * Add items to the toolbar menu.
+ * Add items to the navbar menu.
  *
- * The toolbar is a container for administrative and site-global interactive
+ * The navbar is a container for administrative and site-global interactive
  * components.
  *
- * The toolbar provides a common styling for items denoted by the
- * .toolbar-tab class. The theme wrapper toolbar_tab_wrapper is provided to wrap
- * a toolbar item with the appropriate markup to apply the styling.
+ * The navbar provides a common styling for items denoted by the
+ * .navbar-tab class. The theme wrapper navbar_tab_wrapper is provided to wrap
+ * a navbar item with the appropriate markup to apply the styling.
  *
- * The toolbar provides a construct called a 'tray'. The tray is a container
+ * The navbar provides a construct called a 'tray'. The tray is a container
  * for content. The tray may be associated with a toggle in the administration
  * bar. The toggle shows or hides the tray and is optimized for small and
- * large screens. To create this association, hook_toolbar() returns one or
- * more render elements of type 'toolbar_item', containing the toggle and tray
+ * large screens. To create this association, hook_navbar() returns one or
+ * more render elements of type 'navbar_item', containing the toggle and tray
  * elements in its 'tab' and 'tray' properties.
  *
  * The following properties are available:
  *   - 'tab': A renderable array.
  *   - 'tray': Optional. A renderable array.
- *   - '#weight': Optional. Integer weight used for sorting toolbar items in
+ *   - '#weight': Optional. Integer weight used for sorting navbar items in
  *     administration bar area.
  *
- * This hook is invoked in toolbar_pre_render().
+ * This hook is invoked in navbar_pre_render().
  *
  * @return
- *   An array of toolbar items, keyed by unique identifiers such as 'home' or
+ *   An array of navbar items, keyed by unique identifiers such as 'home' or
  *   'administration', or the short name of the module implementing the hook.
- *   The corresponding value is a render element of type 'toolbar_item'.
+ *   The corresponding value is a render element of type 'navbar_item'.
  *
- * @see toolbar_pre_render()
- * @ingroup toolbar_tabs
+ * @see navbar_pre_render()
+ * @ingroup navbar_tabs
  */
-function hook_toolbar() {
+function hook_navbar() {
   $items = array();
 
-  // Add a search field to the toolbar. The search field employs no toolbar
+  // Add a search field to the navbar. The search field employs no navbar
   // module theming functions.
   $items['global_search'] = array(
-    '#type' => 'toolbar_item',
+    '#type' => 'navbar_item',
     'tab' => array(
       '#type' => 'search',
       '#attributes' => array(
@@ -58,7 +58,7 @@ function hook_toolbar() {
       ),
     ),
     '#weight' => 200,
-    // Custom CSS, JS or a library can be associated with the toolbar item.
+    // Custom CSS, JS or a library can be associated with the navbar item.
     '#attached' => array(
       'css' => array(
         drupal_get_path('module', 'search') . '/css/search.base.css',
@@ -69,7 +69,7 @@ function hook_toolbar() {
   // The 'Home' tab is a simple link, which is wrapped in markup associated
   // with a visual tab styling.
   $items['home'] = array(
-    '#type' => 'toolbar_item',
+    '#type' => 'navbar_item',
     'tab' => array(
       '#type' => 'link',
       '#title' => t('Home'),
@@ -77,7 +77,7 @@ function hook_toolbar() {
       '#options' => array(
         'attributes' => array(
           'title' => t('Home page'),
-          'class' => array('toolbar-icon', 'toolbar-icon-home'),
+          'class' => array('navbar-icon', 'navbar-icon-home'),
         ),
       ),
     ),
@@ -93,7 +93,7 @@ function hook_toolbar() {
   // can be passed. This text is written to a heading tag in the tray as a
   // landmark for accessibility.
   $items['commerce'] = array(
-    '#type' => 'toolbar_item',
+    '#type' => 'navbar_item',
     'tab' => array(
       '#type' => 'link',
       '#title' => t('Shopping cart'),
@@ -118,18 +118,18 @@ function hook_toolbar() {
   // The tray can be used to render arbritrary content.
   //
   // A renderable array passed to the 'tray' property will be rendered outside
-  // the administration bar but within the containing toolbar element.
+  // the administration bar but within the containing navbar element.
   //
-  // If the default behavior and styling of a toolbar tray is not desired, one
-  // can render content to the toolbar element and apply custom theming and
+  // If the default behavior and styling of a navbar tray is not desired, one
+  // can render content to the navbar element and apply custom theming and
   // behaviors.
   $items['user_messages'] = array(
-    // Include the toolbar_tab_wrapper to style the link like a toolbar tab.
+    // Include the navbar_tab_wrapper to style the link like a navbar tab.
     // Exclude the theme wrapper if custom styling is desired.
-    '#type' => 'toolbar_item',
+    '#type' => 'navbar_item',
     'tab' => array(
       '#type' => 'link',
-      '#theme' => 'user_message_toolbar_tab',
+      '#theme' => 'user_message_navbar_tab',
       '#theme_wrappers' => array(),
       '#title' => t('Messages'),
       '#href' => '/user/messages',
@@ -150,19 +150,30 @@ function hook_toolbar() {
 }
 
 /**
- * Alter the toolbar menu after hook_toolbar() is invoked.
+ * Alter the navbar menu after hook_navbar() is invoked.
  *
- * This hook is invoked by toolbar_view() immediately after hook_toolbar(). The
- * toolbar definitions are passed in by reference. Each element of the $items
- * array is one item returned by a module from hook_toolbar(). Additional items
+ * This hook is invoked by navbar_view() immediately after hook_navbar(). The
+ * navbar definitions are passed in by reference. Each element of the $items
+ * array is one item returned by a module from hook_navbar(). Additional items
  * may be added, or existing items altered.
  *
  * @param $items
- *   Associative array of toolbar menu definitions returned from hook_toolbar().
+ *   Associative array of navbar menu definitions returned from hook_navbar().
  */
-function hook_toolbar_alter(&$items) {
+function hook_navbar_alter(&$items) {
   // Move the User tab to the right.
   $items['commerce']['#weight'] = 5;
+}
+
+/**
+ * Implementing hook_navbar_breakpoints_alter allows a module to change the
+ * media query string associated with one of the three default breakpoints
+ * that the Navbar reacts to.
+ *
+ * @see Drupal.navbar.mediaQueryChangeHandler in navbar.js.
+ */
+function hook_navbar_breakpoints_alter(&$breakpoints) {
+  $breakpoints['standard'] = 'only screen and (min-width: 35em)';
 }
 
 /**
