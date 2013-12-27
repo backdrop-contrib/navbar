@@ -183,7 +183,7 @@
       var rootNotProcessed = $menu.once('navbar-menu');
       if (rootNotProcessed.length) {
         $menu
-          .addClass('navbar-root')
+          .addClass('navbar-menu-root navbar-root')
           .on('click.navbar', toggleClickHandler);
       }
       // Process components of the menu.

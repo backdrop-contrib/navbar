@@ -33,8 +33,10 @@
   padding: 0;
 }
 /* Override core system.menus.css */
-.drupal-navbar ul.menu li {
-  margin-left: 0; /* LTR */
+.drupal-navbar ul.menu li,
+/* Override overzealous menu styling in themes. */
+.drupal-navbar .navbar-menu-root li {
+  margin: 0;
 }
 .drupal-navbar .menu li {
   padding-top: 0;
