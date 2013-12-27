@@ -14,6 +14,10 @@
 /**
  * Navbar tray.
  */
+.drupal-navbar .navbar-tray-vertical {
+  padding-left: 1px;
+  padding-right: 0;
+}
 .drupal-navbar .navbar-tray-horizontal > .navbar-lining {
   padding-right: 0;
   padding-left: 5em;

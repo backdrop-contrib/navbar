@@ -59,10 +59,14 @@
 .drupal-navbar .navbar-tray-horizontal > .navbar-lining {
   padding-right: 5em; /* LTR */
 }
+.drupal-navbar .navbar-tray-vertical {
+  padding-right: 1px; /* LTR */
+}
 .drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
   background-color: #ffffff;
   border-right: 1px solid #aaaaaa; /* LTR */
   box-shadow: -1px 0 5px 2px rgba(0, 0, 0, 0.3333); /* LTR */
+  width: 239px;
 }
 .drupal-navbar .navbar-tray-horizontal {
   border-bottom: 1px solid #aaaaaa;
