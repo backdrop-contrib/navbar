@@ -829,6 +829,24 @@ function navbar_library() {
     ),
   );
 
+  // Support Tableheader displacement.
+  $libraries['navbar.tableheader'] = array(
+    'title' => 'Tableheader method to support D8 viewport displacement.',
+    'version' => VERSION,
+    'js' => array(
+      // Load this file well after Overlay code has loaded.
+      $path . '/js/navbar-tableheader.js' => array('weight' => 100),
+      array(
+        'data' => array('tableHeaderOffset' => 'Drupal.navbar.height'),
+        'type' => 'setting'
+      ),
+    ),
+    'dependencies' => array(
+      array('system', 'jquery'),
+      array('navbar', 'navbar.displace'),
+    ),
+  );
+
   // Modernizr
   $libraries['modernizr'] = navbar_convert_libraries_to_library(libraries_load('modernizr'), array(
     'group' => JS_LIBRARY,
@@ -873,6 +891,17 @@ function navbar_library_alter(&$libraries, $module) {
       unset($libraries['child']['css']['modules/overlay/overlay-child.css']);
     }
     $libraries['child']['css'][drupal_get_path('module', 'navbar') . '/css/navbar-overlay-child.css'] = array();
+  }
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function navbar_js_alter(&$javascript) {
+  // Only load the tableheader offset script if the core tableheader script
+  // is loaded.
+  if (isset($javascript['misc/tableheader.js'])) {
+    drupal_add_library('navbar', 'navbar.tableheader');
   }
 }
 
