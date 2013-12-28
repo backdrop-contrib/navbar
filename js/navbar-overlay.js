@@ -11,14 +11,14 @@
 /**
  * Implements Drupal.behaviors.
  */
- Drupal.behaviors.NavbarOverlayOverrides = {
+Drupal.behaviors.NavbarOverlayOverrides = {
   attach: function (context, settings) {
     $(document)
       .bind('drupalViewportOffsetChange.navbar', $.proxy(Drupal.overlay, 'eventhandlerViewportOffsetChange'))
   }
- };
+};
 
- Drupal.overlay = Drupal.overlay || {};
+Drupal.overlay = Drupal.overlay || {};
 
 $.extend(Drupal.overlay, {
   /**
