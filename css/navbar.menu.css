@@ -1,32 +1,32 @@
 /**
  * @file navbar.menu.css
  */
-.drupal-navbar .menu {
+#navbar-administration .menu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.drupal-navbar .navbar-box {
+#navbar-administration .navbar-box {
   display: block;
   line-height: 1em; /* this prevents the value "normal" from being returned as the line-height */
   position: relative;
   width: auto;
 }
-.drupal-navbar .navbar-tray-horizontal .menu .navbar-handle,
-.drupal-navbar .navbar-tray-horizontal .menu .menu,
-.drupal-navbar .navbar-tray-vertical .menu > .navbar-twisty > .menu {
+#navbar-administration .navbar-tray-horizontal .menu .navbar-handle,
+#navbar-administration .navbar-tray-horizontal .menu .menu,
+#navbar-administration .navbar-tray-vertical .menu > .navbar-twisty > .menu {
   display: none;
 }
-.drupal-navbar .navbar-tray-vertical .navbar-twisty.open > .menu {
+#navbar-administration .navbar-tray-vertical .navbar-twisty.open > .menu {
   display: block; /* Show the sub-menus */
 }
-.drupal-navbar .navbar-tray-vertical .navbar-handle + .navbar-menu-item {
+#navbar-administration .navbar-tray-vertical .navbar-handle + .navbar-menu-item {
   margin-right: 3em; /* LTR */
 }
-.drupal-navbar .navbar-tray .navbar-active-trail > .navbar-box .navbar-menu-item,
-.drupal-navbar .navbar-tray .navbar-active
+#navbar-administration .navbar-tray .navbar-active-trail > .navbar-box .navbar-menu-item,
+#navbar-administration .navbar-tray .navbar-active
 /* Drupal's active menu item class. */
-.drupal-navbar .navbar-tray .active {
+#navbar-administration .navbar-tray .active {
   color: #000;
   font-weight: bold;
 }
@@ -34,37 +34,37 @@
 /**
  * Items.
  */
-.drupal-navbar .navbar-level-2 > ul {
+#navbar-administration .navbar-level-2 > ul {
   background-color: #fafafa;
   border-bottom-color: #cccccc;
   border-top-color: #e5e5e5;
 }
-.drupal-navbar .navbar-level-3 > ul {
+#navbar-administration .navbar-level-3 > ul {
   background-color: #f5f5f5;
   border-bottom-color: #c5c5c5;
   border-top-color: #dddddd;
 }
-.drupal-navbar .navbar-level-4 > ul {
+#navbar-administration .navbar-level-4 > ul {
   background-color: #eeeeee;
   border-bottom-color: #bbbbbb;
   border-top-color: #d5d5d5;
 }
-.drupal-navbar .navbar-level-5 > ul {
+#navbar-administration .navbar-level-5 > ul {
   background-color: #e5e5e5;
   border-bottom-color: #b5b5b5;
   border-top-color: #cccccc;
 }
-.drupal-navbar .navbar-level-6 > ul {
+#navbar-administration .navbar-level-6 > ul {
   background-color: #eeeeee;
   border-bottom-color: #aaaaaa;
   border-top-color: #c5c5c5;
 }
-.drupal-navbar .navbar-level-7 > ul {
+#navbar-administration .navbar-level-7 > ul {
   background-color: #fafafa;
   border-bottom-color: #b5b5b5;
   border-top-color: #cccccc;
 }
-.drupal-navbar .navbar-level-8 > ul {
+#navbar-administration .navbar-level-8 > ul {
   background-color: #dddddd;
   border-bottom-color: #cccccc;
   border-top-color: #dddddd;
@@ -73,10 +73,10 @@
 /**
  * Handle.
  */
-.drupal-navbar .navbar-handle:hover {
+#navbar-administration .navbar-handle:hover {
   cursor: pointer;
 }
-.drupal-navbar .navbar-icon.navbar-handle {
+#navbar-administration .navbar-icon.navbar-handle {
   bottom: 0;
   display: block;
   height: 100%;

@@ -1,25 +1,25 @@
 /**
- * @file navbar.base-rtl.css
+ * @file navbar.module-rtl.css
  *
  * RTL styling for navbar.base.css
  */
 
 /* Override core system.menus.css */
-.drupal-navbar ul.menu li {
+#navbar-administration ul.menu li {
   margin-right: 0;
 }
 /* Present the admin navbar tabs horizontally as a default on user agents that
  * do not understand media queries or on user agents where JavaScript is
  * disabled. */
-.drupal-navbar .navbar-bar .navbar-tab,
-.drupal-navbar .navbar-tray-horizontal li {
+#navbar-administration .navbar-bar .navbar-tab,
+#navbar-administration .navbar-tray-horizontal li {
   float: right;
 }
 /* Present the admin navbar tabs vertically by default on user agents that
  * that understand media queries. This will be the small screen default. */
 @media only screen {
-  .drupal-navbar .navbar-bar .navbar-tab,
-  .drupal-navbar .navbar-tray-horizontal li {
+  #navbar-administration .navbar-bar .navbar-tab,
+  #navbar-administration .navbar-tray-horizontal li {
     float: none;
   }
 }
@@ -27,30 +27,30 @@
  * the main menu tabs when JavaScript is disabled on user agents that understand
  * media queries. */
 @media (min-width:16.5em) {
-  .drupal-navbar .navbar-bar .navbar-tab,
-  .drupal-navbar .navbar-tray-horizontal li {
+  #navbar-administration .navbar-bar .navbar-tab,
+  #navbar-administration .navbar-tray-horizontal li {
     float: right;
   }
 }
 /* Present the admin navbar tabs horizontally when the configured narrow
  * breakpoint is active. */
-.navbar-oriented .navbar-bar .navbar-tab,
-.navbar-oriented .navbar-tray-horizontal li {
+#navbar-administration.navbar-oriented .navbar-bar .navbar-tab,
+#navbar-administration.navbar-oriented .navbar-tray-horizontal li {
   float: right;
 }
 
 /**
  * Navbar tray.
  */
-.navbar-oriented .navbar-tray-vertical {
+#navbar-administration.navbar-oriented .navbar-tray-vertical {
   left: auto;
   right: -100%;
 }
-.drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+#navbar-administration .navbar-tray-vertical > .navbar-lining:before {
   left: auto;
   right: 0;
 }
-.navbar-oriented .navbar-tray-vertical.navbar-active {
+#navbar-administration.navbar-oriented .navbar-tray-vertical.navbar-active {
   left: auto;
   right: 0;
 }
@@ -65,10 +65,10 @@ body.navbar-tray-open.navbar-vertical.navbar-fixed {
  */
 /* Show the orientation toggle when the configured narrow breakpoint is
  * active. */
-.navbar-oriented .navbar-tray-horizontal .navbar-toggle-orientation {
+#navbar-administration.navbar-oriented .navbar-tray-horizontal .navbar-toggle-orientation {
   left: 0;
   right: auto;
 }
-.navbar-oriented .navbar-tray-vertical .navbar-toggle-orientation {
+#navbar-administration.navbar-oriented .navbar-tray-vertical .navbar-toggle-orientation {
   float: left;
 }

@@ -1,21 +1,11 @@
 /**
  * @file navbar.menu-rtl.css
  */
-html .drupal-navbar .menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.drupal-navbar .navbar-tray-vertical .navbar-handle + a {
+#navbar-administration .navbar-tray-vertical .navbar-handle + .navbar-menu-item {
   margin-left: 3em;
   margin-right: 0;
 }
-
-/**
- * Handle.
- */
-.drupal-navbar .navbar-icon.navbar-handle {
+#navbar-administration .navbar-icon.navbar-handle {
   left: 0;
-  padding: 0;
   right: auto;
 }

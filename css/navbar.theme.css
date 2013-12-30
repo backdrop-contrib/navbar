@@ -1,7 +1,7 @@
 /**
  * @file navbar.theme.css
  */
-.drupal-navbar {
+#navbar-administration {
   font-family: "Source Sans Pro", "Lucida Grande", Verdana, sans-serif;
   /* Set base font size to 13px based on root ems. */
   font-size: 0.8125rem;
@@ -14,10 +14,10 @@
   -webkit-touch-callout: none;
   touch-callout: none;
 }
-.navbar-tab > *,
-.drupal-navbar .navbar-menu-item,
+#navbar-administration .navbar-tab > *,
+#navbar-administration .navbar-menu-item,
 /* On behalf of shortcut module */
-.drupal-navbar .navbar-tray .edit-shortcuts {
+#navbar-administration .navbar-tray .edit-shortcuts {
   padding: 1em 1.3333em;
 }
 .navbar-box a {
@@ -31,21 +31,21 @@
 /**
  * Navbar bar.
  */
-.drupal-navbar .navbar-bar {
+#navbar-administration .navbar-bar {
   background-color: #0f0f0f;
   box-shadow: -1px 0 3px 1px rgba(0, 0, 0, 0.3333); /* LTR */
   color: #dddddd;
 }
-.drupal-navbar .navbar-tab > * {
+#navbar-administration .navbar-tab > * {
   color: #ffffff;
   font-weight: bold;
 }
-.drupal-navbar .navbar-tab > *:hover {
+#navbar-administration .navbar-tab > *:hover {
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.125) 20%, transparent 200%);
   background-image: linear-gradient(rgba(255, 255, 255, 0.125) 20%, transparent 200%);
   text-decoration: none;
 }
-.drupal-navbar .navbar-tab > *.navbar-active {
+#navbar-administration .navbar-tab > *.navbar-active {
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.25) 20%, transparent 200%);
   background-image: linear-gradient(rgba(255, 255, 255, 0.25) 20%, transparent 200%);
 }
@@ -53,89 +53,89 @@
 /**
  * Navbar tray.
  */
-.drupal-navbar .navbar-tray {
+#navbar-administration .navbar-tray {
   background-color: #ffffff;
 }
-.drupal-navbar .navbar-tray-horizontal > .navbar-lining {
+#navbar-administration .navbar-tray-horizontal > .navbar-lining {
   padding-right: 5em; /* LTR */
 }
-.drupal-navbar .navbar-tray-vertical {
+#navbar-administration .navbar-tray-vertical {
   padding-right: 1px; /* LTR */
 }
-.drupal-navbar .navbar-tray-vertical > .navbar-lining:before {
+#navbar-administration .navbar-tray-vertical > .navbar-lining:before {
   background-color: #ffffff;
   border-right: 1px solid #aaaaaa; /* LTR */
   box-shadow: -1px 0 5px 2px rgba(0, 0, 0, 0.3333); /* LTR */
   width: 239px;
 }
-.drupal-navbar .navbar-tray-horizontal {
+#navbar-administration .navbar-tray-horizontal {
   border-bottom: 1px solid #aaaaaa;
   box-shadow: -2px 1px 3px 1px rgba(0, 0, 0, 0.3333); /* LTR */
 }
-.drupal-navbar .navbar-tray-horizontal .navbar-tray {
+#navbar-administration .navbar-tray-horizontal .navbar-tray {
   background-color: #f5f5f5;
 }
-.drupal-navbar .navbar-tray a {
+#navbar-administration .navbar-tray a {
   color: #707070;
 }
-.drupal-navbar .navbar-tray a:hover,
-.drupal-navbar .navbar-tray a:active,
-.drupal-navbar .navbar-tray a.navbar-active {
+#navbar-administration .navbar-tray a:hover,
+#navbar-administration .navbar-tray a:active,
+#navbar-administration .navbar-tray a.navbar-active {
   color: #000;
 }
-.drupal-navbar .navbar-tray-horizontal .menu {
+#navbar-administration .navbar-tray-horizontal .menu {
   background-color: #ffffff;
 }
-.drupal-navbar .navbar-tray-horizontal .menu li + li {
+#navbar-administration .navbar-tray-horizontal .menu li + li {
   border-left: 1px solid #dddddd; /* LTR */
 }
-.drupal-navbar .navbar-tray-horizontal .menu li:last-child {
+#navbar-administration .navbar-tray-horizontal .menu li:last-child {
   border-right: 1px solid #dddddd; /* LTR */
 }
-.drupal-navbar .navbar-tray-vertical .menu li + li {
+#navbar-administration .navbar-tray-vertical .menu li + li {
   border-top: 1px solid #dddddd;
 }
-.drupal-navbar .navbar-tray-vertical .menu li:last-child {
+#navbar-administration .navbar-tray-vertical .menu li:last-child {
   border-bottom: 1px solid #dddddd;
 }
-.drupal-navbar .navbar-tray-vertical .menu .menu li {
+#navbar-administration .navbar-tray-vertical .menu .menu li {
   border: 0 none;
 }
-.drupal-navbar .navbar-tray-vertical .menu ul ul {
+#navbar-administration .navbar-tray-vertical .menu ul ul {
   border-bottom: 1px solid #dddddd;
   border-top: 1px solid #dddddd;
 }
-.drupal-navbar .navbar-tray-vertical .menu li:last-child > ul {
+#navbar-administration .navbar-tray-vertical .menu li:last-child > ul {
   border-bottom: 0;
 }
-.drupal-navbar .navbar-tray-vertical .menu .menu .menu {
+#navbar-administration .navbar-tray-vertical .menu .menu .menu {
   margin-left: 1.3333em; /* LTR */
 }
-.drupal-navbar .navbar-tray-vertical .menu .menu .menu .menu {
+#navbar-administration .navbar-tray-vertical .menu .menu .menu .menu {
   margin-left: 0.25em; /* LTR */
 }
-.drupal-navbar .menu .menu a {
+#navbar-administration .menu .menu a {
   color: #434343;
 }
-.drupal-navbar .navbar-tray-vertical .menu .menu .menu a {
+#navbar-administration .navbar-tray-vertical .menu .menu .menu a {
   padding-left: 0.6667em; /* LTR */
 }
 
 /**
  * Orientation toggle.
  */
-.drupal-navbar .navbar-toggle-orientation {
+#navbar-administration .navbar-toggle-orientation {
   background-color: #f5f5f5;
   padding: 0.6667em;
 }
-.drupal-navbar .navbar-tray-horizontal .navbar-toggle-orientation {
+#navbar-administration .navbar-tray-horizontal .navbar-toggle-orientation {
   border-left: 1px solid #c9c9c9; /* LTR */
 }
-.drupal-navbar .navbar-toggle-orientation > .navbar-lining {
+#navbar-administration .navbar-toggle-orientation > .navbar-lining {
   float: right; /* LTR */
   padding: 0.1667em;
 }
-.drupal-navbar .navbar-toggle-orientation .navbar-toggle {
+#navbar-administration .navbar-toggle-orientation .navbar-toggle {
   cursor: pointer;
   display: inline-block;
   margin: 0;
@@ -145,15 +145,15 @@
 /**
  * Fix Shortcuts Edit link
  */
-.drupal-navbar .navbar-tray-horizontal .edit-shortcuts {
+#navbar-administration .navbar-tray-horizontal .edit-shortcuts {
   float: left; /* LTR */
 }
 
 /**
  * Undo overzealous theme resets.
  */
-.drupal-navbar *:before,
-.drupal-navbar *:after {
+#navbar-administration *:before,
+#navbar-administration *:after {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
