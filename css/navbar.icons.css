@@ -127,6 +127,20 @@
 /**
  * Main menu icons.
  */
+.navbar-icon-dashboard:before {
+  background-image: url("../icons/787878/dashboard.svg");
+}
+.no-svg .navbar-icon-dashboard:before {
+  background-image: url("../icons/787878/dashboard.png");
+}
+.navbar-icon-dashboard:active:before,
+.navbar-icon-dashboard.navbar-active:before {
+  background-image: url("../icons/000000/dashboard.svg");
+}
+.no-svg .navbar-icon-dashboard:active:before,
+.no-svg .navbar-icon-dashboard.navbar-active:before {
+  background-image: url("../icons/000000/dashboard.png");
+}
 .navbar-icon-content:before {
   background-image: url("../icons/787878/file.svg");
 }
