@@ -1056,3 +1056,23 @@ function navbar_suppress($set = TRUE) {
   }
   return $suppress;
 }
+
+/**
+ * Implements hook_modernizr_info().
+ */
+function navbar_modernizr_info() {
+  $tests = array();
+
+  // Feature tests
+  $tests[] = 'inputtypes';
+  $tests[] = 'svg';
+  $tests[] = 'touch';
+  $tests[] = 'elem_details';
+
+  // Extensibility
+  $tests[] = 'addtest';
+  $tests[] = 'teststyles';
+  $tests[] = 'prefixes';
+
+  return $tests;
+}
