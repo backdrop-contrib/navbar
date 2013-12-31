@@ -991,7 +991,6 @@ function navbar_libraries_info() {
             'files' => array(
               'js' => array(
                 'backbone.js',
-                'backbone-min.map',
               ),
             ),
           ),
@@ -999,7 +998,6 @@ function navbar_libraries_info() {
             'files' => array(
               'js' => array(
                 'backbone-min.js',
-                'backbone-min.map',
               ),
             ),
           ),
