@@ -847,20 +847,27 @@ function navbar_library() {
     ),
   );
 
+  // Ensure that each 3rd party library dependency has a default variant.
+  $variants = variable_get('navbar_libraries_variants', array());
+  $default_variant = 'minified';
+  foreach (array('modernizr', 'underscore', 'backbone') as $lib) {
+    $variants[$lib] = (!empty($variants[$lib])) ? $variants[$lib] : $default_variant;
+  }
+  // Convert Libraries module data structures to library data structures.
   // Modernizr
-  $libraries['modernizr'] = navbar_convert_libraries_to_library(libraries_load('modernizr'), array(
+  $libraries['modernizr'] = navbar_convert_libraries_to_library(libraries_load('modernizr', $variants['modernizr']), array(
     'group' => JS_LIBRARY,
     'weight' => -100,
   ));
 
   // Underscore
-  $libraries['underscore'] = navbar_convert_libraries_to_library(libraries_load('underscore'), array(
+  $libraries['underscore'] = navbar_convert_libraries_to_library(libraries_load('underscore', $variants['underscore']), array(
     'group' => JS_LIBRARY,
     'weight' => -20,
   ));
 
   // Backbone
-  $libraries['backbone'] = navbar_convert_libraries_to_library(libraries_load('backbone'), array(
+  $libraries['backbone'] = navbar_convert_libraries_to_library(libraries_load('backbone', $variants['backbone']), array(
     'group' => JS_LIBRARY,
     'weight' => -19,
   ));
@@ -917,66 +924,92 @@ function navbar_libraries_info() {
     'name' => 'Modernizr (custom build, see download URL)',
     'vendor url' => 'https://github.com/Modernizr/Modernizr',
     'download url' => 'http://modernizr.com/download/#-inputtypes-svg-touch-cssclasses-addtest-teststyles-prefixes-elem_details',
-    'files' => array(
-      'js' => array(
-        'modernizr.js',
-      ),
-    ),
-    'variants' => array(
-      // All properties defined for 'minified' override top-level properties.
-      'minified' => array(
-        'files' => array(
-          'js' => array(
-            'modernizr.min.js',
+    'versions' => array(
+      '2.6.2' => array(
+        'variants' => array(
+          'source' => array(
+            'files' => array(
+              'js' => array(
+                'modernizr.js',
+              ),
+            ),
+          ),
+          'minified' => array(
+            'files' => array(
+              'js' => array(
+                'modernizr.min.js',
+              ),
+            ),
           ),
         ),
       ),
     ),
-    'version' => '2.6.2',
+    'version arguments' => array(
+      'file' => 'modernizr.js',
+      'pattern' => '/Modernizr\s*([\d\.]+)/',
+    ),
   );
 
   $libraries['underscore'] = array(
     'name' => 'Underscore',
     'vendor url' => 'http://documentcloud.github.io/backbone/',
-    'download url' => 'https://github.com/documentcloud/underscore/tree/1.4.4',
-    'files' => array(
-      'js' => array(
-        'underscore.js',
-      ),
-    ),
-    'variants' => array(
-      // All properties defined for 'minified' override top-level properties.
-      'minified' => array(
-        'files' => array(
-          'js' => array(
-            'underscore-min.js',
+    'download url' => 'https://github.com/jashkenas/underscore/archive/1.5.2.zip',
+    'versions' => array(
+      '1.4.4' => array(
+        'variants' => array(
+          'source' => array(
+            'files' => array(
+              'js' => array(
+                'underscore.js',
+              ),
+            ),
+          ),
+          'minified' => array(
+            'files' => array(
+              'js' => array(
+                'underscore-min.js',
+              ),
+            ),
           ),
         ),
       ),
     ),
-    'version' => '1.4.4',
+    'version arguments' => array(
+      'file' => 'underscore.js',
+      'pattern' => '/Underscore.js\s*([\d\.]+)/',
+    ),
   );
 
   $libraries['backbone'] = array(
     'name' => 'Backbone',
     'vendor url' => 'http://documentcloud.github.io/backbone/',
-    'download url' => 'https://github.com/documentcloud/backbone/tree/1.0.0',
-    'files' => array(
-      'js' => array(
-        'backbone.js',
-      ),
-    ),
-    'variants' => array(
-      // All properties defined for 'minified' override top-level properties.
-      'minified' => array(
-        'files' => array(
-          'js' => array(
-            'backbone-min.js',
+    'download url' => 'https://github.com/jashkenas/backbone/archive/1.1.0.zip',
+    'versions' => array(
+      '1.0.0' => array(
+        'variants' => array(
+          'source' => array(
+            'files' => array(
+              'js' => array(
+                'backbone.js',
+                'backbone-min.map',
+              ),
+            ),
+          ),
+          'minified' => array(
+            'files' => array(
+              'js' => array(
+                'backbone-min.js',
+                'backbone-min.map',
+              ),
+            ),
           ),
         ),
       ),
     ),
-    'version' => '1.0.0',
+    'version arguments' => array(
+      'file' => 'backbone.js',
+      'pattern' => '/Backbone.js\s*([\d\.]+)/',
+    ),
     'dependencies' => array('underscore'),
   );
 

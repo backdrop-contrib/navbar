@@ -11,37 +11,21 @@ function navbar_requirements($phase) {
   $requirements = array();
 
   if ($phase == 'runtime') {
-    $requirements['navbar_modernizr'] = array(
-      'title' => t('Navbar Modernizr requirement'),
-      'value' => t('The Modernizr library is not present'),
-      'severity' => REQUIREMENT_ERROR,
-    );
-    $requirements['navbar_backbone'] = array(
-      'title' => t('Navbar Backbone requirement'),
-      'value' => t('The Backbone library is not present'),
-      'severity' => REQUIREMENT_ERROR,
-    );
-    $requirements['navbar_underscore'] = array(
-      'title' => t('Navbar Underscore requirement'),
-      'value' => t('The Underscore library is not present'),
-      'severity' => REQUIREMENT_ERROR,
-    );
-
-    if (function_exists('libraries_detect')) {
-      // Check for Modernizr.
-      if (($library = libraries_detect('modernizr')) && !empty($library['installed'])) {
-        $requirements['navbar_modernizr']['value'] = t('The Modernizr library is present');
-        $requirements['navbar_modernizr']['severity'] = REQUIREMENT_OK;
-      }
-      // Check for Underscore.
-      if (($library = libraries_detect('underscore')) && !empty($library['installed'])) {
-        $requirements['navbar_underscore']['value'] = t('The Underscore library is present');
-        $requirements['navbar_underscore']['severity'] = REQUIREMENT_OK;
-      }
-      // Check for Backbone.
-      if (($library = libraries_detect('backbone')) && !empty($library['installed'])) {
-        $requirements['navbar_backbone']['value'] = t('The Backbone library is present');
-        $requirements['navbar_backbone']['severity'] = REQUIREMENT_OK;
+    $libraries = array('modernizr', 'underscore', 'backbone');
+    foreach ($libraries as $lib) {
+      $requirements['navbar_' . $lib] = array(
+        'title' => t('Navbar: @library', array('@library' => $lib)),
+        'value' => t('The @library library is not present', array('@library' => $lib)),
+        'severity' => REQUIREMENT_ERROR,
+      );
+      if (function_exists('libraries_detect')) {
+        if (($library = libraries_detect($lib)) && !empty($library['installed'])) {
+          $requirements['navbar_' . $lib]['value'] = $library['version'];
+          $requirements['navbar_' . $lib]['severity'] = REQUIREMENT_OK;
+        }
+        elseif (!empty($library['error'])) {
+          $requirements['navbar_' . $lib]['value'] = $library['error message'];
+        }
       }
     }
   }
