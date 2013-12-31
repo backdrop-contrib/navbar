@@ -855,19 +855,22 @@ function navbar_library() {
   }
   // Convert Libraries module data structures to library data structures.
   // Modernizr
-  $libraries['modernizr'] = navbar_convert_libraries_to_library(libraries_load('modernizr', $variants['modernizr']), array(
+  $libraries['modernizr'] = navbar_convert_libraries_to_library(libraries_detect('modernizr'), array(
+    'variant' => $variants['modernizr'],
     'group' => JS_LIBRARY,
     'weight' => -100,
   ));
 
   // Underscore
-  $libraries['underscore'] = navbar_convert_libraries_to_library(libraries_load('underscore', $variants['underscore']), array(
+  $libraries['underscore'] = navbar_convert_libraries_to_library(libraries_detect('underscore'), array(
+    'variant' => $variants['underscore'],
     'group' => JS_LIBRARY,
     'weight' => -20,
   ));
 
   // Backbone
-  $libraries['backbone'] = navbar_convert_libraries_to_library(libraries_load('backbone', $variants['backbone']), array(
+  $libraries['backbone'] = navbar_convert_libraries_to_library(libraries_detect('backbone'), array(
+    'variant' => $variants['backbone'],
     'group' => JS_LIBRARY,
     'weight' => -19,
   ));
@@ -1045,23 +1048,27 @@ function _navbar_get_subtree_hash() {
  * to get an array that corresponds to what hook_library expects.
  */
 function navbar_convert_libraries_to_library($library, $options = array()) {
-
-  // If the library wasn't loaded, don't bother converting it.
-  if (!$library['loaded']) {
+  // If the library wasn't installed, don't bother converting it.
+  if (!$library['installed']) {
     return array();
   }
 
+  // The variant will be something like 'minified' or 'source'.
+  $variant = $options['variant'];
+  unset($options['variant']);
+
+  // This is the basic structure expected by hook_library().
   $converted = array(
     'title' => $library['name'],
     'website' => $library['vendor url'],
     'version' => $library['version'],
   );
 
-  // This is not ideal, but I don't see any other way to convert these files.
-  // It's a bit hard-coded to expect just one file, but that's all we have for
-  // now, so it stays.
-  $filename = array_keys($library['files']['js']);
-  $converted['js'][$library['library path'] . '/' . $filename[0]] = $options;
+  // We only expect JS files. If ever more types are added, e.g. CSS, then
+  // this loop will need to be made more complex.
+  foreach($library['variants'][$variant]['files']['js'] as $filename => $data) {
+    $converted['js'][$library['library path'] . '/' . $filename] = $options;
+  }
 
   return $converted;
 }
