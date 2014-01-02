@@ -949,7 +949,7 @@ function navbar_libraries_info() {
     ),
     'version arguments' => array(
       'file' => 'modernizr.js',
-      'pattern' => '/Modernizr\s*([\d\.]+)/',
+      'pattern' => '/Modernizr\s*[Vv]?([\d\.]+)/',
     ),
   );
 
