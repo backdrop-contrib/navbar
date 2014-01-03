@@ -1063,7 +1063,7 @@ function _navbar_get_subtree_hash() {
  * What is this necessary? I don't see any way from the Libraries module API
  * to get an array that corresponds to what hook_library expects.
  *
- * @return array
+ * @return Array
  *  Returns a standard Drupal library definition structure.
  */
 function navbar_convert_libraries_to_library($library, $options = array()) {
