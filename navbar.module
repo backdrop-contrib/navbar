@@ -927,6 +927,15 @@ function navbar_libraries_info() {
     'name' => 'Modernizr (custom build, see download URL)',
     'vendor url' => 'https://github.com/Modernizr/Modernizr',
     'download url' => 'http://modernizr.com/download/#-inputtypes-svg-touch-cssclasses-addtest-teststyles-prefixes-elem_details',
+    'files' => array(
+      'js' => array(
+        'modernizr.min.js',
+      ),
+    ),
+    'version arguments' => array(
+      'file' => 'modernizr.js',
+      'pattern' => '/Modernizr\s*[Vv]?([\d\.]+)/',
+    ),
     'versions' => array(
       '2.6.2' => array(
         'variants' => array(
@@ -947,16 +956,22 @@ function navbar_libraries_info() {
         ),
       ),
     ),
-    'version arguments' => array(
-      'file' => 'modernizr.js',
-      'pattern' => '/Modernizr\s*[Vv]?([\d\.]+)/',
-    ),
   );
 
   $libraries['underscore'] = array(
     'name' => 'Underscore',
     'vendor url' => 'http://documentcloud.github.io/backbone/',
     'download url' => 'https://github.com/jashkenas/underscore/archive/1.5.2.zip',
+    // Declare a default set of files.
+    'files' => array(
+      'js' => array(
+        'underscore-min.js',
+      ),
+    ),
+    'version arguments' => array(
+      'file' => 'underscore.js',
+      'pattern' => '/Underscore.js\s*([\d\.]+)/',
+    ),
     'versions' => array(
       '1.4.4' => array(
         'variants' => array(
@@ -977,16 +992,21 @@ function navbar_libraries_info() {
         ),
       ),
     ),
-    'version arguments' => array(
-      'file' => 'underscore.js',
-      'pattern' => '/Underscore.js\s*([\d\.]+)/',
-    ),
   );
 
   $libraries['backbone'] = array(
     'name' => 'Backbone',
     'vendor url' => 'http://documentcloud.github.io/backbone/',
     'download url' => 'https://github.com/jashkenas/backbone/archive/1.1.0.zip',
+    'files' => array(
+      'js' => array(
+        'backbone-min.js',
+      ),
+    ),
+    'version arguments' => array(
+      'file' => 'backbone.js',
+      'pattern' => '/Backbone.js\s*([\d\.]+)/',
+    ),
     'versions' => array(
       '1.0.0' => array(
         'variants' => array(
@@ -1007,11 +1027,7 @@ function navbar_libraries_info() {
         ),
       ),
     ),
-    'version arguments' => array(
-      'file' => 'backbone.js',
-      'pattern' => '/Backbone.js\s*([\d\.]+)/',
-    ),
-    'dependencies' => array('underscore'),
+    'dependencies' => array('underscore (>=1.4.4)'),
   );
 
   return $libraries;
@@ -1046,6 +1062,9 @@ function _navbar_get_subtree_hash() {
  *
  * What is this necessary? I don't see any way from the Libraries module API
  * to get an array that corresponds to what hook_library expects.
+ *
+ * @return array
+ *  Returns a standard Drupal library definition structure.
  */
 function navbar_convert_libraries_to_library($library, $options = array()) {
   // If the library wasn't installed, don't bother converting it.
@@ -1053,21 +1072,29 @@ function navbar_convert_libraries_to_library($library, $options = array()) {
     return array();
   }
 
+  $converted = array();
+
   // The variant will be something like 'minified' or 'source'.
   $variant = $options['variant'];
   unset($options['variant']);
 
-  // This is the basic structure expected by hook_library().
-  $converted = array(
-    'title' => $library['name'],
-    'website' => $library['vendor url'],
-    'version' => $library['version'],
-  );
-
-  // We only expect JS files. If ever more types are added, e.g. CSS, then
-  // this loop will need to be made more complex.
-  foreach($library['variants'][$variant]['files']['js'] as $filename => $data) {
-    $converted['js'][$library['library path'] . '/' . $filename] = $options;
+  // If variants are defined, prefer the them.
+  $files = (!empty($library['variants'][$variant]['files'])) ? $library['variants'][$variant]['files'] : array();
+  // If no variants are defined, check for default files.
+  $files = (empty($files) && !empty($library['files'])) ? $library['files'] : $files;
+  // Define the library if files exist for it.
+  if (!empty($files)) {
+    // This is the basic structure expected by hook_library().
+    $converted = array(
+      'title' => $library['name'],
+      'website' => $library['vendor url'],
+      'version' => $library['version'],
+    );
+    foreach ($files as $type => $paths) {
+      foreach($paths as $filename => $data) {
+        $converted[$type][$library['library path'] . '/' . $filename] = $options;
+      }
+    }
   }
 
   return $converted;
