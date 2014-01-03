@@ -4,7 +4,7 @@
 #navbar-administration {
   font-family: "Source Sans Pro", "Lucida Grande", Verdana, sans-serif;
   /* Set base font size to 13px based on root ems. */
-  font-size: 0.8125rem;
+  font-size: small;
   -moz-tap-highlight-color: rgba(0,0,0,0);
   -o-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: rgba(0,0,0,0);
