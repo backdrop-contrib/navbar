@@ -848,29 +848,21 @@ function navbar_library() {
   );
 
   // Ensure that each 3rd party library dependency has a default variant.
-  $variants = variable_get('navbar_libraries_variants', array());
-  $default_variant = 'minified';
-  foreach (array('modernizr', 'underscore', 'backbone') as $lib) {
-    $variants[$lib] = (!empty($variants[$lib])) ? $variants[$lib] : $default_variant;
-  }
   // Convert Libraries module data structures to library data structures.
   // Modernizr
-  $libraries['modernizr'] = navbar_convert_libraries_to_library(libraries_detect('modernizr'), array(
-    'variant' => $variants['modernizr'],
+  $libraries['modernizr'] = _navbar_convert_libraries_to_library(libraries_detect('modernizr'), array(
     'group' => JS_LIBRARY,
     'weight' => -100,
   ));
 
   // Underscore
-  $libraries['underscore'] = navbar_convert_libraries_to_library(libraries_detect('underscore'), array(
-    'variant' => $variants['underscore'],
+  $libraries['underscore'] = _navbar_convert_libraries_to_library(libraries_detect('underscore'), array(
     'group' => JS_LIBRARY,
     'weight' => -20,
   ));
 
   // Backbone
-  $libraries['backbone'] = navbar_convert_libraries_to_library(libraries_detect('backbone'), array(
-    'variant' => $variants['backbone'],
+  $libraries['backbone'] = _navbar_convert_libraries_to_library(libraries_detect('backbone'), array(
     'group' => JS_LIBRARY,
     'weight' => -19,
   ));
@@ -923,20 +915,30 @@ function navbar_js_alter(&$javascript) {
 function navbar_libraries_info() {
   $libraries = array();
 
+  $common = array(
+    'version callback' => '_navbar_libraries_get_version',
+    'variant order' => array('minified', 'source'),
+  );
+
   $libraries['modernizr'] = array(
-    'name' => 'Modernizr (custom build, see download URL)',
+    'name' => 'Modernizr',
     'vendor url' => 'https://github.com/Modernizr/Modernizr',
     'download url' => 'http://modernizr.com/download/#-inputtypes-svg-touch-cssclasses-addtest-teststyles-prefixes-elem_details',
-    'files' => array(
-      'js' => array(
-        'modernizr.min.js',
+    'version arguments' => array(
+      'variants' => array(
+        'source' => array(
+          'file' => 'modernizr.js',
+          // @todo Document an actual example version string.
+          'pattern' => '#Modernizr\s+[Vv]?([0-9\.]+)#',
+        ),
+        'minified' => array(
+          'file' => 'modernizr-min.js',
+          'pattern' => '#Modernizr\s+[Vv]?([0-9\.]+)#',
+        ),
       ),
     ),
-    'version arguments' => array(
-      'file' => 'modernizr.js',
-      'pattern' => '/Modernizr\s*[Vv]?([\d\.]+)/',
-    ),
     'versions' => array(
+      // Means ">=2.6.2": matches 2.6.2, 2.7.1, etc.
       '2.6.2' => array(
         'variants' => array(
           'source' => array(
@@ -945,35 +947,51 @@ function navbar_libraries_info() {
                 'modernizr.js',
               ),
             ),
+            // Without a variant callback, the variant is assumed to be
+            // installed.
+            'variant callback' => '_navbar_libraries_variant_exists',
+            'variant arguments' => array('modernizr.js')
           ),
           'minified' => array(
             'files' => array(
               'js' => array(
-                'modernizr.min.js',
+                'modernizr-min.js',
               ),
             ),
+            // Without a variant callback, the variant is assumed to be
+            // installed.
+            'variant callback' => '_navbar_libraries_variant_exists',
+            'variant arguments' => array('modernizr-min.js')
           ),
         ),
       ),
     ),
   );
+  $libraries['modernizr'] += $common;
 
   $libraries['underscore'] = array(
     'name' => 'Underscore',
     'vendor url' => 'http://documentcloud.github.io/backbone/',
     'download url' => 'https://github.com/jashkenas/underscore/archive/1.5.2.zip',
-    // Declare a default set of files.
-    'files' => array(
-      'js' => array(
-        'underscore-min.js',
+    'version arguments' => array(
+      'variants' => array(
+        'source' => array(
+          'file' => 'underscore.js',
+          // @todo Document an actual example version string.
+          'pattern' => '#VERSION *\W *[\'\"]{1}(.*?)[\'\"]{1}#',
+          // In the unminified Underscore.js 1.5.2, the version is defined on
+          // line 68.
+          'lines' => 100,
+        ),
+        'minified' => array(
+          'file' => 'underscore-min.js',
+          'pattern' => '#Underscore.js\s([\d\.]+)#',
+        ),
       ),
     ),
-    'version arguments' => array(
-      'file' => 'underscore.js',
-      'pattern' => '/Underscore.js\s*([\d\.]+)/',
-    ),
     'versions' => array(
-      '1.4.4' => array(
+      // Means ">=1.5.0": matches 1.5.0, 1.5.2, etc.
+      '1.5.0' => array(
         'variants' => array(
           'source' => array(
             'files' => array(
@@ -981,6 +999,10 @@ function navbar_libraries_info() {
                 'underscore.js',
               ),
             ),
+            // Without a variant callback, the variant is assumed to be
+            // installed.
+            'variant callback' => '_navbar_libraries_variant_exists',
+            'variant arguments' => array('underscore.js'),
           ),
           'minified' => array(
             'files' => array(
@@ -988,26 +1010,39 @@ function navbar_libraries_info() {
                 'underscore-min.js',
               ),
             ),
+            // Without a variant callback, the variant is assumed to be
+            // installed.
+            'variant callback' => '_navbar_libraries_variant_exists',
+            'variant arguments' => array('underscore-min.js'),
           ),
         ),
       ),
     ),
   );
+  $libraries['underscore'] += $common;
 
   $libraries['backbone'] = array(
     'name' => 'Backbone',
     'vendor url' => 'http://documentcloud.github.io/backbone/',
     'download url' => 'https://github.com/jashkenas/backbone/archive/1.1.0.zip',
-    'files' => array(
-      'js' => array(
-        'backbone-min.js',
+    'version arguments' => array(
+      'variants' => array(
+        'source' => array(
+          'file' => 'backbone.js',
+          // @todo Document an actual example version string.
+          'pattern' => '#VERSION *\W *[\'\"]{1}(.*?)[\'\"]{1}#',
+          // In the unminified Backbone.js 1.1.0, the version is defined on line
+          // 38.
+          'lines' => 50,
+        ),
+        'minified' => array(
+          'file' => 'backbone-min.js',
+          'pattern' => '#Backbone.js\s([\d\.]+)#',
+        ),
       ),
     ),
-    'version arguments' => array(
-      'file' => 'backbone.js',
-      'pattern' => '/Backbone.js\s*([\d\.]+)/',
-    ),
     'versions' => array(
+      // Means ">=1.0.0": matches 1.0.0, 1.1.0, etc.
       '1.0.0' => array(
         'variants' => array(
           'source' => array(
@@ -1016,6 +1051,11 @@ function navbar_libraries_info() {
                 'backbone.js',
               ),
             ),
+            // Without a variant callback, the variant is assumed to be
+            // installed.
+            'variant callback' => '_navbar_libraries_variant_exists',
+            'variant arguments' => array('backbone.js'),
+            'dependencies' => array('underscore (>=1.5.0)'),
           ),
           'minified' => array(
             'files' => array(
@@ -1023,14 +1063,98 @@ function navbar_libraries_info() {
                 'backbone-min.js',
               ),
             ),
+            // Without a variant callback, the variant is assumed to be
+            // installed.
+            'variant callback' => '_navbar_libraries_variant_exists',
+            'variant arguments' => array('backbone-min.js'),
+            'dependencies' => array('underscore (>=1.5.0)'),
           ),
         ),
       ),
     ),
-    'dependencies' => array('underscore (>=1.4.4)'),
   );
+  $libraries['backbone'] += $common;
 
   return $libraries;
+}
+
+/**
+ * Determines the version of a navbar library.
+ *
+ * This is used in case different variants of the library are shipped separately
+ * and, thus, different variants can contain different versions.
+ *
+ * @param array $library
+ *   An associative array containing all information about the library. The
+ *   library is assumed to have the following non-standard keys:
+ *   - variant order: An array of variant names, ordered from the most preferred
+ *     variant to the least preferred.
+ * @param array $options
+ *   An associative array with the following keys:
+ *   - variants: An array of options for libraries_get_version() keyed by
+ *     variant name.
+ *
+ */
+function _navbar_libraries_get_version(&$library, $options = array()) {
+  $versions = array();
+  foreach ($library['variant order'] as $variant_name) {
+    $variant = $library['version arguments']['variants'][$variant_name];
+    // Use the libraries get version function to determine the version string.
+    $versions[$variant_name] = libraries_get_version($library, $variant);
+  }
+
+  // If no versions could be found for any of the variant, there is no version
+  // to return. If different versions have been found, there is no way to
+  // determine the correct one. We cannot use the information on the preferred
+  // variants because we cannot guarantee that a less preferred variant will not
+  // be loaded. Null values are fine. Either that variant file doesn't exist
+  // or id doesn't contain version information. As long as the there is no
+  // conflicting version information, the check should pass.
+  $versions = array_filter($versions, '_navbar_libraries_filter_null_values');
+  $version = array_unique($versions);
+  $vcount = count($version);
+  if ($vcount == 1) {
+    // A version number exists, so suppress any errors that any individual
+    // variant might have raised.
+    unset($library['error']);
+    unset($library['error message']);
+    return array_shift($version);
+  }
+  elseif ($vcount > 1) {
+    $output = array();
+    foreach ($versions as $name => $v) {
+      $output[] = t('@name (@v)', array(
+        '@name' => $name,
+        '@v' => $v,
+      ));
+    }
+
+    $library['error'] = 'inconsistent versions';
+    $library['error message'] = t('The library\'s variants returned inconsistent versions: @variant_info', array(
+      '@variant_info' => implode(', ', $output),
+    ));
+  }
+  // If the version count is zero, then let the error from libraries_get_version
+  // propagate through.
+}
+
+/**
+ * Determines if an item is empty or not.
+ *
+ * @param string $item
+ *   A version number string.
+ * @return boolean
+ *   Whether the $item's value is empty or not.
+ */
+function _navbar_libraries_filter_null_values($item) {
+  return !empty($item);
+}
+
+/**
+ * Libraries API variant callback.
+ */
+function _navbar_libraries_variant_exists($library, $variant_name, $required_file) {
+  return file_exists($library['library path'] . '/' . $required_file);;
 }
 
 /**
@@ -1060,28 +1184,26 @@ function _navbar_get_subtree_hash() {
 /**
  * Converts a libraries module array to a hook_library array.
  *
- * What is this necessary? I don't see any way from the Libraries module API
- * to get an array that corresponds to what hook_library expects.
+ * @todo Libraries API should automatically register all libraries in
+ *   hook_library(). See https://drupal.org/node/1386368
  *
  * @return Array
  *  Returns a standard Drupal library definition structure.
  */
-function navbar_convert_libraries_to_library($library, $options = array()) {
+function _navbar_convert_libraries_to_library($library, $options = array()) {
   // If the library wasn't installed, don't bother converting it.
   if (!$library['installed']) {
     return array();
   }
 
   $converted = array();
+  $files = array();
 
-  // The variant will be something like 'minified' or 'source'.
-  $variant = $options['variant'];
-  unset($options['variant']);
+  // Get the library files from one of the installed variants.
+  if ($name = _navbar_libraries_get_preferred_variant_name($library)) {
+    $files = $library['variants'][$name]['files'];
+  }
 
-  // If variants are defined, prefer the them.
-  $files = (!empty($library['variants'][$variant]['files'])) ? $library['variants'][$variant]['files'] : array();
-  // If no variants are defined, check for default files.
-  $files = (empty($files) && !empty($library['files'])) ? $library['files'] : $files;
   // Define the library if files exist for it.
   if (!empty($files)) {
     // This is the basic structure expected by hook_library().
@@ -1098,6 +1220,27 @@ function navbar_convert_libraries_to_library($library, $options = array()) {
   }
 
   return $converted;
+}
+
+/**
+ * Returns the variant that should be loaded based on order preference.
+ *
+ * @param array $library
+ *   A libraries module library definition array.
+ * @return string
+ *   The name of the variant that should be loaded.
+ */
+function _navbar_libraries_get_preferred_variant_name($library) {
+  if (!empty($library['variant order'])) {
+    foreach ($library['variant order'] as $name) {
+      if ($variant = $library['variants'][$name]) {
+        if ($variant['installed']) {
+          return $name;
+        }
+      }
+    }
+  }
+  return NULL;
 }
 
 /**

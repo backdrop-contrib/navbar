@@ -11,20 +11,29 @@ function navbar_requirements($phase) {
   $requirements = array();
 
   if ($phase == 'runtime') {
-    $libraries = array('modernizr', 'underscore', 'backbone');
-    foreach ($libraries as $lib) {
+    $libraries = array(
+      'modernizr' => 'Modernizr',
+      'underscore' => 'Underscore',
+      'backbone' => 'Backbone',
+    );
+    foreach ($libraries as $lib => $label) {
       $requirements['navbar_' . $lib] = array(
-        'title' => t('Navbar: @library', array('@library' => $lib)),
-        'value' => t('The @library library is not present', array('@library' => $lib)),
+        'title' => t('Navbar: @library library', array('@library' => $label)),
+        'value' => t('The @library library is not present', array('@library' => $label)),
         'severity' => REQUIREMENT_ERROR,
       );
       if (function_exists('libraries_detect')) {
         if (($library = libraries_detect($lib)) && !empty($library['installed'])) {
-          $requirements['navbar_' . $lib]['value'] = $library['version'];
+          $requirements['navbar_' . $lib]['value'] = t('@version (@variant)', array(
+            '@version' => $library['version'],
+            // @todo This is problematic, because there is no way to enforce a
+            //   certain variant.
+            '@variant' => _navbar_libraries_get_preferred_variant_name($library),
+          ));
           $requirements['navbar_' . $lib]['severity'] = REQUIREMENT_OK;
         }
         elseif (!empty($library['error'])) {
-          $requirements['navbar_' . $lib]['value'] = $library['error message'];
+          $requirements['navbar_' . $lib]['description'] = $library['error message'];
         }
       }
     }
