@@ -1046,6 +1046,7 @@ function navbar_libraries_info() {
       '1.0.0' => array(
         'variants' => array(
           'source' => array(
+            'name' => 'Backbone',
             'files' => array(
               'js' => array(
                 'backbone.js',
@@ -1058,6 +1059,7 @@ function navbar_libraries_info() {
             'dependencies' => array('underscore (>=1.5.0)'),
           ),
           'minified' => array(
+            'name' => 'Backbone',
             'files' => array(
               'js' => array(
                 'backbone-min.js',
