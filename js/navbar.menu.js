@@ -80,7 +80,8 @@
     function processMenuLinks ($menu, settings) {
       // Initialize items and their links.
       $menu
-        .find('li > a, li > span')
+        // Allow for a wrapper just inside the menu item li.
+        .find('li > a, li > span, li > * > a, li > * > span')
         .once('navbar-menu')
         .addClass('navbar-menu-item')
         .wrap('<div class="navbar-box">');
