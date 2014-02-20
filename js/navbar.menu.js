@@ -79,17 +79,23 @@
      */
     function processMenuLinks ($items, settings) {
       // Initialize items and their links.
-      var $unprocessedItems = $items.once('navbar-menu-item');
-      if ($unprocessedItems.length) {
-        var $handles = $unprocessedItems.children('a, span');
-        // Allow for a wrapper just inside the menu item li.
-        $handles = $handles.add($unprocessedItems.children().children('a, span'));
-        $handles
-        // Add a handle to each list item if it has a menu.
-          .addClass('navbar-menu-item')
-          .wrap('<div class="navbar-box">');
-      }
-
+      $items
+        .once('navbar-menu-item')
+        .each(function (index, element) {
+          var $item = $(element);
+          var $handle = $item.children('a, span');
+          if ($handle.length === 0) {
+            // Allow for a wrapper just inside the menu item li.
+            $handle = $item.children().children('a, span')
+          }
+          if ($handle.length) {
+            $handle
+              // Add a handle to each list item if it has a menu.
+              .addClass('navbar-menu-item')
+              .wrap('<div class="navbar-box">');
+          }
+        });
+      // Twisties allow for expand/collapse of nested menu items.
       if (settings.twisties) {
         var options = {
           'class': 'navbar-icon navbar-handle',
@@ -99,21 +105,20 @@
         $items
           .each(function (index, element) {
             var $item = $(element);
-            var $menus = $item.children('ul.menu').once('navbar-menu-twisties');
-            if ($menus.length) {
-              var $box = $item.children('.navbar-box');
-              options.text = Drupal.t('@label', {'@label': $box.find('a').text()});
-              $item
-                .addClass('navbar-twisty')
-                .children('.navbar-box')
-                .append(Drupal.theme('navbarMenuItemToggle', options));
+            var $box = $item.children('.navbar-box');
+            var $menu = $item.children('ul.menu');
+              if ($box.length === 0) {
+                // Allow for a wrapper just inside the menu item li.
+                $box = $item.children().children('a, span');
+                $menu = $item.children().children('ul.menu');
+              }
+            $menu = $menu.once('navbar-menu-twisties');
+            if ($menu.length) {
+              options.text = Drupal.t('@label', {'@label': $box.find('a, span').text()});
+              $item.addClass('navbar-twisty');
+              $box.append(Drupal.theme('navbarMenuItemToggle', options));
             }
           });
-      }
-      // Process any child items of this menu.
-      var $children = $items.children('ul').children('li');
-      if ($children.length) {
-        processMenuLinks($children, settings);
       }
     }
     /**
@@ -195,7 +200,7 @@
           .on('click.navbar', toggleClickHandler);
       }
       // Process components of the menu.
-      processMenuLinks($menu.children('li'), settings);
+      processMenuLinks($menu.find('li'), settings);
       // Add a menu level class to each menu item.
       if (settings.listLevels) {
         markListLevels($menu);
