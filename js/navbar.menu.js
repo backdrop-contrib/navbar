@@ -77,15 +77,18 @@
      * @param {jQuery} $menu
      *   The root of the menu to be initialized.
      */
-    function processMenuLinks ($menu, settings) {
+    function processMenuLinks ($items, settings) {
       // Initialize items and their links.
-      $menu
+      var $unprocessedItems = $items.once('navbar-menu-item');
+      if ($unprocessedItems.length) {
+        var $handles = $unprocessedItems.children('a, span');
         // Allow for a wrapper just inside the menu item li.
-        .find('li > a, li > span, li > * > a, li > * > span')
-        .once('navbar-menu')
-        .addClass('navbar-menu-item')
-        .wrap('<div class="navbar-box">');
+        $handles = $handles.add($unprocessedItems.children().children('a, span'));
+        $handles
         // Add a handle to each list item if it has a menu.
+          .addClass('navbar-menu-item')
+          .wrap('<div class="navbar-box">');
+      }
 
       if (settings.twisties) {
         var options = {
@@ -93,11 +96,10 @@
           'action': ui.handleOpen,
           'text': ''
         };
-        $menu
-          .find('li')
+        $items
           .each(function (index, element) {
             var $item = $(element);
-            var $menus = $item.children('ul.menu').once('navbar-menu');
+            var $menus = $item.children('ul.menu').once('navbar-menu-twisties');
             if ($menus.length) {
               var $box = $item.children('.navbar-box');
               options.text = Drupal.t('@label', {'@label': $box.find('a').text()});
@@ -107,6 +109,11 @@
                 .append(Drupal.theme('navbarMenuItemToggle', options));
             }
           });
+      }
+      // Process any child items of this menu.
+      var $children = $items.children('ul').children('li');
+      if ($children.length) {
+        processMenuLinks($children, settings);
       }
     }
     /**
@@ -188,7 +195,7 @@
           .on('click.navbar', toggleClickHandler);
       }
       // Process components of the menu.
-      processMenuLinks($menu, settings);
+      processMenuLinks($menu.children('li'), settings);
       // Add a menu level class to each menu item.
       if (settings.listLevels) {
         markListLevels($menu);
