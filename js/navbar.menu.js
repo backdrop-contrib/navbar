@@ -19,7 +19,12 @@
     var settings = $.extend({}, {
       twisties: true,
       activeTrail: true,
-      listLevels: true
+      listLevels: true,
+      // A function that returns the element which should be treated as the
+      // "link" for a menu item.
+      findItemElement: null,
+      // A function that returns the sub-menu element of a menu item.
+      findItemSubMenu: null
     }, options);
 
     var ui = {
@@ -77,17 +82,13 @@
      * @param {jQuery} $menu
      *   The root of the menu to be initialized.
      */
-    function processMenuLinks ($items, settings) {
+    function processMenuLinks ($items, settings, $menu) {
       // Initialize items and their links.
       $items
         .once('navbar-menu-item')
         .each(function (index, element) {
           var $item = $(element);
-          var $handle = $item.children('a, span');
-          if ($handle.length === 0) {
-            // Allow for a wrapper just inside the menu item li.
-            $handle = $item.children().children('a, span')
-          }
+          var $handle = settings.findItemElement && settings.findItemElement($item, $menu) || $item.children('a, span');
           if ($handle.length) {
             $handle
               // Add a handle to each list item if it has a menu.
@@ -105,18 +106,29 @@
         $items
           .each(function (index, element) {
             var $item = $(element);
-            var $box = $item.children('.navbar-box');
-            var $menu = $item.children('ul.menu');
-              if ($box.length === 0) {
-                // Allow for a wrapper just inside the menu item li.
-                $box = $item.children().children('a, span');
-                $menu = $item.children().children('ul.menu');
-              }
-            $menu = $menu.once('navbar-menu-twisties');
+            // The following code involves a lot of DOM traversing. Exit early
+            // if possible, but don't mark the menu as processed just yet, so
+            // $.once() can't be called here.
+            if ($item.hasClass('navbar-menu-twisties-processed')) {
+              return;
+            }
+            var $menu = settings.findItemSubMenu && settings.findItemSubMenu($item, $menu) || $item.children('ul.menu');
             if ($menu.length) {
-              options.text = Drupal.t('@label', {'@label': $box.find('a, span').text()});
-              $item.addClass('navbar-twisty');
-              $box.append(Drupal.theme('navbarMenuItemToggle', options));
+              // Find the item 'link' element.
+              var $box = $item
+                .find('.navbar-box')
+                .not(function (index, box) {
+                  // Reject .navbar-box elements in submenu items.
+                  return ($(box).closest($menu).length > 0);
+                });
+              if ($box.length) {
+                var $twistyItem = $item.once('navbar-menu-twisties');
+                if ($twistyItem.length) {
+                  options.text = Drupal.t('@label', {'@label': $box.find('a, span').text()});
+                  $item.addClass('navbar-twisty');
+                  $box.append(Drupal.theme('navbarMenuItemToggle', options));
+                }
+              }
             }
           });
       }
@@ -200,7 +212,7 @@
           .on('click.navbar', toggleClickHandler);
       }
       // Process components of the menu.
-      processMenuLinks($menu.find('li'), settings);
+      processMenuLinks($menu.find('li'), settings, $menu);
       // Add a menu level class to each menu item.
       if (settings.listLevels) {
         markListLevels($menu);
