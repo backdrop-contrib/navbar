@@ -119,7 +119,7 @@
                 .find('.navbar-box')
                 .not(function (index, box) {
                   // Reject .navbar-box elements in submenu items.
-                  return ($(box).closest($menu).length > 0);
+                  return ($(box).closest($menu.selector).length > 0);
                 });
               if ($box.length) {
                 var $twistyItem = $item.once('navbar-menu-twisties');
