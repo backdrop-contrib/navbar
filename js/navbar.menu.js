@@ -20,6 +20,8 @@
       twisties: true,
       activeTrail: true,
       listLevels: true,
+      //A function that returns the list (li) element.
+      findItem: null,
       // A function that returns the element which should be treated as the
       // "link" for a menu item.
       findItemElement: null,
@@ -112,7 +114,7 @@
             if ($item.hasClass('navbar-menu-twisties-processed')) {
               return;
             }
-            var $menu = settings.findItemSubMenu && settings.findItemSubMenu($item, $menu) || $item.children('ul.menu');
+            var $menu = settings.findItemSubMenu && settings.findItemSubMenu($item, $menu) || $item.children('ul');
             if ($menu.length) {
               // Find the item 'link' element.
               var $box = $item
@@ -145,14 +147,14 @@
      * @param {Integer} level
      *   The current level number to be assigned to the list elements.
      */
-    function markListLevels ($lists, level) {
+    function markListLevels ($lists, level, settings, $menu) {
       level = (!level) ? 1 : level;
-      $lists = $lists.children('li')
-        .addClass('navbar-level-' + level)
+      var $items = settings.findItem && settings.findItem($lists, $menu) || $lists.children('li');
+      $items.addClass('navbar-level-' + level);
         // Retrieve child menus.
-        .children('ul');
+      var $lists = settings.findItemSubMenu && settings.findItemSubMenu($items, $menu) || $items.children('ul');
       if ($lists.length) {
-        markListLevels($lists, level + 1);
+        markListLevels($lists, level + 1, settings, $menu);
       }
     }
     /**
@@ -215,7 +217,7 @@
       processMenuLinks($menu.find('li'), settings, $menu);
       // Add a menu level class to each menu item.
       if (settings.listLevels) {
-        markListLevels($menu);
+        markListLevels($menu, 1, settings, $menu);
       }
       // Restore previous and active states.
       if (settings.activeTrail) {
