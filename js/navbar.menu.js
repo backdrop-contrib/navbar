@@ -97,6 +97,9 @@
               .addClass('navbar-menu-item')
               .wrap('<div class="navbar-box">');
           }
+          // Store a reference to the box wrapping element so that it needn't be
+          // found again through DOM searching.
+          $item.data({'box': $handle.parent().get(0)});
         });
       // Twisties allow for expand/collapse of nested menu items.
       if (settings.twisties) {
@@ -116,17 +119,12 @@
             }
             var $menu = settings.findItemSubMenu && settings.findItemSubMenu($item, $menu) || $item.children('ul');
             if ($menu.length) {
-              // Find the item 'link' element.
-              var $box = $item
-                .find('.navbar-box')
-                .not(function (index, box) {
-                  // Reject .navbar-box elements in submenu items.
-                  return ($(box).closest($menu.selector).length > 0);
-                });
+              // Get the item 'link' element.
+              var $box = $($item.data('box'));
               if ($box.length) {
                 var $twistyItem = $item.once('navbar-menu-twisties');
                 if ($twistyItem.length) {
-                  options.text = Drupal.t('@label', {'@label': $box.find('a, span').text()});
+                  options.text = Drupal.t('@label', {'@label': $box.text()});
                   $item.addClass('navbar-twisty');
                   $box.append(Drupal.theme('navbarMenuItemToggle', options));
                 }
