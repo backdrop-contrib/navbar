@@ -745,6 +745,7 @@ function navbar_library() {
       array('navbar', 'navbar.announce'),
       array('navbar', 'navbar.displace'),
       array('navbar', 'navbar.menu'),
+      array('navbar', 'navbar.tableheader'),
     ),
   );
 
@@ -836,10 +837,6 @@ function navbar_library() {
     'js' => array(
       // Load this file well after Overlay code has loaded.
       $path . '/js/navbar-tableheader.js' => array('weight' => 100),
-      array(
-        'data' => array('tableHeaderOffset' => 'Drupal.navbar.height'),
-        'type' => 'setting'
-      ),
     ),
     'dependencies' => array(
       array('system', 'jquery'),
@@ -901,9 +898,9 @@ function navbar_library_alter(&$libraries, $module) {
  */
 function navbar_js_alter(&$javascript) {
   // Only load the tableheader offset script if the core tableheader script
-  // is loaded.
-  if (isset($javascript['misc/tableheader.js'])) {
-    drupal_add_library('navbar', 'navbar.tableheader');
+  // and the navbar js itself is loaded.
+  if (isset($javascript['misc/tableheader.js']) && isset($javascript[drupal_get_path('module', 'navbar') . '/js/navbar.js'])) {
+    drupal_add_js(array('tableHeaderOffset' => 'Drupal.navbar.height'), array('type' => 'setting'));
   }
 }
 
