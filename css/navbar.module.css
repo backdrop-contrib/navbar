@@ -266,6 +266,7 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical #navbar-administration.navbar
   position: fixed;
   top: 0;
   width: 240px;
+  height: auto;
   z-index: -1;
 }
 /* Hide secondary menus when the tray is horizontal. */
