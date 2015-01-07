@@ -46,6 +46,12 @@
 /**
  * Top level icons.
  */
+.navbar-bar .navbar-icon-escape-admin:before {
+  background-image: url("../icons/bebebe/chevron-disc-left.svg"); /* LTR */
+}
+.no-svg .navbar-bar .navbar-icon-escape-admin:before {
+  background-image: url("../icons/bebebe/chevron-disc-left.png"); /* LTR */
+}
 .navbar-bar .navbar-icon-home:before {
   background-image: url("../icons/bebebe/house.svg");
 }
@@ -87,6 +93,9 @@
 .no-svg .navbar-bar .navbar-icon-help:active:before,
 .no-svg .navbar-bar .navbar-icon-help.navbar-active:before {
   background-image: url("../icons/ffffff/questionmark-disc.png");
+}
+#navbar-administration .navbar-bar .navbar-icon.element-hidden {
+  display: none;
 }
 
 /**

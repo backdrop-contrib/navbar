@@ -102,6 +102,20 @@ function navbar_menu() {
 }
 
 /**
+ * Implements hook_page_alter().
+ */
+function navbar_page_alter(&$page) {
+  $current_path = current_path();
+  $current_path_is_admin = FALSE;
+
+  // The function path_is_admin() is not available on update.php pages.
+  if (!defined('MAINTENANCE_MODE')) {
+    $current_path_is_admin = path_is_admin($current_path);
+  }
+  drupal_add_js(array('currentPath' => $current_path, 'currentPathIsAdmin' => $current_path_is_admin), 'setting');
+}
+
+/**
  * Implements hook_element_info().
  */
 function navbar_element_info() {
@@ -627,6 +641,7 @@ function navbar_library() {
       array('navbar', 'navbar.displace'),
       array('navbar', 'navbar.menu'),
       array('navbar', 'navbar.tableheader'),
+      array('navbar', 'navbar.escape_admin'),
     ),
   );
 
@@ -634,6 +649,18 @@ function navbar_library() {
   if (module_exists('overlay')) {
     $libraries['navbar']['dependencies'][] = array('navbar', 'navbar.overlay');
   }
+
+  $libraries['navbar.escape_admin'] = array(
+    'title' => 'Provides a button to escape the administration area.',
+    'version' => VERSION,
+    'js' => array(
+      $path . '/js/escape-admin.js' => array(),
+    ),
+    'dependencies' => array(
+      array('system', 'jquery'),
+      array('system', 'jquery.once'),
+    ),
+  );
 
   $libraries['navbar.menu'] = array(
     'title' => 'Navbar nested accordion menus.',

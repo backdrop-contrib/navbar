@@ -28,6 +28,12 @@
 /**
  * Top level icons.
  */
+.navbar-bar .navbar-icon-escape-admin:before {
+  background-image: url("../icons/bebebe/chevron-disc-right.svg");
+}
+.no-svg .navbar-bar .navbar-icon-escape-admin:before {
+  background-image: url("../icons/bebebe/chevron-disc-right.png");
+}
 
 @media only screen and (min-width: 16.5em) {
   #navbar-administration .navbar-bar .navbar-icon:before {
