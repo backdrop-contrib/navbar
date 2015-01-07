@@ -83,41 +83,41 @@
 #navbar-administration .navbar-tray a.navbar-active {
   color: #000;
 }
-#navbar-administration .navbar-tray-horizontal .menu {
+#navbar-administration .navbar-tray-horizontal .navbar-menu {
   background-color: #ffffff;
 }
-#navbar-administration .navbar-tray-horizontal .menu .navbar-level-1 + .navbar-level-1 {
+#navbar-administration .navbar-tray-horizontal .navbar-menu .navbar-level-1 + .navbar-level-1 {
   border-left: 1px solid #dddddd; /* LTR */
 }
-#navbar-administration .navbar-tray-horizontal .menu .navbar-level-1:last-child {
+#navbar-administration .navbar-tray-horizontal .navbar-menu .navbar-level-1:last-child {
   border-right: 1px solid #dddddd; /* LTR */
 }
-#navbar-administration .navbar-tray-vertical .menu li + li {
+#navbar-administration .navbar-tray-vertical .navbar-menu li + li {
   border-top: 1px solid #dddddd;
 }
-#navbar-administration .navbar-tray-vertical .menu li:last-child {
+#navbar-administration .navbar-tray-vertical .navbar-menu li:last-child {
   border-bottom: 1px solid #dddddd;
 }
-#navbar-administration .navbar-tray-vertical .menu .menu li {
+#navbar-administration .navbar-tray-vertical .navbar-menu .navbar-menu li {
   border: 0 none;
 }
-#navbar-administration .navbar-tray-vertical .menu ul ul {
+#navbar-administration .navbar-tray-vertical .navbar-menu ul ul {
   border-bottom: 1px solid #dddddd;
   border-top: 1px solid #dddddd;
 }
-#navbar-administration .navbar-tray-vertical .menu li:last-child > ul {
+#navbar-administration .navbar-tray-vertical .navbar-menu li:last-child > ul {
   border-bottom: 0;
 }
-#navbar-administration .navbar-tray-vertical .menu .menu .menu {
+#navbar-administration .navbar-tray-vertical .navbar-menu .navbar-menu .navbar-menu {
   margin-left: 1.3333em; /* LTR */
 }
-#navbar-administration .navbar-tray-vertical .menu .menu .menu .menu {
+#navbar-administration .navbar-tray-vertical .navbar-menu .navbar-menu .navbar-menu .navbar-menu {
   margin-left: 0.25em; /* LTR */
 }
-#navbar-administration .menu .menu a {
+#navbar-administration .navbar-menu .navbar-menu a {
   color: #434343;
 }
-#navbar-administration .navbar-tray-vertical .menu .menu .menu a {
+#navbar-administration .navbar-tray-vertical .navbar-menu .navbar-menu .navbar-menu a {
   padding-left: 0.6667em; /* LTR */
 }
 

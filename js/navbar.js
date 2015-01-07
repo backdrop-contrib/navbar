@@ -145,24 +145,7 @@ Drupal.behaviors.navbar = {
 
     // Invoke the Navbar menu script for core modules.
     $('.navbar-menu-user').drupalNavbarMenu();
-    $('.navbar-menu-shortcuts .navbar-lining > .menu').drupalNavbarMenu();
-  }
-};
-
-/**
- * Removes the clearfix class automatically added menus by Drupal.
- *
- * It's very difficult to remove this class on a case-by-case basis, so
- * we just do it with JavaScript here.
- */
-Drupal.behaviors.navbarShortcuts = {
-
-  attach: function (context) {
-    var $shortcutsTray = $('.navbar-tray-shortcuts').once('navbar');
-
-    if ($shortcutsTray.length) {
-      $shortcutsTray.find('.menu.clearfix').removeClass('clearfix');
-    }
+    $('.navbar-menu-shortcuts .navbar-lining > .navbar-menu').drupalNavbarMenu();
   }
 };
 
@@ -651,7 +634,7 @@ Drupal.navbar = {
       // Render the main menu as a nested, collapsible accordion.
       if ('drupalNavbarMenu' in $.fn) {
         this.$el
-          .children('.menu')
+          .children('.navbar-menu')
           .drupalNavbarMenu();
       }
     }

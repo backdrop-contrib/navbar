@@ -30,16 +30,16 @@
   border: 0;
   font-size: 1em;
 }
-#navbar-administration .menu ul .navbar-icon {
+#navbar-administration .navbar-menu ul .navbar-icon {
   padding-left: 1.3333em; /* LTR */
 }
-#navbar-administration .menu ul a.navbar-icon:before {
+#navbar-administration .navbar-menu ul a.navbar-icon:before {
   display: none;
 }
-#navbar-administration .navbar-tray-vertical .menu ul {
+#navbar-administration .navbar-tray-vertical .navbar-menu ul {
   margin-left: 1.5em; /* LTR */
 }
-#navbar-administration .navbar-tray-vertical .menu ul ul {
+#navbar-administration .navbar-tray-vertical .navbar-menu ul ul {
   margin-left: 0.75em; /* LTR */
 }
 
@@ -313,19 +313,19 @@
 .no-svg #navbar-administration .navbar-icon.navbar-handle.open:before {
   background-image: url("../icons/787878/chevron-disc-up.png");
 }
-#navbar-administration .menu .menu .navbar-icon.navbar-handle:before {
+#navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
   background-image: url("../icons/5181c6/twistie-down.svg");
   background-size: 75%;
 }
-.no-svg #navbar-administration .menu .menu .navbar-icon.navbar-handle:before {
+.no-svg #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
   background-image: url("../icons/5181c6/twistie-down.png");
   background-size: auto auto;
 }
-#navbar-administration .menu .menu .navbar-icon.navbar-handle.open:before {
+#navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle.open:before {
   background-image: url("../icons/787878/twistie-up.svg");
   background-size: 75%;
 }
-.no-svg #navbar-administration .menu .menu .navbar-icon.navbar-handle.open:before {
+.no-svg #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle.open:before {
   background-image: url("../icons/787878/twistie-up.png");
   background-size: auto auto;
 }

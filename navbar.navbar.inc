@@ -126,7 +126,7 @@ function navbar_navbar() {
           '#theme' => 'links__navbar_user',
           '#links' => $links,
           '#attributes' => array(
-            'class' => array('menu', 'navbar-menu-user'),
+            'class' => array('navbar-menu', 'navbar-menu-user'),
           ),
         ),
       ),
