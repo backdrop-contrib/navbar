@@ -329,13 +329,23 @@ Drupal.navbar = {
   }),
 
   /**
-   * Backbone view for the navbar element.
+   * Backbone view for the navbar element. Listens to mouse & touch.
    */
   NavbarVisualView: Backbone.View.extend({
 
-    events: {
-      'click .navbar-bar [data-navbar-tab-trigger]': 'onTabClick',
-      'click .navbar-toggle-orientation button': 'onOrientationToggleClick'
+    events: function () {
+      // Prevents delay and simulated mouse events.
+      var touchEndToClick = function (event) {
+        event.preventDefault();
+        event.target.click();
+      };
+
+      return {
+        'click .navbar-bar [data-navbar-tab-trigger]': 'onTabClick',
+        'click .navbar-toggle-orientation button': 'onOrientationToggleClick',
+        'touchend .navbar-bar [data-navbar-tab-trigger]': touchEndToClick,
+        'touchend .navbar-toggle-orientation button': touchEndToClick
+      };
     },
 
     /**
