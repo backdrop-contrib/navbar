@@ -559,7 +559,7 @@ Drupal.navbar = {
       else {
         // The navbar container is invisible. Its placement is used to determine
         // the container for the trays.
-        $trays.css('padding-top', this.$el.find('.navbar-bar').outerHeight());
+        $trays.css('padding-top', this.$el.find('.navbar-bar').outerHeight(true));
       }
     },
 
