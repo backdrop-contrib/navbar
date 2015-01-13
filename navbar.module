@@ -72,16 +72,18 @@ function navbar_theme($existing, $type, $theme, $path) {
     'function' => 'theme_navbar_menu_tree',
     'preprocess functions' => array('template_preprocess_navbar_menu_tree'),
   );
-  // Shortcut module assigns an incrementing set_name to every shortcut set and
-  // menu_tree_output() does not add any useful wildcard suggestion.
-  $shortcut_sets = db_query('SELECT set_name FROM {shortcut_set}');
-  foreach ($shortcut_sets as $shortcut_set) {
-    // Override theming for every single shortcut set.
-    $items['menu_tree__' . strtr($shortcut_set->set_name, '-', '_')] = array(
-      'render element' => 'tree',
-      'function' => 'theme_navbar_menu_tree',
-      'preprocess functions' => array('template_preprocess_navbar_menu_tree'),
-    );
+  if (module_exists('shortcut')) {
+    // Shortcut module assigns an incrementing set_name to every shortcut set and
+    // menu_tree_output() does not add any useful wildcard suggestion.
+    $shortcut_sets = db_query('SELECT set_name FROM {shortcut_set}');
+    foreach ($shortcut_sets as $shortcut_set) {
+      // Override theming for every single shortcut set.
+      $items['menu_tree__' . strtr($shortcut_set->set_name, '-', '_')] = array(
+        'render element' => 'tree',
+        'function' => 'theme_navbar_menu_tree',
+        'preprocess functions' => array('template_preprocess_navbar_menu_tree'),
+      );
+    }
   }
 
   return $items;
