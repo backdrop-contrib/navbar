@@ -135,6 +135,12 @@
   quotes: "" "";
 }
 
+#navbar-administration ul.navbar-menu {
+  border: none;
+  list-style: none;
+  text-align: left; /* LTR */
+}
+
 /* @end */
 
 /**
