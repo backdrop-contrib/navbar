@@ -16,13 +16,17 @@
   padding-left: 0;
   padding-right: 1.3333em;
 }
-#navbar-administration .navbar-tray-vertical .navbar-menu ul {
-  margin-left: 0;
-  margin-right: 1.5em;
+#navbar-administration .navbar-tray-vertical .navbar-menu ul a {
+  padding-left: 0;
+  padding-right: 2.75em;
 }
-#navbar-administration .navbar-tray-vertical .navbar-menu ul ul {
-  margin-left: 0;
-  margin-right: 0.75em;
+#navbar-administration .navbar-tray-vertical .navbar-menu ul ul a {
+  padding-left: 0;
+  padding-right: 3.75em;
+}
+#navbar-administration .navbar-tray-vertical .navbar-menu a {
+  padding-left: 4em;
+  padding-right: 2.75em;
 }
 
 /**
@@ -55,15 +59,34 @@
 }
 
 /**
+ *  Accessibility/focus
+ */
+#navbar-administration .navbar-tab a {
+  border-left: none;
+  border-right: 2px solid transparent;
+}
+#navbar-administration .navbar-tray-horizontal a,
+#navbar-administration .navbar-box a {
+  border-left: none;
+  border-right: 2px solid transparent;
+}
+
+/**
  * Handle.
  */
 #navbar-administration .navbar-icon.navbar-handle:before {
   left: auto;
-  right: 0;
+  right: 1.6667em;
 }
 .no-svg #navbar-administration .navbar-icon.navbar-handle:before {
   left: auto;
-  right: 0;
+  right: 1.6667em;
+}
+#navbar-administration .navbar-icon-escape-admin:before {
+  background-image: url(../icons/bebebe/chevron-disc-right.svg);
+}
+.no-svg #navbar-administration .navbar-icon-escape-admin:before {
+  background-image: url(../icons/bebebe/chevron-disc-right.png);
 }
 
 /**

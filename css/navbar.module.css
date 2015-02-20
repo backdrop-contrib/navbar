@@ -211,6 +211,7 @@ body.navbar-fixed #navbar-administration.navbar-oriented .navbar-bar {
 body.navbar-tray-open.navbar-fixed.navbar-vertical #navbar-administration.navbar-oriented {
   bottom: 0;
   width: 240px;
+  width: 15rem;
 }
 /* Present the admin navbar tabs horizontally as a default on user agents that
  * do not understand media queries or on user agents where JavaScript is
@@ -257,6 +258,7 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical #navbar-administration.navbar
   left: -100%; /* LTR */
   position: absolute;
   width: 240px;
+  width: 15rem;
 }
 #navbar-administration .navbar-tray-vertical > .navbar-lining {
   min-height: 100%;
@@ -272,6 +274,7 @@ body.navbar-tray-open.navbar-fixed.navbar-vertical #navbar-administration.navbar
   position: fixed;
   top: 0;
   width: 240px;
+  width: 14rem;
   z-index: -1;
 }
 /* Hide secondary menus when the tray is horizontal. */
@@ -304,6 +307,7 @@ body.navbar-fixed #navbar-administration .navbar-tray-vertical {
  * the page content away from the edge of the viewport. */
 body.navbar-tray-open.navbar-vertical.navbar-fixed {
   margin-left: 240px; /* LTR */
+  margin-left: 15rem; /* LTR */
 }
 
 /**
