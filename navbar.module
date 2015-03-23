@@ -850,6 +850,10 @@ function navbar_libraries_info() {
           'file' => 'modernizr-min.js',
           'pattern' => '#Modernizr\s+[Vv]?([0-9\.]+)#',
         ),
+        'minified standard' => array(
+          'file' => 'modernizr.min.js',
+          'pattern' => '#Modernizr\s+[Vv]?([0-9\.]+)#',
+        )
       ),
     ),
     'versions' => array(
@@ -878,11 +882,24 @@ function navbar_libraries_info() {
             'variant callback' => '_navbar_libraries_variant_exists',
             'variant arguments' => array('modernizr-min.js')
           ),
+          'minified standard' => array(
+            'files' => array(
+              'js' => array(
+                'modernizr.min.js',
+              ),
+            ),
+            // Without a variant callback, the variant is assumed to be
+            // installed.
+            'variant callback' => '_navbar_libraries_variant_exists',
+            'variant arguments' => array('modernizr.min.js')
+          ),
+
         ),
       ),
     ),
   );
   $libraries['modernizr'] += $common;
+  array_unshift($libraries['modernizr']['variant order'], 'minified standard');
 
   $libraries['underscore'] = array(
     'name' => 'Underscore',
