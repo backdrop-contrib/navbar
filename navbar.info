@@ -1,6 +1,6 @@
 name = Navbar
 description = A very simple mobile friendly navigation toolbar that lets you switch between frontend and backend.
-core = 7.x
+backdrop = 1.x
 package = Administration
-
+type = module
 dependencies[] = libraries (>=2.0)
