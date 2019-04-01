@@ -216,15 +216,15 @@ function _navbar_initialize_page_cache() {
 }
 
 /**
- * Implements hook_page_build().
+ * Implements hook_preprocess_page().
  *
  * Add admin navbar to the page_top region automatically.
  */
-function navbar_page_build(&$page) {
+function navbar_preprocess_page(&$variables) {
   if (navbar_suppress(FALSE)) {
     return;
   }
-  $page['page_top']['navbar'] = array(
+  $variables['page_top']['navbar'] = array(
     '#type' => 'navbar',
     '#access' => user_access('access navbar'),
   );
