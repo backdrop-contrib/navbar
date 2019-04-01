@@ -598,9 +598,9 @@ function navbar_in_active_trail($path) {
 }
 
 /**
- * Implements hook_library().
+ * Implements hook_library_info().
  */
-function navbar_library() {
+function navbar_library_info() {
 
   $path = drupal_get_path('module', 'navbar');
 
@@ -762,9 +762,9 @@ function navbar_library() {
 }
 
 /**
- * Implements hook_library_alter().
+ * Implements hook_library_info_alter().
  */
-function navbar_library_alter(&$libraries, $module) {
+function navbar_library_info_alter(&$libraries, $module) {
   $jquery_version = &drupal_static(__FUNCTION__, NULL);
 
   if ($module == 'system') {
