@@ -25,7 +25,7 @@
 }
 #navbar-administration .navbar-tray .navbar-active-trail > .navbar-box .navbar-menu-item,
 #navbar-administration .navbar-tray .navbar-active
-/* Drupal's active menu item class. */
+/* Backdrop's active menu item class. */
 #navbar-administration .navbar-tray .active {
   color: #000;
   font-weight: bold;

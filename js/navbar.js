@@ -1,9 +1,9 @@
 /**
  * @file
- * Defines the behavior of the Drupal administration navbar.
+ * Defines the behavior of the Backdrop administration navbar.
  */
 
-(function ($, Backbone, Drupal) {
+(function ($, Backbone, Backdrop) {
 
 "use strict";
 
@@ -15,7 +15,7 @@
  *
  * Modules register tabs with hook_navbar().
  */
-Drupal.behaviors.navbar = {
+Backdrop.behaviors.navbar = {
 
   attach: function (context) {
     // Verify that the user agent understands media queries. Complex admin
@@ -40,69 +40,69 @@ Drupal.behaviors.navbar = {
             'wide': ''
           }
         },
-        Drupal.settings.navbar,
-        // Merge strings on top of drupalSettings so that they are not mutable.
+        Backdrop.settings.navbar,
+        // Merge strings on top of backdropSettings so that they are not mutable.
         {
           strings: {
-            horizontal: Drupal.t('Horizontal orientation'),
-            vertical: Drupal.t('Vertical orientation')
+            horizontal: Backdrop.t('Horizontal orientation'),
+            vertical: Backdrop.t('Vertical orientation')
           }
         }
       );
 
       // Establish the navbar models and views.
-      var model = Drupal.navbar.models.navbarModel = new Drupal.navbar.NavbarModel({
-        locked: JSON.parse(localStorage.getItem('Drupal.navbar.trayVerticalLocked')) || false,
-        activeTab: JSON.parse(localStorage.getItem('Drupal.navbar.activeTab'))
+      var model = Backdrop.navbar.models.navbarModel = new Backdrop.navbar.NavbarModel({
+        locked: JSON.parse(localStorage.getItem('Backdrop.navbar.trayVerticalLocked')) || false,
+        activeTab: JSON.parse(localStorage.getItem('Backdrop.navbar.activeTab'))
       });
-      Drupal.navbar.views.navbarVisualView = new Drupal.navbar.NavbarVisualView({
+      Backdrop.navbar.views.navbarVisualView = new Backdrop.navbar.NavbarVisualView({
         el: this,
         model: model,
         strings: options.strings
       });
-      Drupal.navbar.views.navbarAuralView = new Drupal.navbar.NavbarAuralView({
+      Backdrop.navbar.views.navbarAuralView = new Backdrop.navbar.NavbarAuralView({
         el: this,
         model: model,
         strings: options.strings
       });
-      Drupal.navbar.views.NavbarVisualView = new Drupal.navbar.BodyVisualView({
+      Backdrop.navbar.views.NavbarVisualView = new Backdrop.navbar.BodyVisualView({
         el: this,
         model: model
       });
 
       // Render collapsible menus.
-      var menuModel = Drupal.navbar.models.menuModel = new Drupal.navbar.MenuModel();
-      Drupal.navbar.views.menuVisualView = new Drupal.navbar.MenuVisualView({
+      var menuModel = Backdrop.navbar.models.menuModel = new Backdrop.navbar.MenuModel();
+      Backdrop.navbar.views.menuVisualView = new Backdrop.navbar.MenuVisualView({
         el: $(this).find('.navbar-menu-administration').get(0),
         model: menuModel,
         strings: options.strings
       });
 
-      // Handle the resolution of Drupal.navbar.setSubtrees.
+      // Handle the resolution of Backdrop.navbar.setSubtrees.
       // This is handled with a deferred so that the function may be invoked
       // asynchronously.
-      Drupal.navbar.setSubtrees.done(function (subtrees) {
+      Backdrop.navbar.setSubtrees.done(function (subtrees) {
         menuModel.set('subtrees', subtrees);
-        localStorage.setItem('Drupal.navbar.subtrees', JSON.stringify(subtrees));
+        localStorage.setItem('Backdrop.navbar.subtrees', JSON.stringify(subtrees));
         // Indicate on the navbarModel that subtrees are now loaded.
         model.set('areSubtreesLoaded', true);
       });
       // Resolve this immediately since we're simply loading all the submenu
       // items right from the server each time until we can resolve the JSONP
-      // loading issue in Drupal 7.
-      Drupal.navbar.setSubtrees.resolve(null);
+      // loading issue in Backdrop.
+      Backdrop.navbar.setSubtrees.resolve(null);
 
       // Attach a listener to the configured media query breakpoints.
       for (var label in options.breakpoints) {
         if (options.breakpoints.hasOwnProperty(label)) {
           var mq = options.breakpoints[label];
-          var mql = Drupal.navbar.mql[label] = window.matchMedia(mq);
+          var mql = Backdrop.navbar.mql[label] = window.matchMedia(mq);
           // Curry the model and the label of the media query breakpoint to the
           // mediaQueryChangeHandler function.
-          mql.addListener(Drupal.navbar.mediaQueryChangeHandler.bind(null, model, label));
+          mql.addListener(Backdrop.navbar.mediaQueryChangeHandler.bind(null, model, label));
           // Fire the mediaQueryChangeHandler for each configured breakpoint
           // so that they process once.
-          Drupal.navbar.mediaQueryChangeHandler.call(null, model, label, mql);
+          Backdrop.navbar.mediaQueryChangeHandler.call(null, model, label, mql);
         }
       }
 
@@ -113,46 +113,46 @@ Drupal.behaviors.navbar = {
       // orientation. Thus we give the Navbar a chance to determine if it
       // should be set to horizontal orientation before attempting to load menu
       // subtrees.
-      Drupal.navbar.views.navbarVisualView.loadSubtrees();
+      Backdrop.navbar.views.navbarVisualView.loadSubtrees();
 
       $(document)
         // Update the model when the viewport offset changes.
-        .on('drupalViewportOffsetChange.navbar', function (event, offsets) {
+        .on('backdropViewportOffsetChange.navbar', function (event, offsets) {
           model.set('offsets', offsets);
         })
         // The overlay will hide viewport overflow, potentially stranding tray
         // items that are offscreen. The navbar will adjust tray presentation
         // to prevent this when viewport overflow is hidden.
-        .on('drupalOverlayOpen.navbar', function () {
+        .on('backdropOverlayOpen.navbar', function () {
           model.set('isViewportOverflowConstrained', true);
         })
-        .on('drupalOverlayClose.navbar', function () {
+        .on('backdropOverlayClose.navbar', function () {
           model.set('isViewportOverflowConstrained', false);
         });
 
       // Broadcast model changes to other modules.
       model
         .on('change:orientation', function (model, orientation) {
-          $(document).trigger('drupalNavbarOrientationChange', orientation);
+          $(document).trigger('backdropNavbarOrientationChange', orientation);
         })
         .on('change:activeTab', function (model, tab) {
-          $(document).trigger('drupalNavbarTabChange', tab);
+          $(document).trigger('backdropNavbarTabChange', tab);
         })
         .on('change:activeTray', function (model, tray) {
-          $(document).trigger('drupalNavbarTrayChange', tray);
+          $(document).trigger('backdropNavbarTrayChange', tray);
         });
     });
 
     // Invoke the Navbar menu script for core modules.
-    $('.navbar-menu-user').drupalNavbarMenu();
-    $('.navbar-menu-shortcuts .navbar-lining > .navbar-menu').drupalNavbarMenu();
+    $('.navbar-menu-user').backdropNavbarMenu();
+    $('.navbar-menu-shortcuts .navbar-lining > .navbar-menu').backdropNavbarMenu();
   }
 };
 
 /**
  * Navbar Backbone objects.
  */
-Drupal.navbar = {
+Backdrop.navbar = {
 
   // A hash of View instances.
   views: {},
@@ -256,7 +256,7 @@ Drupal.navbar = {
       isTrayToggleVisible: false,
       // The height of the navbar.
       height: null,
-      // The current viewport offsets determined by Drupal.displace(). The
+      // The current viewport offsets determined by Backdrop.displace(). The
       // offsets suggest how a module might position is components relative to
       // the viewport.
       offsets: {
@@ -274,7 +274,7 @@ Drupal.navbar = {
       // Prevent the orientation being set to horizontal if it is locked, unless
       // override has not been passed as an option.
       if (attributes.orientation === 'horizontal' && this.get('locked') && !options.override) {
-        return Drupal.t('The navbar cannot be set to a horizontal orientation when it is locked.');
+        return Backdrop.t('The navbar cannot be set to a horizontal orientation when it is locked.');
       }
     }
   }),
@@ -297,12 +297,12 @@ Drupal.navbar = {
     /**
      * Announces an orientation change.
      *
-     * @param Drupal.Navbar.NavbarModel model
+     * @param Backdrop.Navbar.NavbarModel model
      * @param String orientation
      *   The new value of the orientation attribute in the model.
      */
     onOrientationChange: function (model, orientation) {
-      Drupal.announce(Drupal.t('Tray orientation changed to @orientation.', {
+      Backdrop.announce(Backdrop.t('Tray orientation changed to @orientation.', {
         '@orientation': orientation
       }));
     },
@@ -310,7 +310,7 @@ Drupal.navbar = {
     /**
      * Announces a changed active tray.
      *
-     * @param Drupal.Navbar.NavbarModel model
+     * @param Backdrop.Navbar.NavbarModel model
      * @param Element orientation
      *   The new value of the tray attribute in the model.
      */
@@ -319,12 +319,12 @@ Drupal.navbar = {
       var trayName = relevantTray.querySelector('.navbar-tray-name').textContent;
       var text;
       if (tray === null) {
-        text = Drupal.t('Tray "@tray" closed.', { '@tray': trayName });
+        text = Backdrop.t('Tray "@tray" closed.', { '@tray': trayName });
       }
       else {
-        text = Drupal.t('Tray "@tray" opened.', { '@tray': trayName });
+        text = Backdrop.t('Tray "@tray" opened.', { '@tray': trayName });
       }
-      Drupal.announce(text);
+      Backdrop.announce(text);
     }
   }),
 
@@ -361,7 +361,7 @@ Drupal.navbar = {
       // Add the tray orientation toggles.
       this.$el
         .find('.navbar-tray .navbar-lining')
-        .append(Drupal.theme('navbarOrientationToggle'));
+        .append(Backdrop.theme('navbarOrientationToggle'));
 
       // Trigger an activeTab change so that listening scripts can respond on
       // page load. This will call render.
@@ -384,7 +384,7 @@ Drupal.navbar = {
       // always being loaded, even when the navbar initialization ultimately
       // results in a horizontal orientation.
       //
-      // @see Drupal.behaviors.navbar.attach() where admin menu subtrees
+      // @see Backdrop.behaviors.navbar.attach() where admin menu subtrees
       // loading is invoked during initialization after media query conditions
       // have been processed.
       if (this.model.changed.orientation === 'vertical' || this.model.changed.activeTab) {
@@ -394,7 +394,7 @@ Drupal.navbar = {
       // to ensure this recalculation happens after changes to visual elements
       // have processed.
       window.setTimeout(function () {
-        Drupal.displace(true);
+        Backdrop.displace(true);
       }, 0);
       return this;
     },
@@ -431,10 +431,10 @@ Drupal.navbar = {
         var locked = (antiOrientation === 'vertical') ? true : false;
         // Remember the locked state.
         if (locked) {
-          localStorage.setItem('Drupal.navbar.trayVerticalLocked', 'true');
+          localStorage.setItem('Backdrop.navbar.trayVerticalLocked', 'true');
         }
         else {
-          localStorage.removeItem('Drupal.navbar.trayVerticalLocked');
+          localStorage.removeItem('Backdrop.navbar.trayVerticalLocked');
         }
         // Update the model.
         this.model.set({
@@ -473,7 +473,7 @@ Drupal.navbar = {
         // Store the active tab name or remove the setting.
         var id = $tab.get(0).id;
         if (id) {
-          localStorage.setItem('Drupal.navbar.activeTab', JSON.stringify(id));
+          localStorage.setItem('Backdrop.navbar.activeTab', JSON.stringify(id));
         }
         // Activate the associated tray.
         var $tray = this.$el.find('[data-navbar-tray="' + name + '"].navbar-tray');
@@ -489,7 +489,7 @@ Drupal.navbar = {
       else {
         // There is no active tray.
         this.model.set('activeTray', null);
-        localStorage.removeItem('Drupal.navbar.activeTab');
+        localStorage.removeItem('Backdrop.navbar.activeTab');
       }
     },
 
@@ -569,7 +569,7 @@ Drupal.navbar = {
      * The rendered admin menu subtrees HTML is cached on the client in
      * localStorage until the cache of the admin menu subtrees on the server-
      * side is invalidated. The subtreesHash is stored in localStorage as well
-     * and compared to the subtreesHash in drupalSettings to determine when the
+     * and compared to the subtreesHash in backdropSettings to determine when the
      * admin menu subtrees cache has been invalidated.
      */
     loadSubtrees: function () {
@@ -578,30 +578,30 @@ Drupal.navbar = {
       // Only load and render the admin menu subtrees if:
       //   (1) They have not been loaded yet.
       //   (2) The active tab is the administration menu tab, indicated by the
-      //       presence of the data-drupal-subtrees attribute.
+      //       presence of the data-backdrop-subtrees attribute.
       //   (3) The orientation of the tray is vertical.
-      if (!this.model.get('areSubtreesLoaded') && $activeTab.data('drupal-subtrees') !== undefined && orientation === 'vertical') {
-        var subtreesHash = drupalSettings.navbar.subtreesHash;
-        var endpoint = Drupal.url('navbar/subtrees/' + subtreesHash);
-        var cachedSubtreesHash = localStorage.getItem('Drupal.navbar.subtreesHash');
-        var cachedSubtrees = JSON.parse(localStorage.getItem('Drupal.navbar.subtrees'));
+      if (!this.model.get('areSubtreesLoaded') && $activeTab.data('backdrop-subtrees') !== undefined && orientation === 'vertical') {
+        var subtreesHash = backdropSettings.navbar.subtreesHash;
+        var endpoint = Backdrop.url('navbar/subtrees/' + subtreesHash);
+        var cachedSubtreesHash = localStorage.getItem('Backdrop.navbar.subtreesHash');
+        var cachedSubtrees = JSON.parse(localStorage.getItem('Backdrop.navbar.subtrees'));
         var isVertical = this.model.get('orientation') === 'vertical';
         // If we have the subtrees in localStorage and the subtree hash has not
         // changed, then use the cached data.
         if (isVertical && subtreesHash === cachedSubtreesHash && cachedSubtrees) {
-          Drupal.navbar.setSubtrees.resolve(cachedSubtrees);
+          Backdrop.navbar.setSubtrees.resolve(cachedSubtrees);
         }
         // Only make the call to get the subtrees if the orientation of the
         // navbar is vertical.
         else if (isVertical) {
           // Remove the cached menu information.
-          localStorage.removeItem('Drupal.navbar.subtreesHash');
-          localStorage.removeItem('Drupal.navbar.subtrees');
+          localStorage.removeItem('Backdrop.navbar.subtreesHash');
+          localStorage.removeItem('Backdrop.navbar.subtrees');
           // The response from the server will call the resolve method of the
-          // Drupal.navbar.setSubtrees Promise.
+          // Backdrop.navbar.setSubtrees Promise.
           $.ajax(endpoint);
           // Cache the hash for the subtrees locally.
-          localStorage.setItem('Drupal.navbar.subtreesHash', subtreesHash);
+          localStorage.setItem('Backdrop.navbar.subtreesHash', subtreesHash);
         }
       }
     }
@@ -642,10 +642,10 @@ Drupal.navbar = {
         }
       }
       // Render the main menu as a nested, collapsible accordion.
-      if ('drupalNavbarMenu' in $.fn) {
+      if ('backdropNavbarMenu' in $.fn) {
         this.$el
           .children('.navbar-menu')
-          .drupalNavbarMenu();
+          .backdropNavbarMenu();
       }
     }
   }),
@@ -699,10 +699,10 @@ Drupal.navbar = {
  * @return {String}
  *   A string representing a DOM fragment.
  */
-Drupal.theme.navbarOrientationToggle = function () {
+Backdrop.theme.navbarOrientationToggle = function () {
   return '<div class="navbar-toggle-orientation"><div class="navbar-lining">' +
     '<button class="navbar-icon navbar-toggle" type="button"></button>' +
     '</div></div>';
 };
 
-}(jQuery, Backbone, Drupal));
+}(jQuery, Backbone, Backdrop));

@@ -18,9 +18,9 @@
  *   will only be called at most 4 times per second.
  */
 
-var Drupal = Drupal || {};
+var Backdrop = Backdrop || {};
 
-Drupal.debounce = function (callback, wait) {
+Backdrop.debounce = function (callback, wait) {
 
   "use strict";
 

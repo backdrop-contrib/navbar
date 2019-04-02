@@ -3,12 +3,12 @@
  * Provide displacement information sticky tableheaders.
  */
 
-(function ($, Drupal, displace) {
+(function ($, Backdrop, displace) {
 
 "use strict";
 
-Drupal.navbar = Drupal.navbar || {};
-  $.extend(Drupal.navbar, {
+Backdrop.navbar = Backdrop.navbar || {};
+  $.extend(Backdrop.navbar, {
     calculatedHeight: NaN,
     calculateHeight: function () {
       var self = this;
@@ -29,4 +29,4 @@ Drupal.navbar = Drupal.navbar || {};
     }
   });
 
-}(jQuery, Drupal, Drupal.displace));
+}(jQuery, Backdrop, Backdrop.displace));

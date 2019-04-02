@@ -13,7 +13,7 @@
  * Back to site link points to the last non-administrative page the user visited
  * within the same browser tab.
  */
-Drupal.behaviors.escapeAdmin = {
+Backdrop.behaviors.escapeAdmin = {
   attach: function (context, settings) {
     var escapeAdminPath = sessionStorage.getItem('escapeAdminPath');
     var windowLocation = window.location;
@@ -32,7 +32,7 @@ Drupal.behaviors.escapeAdmin = {
         $toolbarEscape.attr('href', escapeAdminPath);
       }
       else {
-        $toolbarEscape.text(Drupal.t('Home'));
+        $toolbarEscape.text(Backdrop.t('Home'));
       }
       $toolbarEscape.removeClass('element-hidden');
     }

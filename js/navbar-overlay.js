@@ -1,28 +1,28 @@
 /**
  * @file
- * Overrides methods of the Drupal.overlay object in order to support D8-style
+ * Overrides methods of the Backdrop.overlay object in order to support D8-style
  * viewport displacement
  */
 
-(function ($, Drupal, displace) {
+(function ($, Backdrop, displace) {
 
 "use strict";
 
 /**
- * Implements Drupal.behaviors.
+ * Implements Backdrop.behaviors.
  */
-Drupal.behaviors.NavbarOverlayOverrides = {
+Backdrop.behaviors.NavbarOverlayOverrides = {
   attach: function (context, settings) {
     $(document)
-      .bind('drupalViewportOffsetChange.navbar', $.proxy(Drupal.overlay, 'eventhandlerViewportOffsetChange'))
+      .bind('backdropViewportOffsetChange.navbar', $.proxy(Backdrop.overlay, 'eventhandlerViewportOffsetChange'))
   }
 };
 
-Drupal.overlay = Drupal.overlay || {};
+Backdrop.overlay = Backdrop.overlay || {};
 
-$.extend(Drupal.overlay, {
+$.extend(Backdrop.overlay, {
   /**
-   * Responds to the drupalViewportOffsetChange event.
+   * Responds to the backdropViewportOffsetChange event.
    *
    * @param object event
    *   A jQuery event object.
@@ -34,7 +34,7 @@ $.extend(Drupal.overlay, {
    */
   eventhandlerViewportOffsetChange: function (event, offsets) {
     // Allow other scripts to respond to this event.
-    $(document).trigger('drupalOverlayResize');
+    $(document).trigger('backdropOverlayResize');
   },
 
   /**
@@ -90,4 +90,4 @@ $.extend(Drupal.overlay, {
   }
 });
 
-}(jQuery, Drupal, Drupal.displace));
+}(jQuery, Backdrop, Backdrop.displace));

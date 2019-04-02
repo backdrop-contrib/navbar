@@ -2,10 +2,10 @@
  * Builds a nested accordion widget.
  *
  * Invoke on an HTML list element with the jQuery plugin pattern.
- * - For example, $('.navbar-menu').drupalNavbarMenu();
+ * - For example, $('.navbar-menu').backdropNavbarMenu();
  */
 
-(function ($, Drupal) {
+(function ($, Backdrop) {
 
 "use strict";
 
@@ -13,7 +13,7 @@
  * Store the open menu tray.
  */
 
-  $.fn.drupalNavbarMenu = function (options) {
+  $.fn.backdropNavbarMenu = function (options) {
 
     // Merge options onto defaults.
     var settings = $.extend({}, {
@@ -30,8 +30,8 @@
     }, options);
 
     var ui = {
-      'handleOpen': Drupal.t('Extend'),
-      'handleClose': Drupal.t('Collapse')
+      'handleOpen': Backdrop.t('Extend'),
+      'handleClose': Backdrop.t('Collapse')
     };
     /**
      * Handle clicks from the disclosure button on an item with sub-items.
@@ -124,9 +124,9 @@
               if ($box.length) {
                 var $twistyItem = $item.once('navbar-menu-twisties');
                 if ($twistyItem.length) {
-                  options.text = Drupal.t('@label', {'@label': $box.text()});
+                  options.text = Backdrop.t('@label', {'@label': $box.text()});
                   $item.addClass('navbar-twisty');
-                  $box.append(Drupal.theme('navbarMenuItemToggle', options));
+                  $box.append(Backdrop.theme('navbarMenuItemToggle', options));
                 }
               }
             }
@@ -230,8 +230,8 @@
    * @return {String}
    *   A string representing a DOM fragment.
    */
-  Drupal.theme.navbarMenuItemToggle = function (options) {
+  Backdrop.theme.navbarMenuItemToggle = function (options) {
     return '<button class="' + options['class'] + '"><span class="action">' + options.action + '</span><span class="label">' + options.text + '</span></button>';
   };
 
-}(jQuery, Drupal));
+}(jQuery, Backdrop));

@@ -1,7 +1,7 @@
 /**
  * Manages elements that can offset the size of the viewport.
  */
-(function ($, Drupal, debounce) {
+(function ($, Backdrop, debounce) {
 
   "use strict";
 
@@ -15,10 +15,10 @@
   /**
    * Registers a resize hanlder on the window.
    */
-  Drupal.behaviors.drupalDisplace = {
+  Backdrop.behaviors.backdropDisplace = {
     attach: function () {
       // Do not process the window of the overlay.
-      if (parent.Drupal.overlay && parent.Drupal.overlay.iframeWindow === window) {
+      if (parent.Backdrop.overlay && parent.Backdrop.overlay.iframeWindow === window) {
         return;
       }
       // Mark this behavior as processed on the first pass.
@@ -27,7 +27,7 @@
       }
       this.displaceProcessed = true;
 
-      $(window).bind('resize.drupalDisplace', debounce(displace, 200));
+      $(window).bind('resize.backdropDisplace', debounce(displace, 200));
     }
   };
 
@@ -44,9 +44,9 @@
    *   that edge.
    */
   function displace (broadcast) {
-    offsets = Drupal.displace.offsets = calculateOffsets();
+    offsets = Backdrop.displace.offsets = calculateOffsets();
     if (typeof broadcast === 'undefined' || broadcast) {
-      $(document).trigger('drupalViewportOffsetChange', offsets);
+      $(document).trigger('backdropViewportOffsetChange', offsets);
     }
     return offsets;
   }
@@ -162,10 +162,10 @@
   }
 
   /**
-   * Assign the displace function to a property of the Drupal global object.
+   * Assign the displace function to a property of the Backdrop global object.
    */
-  Drupal.displace = displace;
-  $.extend(Drupal.displace, {
+  Backdrop.displace = displace;
+  $.extend(Backdrop.displace, {
     /**
      * Expose offsets to other scripts to avoid having to recalculate offsets
      */
@@ -176,4 +176,4 @@
     calculateOffset: calculateOffset
   });
 
-})(jQuery, Drupal, Drupal.debounce);
+})(jQuery, Backdrop, Backdrop.debounce);
