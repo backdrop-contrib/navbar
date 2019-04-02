@@ -218,16 +218,16 @@ function _navbar_initialize_page_cache() {
 /**
  * Implements hook_preprocess_page().
  *
- * Add admin navbar to the page_top region automatically.
+ * Add admin navbar to the page region automatically.
  */
 function navbar_preprocess_page(&$variables) {
   if (navbar_suppress(FALSE)) {
     return;
   }
-  $variables['page_top']['navbar'] = array(
+  $variables['page'] .= backdrop_render($content=array(
     '#type' => 'navbar',
     '#access' => user_access('access navbar'),
-  );
+  ));
 }
 
 /**
