@@ -116,7 +116,7 @@ function navbar_navbar() {
       '#type' => 'navbar_item',
       'tab' => array(
         '#type' => 'link',
-        '#title' => format_username($user),
+        '#title' => user_format_name($user),
         '#href' => 'user',
         '#options' => array(
           'attributes' => array(
