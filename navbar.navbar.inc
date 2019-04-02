@@ -57,12 +57,12 @@ function navbar_navbar() {
     );
 
     // This flow is commented out until we figure out how to return a JSONP
-    // response in Drupal 7.
+    // response in Backdrop.
     //
     // To conserve bandwidth, we only include the top-level links in the HTML.
     // The subtrees are included in a JSONP script, cached by the browser. Here we
     // add that JSONP script. We add it as an external script, because it's a
-    // Drupal path, not a file available via a stream wrapper.
+    // Backdrop path, not a file available via a stream wrapper.
     // @see navbar_subtrees_jsonp()
     // $menu['navbar_administration']['#attached']['js'][url('navbar/subtrees/' . _navbar_get_subtree_hash())] = array('type' => 'external');
     // The administration element has a link that is themed to correspond to

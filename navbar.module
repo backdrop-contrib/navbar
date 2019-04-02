@@ -97,7 +97,7 @@ function navbar_page_alter(&$page) {
   if (!defined('MAINTENANCE_MODE')) {
     $current_path_is_admin = path_is_admin($current_path);
   }
-  drupal_add_js(array('currentPath' => $current_path, 'currentPathIsAdmin' => $current_path_is_admin), 'setting');
+  backdrop_add_js(array('currentPath' => $current_path, 'currentPathIsAdmin' => $current_path_is_admin), 'setting');
 }
 
 /**
@@ -120,10 +120,10 @@ function navbar_element_info() {
       // tests listing which produces a checkbox with attribute id="navbar"
       'id' => 'navbar-administration',
       // The 'overlay-displace-top' class is necessary in overlay-parent so that
-      // the drupalOverlayResize and drupalOverlayClose events will be bound
+      // the backdropOverlayResize and backdropOverlayClose events will be bound
       // to the document. The navbar does not use this class. It is present
       // to enable compatibility with the Overlay module.
-      'class' => array('drupal-navbar', 'overlay-displace-top'),
+      'class' => array('backdrop-navbar', 'overlay-displace-top'),
       'role' => 'navigation',
     ),
     // Metadata for the administration bar.
@@ -171,48 +171,48 @@ function navbar_subtrees_jsonp($hash) {
   _navbar_initialize_page_cache();
   $subtrees = navbar_get_rendered_subtrees();
   $response = new JsonResponse($subtrees);
-  $response->setCallback('Drupal.navbar.setSubtrees.resolve');
+  $response->setCallback('Backdrop.navbar.setSubtrees.resolve');
   return $response;
 }
 
 /**
- * Use Drupal's page cache for navbar/subtrees/*, even for authenticated users.
+ * Use Backdrop's page cache for navbar/subtrees/*, even for authenticated users.
  *
  * This gets invoked after full bootstrap, so must duplicate some of what's
- * done by _drupal_bootstrap_page_cache().
+ * done by _backdrop_bootstrap_page_cache().
  *
- * @todo Replace this hack with something better integrated with DrupalKernel
- *   once Drupal's page caching itself is properly integrated.
+ * @todo Replace this hack with something better integrated with BackdropKernel
+ *   once Backdrop's page caching itself is properly integrated.
  */
 function _navbar_initialize_page_cache() {
   $GLOBALS['conf']['system.performance']['cache']['page']['enabled'] = TRUE;
-  drupal_page_is_cacheable(TRUE);
+  backdrop_page_is_cacheable(TRUE);
 
   // If we have a cache, serve it.
-  // @see _drupal_bootstrap_page_cache()
-  $cache = drupal_page_get_cache();
+  // @see _backdrop_bootstrap_page_cache()
+  $cache = backdrop_page_get_cache();
   if (is_object($cache)) {
-    header('X-Drupal-Cache: HIT');
+    header('X-Backdrop-Cache: HIT');
     // Restore the metadata cached with the page.
     $_GET['q'] = $cache->data['path'];
-    date_default_timezone_set(drupal_get_user_timezone());
+    date_default_timezone_set(backdrop_get_user_timezone());
 
-    drupal_serve_page_from_cache($cache);
+    backdrop_serve_page_from_cache($cache);
 
     // We are done.
     exit;
   }
 
   // Otherwise, create a new page response (that will be cached).
-  header('X-Drupal-Cache: MISS');
+  header('X-Backdrop-Cache: MISS');
 
   // The Expires HTTP header is the heart of the client-side HTTP caching. The
   // additional server-side page cache only takes effect when the client
   // accesses the callback URL again (e.g., after clearing the browser cache or
-  // when force-reloading a Drupal page).
+  // when force-reloading a Backdrop page).
   $max_age = 3600 * 24 * 365;
-  drupal_add_http_header('Expires', gmdate(DATE_RFC1123, REQUEST_TIME + $max_age));
-  drupal_add_http_header('Cache-Control', 'private, max-age=' . $max_age);
+  backdrop_add_http_header('Expires', gmdate(DATE_RFC1123, REQUEST_TIME + $max_age));
+  backdrop_add_http_header('Cache-Control', 'private, max-age=' . $max_age);
 }
 
 /**
@@ -231,7 +231,7 @@ function navbar_preprocess_page(&$variables) {
 }
 
 /**
- * Builds the Navbar as a structured array ready for drupal_render().
+ * Builds the Navbar as a structured array ready for backdrop_render().
  *
  * Since building the navbar takes some time, it is done just prior to
  * rendering to ensure that it is built only if it will be displayed.
@@ -254,7 +254,7 @@ function navbar_pre_render($element) {
     'wide' => 'only screen and (min-width: 50em)',
   );
   // Allow for altering of the breakpoints.
-  drupal_alter('navbar_breakpoints', $breakpoints);
+  backdrop_alter('navbar_breakpoints', $breakpoints);
 
   if (!empty($breakpoints)) {
     $element['#attached']['js'][] = array(
@@ -270,7 +270,7 @@ function navbar_pre_render($element) {
   // Get navbar items from all modules that implement hook_navbar().
   $items = module_invoke_all('navbar');
   // Allow for altering of hook_navbar().
-  drupal_alter('navbar', $items);
+  backdrop_alter('navbar', $items);
   // Sort the children.
   uasort($items, 'element_sort');
 
@@ -278,7 +278,7 @@ function navbar_pre_render($element) {
   $element = array_merge($element, $items);
 
   // Render the children.
-  $element['#children'] = drupal_render_children($element);
+  $element['#children'] = backdrop_render_children($element);
 
   return $element;
 }
@@ -296,10 +296,10 @@ function theme_navbar(&$variables) {
     $element = $variables['element'];
     $trays = '';
     foreach (element_children($element) as $key) {
-      $trays .= drupal_render($element[$key]['tray']);
+      $trays .= backdrop_render($element[$key]['tray']);
     }
-    return '<nav' . drupal_attributes($element['#attributes']) . '>'
-      . '<div' . drupal_attributes($element['#bar']['#attributes']) . '>'
+    return '<nav' . backdrop_attributes($element['#attributes']) . '>'
+      . '<div' . backdrop_attributes($element['#bar']['#attributes']) . '>'
       . '<h2 class="element-invisible">' . $element['#bar']['#heading'] . '</h2>'
       . $element['#children'] . '</div>' . $trays . '</nav>';
   }
@@ -319,7 +319,7 @@ function theme_navbar(&$variables) {
  */
 function navbar_pre_render_item($element) {
   // Assign each item a unique ID.
-  $id = drupal_html_id('navbar-item');
+  $id = backdrop_html_id('navbar-item');
 
   // Provide attributes for a navbar item.
   $attributes = array(
@@ -400,7 +400,7 @@ function template_preprocess_navbar_tab_wrapper(&$variables) {
  * @see theme_navbar().
  */
 function theme_navbar_item(&$variables) {
-  return drupal_render($variables['element']['tab']);
+  return backdrop_render($variables['element']['tab']);
 }
 
 /**
@@ -430,7 +430,7 @@ function theme_navbar_menu_tree($variables) {
 function theme_navbar_tab_wrapper(&$variables) {
   if (!empty($variables['element']['#children'])) {
     $element = $variables['element'];
-    return '<div' . drupal_attributes($element['#wrapper_attributes']) . '>' . $element['#children'] . '</div>';
+    return '<div' . backdrop_attributes($element['#wrapper_attributes']) . '>' . $element['#children'] . '</div>';
   }
 }
 
@@ -449,7 +449,7 @@ function theme_navbar_tab_wrapper(&$variables) {
 function theme_navbar_tray_wrapper(&$variables) {
   if (!empty($variables['element']['#children'])) {
     $element = $variables['element'];
-    return '<div' . drupal_attributes($element['#wrapper_attributes']) . '><div class="navbar-lining clearfix">' . $element['#children'] . '</div></div>';
+    return '<div' . backdrop_attributes($element['#wrapper_attributes']) . '><div class="navbar-lining clearfix">' . $element['#children'] . '</div></div>';
   }
 }
 
@@ -556,7 +556,7 @@ function navbar_get_rendered_subtrees() {
         $subtree = menu_build_tree($item['menu_name'], array('expanded' => $parents, 'min_depth' => $item['depth'] + 1));
         navbar_menu_navigation_links($subtree);
         $subtree = menu_tree_output($subtree);
-        $subtree = drupal_render($subtree);
+        $subtree = backdrop_render($subtree);
       }
       else {
         $subtree = '';
@@ -582,7 +582,7 @@ function navbar_get_rendered_subtrees() {
  *   Look at migrating to a menu system level function.
  */
 function navbar_in_active_trail($path) {
-  $active_paths = &drupal_static(__FUNCTION__);
+  $active_paths = &backdrop_static(__FUNCTION__);
 
   // Gather active paths.
   if (!isset($active_paths)) {
@@ -602,7 +602,7 @@ function navbar_in_active_trail($path) {
  */
 function navbar_library_info() {
 
-  $path = drupal_get_path('module', 'navbar');
+  $path = backdrop_get_path('module', 'navbar');
 
   $libraries['navbar'] = array(
     'title' => 'Navbar',
@@ -786,13 +786,13 @@ function navbar_library_info() {
  * Implements hook_library_info_alter().
  */
 function navbar_library_info_alter(&$libraries, $module) {
-  $jquery_version = &drupal_static(__FUNCTION__, NULL);
+  $jquery_version = &backdrop_static(__FUNCTION__, NULL);
 
   if ($module == 'system') {
     $jquery_version = $libraries['jquery']['version'];
   }
   if ($jquery_version && $module == 'navbar') {
-    $path = drupal_get_path('module', 'navbar');
+    $path = backdrop_get_path('module', 'navbar');
     // If the version of jQuery is old, we need to add `on` and `off`.
     if ($jquery_version < '1.7') {
       $libraries['navbar']['js'][$path . '/js/jquery/ducktape.events.js'] = array('group' => JS_LIBRARY);
@@ -804,7 +804,7 @@ function navbar_library_info_alter(&$libraries, $module) {
     if (!empty($libraries['child']['css'])) {
       unset($libraries['child']['css']['modules/overlay/overlay-child.css']);
     }
-    $libraries['child']['css'][drupal_get_path('module', 'navbar') . '/css/navbar-overlay-child.css'] = array();
+    $libraries['child']['css'][backdrop_get_path('module', 'navbar') . '/css/navbar-overlay-child.css'] = array();
   }
 }
 
@@ -814,8 +814,8 @@ function navbar_library_info_alter(&$libraries, $module) {
 function navbar_js_alter(&$javascript) {
   // Only load the tableheader offset script if the core tableheader script
   // and the navbar js itself is loaded.
-  if (isset($javascript['misc/tableheader.js']) && isset($javascript[drupal_get_path('module', 'navbar') . '/js/navbar.js'])) {
-    drupal_add_js(array('tableHeaderOffset' => 'Drupal.navbar.height'), array('type' => 'setting'));
+  if (isset($javascript['misc/tableheader.js']) && isset($javascript[backdrop_get_path('module', 'navbar') . '/js/navbar.js'])) {
+    backdrop_add_js(array('tableHeaderOffset' => 'Backdrop.navbar.height'), array('type' => 'setting'));
   }
 }
 
@@ -1106,7 +1106,7 @@ function _navbar_get_subtree_hash() {
   }
   else {
     $subtrees = navbar_get_rendered_subtrees();
-    $hash = drupal_hash_base64(serialize($subtrees));
+    $hash = backdrop_hash_base64(serialize($subtrees));
     cache('navbar')->set($cid, $hash);
   }
   return $hash;
@@ -1119,7 +1119,7 @@ function _navbar_get_subtree_hash() {
  *   hook_library(). See https://drupal.org/node/1386368
  *
  * @return Array
- *  Returns a standard Drupal library definition structure.
+ *  Returns a standard Backdrop library definition structure.
  */
 function _navbar_convert_libraries_to_library($library, $options = array()) {
   // If the library wasn't installed, don't bother converting it.

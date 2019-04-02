@@ -61,7 +61,7 @@ function hook_navbar() {
     // Custom CSS, JS or a library can be associated with the navbar item.
     '#attached' => array(
       'css' => array(
-        drupal_get_path('module', 'search') . '/css/search.base.css',
+        backdrop_get_path('module', 'search') . '/css/search.base.css',
       ),
     ),
   );
@@ -170,7 +170,7 @@ function hook_navbar_alter(&$items) {
  * media query string associated with one of the three default breakpoints
  * that the Navbar reacts to.
  *
- * @see Drupal.navbar.mediaQueryChangeHandler in navbar.js.
+ * @see Backdrop.navbar.mediaQueryChangeHandler in navbar.js.
  */
 function hook_navbar_breakpoints_alter(&$breakpoints) {
   $breakpoints['standard'] = 'only screen and (min-width: 35em)';
