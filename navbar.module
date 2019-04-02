@@ -741,22 +741,43 @@ function navbar_library_info() {
   // Ensure that each 3rd party library dependency has a default variant.
   // Convert Libraries module data structures to library data structures.
   // Modernizr
-  $libraries['modernizr'] = _navbar_convert_libraries_to_library(libraries_detect('modernizr'), array(
-    'group' => JS_LIBRARY,
-    'weight' => -100,
-  ));
+  //$libraries['modernizr'] = _navbar_convert_libraries_to_library(libraries_detect('modernizr'), array(
+  //  'group' => JS_LIBRARY,
+  //  'weight' => -100,
+  //));
+  $libraries['modernizr'] = array(
+    'title' => 'Modernizr',
+    'version' => '3.6.0',
+    'js' => array(
+      $path . '/js/modernizr/modernizr-min.js' => array('weight' => -100),
+    ),
+  );
 
   // Underscore
-  $libraries['underscore'] = _navbar_convert_libraries_to_library(libraries_detect('underscore'), array(
-    'group' => JS_LIBRARY,
-    'weight' => -20,
-  ));
+  //$libraries['underscore'] = _navbar_convert_libraries_to_library(libraries_detect('underscore'), array(
+  //  'group' => JS_LIBRARY,
+  //  'weight' => -20,
+  //));
+  $libraries['underscore'] = array(
+    'title' => 'Underscore',
+    'version' => '1.9.1',
+    'js' => array(
+      $path . '/js/underscore/underscore-min.js' => array('weight' => -20),
+    ),
+  );
 
   // Backbone
-  $libraries['backbone'] = _navbar_convert_libraries_to_library(libraries_detect('backbone'), array(
-    'group' => JS_LIBRARY,
-    'weight' => -19,
-  ));
+  //$libraries['backbone'] = _navbar_convert_libraries_to_library(libraries_detect('backbone'), array(
+  //  'group' => JS_LIBRARY,
+  //  'weight' => -19,
+  //));
+  $libraries['backbone'] = array(
+    'title' => 'Backbone',
+    'version' => '1.4.0',
+    'js' => array(
+      $path . '/js/backbone/backbone-min.js' => array('weight' => -19),
+    ),
+  );
 
   return $libraries;
 }
