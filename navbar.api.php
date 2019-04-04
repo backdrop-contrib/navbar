@@ -84,6 +84,24 @@ function hook_navbar() {
     '#weight' => -20,
   );
 
+  //Another example:
+  $items['menu'] = array(
+    '#type' => 'navbar_item',
+    'tab' => array(
+      '#type' => 'link',
+      '#title' => t('Accounts'),
+      '#href' => 'admin/people',
+      '#options' => array(
+        'attributes' => array(
+          'title' => t('Manage user accounts'),
+          'class' => array('navbar-icon', 'navbar-icon-user'),
+        ),
+      ),
+    ),
+    '#weight' => 20,
+  );
+
+
   // A tray may be associated with a tab.
   //
   // When the tab is activated, the tray will become visible, either in a
@@ -109,13 +127,62 @@ function hook_navbar() {
       '#heading' => t('Shopping cart actions'),
       'shopping_cart' => array(
         '#theme' => 'item_list',
-        '#items' => array( /* An item list renderable array */ ),
+        'items' => array( /* An item list renderable array. Like $links below.*/ ),
       ),
     ),
     '#weight' => 150,
   );
+  //Another example:
+  $links = array(
+    'site_inf' => array(
+      'title' => t('Site information'),
+      'href' => 'admin/config/system/site-information',
+      'attributes' => array(
+        'title' => t('Change site name, logo etc.'),
+      ),
+    ),
+    'cron' => array(
+      'title' => t('Cron'),
+      'href' => 'admin/config/system/cron',
+      'attributes' => array(
+        'title' => t('Manage automatic site maintenance tasks.'),
+      ),
+    ),
+  );
 
-  // The tray can be used to render arbritrary content.
+  $items['system'] = array(
+    '#type' => 'navbar_item',
+    'tab' => array(
+      '#type' => 'link',
+      '#title' => t('System'),
+      '#href' => 'admin/config/system',
+      '#options' => array(
+        'html' => FALSE,
+        'attributes' => array(
+          'title' => t('General system related configuration.'),
+          'class' => array('navbar-icon', 'navbar-icon-menu'),
+        ),
+      ),
+    ),
+    'tray' => array(
+      '#heading' => t('System'),
+      'shopping_cart' => array(
+        '#theme' => 'item_list',
+        'items' => array(
+          'account' => array(
+            '#theme' => 'links__navbar_user',
+            '#links' => $links,
+            '#attributes' => array(
+              'class' => array('navbar-menu', 'navbar-menu-user'),
+            ),
+          ),
+        ),
+      ),
+    ),
+    '#weight' => 21,
+  );
+
+  // The tray can be used to render arbitrary content.
   //
   // A renderable array passed to the 'tray' property will be rendered outside
   // the administration bar but within the containing navbar element.
