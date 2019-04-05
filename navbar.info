@@ -2,5 +2,9 @@ name = Navbar
 description = A very simple mobile friendly navigation toolbar that lets you switch between frontend and backend.
 backdrop = 1.x
 package = Administration
+tags[] = Menus
+tags[] = Site Architecture
+tags[] = Structure
+tags[] = Administration
 type = module
-dependencies[] = libraries (>=2.0)
+dependencies[] = libraries
