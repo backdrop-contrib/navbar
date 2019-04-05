@@ -272,7 +272,7 @@ function navbar_pre_render($element) {
   // Allow for altering of hook_navbar().
   backdrop_alter('navbar', $items);
   // Sort the children.
-  uasort($items, 'element_sort');
+  backdrop_sort($items, array('#weight'));
 
   // Merge in the original navbar values.
   $element = array_merge($element, $items);
