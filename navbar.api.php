@@ -85,7 +85,7 @@ function hook_navbar() {
   );
 
   //Another example:
-  $items['menu'] = array(
+  $items['accounts'] = array(
     '#type' => 'navbar_item',
     'tab' => array(
       '#type' => 'link',
