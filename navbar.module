@@ -224,10 +224,11 @@ function navbar_preprocess_page(&$variables) {
   if (navbar_suppress(FALSE)) {
     return;
   }
-  $variables['page'] .= backdrop_render($content=array(
+  $content = array(
     '#type' => 'navbar',
     '#access' => user_access('access navbar'),
-  ));
+  );
+  $variables['page'] .= backdrop_render($content);
 }
 
 /**
@@ -603,7 +604,9 @@ function navbar_in_active_trail($path) {
 function navbar_library_info() {
 
   $path = backdrop_get_path('module', 'navbar');
-  if (!defined('VERSION')) {define('VERSION', system_get_info('module', 'navbar')['version']); }
+  if (!defined('VERSION')) {
+    define('VERSION', system_get_info('module', 'navbar')['version']);
+  }
   $libraries['navbar'] = array(
     'title' => 'Navbar',
     'version' => VERSION,
