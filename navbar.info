@@ -8,4 +8,3 @@ tags[] = Structure
 tags[] = Administration
 type = module
 dependencies[] = libraries
-version = "1.x-1.7.0"
