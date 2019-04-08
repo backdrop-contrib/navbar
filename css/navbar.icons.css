@@ -177,47 +177,47 @@
 .no-svg .navbar-icon-appearance.navbar-active:before {
   background-image: url("../icons/000000/paintbrush.png");
 }
-.navbar-icon-people:before {
+.navbar-icon-user-accounts:before {
   background-image: url("../icons/787878/people.svg");
 }
-.no-svg .navbar-icon-people:before {
+.no-svg .navbar-icon-user-accounts:before {
   background-image: url("../icons/787878/people.png");
 }
-.navbar-icon-people:active:before,
-.navbar-icon-people.navbar-active:before {
+.navbar-icon-user-accounts:active:before,
+.navbar-icon-user-accounts.navbar-active:before {
   background-image: url("../icons/000000/people.svg");
 }
-.no-svg .navbar-icon-people:active:before,
-.no-svg .navbar-icon-people.navbar-active:before {
+.no-svg .navbar-icon-user-accounts:active:before,
+.no-svg .navbar-icon-user-accounts.navbar-active:before {
   background-image: url("../icons/000000/people.png");
 }
-.navbar-icon-modules:before {
+.navbar-icon-functionality:before {
   background-image: url("../icons/787878/puzzlepiece.svg");
 }
-.no-svg .navbar-icon-modules:before {
+.no-svg .navbar-icon-functionality:before {
   background-image: url("../icons/787878/puzzlepiece.png");
 }
-.navbar-icon-modules:active:before,
-.navbar-icon-modules.navbar-active:before {
+.navbar-icon-functionality:active:before,
+.navbar-icon-functionality.navbar-active:before {
   background-image: url("../icons/000000/puzzlepiece.svg");
 }
-.no-svg .navbar-icon-modules:active:before,
-.no-svg .navbar-icon-modules.navbar-active:before {
+.no-svg .navbar-icon-functionality:active:before,
+.no-svg .navbar-icon-functionality.navbar-active:before {
   background-image: url("../icons/000000/puzzlepiece.png");
 }
 .navbar-icon-configuration:before {
-  background-image: url("../icons/787878/wrench.svg");
+  background-image: url("../icons/787878/cog.svg");
 }
 .no-svg .navbar-icon-configuration:before {
-  background-image: url("../icons/787878/wrench.png");
+  background-image: url("../icons/787878/cog.png");
 }
 .navbar-icon-configuration:active:before,
 .navbar-icon-configuration.navbar-active:before {
-  background-image: url("../icons/000000/wrench.svg");
+  background-image: url("../icons/000000/cog.svg");
 }
 .no-svg .navbar-icon-configuration:active:before,
 .no-svg .navbar-icon-configuration.navbar-active:before {
-  background-image: url("../icons/000000/wrench.png");
+  background-image: url("../icons/000000/cog.png");
 }
 .navbar-icon-reports:before {
   background-image: url("../icons/787878/barchart.svg");
