@@ -219,6 +219,20 @@
 .no-svg .navbar-icon-configuration.navbar-active:before {
   background-image: url("../icons/000000/cog.png");
 }
+.navbar-icon-development:before {
+  background-image: url("../icons/787878/devel.svg");
+}
+.no-svg .navbar-icon-development:before {
+  background-image: url("../icons/787878/devel.png");
+}
+.navbar-icon-development:active:before,
+.navbar-icon-development.navbar-active:before {
+  background-image: url("../icons/000000/devel.svg");
+}
+.no-svg .navbar-icon-development:active:before,
+.no-svg .navbar-icon-development.navbar-active:before {
+  background-image: url("../icons/000000/devel.png");
+}
 .navbar-icon-reports:before {
   background-image: url("../icons/787878/barchart.svg");
 }
