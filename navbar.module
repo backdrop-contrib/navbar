@@ -505,7 +505,12 @@ function navbar_get_menu_tree() {
       'max_depth' => 5,
     ));
   }
-
+  //Ignore links which are contained by "Add content" (node/add) page.
+  foreach ($tree as $key => $item) {
+    if (substr_count($item['link']['link_path'], 'node/add/')) {
+      unset($tree[$key]);
+    }
+  }
   return $tree;
 }
 
