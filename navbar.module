@@ -505,7 +505,7 @@ function navbar_get_menu_tree() {
       'max_depth' => 5,
     ));
   }
-  //Ignore links which are contained by "Add content" (node/add) page.
+  // Ignore links which are contained by "Add content" (node/add) page.
   foreach ($tree as $key => $item) {
     if (substr_count($item['link']['link_path'], 'node/add/')) {
       unset($tree[$key]);
@@ -1222,4 +1222,15 @@ function navbar_modernizr_info() {
   $tests[] = 'prefixes';
 
   return $tests;
+}
+
+/**
+ * Implements hook_init().
+ */
+function navbar_init() {
+
+  // Suppress the Admin Bar, but only if the module is actually enabled.
+  if (module_exists('admin_bar')) {
+    admin_bar_suppress();
+  }
 }

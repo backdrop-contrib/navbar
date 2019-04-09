@@ -10,7 +10,7 @@ Navbar module has a drawer section where it displays links provided by other mod
 Attention
 ---------
 
-The Navbar module is incompatible with Backdrop core's Administration bar module. Administration bar should be disabled before the Navbar module is enabled.
+The Navbar module is incompatible with Backdrop core's Administration bar module. Administration bar is suppressed if the Navbar module is enabled.
 
 
 Prerequisite
