@@ -13,17 +13,10 @@ Attention
 The Navbar module is incompatible with Backdrop core's Administration bar module. Administration bar is suppressed if the Navbar module is enabled.
 
 
-Prerequisite
-------------
-
-Navbar requires [Libraries module](https://backdropcms.org/project/libraries).
-
-
 Installation
 ------------
 
-- Disable the Administration bar module before enabling the Navbar module. The Navbar module is incompatible with Backdrop core's Administration bar module.
-- Install this module using the official Backdrop CMS instructions at
+Install this module using the official Backdrop CMS instructions at
   https://backdropcms.org/guide/modules
 
 
@@ -69,7 +62,9 @@ function workbench_navbar() {
 Icons
 -----
 
-The toolbar uses the SVG icons designed by ry5n: [https://github.com/ry5n/libricons](https://github.com/ry5n/libricons)
+The toolbar uses the SVG icons designed by ry5n: [https://github.com/ry5n/libricons](https://github.com/ry5n/libricons)  
+Recommended application for create an icon: [Inkscape](https://inkscape.org/)  
+Set the page size to 16x16px (Inkscape: File -> Document Properties -> Width: 16, Height: 16, Units: px)
 
 
 Issues
