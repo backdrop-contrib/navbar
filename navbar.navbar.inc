@@ -26,7 +26,7 @@ function navbar_navbar() {
           'class' => array(
             'navbar-icon',
             'navbar-icon-escape-admin',
-            //'element-hidden'
+            'element-hidden'
           ),
           'data-navbar-escape-admin' => NULL,
         ),

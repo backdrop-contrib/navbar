@@ -32,7 +32,7 @@ Backdrop.behaviors.escapeAdmin = {
         $toolbarEscape.attr('href', escapeAdminPath);
       }
       else {
-        $toolbarEscape.text(Backdrop.t('Home'));
+        $toolbarEscape.text(Backdrop.t('Back to site'));
       }
       $toolbarEscape.removeClass('element-hidden');
     }

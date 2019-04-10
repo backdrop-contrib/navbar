@@ -84,7 +84,7 @@ function hook_navbar() {
     '#weight' => -20,
   );
 
-  //Another example:
+  // Another example.
   $items['accounts'] = array(
     '#type' => 'navbar_item',
     'tab' => array(
@@ -132,7 +132,7 @@ function hook_navbar() {
     ),
     '#weight' => 150,
   );
-  //Another example:
+  // Another example.
   $links = array(
     'site_inf' => array(
       'title' => t('Site information'),
