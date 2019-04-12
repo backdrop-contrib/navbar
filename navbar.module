@@ -500,9 +500,13 @@ function navbar_get_menu_tree() {
       'max_depth' => 5,
     ));
   }
-  // Ignore links which are contained by "Add content" (node/add) page.
+  // Ignore links which are contained by "Add content" (node/add) page
+  // and 'admin/' tabs.
   foreach ($tree as $key => $item) {
     if (substr_count($item['link']['link_path'], 'node/add/')) {
+      unset($tree[$key]);
+    }
+    if (($item['link']['link_path'] == 'admin/index') || ($item['link']['link_path'] == 'admin/tasks')) {
       unset($tree[$key]);
     }
   }
@@ -535,6 +539,113 @@ function navbar_menu_navigation_links(&$tree) {
       'title' => check_plain($item['link']['description']),
     );
   }
+}
+
+
+/**
+ * Returns an output structure for rendering a menu tree.
+ * Like core/includes/menu.inc -> menu_tree_output()
+ *
+ * The menu item's LI element is given one of the following classes:
+ * - expanded: The menu item is showing its submenu.
+ * - collapsed: The menu item has a submenu which is not shown.
+ * - leaf: The menu item has no submenu.
+ *
+ * @param $tree
+ *   A data structure representing the tree as returned from menu_tree_data.
+ *
+ * @param $_current_depth
+ *   Internal use only. The current menu level depth being printed out.
+ *
+ * @return
+ *   A structured array to be rendered by backdrop_render().
+ */
+function navbar_menu_tree_build($tree, $_current_depth = 0) {
+  global $language_url;
+
+  $build = array();
+  $items = array();
+
+  // Pull out just the menu links we are going to render so that we
+  // get an accurate count for the first/last classes.
+  // Skip items that are inaccessible, invisible, or only appear in the
+  // breadcrumb
+  foreach ($tree as $data) {
+    if ($data['link']['access'] && (intval($data['link']['hidden'])<1) && $data['link']['type'] != MENU_VISIBLE_IN_BREADCRUMB) {
+      $items[] = $data;
+    }
+  }
+
+  $router_item = menu_get_item();
+  $num_items = count($items);
+  foreach ($items as $i => $data) {
+    $class = array();
+    if ($i == 0) {
+      $class[] = 'first';
+    }
+    if ($i == $num_items - 1) {
+      $class[] = 'last';
+    }
+    // Set a class for the <li>-tag. Since $data['below'] may contain local
+    // tasks, only set 'expanded' class if the link also has children within
+    // the current menu.
+    if ($data['link']['has_children'] && $data['below']) {
+      $class[] = 'expanded';
+      $class[] = 'has-children';
+    }
+    elseif ($data['link']['has_children']) {
+      $class[] = 'collapsed';
+    }
+    else {
+      $class[] = 'leaf';
+    }
+    // Set a class if the link is in the active trail.
+    if ($data['link']['in_active_trail']) {
+      $class[] = 'active-trail';
+      $data['link']['localized_options']['attributes']['class'][] = 'active-trail';
+    }
+    // Normally, l() compares the href of every link with $_GET['q'] and sets
+    // the active class accordingly. But local tasks do not appear in menu
+    // trees, so if the current path is a local task, and this link is its
+    // tab root, then we have to set the class manually.
+    if ($data['link']['href'] == $router_item['tab_root_href'] && $data['link']['href'] != $_GET['q']) {
+      $class[] = 'active';
+      $data['link']['localized_options']['attributes']['class'][] = 'active';
+    }
+    // Add the active class to the wrapper itself if necessary as the l()
+    // function would.
+    if (($data['link']['href'] == $_GET['q'] || ($data['link']['href'] == '<front>' && backdrop_is_front_page())) &&
+      (empty($data['link']['language']) || $data['link']['language']->langcode == $language_url->langcode)) {
+      $class[] = 'active';
+    }
+    $class[] = 'menu-mlid-' . $data['link']['mlid'];
+    // Allow menu-specific theme overrides.
+    $element['#theme'] = 'menu_link__' . strtr($data['link']['menu_name'], '-', '_');
+    $element['#attributes']['class'] = $class;
+    $element['#title'] = $data['link']['title'];
+    $element['#href'] = $data['link']['href'];
+    $element['#localized_options'] = !empty($data['link']['localized_options']) ? $data['link']['localized_options'] : array();
+    $element['#below'] = $data['below'] ? navbar_menu_tree_build($data['below'], $_current_depth + 1) : $data['below'];
+    $element['#original_link'] = $data['link'];
+    // Index using the link's unique mlid.
+    $build[$data['link']['mlid']] = $element;
+  }
+  if ($build) {
+    // Make sure backdrop_render() does not re-order the links.
+    $build['#sorted'] = TRUE;
+    // Add the depth for use in the theme wrapper.
+    $build['#depth'] = $_current_depth;
+    // Add the theme wrapper for outer markup.
+    // Allow menu-specific theme overrides.
+    if (isset($data['link']['menu_name'])) {
+      $build['#theme_wrappers'][] = 'menu_tree__' . strtr($data['link']['menu_name'], '-', '_');
+    }
+    else {
+      $build['#theme_wrappers'][] = 'menu_tree';
+    }
+  }
+
+  return $build;
 }
 
 /**
