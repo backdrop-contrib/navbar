@@ -179,5 +179,22 @@ function navbar_navbar() {
     }
   }
 
+  // Add search bar.
+  $items['search'] = array(
+    '#type' => 'navbar_item',
+    'tab' => array(
+      '#prefix' => '<div id="admin-bar"><ul class="dropdown"><li class="admin-bar-search">',
+      '#suffix' => '</li></ul></div>',
+      '#type' => 'search',
+      '#attributes' => array(
+        'placeholder' => t('Menu search'),
+        'autocomplete' => 'off',
+        'autocorrect' => 'off',
+        'autocapitalize' => 'off',
+        'size' => 30,
+      ),
+    ),
+    '#weight' => 200,
+  );
   return $items;
 }

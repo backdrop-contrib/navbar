@@ -742,6 +742,7 @@ function navbar_library_info() {
       array('navbar', 'navbar.menu'),
       array('navbar', 'navbar.tableheader'),
       array('navbar', 'navbar.escape_admin'),
+      array('navbar', 'navbar.search'),
     ),
   );
 
@@ -755,6 +756,21 @@ function navbar_library_info() {
     'version' => VERSION,
     'js' => array(
       $path . '/js/escape-admin.js' => array(),
+    ),
+    'dependencies' => array(
+      array('system', 'jquery'),
+      array('system', 'jquery.once'),
+    ),
+  );
+
+  $libraries['navbar.search'] = array(
+    'title' => 'Provides an input field for searching.',
+    'version' => VERSION,
+    'js' => array(
+      $path . '/js/search_bar.js' => array(),
+    ),
+    'css' => array(
+      $path . '/css/search_bar.css',
     ),
     'dependencies' => array(
       array('system', 'jquery'),
