@@ -25,7 +25,7 @@
 }
 #navbar-administration .navbar-tray .navbar-active-trail > .navbar-box .navbar-menu-item,
 #navbar-administration .navbar-tray .navbar-active
-/* Backdrop's active menu item class. */
+/* Drupal's active menu item class. */
 #navbar-administration .navbar-tray .active {
   color: #000;
   font-weight: bold;
@@ -91,82 +91,4 @@
   right: 0; /* LTR */
   top: 0;
   z-index: 1;
-}
-
-/**
- * Styling for Custom Navbar Dropdown. Adapted from Bryant Crayton bccrayton's
- * work at https://www.drupal.org/node/2390047.
- */
-
-.navbar-tray-horizontal .navbar-menu-administration ul {
-  list-style: none !important;
-  position: relative !important;
-  float: left !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul a {
-  display: block !important;
-  text-decoration: none !important;
-  line-height: 39px !important;
-  padding: 0 15px !important;
-  padding-left: 35px !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul li {
-  position: relative !important;
-  float: left !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul li.current-menu-item {
-  background: #ddd !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul li:hover, .navbar-tray-horizontal .navbar-menu-administration ul li.open {
-  background: #f6f6f6 !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul ul {
-  display: none !important;
-  position: absolute !important;
-  top: 100% !important;
-  left: 0 !important;
-  background: #fff !important;
-  padding: 0 !important;
-  border: 1px solid #DDDDDD !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul ul li {
-  float: none !important;
-  width: 200px !important;
-  border: none !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul ul a {
-  line-height: 120% !important;
-  padding: 10px 15px !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul ul ul {
-  top: -1px !important;
-  left: 100% !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration ul li:hover > ul {
-  display: block !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration .navbar-menu li li .navbar-handle {
-  display: block !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
-  background-image: url("../icons/bebebe/chevron-disc-right.svg") !important;
-}
-
-.navbar-tray-horizontal .navbar-menu-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
-  background-image: url("../icons/bebebe/chevron-disc-right.png") !important;
 }
