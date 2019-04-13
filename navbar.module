@@ -559,6 +559,12 @@ function navbar_menu_navigation_links(&$tree) {
  *
  * @return
  *   A structured array to be rendered by backdrop_render().
+ *
+ * @todo This function is a modified version of the core function
+ *    menu_tree_output() from core/includes/menu.inc The core function does not
+ *    work as expected in this case. If a newer version of menu_tree_output()
+ *    works properly, then this function can be replaced with it.
+ *    For details, see: https://github.com/backdrop-contrib/navbar/issues/17
  */
 function navbar_menu_tree_build($tree, $_current_depth = 0) {
   global $language_url;
@@ -569,7 +575,7 @@ function navbar_menu_tree_build($tree, $_current_depth = 0) {
   // Pull out just the menu links we are going to render so that we
   // get an accurate count for the first/last classes.
   // Skip items that are inaccessible, invisible, or only appear in the
-  // breadcrumb
+  // breadcrumb.
   foreach ($tree as $data) {
     if ($data['link']['access'] && (intval($data['link']['hidden'])<1) && $data['link']['type'] != MENU_VISIBLE_IN_BREADCRUMB) {
       $items[] = $data;
