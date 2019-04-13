@@ -3,7 +3,7 @@ Navbar
 
 A very simple mobile friendly navigation toolbar. The Navbar module displays a bar containing top-level administrative components across the top of the screen or on left side.
 
-In addition to providing responsive access, the vertical orientation of Navbar provides deep-level access into administrative functions without refreshing the page.
+In addition to providing responsive access, the vertical orientation of Navbar provides deep-level access into administrative functions.
 Navbar module has a drawer section where it displays links provided by other modules. The drawer can be hidden/shown by clicking on its corresponding tab.
 
 

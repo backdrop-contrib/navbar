@@ -191,7 +191,6 @@ function navbar_navbar() {
         'autocomplete' => 'off',
         'autocorrect' => 'off',
         'autocapitalize' => 'off',
-        'size' => 30,
       ),
     ),
     '#weight' => 200,
