@@ -49,6 +49,8 @@ function navbar_navbar() {
       '#heading' => t('Administration menu'),
       'navbar_administration' => array(
         '#type' => 'container',
+        '#prefix' => '<div id="navbar-mainmenu">',
+        '#suffix' => '</div>',
         '#attributes' => array(
           'class' => array('navbar-menu-administration'),
         ),
@@ -194,6 +196,9 @@ function navbar_navbar() {
       ),
     ),
     '#weight' => 200,
+    '#wrapper_attributes' => array(
+      'class' => array('admin-bar-search-bar-position'),
+    ),
   );
   return $items;
 }

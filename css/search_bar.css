@@ -457,3 +457,9 @@ tr.admin-bar-tweak-permissions-processed td.module {
 #admin-bar .admin-bar-alert .error-label {
   display: none;
 }
+
+/*Search bar position*/
+.admin-bar-search-bar-position {
+  float: right !important;
+  padding: 0 60px 0 0 !important;
+}

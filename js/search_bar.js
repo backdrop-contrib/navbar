@@ -6,7 +6,7 @@
 Backdrop.behaviors.search = {
 
   attach: function (context, settings) {
-    var $adminBar = $(document, '#navbar-bar');
+    var $adminBar = $(document).find('#navbar-administration');
     var $input = $adminBar.find('.admin-bar-search input');
     // Initialize the current search needle.
     var needle = $input.val();
@@ -16,6 +16,10 @@ Backdrop.behaviors.search = {
     var needleMinLength = 2;
     // Append the results container.
     var $results = $('<div class="admin-bar-search-results" />').insertAfter($input.parent());
+    // Store highlighted menu link.
+    var $before;
+    var $mainMenu = $(document).find('#navbar-mainmenu');
+    var $itemTray = $(document).find('#navbar-item--2-tray');
 
     /**
      * Executes the search upon user input.
@@ -97,7 +101,7 @@ Backdrop.behaviors.search = {
         }
 
         var $result = $('<li><a href="' + $element.attr('href') + '">' + result + '</a></li>');
-        $result.data('original-link', $(this.element).parent());
+        $result.data('original-link', $(this.element).parent().parent());
         $html.append($result);
       });
       return $html;
@@ -135,46 +139,65 @@ Backdrop.behaviors.search = {
     /**
      * Shows the link in the menu that corresponds to a search result.
      */
-    /*function highlightPathHandler(e, link) {
-      if (link) {
+    function highlightPathHandler(e, link) {
+      var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
+
+      if (link && horizontal) {
         $adminBar.find('li.highlight').removeClass('highlight');
         var $original = $(link).data('original-link');
         var show = e.type === 'showPath';
         // Toggle an additional CSS class to visually highlight the matching link.
-        $original.toggleClass('highlight', show);
-        $original.trigger(show ? 'mouseenter' : 'mouseleave');
-      }
-    }*/
-
-    /*function resetSearchDisplay(e) {
-      $adminBar.find('#admin-bar-extra > li > ul > li:not(li.admin-bar-search)').css('display', '');
-    }
-    function updateSearchDisplay(e) {
-      // Build the list of extra items to be hidden if in small window mode.
-      var $hideItems = $adminBar.find('#admin-bar-extra > li > ul > li:not(li.admin-bar-search)').css('display', '');
-      if ($results.children().length) {
-        if ($adminBar.find('#admin-bar-extra').hasClass('dropdown')) {
-          $hideItems.css('display', 'none');
+        hideMenu();
+        if (show) {
+          displayMenu($original);
+          $before = $original;
         }
       }
-    }*/
+    }
+
+    /**
+     * Display menu link with its parents.
+     */
+    function displayMenu($original) {
+      $original.addClass('open');
+      $original.parent().attr('style', 'display: block !important;');
+      if ($original.parent().parent().parent().is('ul')) {
+        displayMenu($original.parent().parent());
+      }
+    }
+
+    function hideChain($alink) {
+      $alink.removeAttr('style');
+      if ($alink.parent().parent().is('ul')) {
+        hideChain($alink.parent().parent());
+      }
+    }
+
+    /**
+     * Hide highlighted menu link with its parents.
+     */
+    function hideMenu() {
+      if (typeof $before != "undefined" && $before != null) {
+        $adminBar.find('.open').removeClass('open');
+        hideChain($before.parent());
+      }
+    }
 
     // Attach showPath/hidePath handler to search result entries.
     $results.on('touchstart mouseenter focus blur', 'li', resultsHandler);
     // Hide the result list after a link has been clicked.
     $results.on('click', 'li', resultsClickHandler);
     // Attach hover/active highlight behavior to search result entries.
-    //$adminBar.on('showPath hidePath', '.admin-bar-search-results li', highlightPathHandler);
-    // Show/hide the extra parts of the menu on resize.
-    //$adminBar.on('beforeResize', resetSearchDisplay);
-    //$adminBar.on('afterResize searchChanged', updateSearchDisplay);
+    $adminBar.on('showPath hidePath', '.admin-bar-search-results li', highlightPathHandler);
     // Attach the search input event handler.
     $input.bind('focus keyup search', keyupHandler);
+    $mainMenu.on('mouseenter', 'ul', hideMenu);
 
     // Close search if clicking outside the menu.
     $(document).on('click', function (e) {
       if ($(e.target).closest($adminBar).length === 0) {
         $results.empty();
+        hideMenu();
       }
     });
   }
