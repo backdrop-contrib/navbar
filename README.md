@@ -97,7 +97,7 @@ complete text.
 Screenshots
 -----------
 Vertical orientation of Navbar:
-![Vertical orientation of Navbar](https://raw.githubusercontent.com/backdrop-contrib/navbar/1.x-1.x/images/screenshot-vertical.png)
+![Vertical](https://github.com/backdrop-contrib/navbar/blob/1.x-1.x/images/screenshot-vertical.png)
 
 Horizontal orientation of Navbar:
-![Horizontal orientation of Navbar](https://raw.githubusercontent.com/backdrop-contrib/navbar/1.x-1.x/images/screenshot-horizontal.png)
+![Horizontal](https://github.com/backdrop-contrib/navbar/blob/1.x-1.x/images/screenshot-horizontal.png)
