@@ -33,10 +33,10 @@
  * Top level icons.
  */
 .navbar-bar .navbar-icon-escape-admin:before {
-  background-image: url("../icons/bebebe/chevron-disc-right.svg");
+  background-image: url("../icons/666666/arrow-right.svg");
 }
 .no-svg .navbar-bar .navbar-icon-escape-admin:before {
-  background-image: url("../icons/bebebe/chevron-disc-right.png");
+  background-image: url("../icons/666666/arrow-right.png");
 }
 
 @media only screen and (min-width: 16.5em) {
@@ -83,10 +83,10 @@
   right: 1.6667em;
 }
 #navbar-administration .navbar-icon-escape-admin:before {
-  background-image: url(../icons/bebebe/chevron-disc-right.svg);
+  background-image: url(../icons/666666/arrow-right.svg);
 }
 .no-svg #navbar-administration .navbar-icon-escape-admin:before {
-  background-image: url(../icons/bebebe/chevron-disc-right.png);
+  background-image: url(../icons/666666/arrow-right.png);
 }
 
 /**

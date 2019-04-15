@@ -345,31 +345,31 @@
   left: 1.6667em; /* LTR */
 }
 #navbar-administration .navbar-icon.navbar-handle:before {
-  background-image: url("../icons/5181c6/chevron-disc-down.svg");
+  background-image: url("../icons/666666/arrow-right.svg");
 }
 .no-svg #navbar-administration .navbar-icon.navbar-handle:before {
-  background-image: url("../icons/5181c6/chevron-disc-down.png");
+  background-image: url("../icons/666666/arrow-right.png");
 }
 #navbar-administration .navbar-icon.navbar-handle.open:before {
-  background-image: url("../icons/787878/chevron-disc-up.svg");
+  background-image: url("../icons/0074bd/arrow-down.svg");
 }
 .no-svg #navbar-administration .navbar-icon.navbar-handle.open:before {
   background-image: url("../icons/787878/chevron-disc-up.png");
 }
 #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
-  background-image: url("../icons/5181c6/twistie-down.svg");
+  background-image: url("../icons/666666/arrow-right.svg");
   background-size: 75%;
 }
 .no-svg #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
-  background-image: url("../icons/5181c6/twistie-down.png");
+  background-image: url("../icons/666666/arrow-right.png");
   background-size: auto auto;
 }
 #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle.open:before {
-  background-image: url("../icons/787878/twistie-up.svg");
+  background-image: url("../icons/0074bd/arrow-down.svg");
   background-size: 75%;
 }
 .no-svg #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle.open:before {
-  background-image: url("../icons/787878/twistie-up.png");
+  background-image: url("../icons/0074bd/arrow-down.png");
   background-size: auto auto;
 }
 #navbar-administration .navbar-icon-escape-admin:before {
