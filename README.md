@@ -3,7 +3,7 @@ Navbar
 
 A very simple mobile friendly navigation toolbar. The Navbar module displays a bar containing top-level administrative components across the top of the screen or on left side.
 
-In addition to providing responsive access, the vertical orientation of Navbar provides deep-level access into administrative functions without refreshing the page.
+In addition to providing deep-level responsive access into administrative functions without refreshing the page.
 Navbar module has a drawer section where it displays links provided by other modules. The drawer can be hidden/shown by clicking on its corresponding tab.
 
 
@@ -92,3 +92,12 @@ License
 
 This project is GPL v2 software. See the LICENSE.txt file in this directory for
 complete text.
+
+
+Screenshots
+-----------
+Vertical orientation of Navbar:
+![Vertical orientation of Navbar](https://gitlab.com/VasasA/jegyzet/blob/master/screenshot-vertical.png)
+
+Horizontal orientation of Navbar:
+![Horizontal orientation of Navbar](https://gitlab.com/VasasA/jegyzet/blob/master/screenshot-horizontal.png)
