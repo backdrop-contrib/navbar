@@ -354,7 +354,7 @@
   background-image: url("../icons/0074bd/arrow-down.svg");
 }
 .no-svg #navbar-administration .navbar-icon.navbar-handle.open:before {
-  background-image: url("../icons/787878/chevron-disc-up.png");
+  background-image: url("../icons/0074bd/arrow-down.png");
 }
 #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
   background-image: url("../icons/666666/arrow-right.svg");
