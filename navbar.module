@@ -541,6 +541,103 @@ function navbar_menu_navigation_links(&$tree) {
   }
 }
 
+/**
+ * Rearrange the array of links from a menu tree array.
+ *
+ * @return
+ *   An array of links as defined above.
+ */
+function navbar_menu_rearrange_links(&$tree) {
+  // Move node/add under the "Content" item if it already exists in the menu.
+  if (isset($tree['node/add']) && isset($tree['admin/content']['below'])) {
+    array_unshift($tree['admin/content']['below'], $tree['node/add']);
+    unset($tree['node/add']);
+  }
+  // Remove local tasks.
+  unset($tree['admin/index']);
+  unset($tree['admin/tasks']);
+}
+
+/**
+ * Build the administration bar as renderable menu links.
+ * This function is a modified version of the 'Administration bar' core
+ * module's admin_bar_links_menu() function from
+ * core/modules/admin_bar/admin_bar.inc
+ *
+ * @param $tree
+ *   A data structure representing the administration bar tree as returned from
+ *   menu_tree_all_data().
+ *
+ * @return
+ *   The complete administration bar
+ *
+ */
+function navbar_links_menu($tree) {
+  $links = array();
+  foreach ($tree as $data) {
+    // Skip items that are inaccessible, invisible, or only appear in the
+    // breadcrumb.
+    if (!$data['link']['access'] || $data['link']['hidden'] == 1 || $data['link']['type'] == MENU_VISIBLE_IN_BREADCRUMB) {
+      continue;
+    }
+    // Hide 'Administer' and make child links appear on this level.
+    // @todo Make this configurable.
+    if ($data['link']['router_path'] == 'admin') {
+      if ($data['below']) {
+        $links = array_merge($links, navbar_links_menu($data['below']));
+      }
+      continue;
+    }
+    // Omit alias lookups.
+    $data['link']['localized_options']['alias'] = TRUE;
+    // Remove description to prevent mouseover tooltip clashes.
+    unset($data['link']['localized_options']['attributes']['title']);
+
+    // Make action links (typically "Add ...") appear first in dropdowns.
+    // They might appear first already, but only as long as there is no link
+    // that comes alphabetically first (e.g., a node type with label "Ad").
+    if ($data['link']['type'] & MENU_IS_LOCAL_ACTION) {
+      $data['link']['weight'] -= 1000;
+    }
+
+    $links[$data['link']['href']] = array(
+      '#title' => $data['link']['title'],
+      '#weight' => $data['link']['weight'],
+      'below' => array(),
+      'link' => $data['link'],
+    );
+
+    // Set default value of 'in_active_trail'.
+    if (!isset($links[$data['link']['href']]['link']['in_active_trail'])) {
+      $links[$data['link']['href']]['link']['in_active_trail'] = FALSE;
+    }
+
+    // Unassign weights for categories below Configuration.
+    // An alphabetical order is more natural for a dropdown menu.
+    if (substr_count($data['link']['href'], 'admin/config') && substr_count($data['link']['href'], '/') == 2) {
+      unset($links[$data['link']['href']]['#weight']);
+    }
+
+    // Recurse to add any child links.
+    $children = array();
+    if ($data['below']) {
+      $children = navbar_links_menu($data['below']);
+      $links[$data['link']['href']]['below'] = $children;
+    }
+
+    // Handle links pointing to category/overview pages.
+    if ($data['link']['page_callback'] == 'system_admin_menu_block_page' || $data['link']['page_callback'] == 'system_admin_config_page') {
+      // Automatically hide empty categories.
+      // Check for empty children first for performance. Only when non-empty
+      // (typically 'admin/config'), check whether children are accessible.
+      if (empty($children) || !element_get_visible_children($children)) {
+        $links[$data['link']['href']]['link']['access'] = FALSE;
+      }
+    }
+  }
+  backdrop_sort($links, array('#weight' => SORT_NUMERIC, '#title' => SORT_STRING));
+  return $links;
+}
 
 /**
  * Returns an output structure for rendering a menu tree.
@@ -577,7 +674,7 @@ function navbar_menu_tree_build($tree, $_current_depth = 0) {
   // Skip items that are inaccessible, invisible, or only appear in the
   // breadcrumb.
   foreach ($tree as $data) {
-    if ($data['link']['access'] && (intval($data['link']['hidden'])<1) && $data['link']['type'] != MENU_VISIBLE_IN_BREADCRUMB) {
+    if ($data['link']['access'] && (intval($data['link']['hidden']) < 1) && $data['link']['type'] != MENU_VISIBLE_IN_BREADCRUMB) {
       $items[] = $data;
     }
   }
@@ -1338,4 +1435,5 @@ function navbar_init() {
   if (module_exists('admin_bar')) {
     admin_bar_suppress();
   }
+  module_load_include('inc', 'admin_bar', 'admin_bar');
 }

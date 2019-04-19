@@ -36,11 +36,13 @@ function navbar_navbar() {
   );
 
   // Retrieve the administration menu from the database.
-  $tree = navbar_get_menu_tree();
+  $tree = navbar_links_menu(admin_bar_tree('management'));
 
   // If no menu links exist because the user does not have access to any, then
   // don't render a menu tab.
   if (!empty($tree)) {
+    // Rearrange the links before rendering.
+    navbar_menu_rearrange_links($tree);
 
     // Add attributes to the links before rendering.
     navbar_menu_navigation_links($tree);

@@ -7,16 +7,17 @@ In addition to providing deep-level responsive access into administrative functi
 Navbar module has a drawer section where it displays links provided by other modules. The drawer can be hidden/shown by clicking on its corresponding tab.
 
 
-Attention
----------
+Prerequisite
+------------
 
-The Navbar module is incompatible with Backdrop core's Administration bar module. Administration bar is suppressed if the Navbar module is enabled.
+The Navbar module requires Backdrop core's Administration bar module, but Administration bar is suppressed if the Navbar module is enabled.
 
 
 Installation
 ------------
 
-Install this module using the official Backdrop CMS instructions at
+- Enable Backdrop core's Administration bar module.
+- Install this module using the official Backdrop CMS instructions at
   https://backdropcms.org/guide/modules
 
 

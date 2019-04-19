@@ -6,3 +6,4 @@ tags[] = Menus
 tags[] = Site Navigation
 tags[] = User Interface
 type = module
+dependencies[] = admin_bar
