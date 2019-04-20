@@ -185,7 +185,7 @@ function navbar_navbar() {
   $items['search'] = array(
     '#type' => 'navbar_item',
     'tab' => array(
-      '#prefix' => '<div id="admin-bar"><ul class="dropdown"><li class="admin-bar-search">',
+      '#prefix' => '<div id="navbar-tools"><ul class="dropdown"><li class="navbar-tools-search">',
       '#suffix' => '</li></ul></div>',
       '#type' => 'search',
       '#attributes' => array(
@@ -197,7 +197,7 @@ function navbar_navbar() {
     ),
     '#weight' => 200,
     '#wrapper_attributes' => array(
-      'class' => array('admin-bar-search-bar-position'),
+      'class' => array('navbar-tools-search-bar-position'),
     ),
   );
   return $items;

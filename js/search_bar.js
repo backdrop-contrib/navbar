@@ -6,8 +6,8 @@
 Backdrop.behaviors.search = {
 
   attach: function (context, settings) {
-    var $adminBar = $(document).find('#navbar-administration');
-    var $input = $adminBar.find('.admin-bar-search input');
+    var $navBar = $(document).find('#navbar-administration');
+    var $input = $navBar.find('.navbar-tools-search input');
     // Initialize the current search needle.
     var needle = $input.val();
     // Cache of all links that can be matched in the menu.
@@ -15,7 +15,7 @@ Backdrop.behaviors.search = {
     // Minimum search needle length.
     var needleMinLength = 2;
     // Append the results container.
-    var $results = $('<div class="admin-bar-search-results" />').insertAfter($input.parent());
+    var $results = $('<div class="navbar-tools-search-results" />').insertAfter($input.parent());
     // Store highlighted menu link.
     var $before;
     var $mainMenu = $(document).find('#navbar-mainmenu');
@@ -32,11 +32,11 @@ Backdrop.behaviors.search = {
         needle = value;
         // Initialize the cache of menu links upon first search.
         if (!links && needle.length >= needleMinLength) {
-          links = buildSearchIndex($adminBar.find('.navbar-menu a'));
+          links = buildSearchIndex($navBar.find('.navbar-menu a'));
         }
 
         // Close any open items.
-        $adminBar.find('li.highlight').trigger('mouseleave').removeClass('highlight');
+        $navBar.find('li.highlight').trigger('mouseleave').removeClass('highlight');
 
         // Empty results container when deleting search text.
         if (needle.length < needleMinLength) {
@@ -50,7 +50,7 @@ Backdrop.behaviors.search = {
           // Display results.
           $results.empty().append($html);
         }
-        $adminBar.trigger('searchChanged');
+        $navBar.trigger('searchChanged');
       }
     }
 
@@ -118,7 +118,7 @@ Backdrop.behaviors.search = {
         e.preventDefault();
       }
       if (show) {
-        $adminBar.find('.active-search-item').removeClass('active-search-item');
+        $navBar.find('.active-search-item').removeClass('active-search-item');
         $(this).addClass('active-search-item');
       }
       else {
@@ -143,7 +143,7 @@ Backdrop.behaviors.search = {
       var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
 
       if (link && horizontal) {
-        $adminBar.find('li.highlight').removeClass('highlight');
+        $navBar.find('li.highlight').removeClass('highlight');
         var $original = $(link).data('original-link');
         var show = e.type === 'showPath';
         // Toggle an additional CSS class to visually highlight the matching link.
@@ -178,7 +178,7 @@ Backdrop.behaviors.search = {
      */
     function hideMenu() {
       if (typeof $before != "undefined" && $before != null) {
-        $adminBar.find('.open').removeClass('open');
+        $navBar.find('.open').removeClass('open');
         hideChain($before.parent());
       }
     }
@@ -188,14 +188,14 @@ Backdrop.behaviors.search = {
     // Hide the result list after a link has been clicked.
     $results.on('click', 'li', resultsClickHandler);
     // Attach hover/active highlight behavior to search result entries.
-    $adminBar.on('showPath hidePath', '.admin-bar-search-results li', highlightPathHandler);
+    $navBar.on('showPath hidePath', '.navbar-tools-search-results li', highlightPathHandler);
     // Attach the search input event handler.
     $input.bind('focus keyup search', keyupHandler);
     $mainMenu.on('mouseenter', 'ul', hideMenu);
 
     // Close search if clicking outside the menu.
     $(document).on('click', function (e) {
-      if ($(e.target).closest($adminBar).length === 0) {
+      if ($(e.target).closest($navBar).length === 0) {
         $results.empty();
         hideMenu();
       }
