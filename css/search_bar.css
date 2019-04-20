@@ -34,112 +34,6 @@
 #admin-bar-wrapper {
   overflow: hidden;
 }
-/* When body is a contextual links region. */
-.contextual-links-region #admin-bar {
-  top: -33px;
-}
-
-.admin-bar body {
-  border-top: 33px solid #2D2D2D !important;
-}
-
-/* Top level items. */
-#admin-bar .top-level {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  vertical-align: top;
-}
-#admin-bar .top-level > li > a,
-#admin-bar .top-level > li > span {
-  display: none;
-}
-#admin-bar .top-level > li > ul {
-  display: inline-block;
-  left: auto;
-  width: auto;
-  right: auto;
-  background: transparent;
-}
-#admin-bar .top-level > li > ul > li {
-  float: left;
-  width: auto;
-}
-#admin-bar-menu.top-level > li > ul > li > a.active-trail {
-  text-shadow: #333 0 1px 0;
-  background-color: #9F9F9F;
-}
-
-/* Home link */
-#admin-bar .dropdown li.admin-bar-icon > a {
-  background: transparent url(../images/home--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-  padding-left: 28px; /* LTR */
-}
-[dir="rtl"] #admin-bar .dropdown li.admin-bar-icon > a {
-  background-position: 95% center;
-  padding-left: 10px;
-  padding-right: 28px;
-}
-
-/* Admin bar label */
-#admin-bar #admin-bar-menu.dropdown li > span.menu {
-  background: transparent url(../images/bars--white--64.png) 5% center no-repeat; /* LTR */
-  padding-left: 28px; /* LTR */
-  background-size: 16px;
-}
-[dir="rtl"] #admin-bar #admin-bar-menu.dropdown li > span.menu {
-  background-position: 95% center;
-  padding-left: 10px;
-  padding-right: 28px;
-}
-
-/* All admin bar menu links */
-#admin-bar #admin-bar-menu > li > .dropdown > li > a {
-  padding-left: 28px; /* LTR */
-}
-[dir="rtl"] #admin-bar #admin-bar-menu > li > .dropdown > li > a {
-  padding-left: 10px;
-  padding-right: 28px;
-}
-
-/* Specific admin bar menu links */
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-content {
-  background: transparent url(../images/pencil--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-people {
-  background: transparent url(../images/users--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-appearance {
-  background: transparent url(../images/palette--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-modules {
-  background: transparent url(../images/puzzle-piece--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-structure {
-  background: transparent url(../images/sort-amount-down--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-config {
-  background: transparent url(../images/cog--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-devel {
-  background: transparent url(../images/code--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.admin-reports {
-  background: transparent url(../images/info-circle--white--64.png) 5% center no-repeat;
-  background-size: 16px;
-}
-[dir="rtl"] #admin-bar #admin-bar-menu > li > .dropdown > li > a {
-  background-position: 95% center;
-}
 
 /* Admin tasks */
 #admin-bar #admin-bar-extra.dropdown li > span.extra {
@@ -163,45 +57,6 @@
   background-position: 10% center;
   padding-right: 10px;
   padding-left: 28px;
-}
-
-/* My Account link */
-#admin-bar .dropdown .admin-bar-account > a {
-  background: transparent url(../images/user-circle--white--64.png) 90% center no-repeat; /* LTR */
-  padding-right: 28px; /* LTR */
-  background-size: 16px;
-}
-[dir="rtl"] #admin-bar .dropdown .admin-bar-account > a {
-  background-position: 10% center;
-  padding-right: 10px;
-  padding-left: 28px;
-}
-
-/* Log Out link */
-#admin-bar .dropdown .admin-bar-logout > a {
-  background: transparent url(../images/sign-out--white--64.png) 90% center no-repeat; /* LTR */
-  background-size: 16px;
-  padding-right: 28px; /* LTR */
-}
-[dir="rtl"] #admin-bar .dropdown .admin-bar-logout > a {
-  background-position: 10% center;
-  padding-right: 10px;
-  padding-left: 28px;
-}
-
-/* Restore active and hover colors */
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.expanded-trail,
-#admin-bar #admin-bar-extra > li > .dropdown > li > a:hover,
-#admin-bar #admin-bar-icon li.admin-bar-icon > a:hover {
-  background-color: #45454A;
-}
-#admin-bar #admin-bar-menu > li > .dropdown > li > a.active-trail {
-  background-color: #9F9F9F;
-}
-
-#admin-bar li {
-  margin: 0;
-  padding: 0;
 }
 
 /* Dropdown lists */
@@ -265,29 +120,6 @@
   text-decoration: underline;
 }
 
-/* All dropdown list items */
-#admin-bar .dropdown li {
-  background-image: none;
-  float: left; /* LTR */
-  height: 100%;
-  list-style-image: none;
-  list-style-type: none;
-  margin: 0 !important;
-  padding: 0;
-}
-[dir="rtl"] #admin-bar .dropdown li {
-  float: right;
-}
-
-/* First level items */
-#admin-bar .dropdown li li {
-  width: 160px; /* Required for Opera */
-}
-#admin-bar .dropdown li li li {
-  filter: Alpha(opacity=100);
-  opacity: 1;
-}
-
 /* Second-level lists */
 /* Note: We must hide sub-lists or scrollbars might appear (display: none is not read by screen readers). */
 #admin-bar .dropdown li ul {
@@ -301,51 +133,6 @@
 [dir="rtl"] #admin-bar .dropdown li ul {
   left: auto;
   right: -999em;
-}
-
-/* Third-and-above-level lists */
-#admin-bar .dropdown li li.expandable ul {
-  margin: -32px 0 0 160px; /* LTR */
-}
-[dir="rtl"] #admin-bar .dropdown li li.expandable ul {
-  margin-right: 160px;
-  margin-left: 0;
-}
-
-/* Lists nested under hovered list items */
-#admin-bar .dropdown ul.expanded {
-  display: block;
-  left: auto; /* LTR */
-}
-[dir="rtl"] #admin-bar .dropdown ul.expanded {
-  right: auto;
-}
-
-/* Second-and-more-level hovering */
-#admin-bar .dropdown li li.expandable > a {
-  background: #45454A url(../images/arrow.png) no-repeat 145px center; /* LTR */
-}
-[dir="rtl"] #admin-bar .dropdown li li.expandable > a {
-  background-image: url(../images/arrow-rtl.png);
-  background-position: 5px center;
-}
-#admin-bar .dropdown li li a.expanded-trail {
-  background-color: #111;
-  border-color: #444;
-  color: #EEE;
-}
-
-/* Icon menu */
-#admin-bar-icon.dropdown {
-  display: inline-block;
-  background: transparent;
-}
-#admin-bar-icon .admin-bar-icon img {
-  vertical-align: center;
-}
-/* Add a border when using the default Backdrop logo. */
-#admin-bar-icon .admin-bar-icon img[src$="core/misc/favicon.ico"] {
-  outline: 1px solid #45454A;
 }
 
 /* Extras menu */
@@ -412,6 +199,11 @@
   color: white !important;
 }
 
+.admin-bar-search-bar-position {
+  float: right !important;
+  padding: 0 60px 0 0 !important;
+}
+
 /* #210615: Mozilla on Mac fix */
 html.js fieldset.collapsible div.fieldset-wrapper {
   overflow: visible;
@@ -425,17 +217,6 @@ html.js fieldset.collapsible div.fieldset-wrapper {
   body.admin-bar {
     margin-top: 0 !important;
   }
-}
-
-/**
- * Tweaks permissions, if enabled.
- */
-tr.admin-bar-tweak-permissions-processed {
-  cursor: pointer;
-  cursor: hand;
-}
-tr.admin-bar-tweak-permissions-processed td.module {
-  border-top: 0;
 }
 
 /* Alert colors */
@@ -456,10 +237,4 @@ tr.admin-bar-tweak-permissions-processed td.module {
 }
 #admin-bar .admin-bar-alert .error-label {
   display: none;
-}
-
-/*Search bar position*/
-.admin-bar-search-bar-position {
-  float: right !important;
-  padding: 0 60px 0 0 !important;
 }
