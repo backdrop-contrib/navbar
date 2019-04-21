@@ -140,14 +140,16 @@ Backdrop.behaviors.search = {
      * Shows the link in the menu that corresponds to a search result.
      */
     function highlightPathHandler(e, link) {
-      var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
-
-      if (link && horizontal) {
+      // Initialize $before.
+      if (!$before) {
+        $before = $navBar.find('.open li');
+      }
+      if (link) {
         $navBar.find('li.highlight').removeClass('highlight');
         var $original = $(link).data('original-link');
         var show = e.type === 'showPath';
         // Toggle an additional CSS class to visually highlight the matching link.
-        hideMenu();
+        hideMenu(true);
         if (show) {
           displayMenu($original);
           $before = $original;
@@ -156,30 +158,83 @@ Backdrop.behaviors.search = {
     }
 
     /**
-     * Display menu link with its parents.
+     * Insert 'display: block !important;' style and 'open' class
+     * into the elements of menu path recursively.
      */
-    function displayMenu($original) {
+    function displayChain($original) {
+      var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
+
       $original.addClass('open');
+      if (!horizontal && $original.find('button')) {
+        $original.find('button').first().addClass('open');
+      }
       $original.parent().attr('style', 'display: block !important;');
-      if ($original.parent().parent().parent().is('ul')) {
-        displayMenu($original.parent().parent());
+      // .is('ul') doesn't work properly.
+      if ($original.parent().parent().parent().get(0).tagName == 'UL') {
+        displayChain($original.parent().parent());
       }
     }
 
+    /**
+     * Display menu link with its path.
+     *
+     * param $original
+     *   The closest <li> ancestor of the <a> link.
+     */
+    function displayMenu($original) {
+      var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
+
+      if (!horizontal) {
+        //Underline selected menu link
+        $original.find('a').first().attr('style', 'text-decoration: underline;');
+        if ($original.parent().parent().parent().get(0).tagName == 'UL') {
+          displayChain($original.parent().parent());
+        }
+      }
+      else {
+        displayChain($original);
+      }
+    }
+
+    /**
+     * Remove 'display: block !important;' style from elements of
+     * the menu path recursively.
+     */
     function hideChain($alink) {
       $alink.removeAttr('style');
-      if ($alink.parent().parent().is('ul')) {
+      if ($alink.parent().parent().get(0).tagName == 'UL') {
         hideChain($alink.parent().parent());
       }
     }
 
     /**
-     * Hide highlighted menu link with its parents.
+     * Hide highlighted menu link with its path.
      */
-    function hideMenu() {
-      if (typeof $before != "undefined" && $before != null) {
+    function hideMenu(mouseInResultsList) {
+      var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
+
+      if (typeof $before != "undefined" && $before != null && (horizontal || mouseInResultsList)) {
+        // Close all opened menu link.
         $navBar.find('.open').removeClass('open');
+        // Remove underline from link.
+        if (!horizontal) {
+          $before.find('a').first().removeAttr('style');
+        }
+        // Remove 'display: block !important;'.
         hideChain($before.parent());
+      }
+    }
+
+    /**
+     * Event handler on links.
+     */
+    function hideMenuEvent(e) {
+      if (e.type == 'click') {
+        hideChain($before.parent());
+      }
+      else {
+        // On mouseenter event.
+        hideMenu(false);
       }
     }
 
@@ -191,13 +246,14 @@ Backdrop.behaviors.search = {
     $navBar.on('showPath hidePath', '.navbar-tools-search-results li', highlightPathHandler);
     // Attach the search input event handler.
     $input.bind('focus keyup search', keyupHandler);
-    $mainMenu.on('mouseenter', 'ul', hideMenu);
+    // Hide menu links.
+    $mainMenu.on('mouseenter click', 'ul', hideMenuEvent);
 
     // Close search if clicking outside the menu.
     $(document).on('click', function (e) {
       if ($(e.target).closest($navBar).length === 0) {
         $results.empty();
-        hideMenu();
+        hideMenu(false);
       }
     });
   }
