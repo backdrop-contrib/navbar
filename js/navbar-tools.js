@@ -164,11 +164,16 @@ Backdrop.behaviors.search = {
     function displayChain($original) {
       var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
 
+      // Add 'open' class to the closest <li> ancestor of the <a> link.
       $original.addClass('open');
+      // Add 'open' class to the arrow button of <a> link.
       if (!horizontal && $original.find('button')) {
         $original.find('button').first().addClass('open');
       }
+      // Insert 'display: block !important;' style to the closest
+      // <ul> ancestor of the <li>.
       $original.parent().attr('style', 'display: block !important;');
+      // Repeat the function at ancestor of the menu link recursively.
       // .is('ul') doesn't work properly.
       if ($original.parent().parent().parent().get(0).tagName == 'UL') {
         displayChain($original.parent().parent());
@@ -185,7 +190,7 @@ Backdrop.behaviors.search = {
       var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
 
       if (!horizontal) {
-        //Underline selected menu link
+        // Underline selected menu link
         $original.find('a').first().attr('style', 'text-decoration: underline;');
         if ($original.parent().parent().parent().get(0).tagName == 'UL') {
           displayChain($original.parent().parent());
@@ -202,6 +207,7 @@ Backdrop.behaviors.search = {
      */
     function hideChain($alink) {
       $alink.removeAttr('style');
+      // Repeat the function at ancestor of the menu link recursively.
       if ($alink.parent().parent().get(0).tagName == 'UL') {
         hideChain($alink.parent().parent());
       }

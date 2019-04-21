@@ -767,10 +767,10 @@ function navbar_library_info() {
     'title' => 'Provides an input field for searching.',
     'version' => VERSION,
     'js' => array(
-      $path . '/js/search_bar.js' => array(),
+      $path . '/js/navbar-tools.js' => array(),
     ),
     'css' => array(
-      $path . '/css/search_bar.css',
+      $path . '/css/navbar.tools.css',
     ),
     'dependencies' => array(
       array('system', 'jquery'),
