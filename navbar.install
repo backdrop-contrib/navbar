@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the admin bar module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function navbar_uninstall() {
+
+}

@@ -83,7 +83,26 @@ function navbar_menu() {
     'access arguments' => array(2),
     'type' => MENU_CALLBACK,
   );
+  // Module settings.
+  $items['admin/config/administration/navbar'] = array(
+    'title' => 'Navbar',
+    'description' => 'Adjust Navbar module settings.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('navbar_theme_settings'),
+    'access arguments' => array('administer site configuration'),
+  );
   return $items;
+}
+
+/**
+ * Implements hook_config_info().
+ */
+function navbar_config_info() {
+  $prefixes['navbar.settings'] = array(
+    'label' => t('Navbar settings'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
 }
 
 /**
@@ -1348,4 +1367,42 @@ function navbar_init() {
   if (module_exists('admin_bar')) {
     admin_bar_suppress();
   }
+}
+
+/**
+ * Form builder function for module settings.
+ */
+function navbar_theme_settings() {
+  $config = config('navbar.settings');
+  $form['#config'] = 'navbar.settings';
+
+  $form['components'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Enabled components'),
+    '#options' => array(
+      'navbar.user' => t('My account'),
+      'navbar.search' => t('Search bar'),
+    ),
+    '#default_value' => $config->get('components'),
+    '#description' => t('These features will be enabled/visible in the Navbar module. Untick the boxes to disable/hide them.'),
+  );
+
+  $form['actions'] = array(
+    '#type' => 'actions',
+  );
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save configuration'),
+  );
+
+  $form['#submit'] = array('navbar_theme_settings_submit');
+  return system_settings_form($form);
+}
+
+/**
+ * Submit handler for navbar_theme_settings().
+ */
+function navbar_theme_settings_submit($form, &$form_state) {
+  // Save the list of components as a simple array, rather than key/value pair.
+  $form_state['values']['components'] = array_keys(array_filter($form_state['values']['components']));
 }
