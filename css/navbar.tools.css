@@ -1,0 +1,240 @@
+
+/**
+ * @file
+ * Administration bar.
+ *
+ * Implementation of Sons of Suckerfish Dropdowns.
+ *
+ * @see www.htmldog.com/articles/suckerfish
+ */
+
+#navbar-tools {
+  font: normal small "Source Sans Pro", "Lucida Grande", Verdana, sans-serif;
+  left: 0;
+  position: absolute;
+  text-align: left; /* LTR */
+  top: 0;
+  width: 100%;
+  line-height: 1;
+  padding: 9px 0 0 0 !important;
+  margin: 0;
+  z-index: 999;
+  background: #2D2D2D; /* Old browsers */
+  background: -moz-linear-gradient(#2D2D2D 0%, #171717 100%); /* FF3.6+ */
+  background: -webkit-gradient(color-stop(0%, #2D2D2D), color-stop(100%, #171717)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(#2D2D2D 0%, #171717 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(#2D2D2D 0%, #171717 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(#2D2D2D 0%, #171717 100%); /* IE10+ */
+  background: linear-gradient(#2D2D2D 0%, #171717 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2D2D2D', endColorstr='#171717',GradientType=0); /* IE6-9 */
+}
+[dir="rtl"] #navbar-tools {
+  text-align: right;
+}
+#navbar-tools-wrapper {
+  overflow: hidden;
+}
+
+/* Admin tasks */
+#navbar-tools #navbar-tools-extra.dropdown li > span.extra {
+  background: transparent url(../images/clipboard-check--white--64.png) 5% center no-repeat; /* LTR */
+  padding-left: 28px; /* LTR */
+  background-size: 16px;
+}
+[dir="rtl"] #navbar-tools #navbar-tools-extra.dropdown li > span.extra {
+  background-position: 95% center;
+  padding-left: 10px;
+  padding-right: 28px;
+}
+
+/* Logged in users */
+#navbar-tools .dropdown .navbar-tools-users > a {
+  background: transparent url(../images/user-friends--white--64.png) 90% center no-repeat;
+  background-size: 16px;
+  padding-right: 28px; /* LTR */
+}
+[dir="rtl"] #navbar-tools .dropdown .navbar-tools-users > a {
+  background-position: 10% center;
+  padding-right: 10px;
+  padding-left: 28px;
+}
+
+/* Dropdown lists */
+#navbar-tools .dropdown {
+  line-height: 1.4em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 999;
+  display: inline-block;
+  position: static;
+  background: white;
+  vertical-align: top;
+}
+#navbar-tools-wrapper {
+  padding: 0 5px;
+}
+#navbar-tools-wrapper > .dropdown {
+  background: transparent;
+}
+#navbar-tools li > a,
+#navbar-tools li > span {
+  background: transparent none;
+  border: none;
+  color: #565656;
+  font-weight: normal;
+  text-align: left; /* LTR */
+  text-decoration: none;
+}
+[dir="rtl"] #navbar-tools li > a,
+[dir="rtl"] #navbar-tools li > span {
+  text-align: right;
+}
+#navbar-tools .dropdown li > a,
+#navbar-tools .dropdown li > span {
+  display: block;
+  padding: 9px 12px;
+}
+
+#navbar-tools a.expanded-trail,
+#navbar-tools span.expanded-trail {
+  background-color: #45454A;
+}
+
+#navbar-tools .dropdown .navbar-tools-tab a {
+  border-left: none; /* LTR */
+  border-right: 1px solid #52565E; /* LTR */
+}
+[dir="rtl"] #navbar-tools .dropdown .navbar-tools-tab a {
+  border-left: 1px solid #52565E;
+  border-right: none;
+}
+#navbar-tools .dropdown li li a {
+  border-right: none; /* LTR */
+  border-bottom: 1px solid #52565E;
+}
+[dir="rtl"] #navbar-tools .dropdown li li a {
+  border-left: none;
+}
+#navbar-tools .dropdown a:hover {
+  text-decoration: none;
+}
+
+/* Second-level lists */
+/* Note: We must hide sub-lists or scrollbars might appear (display: none is not read by screen readers). */
+#navbar-tools .dropdown li ul {
+  display: none;
+  left: -999em; /* LTR */
+  line-height: 1.2em;
+  margin: 0;
+  position: absolute;
+  width: 160px;
+}
+[dir="rtl"] #navbar-tools .dropdown li ul {
+  left: auto;
+  right: -999em;
+}
+
+/* Extras menu */
+#navbar-tools-extra {
+  float: right; /* LTR */
+  direction: rtl; /* LTR */
+}
+[dir="rtl"] #navbar-tools-extra {
+  float: left;
+  direction: ltr;
+}
+#navbar-tools-extra .dropdown li {
+  direction: ltr; /* LTR */
+}
+[dir="rtl"] #navbar-tools-extra .dropdown li {
+  direction: rtl;
+}
+
+/* Search form */
+#navbar-tools .navbar-tools-search .form-item {
+  margin: 0;
+  padding: 0;
+}
+#navbar-tools .top-level .navbar-tools-search {
+  width: 140px;
+}
+#navbar-tools .top-level .navbar-tools-search .form-item {
+  padding: 6px 0 0;
+}
+#navbar-tools .navbar-tools-search input {
+  background: #fff url(../images/search--gray--64.png) center right no-repeat;
+  background-position: right 5px center; /* LTR */
+  background-size: 12px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: small;
+  font-family: "Source Sans Pro", "Lucida Grande", Verdana, sans-serif;
+  margin: 0;
+  outline: none;
+  padding: 5px 22px 3px 8px; /* LTR */
+  width: 160px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+[dir="rtl"] #navbar-tools .navbar-tools-search input {
+  background-position: left 5px center;
+  padding: 5px 8px 3px 22px;
+}
+
+#navbar-tools .navbar-tools-search-results .dropdown {
+  display: block !important;
+  left: auto !important;
+  top: 100%;
+}
+#navbar-tools .navbar-tools-search-results,
+#navbar-tools .navbar-tools-search-results li {
+  width: 160px;
+}
+
+#navbar-tools li.active-search-item > a,
+#navbar-tools li.highlight > a {
+  background-color: #f5f5f5 !important;
+  color: black !important;
+}
+
+.navbar-tools-search-bar-position {
+  float: right !important;
+  padding: 0 60px 0 0 !important;
+}
+
+/* #210615: Mozilla on Mac fix */
+html.js fieldset.collapsible div.fieldset-wrapper {
+  overflow: visible;
+}
+
+/* Hide the menu on print output. */
+@media print {
+  #navbar-tools {
+    display: none !important;
+  }
+  body.navbar-tools {
+    margin-top: 0 !important;
+  }
+}
+
+/* Alert colors */
+#navbar-tools .navbar-tools-alert .error-count {
+  box-sizing: content-box;
+  padding: 4px 5px 5px 4px;
+  display: inline-block;
+  min-width: 13px;
+  border-radius: 2em;
+  margin: -4px 0 -5px;
+  text-align: center;
+  background-color: #ee3d23;
+  line-height: 1;
+}
+#navbar-tools .navbar-tools-alert .error-count {
+  margin-left: 0;
+  margin-right: 0;
+}
+#navbar-tools .navbar-tools-alert .error-label {
+  display: none;
+}

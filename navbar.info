@@ -7,3 +7,4 @@ tags[] = Site Navigation
 tags[] = User Interface
 type = module
 dependencies[] = admin_bar
+configure = admin/config/administration/navbar

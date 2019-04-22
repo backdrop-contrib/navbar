@@ -12,6 +12,8 @@ function navbar_navbar() {
   global $user;
 
   $items = array();
+  $config = config('navbar.settings');
+  $components = $config->get('components');
 
   // Provides a simple link to escape the administration area.
   $items['home'] = array(
@@ -51,6 +53,8 @@ function navbar_navbar() {
       '#heading' => t('Administration menu'),
       'navbar_administration' => array(
         '#type' => 'container',
+        '#prefix' => '<div id="navbar-mainmenu">',
+        '#suffix' => '</div>',
         '#attributes' => array(
           'class' => array('navbar-menu-administration'),
         ),
@@ -88,7 +92,7 @@ function navbar_navbar() {
   }
 
   // Add logout & user account links or login link.
-  if (module_exists('user')) {
+  if (module_exists('user') && in_array('navbar.user', $components)) {
     if ($user->uid) {
       $links = array(
         'account' => array(
@@ -181,5 +185,26 @@ function navbar_navbar() {
     }
   }
 
+  // Add search bar.
+  if (in_array('navbar.search', $components)) {
+    $items['search'] = array(
+      '#type' => 'navbar_item',
+      'tab' => array(
+        '#prefix' => '<div id="navbar-tools"><ul class="dropdown"><li class="navbar-tools-search">',
+        '#suffix' => '</li></ul></div>',
+        '#type' => 'search',
+        '#attributes' => array(
+          'placeholder' => t('Menu search'),
+          'autocomplete' => 'off',
+          'autocorrect' => 'off',
+          'autocapitalize' => 'off',
+        ),
+      ),
+      '#weight' => 200,
+      '#wrapper_attributes' => array(
+        'class' => array('navbar-tools-search-bar-position'),
+      ),
+    );
+  }
   return $items;
 }
