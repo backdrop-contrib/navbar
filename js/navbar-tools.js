@@ -18,8 +18,12 @@ Backdrop.behaviors.search = {
     var $results = $('<div class="navbar-tools-search-results" />').insertAfter($input.parent());
     // Store highlighted menu link.
     var $before;
+    // Determine the object of Navbar main menu.
     var $mainMenu = $(document).find('#navbar-mainmenu');
+    // Determine the object of Navbar tray menu.
     var $itemTray = $(document).find('#navbar-item--2-tray');
+    // Store orientation of Navbar: vertical or horizontal.
+    var navbarOrientation;
 
     /**
      * Executes the search upon user input.
@@ -141,7 +145,7 @@ Backdrop.behaviors.search = {
      */
     function highlightPathHandler(e, link) {
       // Initialize $before.
-      if (!$before) {
+      if (typeof $before == "undefined" || $before == null) {
         $before = $navBar.find('.open li');
       }
       if (link) {
@@ -162,12 +166,10 @@ Backdrop.behaviors.search = {
      * into the elements of menu path recursively.
      */
     function displayChain($original) {
-      var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
-
       // Add 'open' class to the closest <li> ancestor of the <a> link.
       $original.addClass('open');
       // Add 'open' class to the arrow button of <a> link.
-      if (!horizontal && $original.find('button')) {
+      if (navbarOrientation == 'vertical' && $original.find('button')) {
         $original.find('button').first().addClass('open');
       }
       // Insert 'display: block !important;' style to the closest
@@ -187,9 +189,7 @@ Backdrop.behaviors.search = {
      *   The closest <li> ancestor of the <a> link.
      */
     function displayMenu($original) {
-      var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
-
-      if (!horizontal) {
+      if (navbarOrientation == 'vertical') {
         // Underline selected menu link
         $original.find('a').first().attr('style', 'text-decoration: underline;');
         if ($original.parent().parent().parent().get(0).tagName == 'UL') {
@@ -217,13 +217,11 @@ Backdrop.behaviors.search = {
      * Hide highlighted menu link with its path.
      */
     function hideMenu(mouseInResultsList) {
-      var horizontal =  $itemTray.hasClass('navbar-tray-horizontal') ? true : false;
-
-      if (typeof $before != "undefined" && $before != null && (horizontal || mouseInResultsList)) {
+      if (typeof $before != "undefined" && $before != null && (navbarOrientation == 'horizontal' || mouseInResultsList)) {
         // Close all opened menu link.
         $navBar.find('.open').removeClass('open');
         // Remove underline from link.
-        if (!horizontal) {
+        if (navbarOrientation == 'vertical') {
           $before.find('a').first().removeAttr('style');
         }
         // Remove 'display: block !important;'.
@@ -235,12 +233,25 @@ Backdrop.behaviors.search = {
      * Event handler on links.
      */
     function hideMenuEvent(e) {
-      if (e.type == 'click') {
+      if (e.type == 'click'  && typeof $before != "undefined" && $before != null) {
         hideChain($before.parent());
       }
       else {
         // On mouseenter event.
         hideMenu(false);
+      }
+    }
+
+    /**
+     * Event handler:
+     * 'backdropNavbarOrientationChange' event triggered by navbar.js
+     */
+    function setOrientation(e, orientation) {
+      if (typeof orientation == 'undefined' || orientation == null) {
+        navbarOrientation = $itemTray.hasClass('navbar-tray-horizontal') ? 'horizontal' : 'vertical';
+      }
+      else {
+        navbarOrientation = orientation;
       }
     }
 
@@ -254,6 +265,8 @@ Backdrop.behaviors.search = {
     $input.bind('focus keyup search', keyupHandler);
     // Hide menu links.
     $mainMenu.on('mouseenter click', 'ul', hideMenuEvent);
+    // 'backdropNavbarOrientationChange' event (triggered by navbar.js) handler.
+    $(document).on('backdropNavbarOrientationChange', setOrientation);
 
     // Close search if clicking outside the menu.
     $(document).on('click', function (e) {
