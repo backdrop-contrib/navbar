@@ -6,7 +6,7 @@
 Backdrop.behaviors.search = {
 
   attach: function (context, settings) {
-    var $navBar = $(document).find('#navbar-administration');
+    var $navBar = $(context).find('#navbar-administration');
     var $input = $navBar.find('.navbar-tools-search input');
     // Initialize the current search needle.
     var needle = $input.val();
@@ -19,10 +19,9 @@ Backdrop.behaviors.search = {
     // Store highlighted menu link.
     var $before;
     // Determine the object of Navbar main menu.
-    var $mainMenu = $(document).find('#navbar-mainmenu');
+    var $mainMenu = $(context).find('#navbar-mainmenu');
     // Determine the object of Navbar tray menu.
-    var $itemTray = $(document).find('#navbar-item--2-tray');
-    // Store orientation of Navbar: vertical or horizontal.
+    var $itemTray = $(context).find('#navbar-item--2-tray');
 
     /**
      * Executes the search upon user input.
@@ -144,7 +143,7 @@ Backdrop.behaviors.search = {
      */
     function highlightPathHandler(e, link) {
       // Initialize $before.
-      if (typeof $before == "undefined" || $before == null) {
+      if ((typeof $before == "undefined" || $before == null) && typeof $navBar.find('.open li').get(0) != "undefined") {
         $before = $navBar.find('.open li');
       }
       if (link) {
