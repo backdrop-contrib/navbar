@@ -91,58 +91,82 @@ function navbar_navbar() {
     );
   }
 
-  // Add logout & user account links or login link.
-  if (module_exists('user') && in_array('navbar.user', $components)) {
-    if ($user->uid) {
-      $links = array(
-        'account' => array(
-          'title' => t('View profile'),
-          'href' => 'user',
-          'html' => TRUE,
-          'attributes' => array(
-            'title' => t('User account'),
+  if (!empty($components)) {
+    // Add logout & user account links, or login link.
+    if (module_exists('user') && in_array('navbar.user', $components)) {
+      if ($user->uid) {
+        $links = array(
+          'account' => array(
+            'title' => t('View profile'),
+            'href' => 'user',
+            'html' => TRUE,
+            'attributes' => array(
+              'title' => t('User account'),
+            ),
+          ),
+          'logout' => array(
+            'title' => t('Log out'),
+            'href' => 'user/logout',
+          ),
+        );
+      }
+      else {
+        $links = array(
+          'login' => array(
+            'title' => t('Log in'),
+            'href' => 'user',
+          ),
+        );
+      }
+  
+      $items['user'] = array(
+        '#type' => 'navbar_item',
+        'tab' => array(
+          '#type' => 'link',
+          '#title' => user_format_name($user),
+          '#href' => 'user',
+          '#options' => array(
+            'attributes' => array(
+              'title' => t('My account'),
+              'class' => array('navbar-icon', 'navbar-icon-user',),
+            ),
           ),
         ),
-        'logout' => array(
-          'title' => t('Log out'),
-          'href' => 'user/logout',
-        ),
-      );
-    }
-    else {
-      $links = array(
-        'login' => array(
-          'title' => t('Log in'),
-          'href' => 'user',
-        ),
-      );
-    }
-
-    $items['user'] = array(
-      '#type' => 'navbar_item',
-      'tab' => array(
-        '#type' => 'link',
-        '#title' => user_format_name($user),
-        '#href' => 'user',
-        '#options' => array(
-          'attributes' => array(
-            'title' => t('My account'),
-            'class' => array('navbar-icon', 'navbar-icon-user',),
+        'tray' => array(
+          '#heading' => t('User account actions'),
+          'user_links' => array(
+            '#theme' => 'links__navbar_user',
+            '#links' => $links,
+            '#attributes' => array(
+              'class' => array('navbar-menu', 'navbar-menu-user'),
+            ),
           ),
         ),
-      ),
-      'tray' => array(
-        '#heading' => t('User account actions'),
-        'user_links' => array(
-          '#theme' => 'links__navbar_user',
-          '#links' => $links,
+        '#weight' => 100,
+      );
+    }
+  
+    // Add search bar.
+    if (in_array('navbar.search', $components)) {
+      $items['search'] = array(
+        '#type' => 'navbar_item',
+        'tab' => array(
+          '#prefix' => '<div id="navbar-tools"><ul class="dropdown"><li class="navbar-tools-search">',
+          '#suffix' => '</li></ul></div>',
+          '#type' => 'search',
           '#attributes' => array(
-            'class' => array('navbar-menu', 'navbar-menu-user'),
+            'placeholder' => t('Menu search'),
+            'autocomplete' => 'off',
+            'autocorrect' => 'off',
+            'autocapitalize' => 'off',
           ),
         ),
-      ),
-      '#weight' => 100,
-    );
+        '#weight' => 200,
+        '#wrapper_attributes' => array(
+          'class' => array('navbar-tools-search-bar-position'),
+        ),
+      );
+    }
   }
 
   // Add a shortcuts tab.
@@ -185,26 +209,5 @@ function navbar_navbar() {
     }
   }
 
-  // Add search bar.
-  if (in_array('navbar.search', $components)) {
-    $items['search'] = array(
-      '#type' => 'navbar_item',
-      'tab' => array(
-        '#prefix' => '<div id="navbar-tools"><ul class="dropdown"><li class="navbar-tools-search">',
-        '#suffix' => '</li></ul></div>',
-        '#type' => 'search',
-        '#attributes' => array(
-          'placeholder' => t('Menu search'),
-          'autocomplete' => 'off',
-          'autocorrect' => 'off',
-          'autocapitalize' => 'off',
-        ),
-      ),
-      '#weight' => 200,
-      '#wrapper_attributes' => array(
-        'class' => array('navbar-tools-search-bar-position'),
-      ),
-    );
-  }
   return $items;
 }
