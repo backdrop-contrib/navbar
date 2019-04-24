@@ -130,9 +130,6 @@ Backdrop.behaviors.navbar = {
           model.set('isViewportOverflowConstrained', false);
         });
 
-        // Initialize 'navbarOrientation' in navbar-tools.js by triggered event.
-      $(document).trigger('backdropNavbarOrientationChange', menuModel.get('orientation'));
-
       // Broadcast model changes to other modules.
       model
         .on('change:orientation', function (model, orientation) {

@@ -23,7 +23,6 @@ Backdrop.behaviors.search = {
     // Determine the object of Navbar tray menu.
     var $itemTray = $(document).find('#navbar-item--2-tray');
     // Store orientation of Navbar: vertical or horizontal.
-    var navbarOrientation;
 
     /**
      * Executes the search upon user input.
@@ -166,6 +165,8 @@ Backdrop.behaviors.search = {
      * into the elements of menu path recursively.
      */
     function displayChain($original) {
+      var navbarOrientation = Backdrop.navbar.models.navbarModel.get('orientation');
+
       // Add 'open' class to the closest <li> ancestor of the <a> link.
       $original.addClass('open');
       // Add 'open' class to the arrow button of <a> link.
@@ -189,6 +190,8 @@ Backdrop.behaviors.search = {
      *   The closest <li> ancestor of the <a> link.
      */
     function displayMenu($original) {
+      var navbarOrientation = Backdrop.navbar.models.navbarModel.get('orientation');
+
       if (navbarOrientation == 'vertical') {
         // Underline selected menu link
         $original.find('a').first().attr('style', 'text-decoration: underline;');
@@ -217,6 +220,8 @@ Backdrop.behaviors.search = {
      * Hide highlighted menu link with its path.
      */
     function hideMenu(mouseInResultsList) {
+      var navbarOrientation = Backdrop.navbar.models.navbarModel.get('orientation');
+
       if (typeof $before != "undefined" && $before != null && (navbarOrientation == 'horizontal' || mouseInResultsList)) {
         // Close all opened menu link.
         $navBar.find('.open').removeClass('open');
@@ -242,19 +247,6 @@ Backdrop.behaviors.search = {
       }
     }
 
-    /**
-     * Event handler:
-     * 'backdropNavbarOrientationChange' event triggered by navbar.js
-     */
-    function setOrientation(e, orientation) {
-      if (typeof orientation == 'undefined' || orientation == null) {
-        navbarOrientation = $itemTray.hasClass('navbar-tray-horizontal') ? 'horizontal' : 'vertical';
-      }
-      else {
-        navbarOrientation = orientation;
-      }
-    }
-
     // Attach showPath/hidePath handler to search result entries.
     $results.on('touchstart mouseenter focus blur', 'li', resultsHandler);
     // Hide the result list after a link has been clicked.
@@ -265,8 +257,6 @@ Backdrop.behaviors.search = {
     $input.bind('focus keyup search', keyupHandler);
     // Hide menu links.
     $mainMenu.on('mouseenter click', 'ul', hideMenuEvent);
-    // 'backdropNavbarOrientationChange' event (triggered by navbar.js) handler.
-    $(document).on('backdropNavbarOrientationChange', setOrientation);
 
     // Close search if clicking outside the menu.
     $(document).on('click', function (e) {
