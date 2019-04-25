@@ -19,7 +19,7 @@ Installation
 - Enable Backdrop core's Administration bar module.
 - Install this module using the official Backdrop CMS instructions at
   https://backdropcms.org/guide/modules
-- You can show or hide some components (search bar etc.) on the module's configuration page.
+- You can show or hide some components (search bar etc.) on the module's "Configure" page.
 
 
 3rd party JavaScript libraries
