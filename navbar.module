@@ -1485,6 +1485,7 @@ function navbar_theme_settings() {
     '#title' => t('Enabled components'),
     '#options' => array(
       'navbar.user' => t('My account'),
+      'navbar.alert' => t('Notification badge about errors'),
       'navbar.search' => t('Search bar'),
     ),
     '#default_value' => $config->get('components'),

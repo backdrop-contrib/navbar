@@ -10,7 +10,7 @@ Navbar module has a drawer section where it displays links provided by other mod
 Prerequisite
 ------------
 
-The Navbar module requires Backdrop core's Administration bar module, but Administration bar is suppressed if the Navbar module is enabled.
+The Navbar module requires Backdrop core's Administration bar module, but the Administration bar is suppressed if the Navbar module is enabled.
 
 
 Installation
@@ -19,7 +19,7 @@ Installation
 - Enable Backdrop core's Administration bar module.
 - Install this module using the official Backdrop CMS instructions at
   https://backdropcms.org/guide/modules
-- You can show or hide some components (search bar etc.) on the module's "Configure" page.
+- You can show or hide some components (search bar, notification badge etc.) on the module's "Configure" page.
 
 
 3rd party JavaScript libraries
@@ -42,7 +42,7 @@ The Navbar module depends on several third party JavaScript libraries, which inc
 Application programming interface (API)
 ---------------------------------------
 
-You can integrate your custom module's links in Navbar toolbar. See 'navbar.api.php'
+You can integrate your custom module's links into the Navbar toolbar. See this: 'navbar.api.php'
 
 
 Including styling assets for a menu item

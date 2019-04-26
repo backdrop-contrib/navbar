@@ -118,7 +118,7 @@ function navbar_navbar() {
           ),
         );
       }
-  
+
       $items['user'] = array(
         '#type' => 'navbar_item',
         'tab' => array(
@@ -145,7 +145,33 @@ function navbar_navbar() {
         '#weight' => 100,
       );
     }
-  
+
+    // Add alert indicator. It is a notification badge.
+    if (in_array('navbar.alert', $components) && user_access('administer site configuration')) {
+      // Get Administration bar core module's alert indicator.
+      $alert = admin_bar_links_alert();
+      if (!empty($alert)) {
+        $items['alert'] = array(
+          '#type' => 'navbar_item',
+          'tab' => array(
+            '#type' => 'link',
+            '#title' => $alert['alert']['#title'],
+            '#href' => $alert['alert']['#href'],
+            '#options' => array(
+              'attributes' => array(
+                'title' => t($alert['alert']['#attributes']['title']),
+              ),
+              'html' => $alert['alert']['#options']['html'],
+            ),
+          ),
+          '#weight' => 101,
+          '#wrapper_attributes' => array(
+            'class' => array('navbar-tools-alert error-count'),
+          ),
+        );
+      }
+    }
+
     // Add search bar.
     if (in_array('navbar.search', $components)) {
       $items['search'] = array(

@@ -1,6 +1,7 @@
 {
     "_config_name": "navbar.settings",
     "components": [
-        "navbar.user"
+        "navbar.user",
+        "navbar.alert"
     ]
 }

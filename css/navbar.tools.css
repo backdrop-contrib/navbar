@@ -220,21 +220,20 @@ html.js fieldset.collapsible div.fieldset-wrapper {
 }
 
 /* Alert colors */
-#navbar-tools .navbar-tools-alert .error-count {
-  box-sizing: content-box;
-  padding: 4px 5px 5px 4px;
-  display: inline-block;
-  min-width: 13px;
-  border-radius: 2em;
-  margin: -4px 0 -5px;
-  text-align: center;
-  background-color: #ee3d23;
-  line-height: 1;
+.navbar-tools-alert .error-count {
+  box-sizing: content-box !important;
+  padding: 4px 5px 5px 4px !important;
+  display: inline-block !important;
+  min-width: 13px !important;
+  border-radius: 2em !important;
+  margin: -4px 0 -5px !important;
+  text-align: center !important;
+  background-color: #ee3d23 !important;
+  line-height: 1 !important;
+  color: #ffffff !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
-#navbar-tools .navbar-tools-alert .error-count {
-  margin-left: 0;
-  margin-right: 0;
-}
-#navbar-tools .navbar-tools-alert .error-label {
+.navbar-tools-alert .error-label {
   display: none;
 }
