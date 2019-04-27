@@ -1486,6 +1486,7 @@ function navbar_theme_settings() {
     '#options' => array(
       'navbar.user' => t('My account'),
       'navbar.alert' => t('Notification badge about errors'),
+      'navbar.users' => t('User counts'),
       'navbar.search' => t('Search bar'),
     ),
     '#default_value' => $config->get('components'),

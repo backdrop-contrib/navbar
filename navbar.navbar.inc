@@ -159,25 +159,34 @@ function navbar_navbar() {
             '#href' => $alert['alert']['#href'],
             '#options' => array(
               'attributes' => array(
-                'title' => t($alert['alert']['#attributes']['title']),
+                'title' => $alert['alert']['#attributes']['title'],
               ),
               'html' => $alert['alert']['#options']['html'],
             ),
           ),
-          '#weight' => 101,
+          '#weight' => 190,
           '#wrapper_attributes' => array(
-            'class' => array('navbar-tools-alert error-count'),
+            'class' => array('navbar-tools-alert', 'error-count'),
           ),
         );
       }
     }
 
+    // Prepare an array for search bar and user counter.
+    $items['right'] = array(
+      '#type' => 'navbar_item',
+      '#weight' => 200,
+      '#wrapper_attributes' => array(
+        'id' => 'navbar-tools',
+        'class' => array('navbar-tools-right-block'),
+      ),
+    );
+
     // Add search bar.
     if (in_array('navbar.search', $components)) {
-      $items['search'] = array(
-        '#type' => 'navbar_item',
-        'tab' => array(
-          '#prefix' => '<div id="navbar-tools"><ul class="dropdown"><li class="navbar-tools-search">',
+      $items['right']['tab']['search'] =
+        array(
+          '#prefix' => '<div class="navbar-tools-first-right-component"><ul class="dropdown"><li class="navbar-tools-search">',
           '#suffix' => '</li></ul></div>',
           '#type' => 'search',
           '#attributes' => array(
@@ -186,12 +195,32 @@ function navbar_navbar() {
             'autocorrect' => 'off',
             'autocapitalize' => 'off',
           ),
-        ),
-        '#weight' => 200,
-        '#wrapper_attributes' => array(
-          'class' => array('navbar-tools-search-bar-position'),
-        ),
-      );
+        );
+    }
+
+    // Add user counter.
+    if (in_array('navbar.users', $components) && user_access('administer site configuration')) {
+      // Get Administration bar core module's user counter.
+      $counter = admin_bar_links_users();
+      $items['right']['tab']['counter'] =
+        array(
+          '#prefix' => '<div class="navbar-tools-users navbar-tools-right-component">',
+          '#suffix' => '</div>',
+          '#type' => 'link',
+          '#title' => $counter['user-counter']['#title'],
+          '#description' => $counter['user-counter']['#description'],
+          '#href' => $counter['user-counter']['#href'],
+          '#options' => array(
+            'attributes' => array(
+              'title' => t('Current authenticated users.'),
+            ),
+          ),
+        );
+    }
+
+    // If there aren't components on right side, remove $items['right']
+    if (!isset($items['right']['tab'])) {
+      unset($items['right']);
     }
   }
 

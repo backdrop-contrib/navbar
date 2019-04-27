@@ -48,15 +48,17 @@
 }
 
 /* Logged in users */
-#navbar-tools .dropdown .navbar-tools-users > a {
-  background: transparent url(../images/user-friends--white--64.png) 90% center no-repeat;
-  background-size: 16px;
-  padding-right: 28px; /* LTR */
+.navbar-tools-users > a {
+  background: transparent url(../images/user-friends--white--64.png) 90% center no-repeat !important;
+  background-size: 16px !important;
+  padding-right: 28px !important; /* LTR */
+  color: #ffffff !important;
 }
-[dir="rtl"] #navbar-tools .dropdown .navbar-tools-users > a {
-  background-position: 10% center;
-  padding-right: 10px;
-  padding-left: 28px;
+[dir="rtl"] .navbar-tools-users > a {
+  background-position: 10% center !important;
+  padding-right: 10px !important;
+  padding-left: 28px !important;
+  color: #ffffff !important;
 }
 
 /* Dropdown lists */
@@ -199,9 +201,18 @@
   color: black !important;
 }
 
-.navbar-tools-search-bar-position {
+.navbar-tools-first-right-component {
   float: right !important;
-  padding: 0 60px 0 0 !important;
+  padding: 0 74px 0 0 !important;
+}
+
+.navbar-tools-right-component {
+  float: right !important;
+  padding: 4px 20px 0 0 !important;
+}
+
+.navbar-tools-right-block {
+  float: right !important;
 }
 
 /* #210615: Mozilla on Mac fix */
