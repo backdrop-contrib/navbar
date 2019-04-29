@@ -1,0 +1,11 @@
+[ShortcutLinksTestCase]
+name = Shortcut link functionality
+description = Create, view, edit, delete, and change shortcut links.
+group = Shortcut
+file = shortcut.test
+
+[ShortcutSetsTestCase]
+name = Shortcut set functionality
+description = Create, view, edit, delete, and change shortcut sets.
+group = Shortcut
+file = shortcut.test

@@ -101,14 +101,6 @@ class ShortcutTestCase extends DrupalWebTestCase {
  */
 class ShortcutLinksTestCase extends ShortcutTestCase {
 
-  public static function getInfo() {
-    return array(
-      'name' => 'Shortcut link functionality',
-      'description' => 'Create, view, edit, delete, and change shortcut links.',
-      'group' => 'Shortcut',
-    );
-  }
-
   /**
    * Tests that creating a shortcut works properly.
    */
@@ -228,14 +220,6 @@ class ShortcutLinksTestCase extends ShortcutTestCase {
  * Defines shortcut set test cases.
  */
 class ShortcutSetsTestCase extends ShortcutTestCase {
-
-  public static function getInfo() {
-    return array(
-      'name' => 'Shortcut set functionality',
-      'description' => 'Create, view, edit, delete, and change shortcut sets.',
-      'group' => 'Shortcut',
-    );
-  }
 
   /**
    * Tests creating a shortcut set.
