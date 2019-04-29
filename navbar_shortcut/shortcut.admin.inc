@@ -83,8 +83,8 @@ function shortcut_set_switch($form, &$form_state, $account = NULL) {
     }
 
     $form['#attached'] = array(
-      'css' => array(drupal_get_path('module', 'shortcut') . '/shortcut.admin.css'),
-      'js' => array(drupal_get_path('module', 'shortcut') . '/shortcut.admin.js'),
+      'css' => array(drupal_get_path('module', 'shortcut') . '/css/shortcut.admin.css'),
+      'js' => array(drupal_get_path('module', 'shortcut') . '/js/shortcut.admin.js'),
     );
 
     $form['actions'] = array('#type' => 'actions');
@@ -296,8 +296,8 @@ function shortcut_set_customize($form, &$form_state, $shortcut_set) {
   }
 
   $form['#attached'] = array(
-    'css' => array(drupal_get_path('module', 'shortcut') . '/shortcut.admin.css'),
-    'js' => array(drupal_get_path('module', 'shortcut') . '/shortcut.admin.js'),
+    'css' => array(drupal_get_path('module', 'shortcut') . '/css/shortcut.admin.css'),
+    'js' => array(drupal_get_path('module', 'shortcut') . '/js/shortcut.admin.js'),
   );
 
   $form['actions'] = array(
