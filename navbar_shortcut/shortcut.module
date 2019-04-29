@@ -671,18 +671,24 @@ function shortcut_preprocess_page(&$variables) {
       );
     }
   }
+
+  if (isset($variables['page']['toolbar'])) {
+    // If the toolbar is available, add a pre-render function to display the
+    // current shortcuts in the toolbar drawer.
+    $variables['page']['toolbar']['#pre_render'][] = 'shortcut_toolbar_pre_render';
+  }
 }
 
 /**
  * Implements hook_page_alter().
  */
-function shortcut_page_alter(&$page) {
+/*function shortcut_page_alter(&$page) {
   if (isset($page['page_top']['toolbar'])) {
     // If the toolbar is available, add a pre-render function to display the
     // current shortcuts in the toolbar drawer.
     $page['page_top']['toolbar']['#pre_render'][] = 'shortcut_toolbar_pre_render';
   }
-}
+}*/
 
 /**
  * Pre-render function for adding shortcuts to the toolbar drawer.
