@@ -43,6 +43,19 @@ function shortcut_menu() {
     'access arguments' => array('administer shortcuts'),
     'file' => 'shortcut.admin.inc',
   );
+  $items['admin/config/user-interface/shortcut/sets'] = array(
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'title' => 'Shortcuts',
+  );
+  $items['admin/config/user-interface/shortcut/settings'] = array(
+    'type' => MENU_LOCAL_TASK,
+    'title' => 'Settings',
+    'weight' => 10,
+    'description' => 'Adjust Shortcut module settings.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('shortcut_settings'),
+    'access arguments' => array('administer site configuration'),
+  );
   $items['admin/config/user-interface/shortcut/add-set'] = array(
     'title' => 'Add shortcut set',
     'page callback' => 'drupal_get_form',
@@ -125,15 +138,6 @@ function shortcut_menu() {
     'access arguments' => array(1),
     'type' => MENU_LOCAL_TASK,
     'file' => 'shortcut.admin.inc',
-  );
-
-  // Module settings.
-  $items['admin/config/user-interface/shortcut'] = array(
-    'title' => 'Shortcut',
-    'description' => 'Adjust Shortcut module settings.',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_settings'),
-    'access arguments' => array('administer site configuration'),
   );
 
   return $items;
@@ -677,6 +681,10 @@ function shortcut_preprocess_page(&$variables) {
     // current shortcuts in the toolbar drawer.
     $variables['page']['toolbar']['#pre_render'][] = 'shortcut_toolbar_pre_render';
   }
+
+  if (isset($variables['page'])) {
+    drupal_add_css(drupal_get_path('module', 'shortcut') . '/css/shortcut.settings.css');
+  }
 }
 
 /**
@@ -770,9 +778,9 @@ function shortcut_settings() {
 
   $form['shortcut_max_slots'] = array(
     '#type' => 'number',
-    '#title' => t('Maximum number of shortcuts'),
+    '#title' => t('Maximum number of shortcuts:'),
     '#default_value' => $config->get('shortcut_max_slots'),
-    '#attributes' => array ('min' => 1, 'max' => 100, 'step' => 1),
+    '#attributes' => array ('min' => 1, 'max' => 100, 'step' => 1, 'class' => array('shortcut-max-input')),
     '#description' => t('The maximum number of shortcuts allowed to be added to a shortcut set.'),
   );
 
