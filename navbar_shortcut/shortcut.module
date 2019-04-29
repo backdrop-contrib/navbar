@@ -158,6 +158,15 @@ function shortcut_menu() {
     'file' => 'shortcut.admin.inc',
   );
 
+  // Module settings.
+  $items['admin/config/user-interface/shortcut'] = array(
+    'title' => 'Shortcut',
+    'description' => 'Adjust Shortcut module settings.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('shortcut_settings'),
+    'access arguments' => array('administer site configuration'),
+  );
+
   return $items;
 }
 
@@ -764,4 +773,41 @@ function shortcut_set_title($shortcut_set) {
  */
 function shortcut_set_title_callback($shortcut_set) {
   return $shortcut_set->title;
+}
+
+/**
+ * Implements hook_config_info().
+ */
+function shortcut_config_info() {
+ $prefixes['shortcut.settings'] = array(
+ 'label' => t('Shortcut module settings'),
+ 'group' => t('Configuration'),
+ );
+return $prefixes;
+}
+
+/**
+ * Form builder function for module settings.
+ */
+function shortcut_settings() {
+  $config = config('shortcut.settings');
+  $form['#config'] = 'shortcut.settings';
+
+  $form['shortcut_max_slots'] = array(
+    '#type' => 'number',
+    '#title' => t('Maximum number of shortcuts'),
+    '#default_value' => $config->get('shortcut_max_slots'),
+    '#attributes' => array ('min' => 1, 'max' => 100, 'step' => 1),
+    '#description' => t('The maximum number of shortcuts allowed to be added to a shortcut set.'),
+  );
+
+  $form['actions'] = array(
+    '#type' => 'actions',
+  );
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+
+  return system_settings_form($form);
 }

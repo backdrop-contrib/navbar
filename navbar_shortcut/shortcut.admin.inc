@@ -14,7 +14,7 @@
  *   The maximum number of shortcuts allowed to be added to a shortcut set.
  */
 function shortcut_max_slots() {
-  return variable_get('shortcut_max_slots', 7);
+  return config_get('shortcut.settings', 'shortcut_max_slots');
 }
 
 /**
@@ -491,7 +491,7 @@ function _shortcut_link_form_elements($shortcut_link = NULL) {
     '#description' => t('The path to the shortcut.'),
     '#size' => 40,
     '#maxlength' => 255,
-    '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
+    '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (config_get('system.core', 'clean_url') ? '' : '?q='),
     '#default_value' => $shortcut_link['link_path'],
   );
 
