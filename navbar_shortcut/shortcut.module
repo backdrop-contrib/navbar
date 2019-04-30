@@ -700,11 +700,11 @@ function shortcut_set_title_callback($shortcut_set) {
  * Implements hook_config_info().
  */
 function shortcut_config_info() {
- $prefixes['shortcut.settings'] = array(
- 'label' => t('Shortcut module settings'),
- 'group' => t('Configuration'),
- );
-return $prefixes;
+  $prefixes['shortcut.settings'] = array(
+    'label' => t('Shortcut module settings'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
 }
 
 /**
@@ -718,7 +718,7 @@ function shortcut_settings() {
     '#type' => 'number',
     '#title' => t('Maximum number of shortcuts:'),
     '#default_value' => $config->get('shortcut_max_slots'),
-    '#attributes' => array ('min' => 1, 'max' => 100, 'step' => 1, 'class' => array('shortcut-max-input')),
+    '#attributes' => array('min' => 1, 'max' => 100, 'step' => 1, 'class' => array('shortcut-max-input')),
     '#description' => t('The maximum number of shortcuts allowed to be added to a shortcut set.'),
   );
 
