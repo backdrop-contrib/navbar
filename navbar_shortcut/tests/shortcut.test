@@ -31,9 +31,9 @@ class ShortcutTestCase extends DrupalWebTestCase {
   protected $set;
 
   function setUp() {
-    parent::setUp('toolbar', 'shortcut');
+    parent::setUp('navbar', 'shortcut');
     // Create users.
-    $this->admin_user = $this->drupalCreateUser(array('access toolbar', 'administer shortcuts', 'view the administration theme', 'create article content', 'create page content', 'access content overview'));
+    $this->admin_user = $this->drupalCreateUser(array('access navbar', 'administer shortcuts', 'view the administration theme', 'create page content', 'access content overview'));
     $this->shortcut_user = $this->drupalCreateUser(array('customize shortcut links', 'switch shortcut sets'));
 
     // Create a node.
@@ -141,14 +141,6 @@ class ShortcutLinksTestCase extends ShortcutTestCase {
   }
 
   /**
-   * Tests that the "add to shortcut" link changes to "remove shortcut".
-   */
-  function testShortcutQuickLink() {
-    $this->drupalGet($this->set->links[0]['link_path']);
-    $this->assertRaw(t('Remove from %title shortcuts', array('%title' => $this->set->title)), '"Add to shortcuts" link properly switched to "Remove from shortcuts".');
-  }
-
-  /**
    * Tests that shortcut links can be renamed.
    */
   function testShortcutLinkRename() {
@@ -208,11 +200,6 @@ class ShortcutLinksTestCase extends ShortcutTestCase {
     // The user does not have access to this path.
     $this->drupalGet('admin/modules');
     $this->assertNoRaw('add-shortcut', 'Add to shortcuts link was not shown on a page the user does not have access to.');
-
-    // Verify that the testing mechanism works by verifying the shortcut
-    // link appears on admin/content/node.
-    $this->drupalGet('admin/content/node');
-    $this->assertRaw('add-shortcut', 'Add to shortcuts link was shown on a page the user does have access to.');
   }
 }
 
