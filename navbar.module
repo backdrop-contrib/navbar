@@ -1484,6 +1484,7 @@ function navbar_theme_settings() {
     '#type' => 'checkboxes',
     '#title' => t('Enabled components'),
     '#options' => array(
+      'navbar.shortcut' => t('Shortcut tray'),
       'navbar.user' => t('My account'),
       'navbar.alert' => t('Notification badge about errors'),
       'navbar.users' => t('User counts'),

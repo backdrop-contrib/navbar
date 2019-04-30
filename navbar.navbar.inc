@@ -222,47 +222,46 @@ function navbar_navbar() {
     if (!isset($items['right']['tab'])) {
       unset($items['right']);
     }
-  }
 
-  // Add a shortcuts tab.
-  if (module_exists('shortcut')) {
-    $links = shortcut_renderable_links();
-    $shortcut_set = shortcut_current_displayed_set();
-    $configure_link = NULL;
-    if (shortcut_set_edit_access($shortcut_set)) {
-      $configure_link = array(
-        '#type' => 'link',
-        '#title' => t('Edit shortcuts'),
-        '#href' => 'admin/config/user-interface/shortcut/' . $shortcut_set->set_name,
-        '#options' => array('attributes' => array('class' => array('edit-shortcuts'))),
-      );
-    }
-    if (!empty($links) || !empty($configure_link)) {
-      $items['shortcuts'] = array(
-        '#type' => 'navbar_item',
-        'tab' => array(
+    // Add a shortcuts tab.
+    if (module_exists('shortcut') && in_array('navbar.shortcut', $components)) {
+      $links = shortcut_renderable_links();
+      $shortcut_set = shortcut_current_displayed_set();
+      $configure_link = NULL;
+      if (shortcut_set_edit_access($shortcut_set)) {
+        $configure_link = array(
           '#type' => 'link',
-          '#title' => t('Shortcuts'),
-          '#href' => 'admin/config/user-interface/shortcut',
-          '#options' => array(
-            'attributes' => array(
-              'title' => t('Shortcuts'),
-              'class' => array('navbar-icon', 'navbar-icon-shortcut',),
+          '#title' => t('Edit shortcuts'),
+          '#href' => 'admin/config/user-interface/shortcut/' . $shortcut_set->set_name,
+          '#options' => array('attributes' => array('class' => array('edit-shortcuts'))),
+        );
+      }
+      if (!empty($links) || !empty($configure_link)) {
+        $items['shortcuts'] = array(
+          '#type' => 'navbar_item',
+          'tab' => array(
+            '#type' => 'link',
+            '#title' => t('Shortcuts'),
+            '#href' => 'admin/config/user-interface/shortcut',
+            '#options' => array(
+              'attributes' => array(
+                'title' => t('Shortcuts'),
+                'class' => array('navbar-icon', 'navbar-icon-shortcut',),
+              ),
             ),
           ),
-        ),
-        'tray' => array(
-          '#heading' => t('User-defined shortcuts'),
-          '#wrapper_attributes' => array(
-            'class' => array('navbar-tray-shortcuts', 'navbar-menu-shortcuts'),
+          'tray' => array(
+            '#heading' => t('User-defined shortcuts'),
+            '#wrapper_attributes' => array(
+              'class' => array('navbar-tray-shortcuts', 'navbar-menu-shortcuts'),
+            ),
+            'shortcuts' => $links,
+            'configure' => $configure_link,
           ),
-          'shortcuts' => $links,
-          'configure' => $configure_link,
-        ),
-        '#weight' => -10,
-      );
+          '#weight' => -10,
+        );
+      }
     }
   }
-
   return $items;
 }
