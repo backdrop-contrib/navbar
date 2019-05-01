@@ -248,3 +248,6 @@ html.js fieldset.collapsible div.fieldset-wrapper {
 .navbar-tools-alert .error-label {
   display: none;
 }
+.navbar-shortcut-max-input {
+  width: 70px;
+}

@@ -14,7 +14,7 @@
  *   The maximum number of shortcuts allowed to be added to a shortcut set.
  */
 function shortcut_max_slots() {
-  return config_get('shortcut.settings', 'shortcut_max_slots');
+  return config_get('navbar.settings', 'navbar_shortcut_max_slots');
 }
 
 /**

@@ -1,6 +1,8 @@
 {
     "_config_name": "navbar.settings",
+    "navbar_shortcut_max_slots": 7,
     "components": [
+        "navbar.shortcut",
         "navbar.user",
         "navbar.users",
         "navbar.alert"

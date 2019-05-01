@@ -43,19 +43,6 @@ function shortcut_menu() {
     'access arguments' => array('administer shortcuts'),
     'file' => 'shortcut.admin.inc',
   );
-  $items['admin/config/user-interface/shortcut/sets'] = array(
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-    'title' => 'Shortcuts',
-  );
-  $items['admin/config/user-interface/shortcut/settings'] = array(
-    'type' => MENU_LOCAL_TASK,
-    'title' => 'Settings',
-    'weight' => 10,
-    'description' => 'Adjust Shortcut module settings.',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_settings'),
-    'access arguments' => array('administer site configuration'),
-  );
   $items['admin/config/user-interface/shortcut/add-set'] = array(
     'title' => 'Add shortcut set',
     'page callback' => 'backdrop_get_form',
@@ -630,10 +617,6 @@ function shortcut_preprocess_page(&$variables) {
     // current shortcuts in the toolbar drawer.
     $variables['page']['toolbar']['#pre_render'][] = 'shortcut_toolbar_pre_render';
   }
-
-  if (isset($variables['page'])) {
-    backdrop_add_css(backdrop_get_path('module', 'shortcut') . '/css/shortcut.settings.css');
-  }
 }
 
 /**
@@ -694,41 +677,4 @@ function shortcut_set_title($shortcut_set) {
  */
 function shortcut_set_title_callback($shortcut_set) {
   return $shortcut_set->title;
-}
-
-/**
- * Implements hook_config_info().
- */
-function shortcut_config_info() {
-  $prefixes['shortcut.settings'] = array(
-    'label' => t('Shortcut module settings'),
-    'group' => t('Configuration'),
-  );
-  return $prefixes;
-}
-
-/**
- * Form builder function for module settings.
- */
-function shortcut_settings() {
-  $config = config('shortcut.settings');
-  $form['#config'] = 'shortcut.settings';
-
-  $form['shortcut_max_slots'] = array(
-    '#type' => 'number',
-    '#title' => t('Maximum number of shortcuts:'),
-    '#default_value' => $config->get('shortcut_max_slots'),
-    '#attributes' => array('min' => 1, 'max' => 100, 'step' => 1, 'class' => array('shortcut-max-input')),
-    '#description' => t('The maximum number of shortcuts allowed to be added to a shortcut set.'),
-  );
-
-  $form['actions'] = array(
-    '#type' => 'actions',
-  );
-  $form['actions']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Save'),
-  );
-
-  return system_settings_form($form);
 }

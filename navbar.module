@@ -1494,6 +1494,14 @@ function navbar_theme_settings() {
     '#description' => t('These features will be enabled/visible in the Navbar module. Untick the boxes to disable/hide them.'),
   );
 
+  $form['navbar_shortcut_max_slots'] = array(
+    '#type' => 'number',
+    '#title' => t('Maximum number of shortcuts:'),
+    '#default_value' => $config->get('navbar_shortcut_max_slots'),
+    '#attributes' => array('min' => 1, 'max' => 100, 'step' => 1, 'class' => array('navbar-shortcut-max-input')),
+    '#description' => t('The maximum number of shortcuts allowed to be added to a shortcut set.'),
+  );
+
   $form['actions'] = array(
     '#type' => 'actions',
   );
