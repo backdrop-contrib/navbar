@@ -13,167 +13,6 @@
  */
 define('SHORTCUT_DEFAULT_SET_NAME', 'shortcut-set-1');
 
-/**
- * Implements hook_permission().
- */
-function shortcut_permission() {
-  return array(
-    'administer shortcuts' => array(
-      'title' => t('Administer shortcuts'),
-    ),
-    'customize shortcut links' => array(
-      'title' => t('Edit current shortcut set'),
-      'description' => t('Editing the current shortcut set will affect other users if that set has been assigned to or selected by other users. Granting "Select any shortcut set" permission along with this permission will grant permission to edit any shortcut set.'),
-    ),
-    'switch shortcut sets' => array(
-      'title' => t('Select any shortcut set'),
-      'description' => t('From all shortcut sets, select one to be own active set. Without this permission, an administrator selects shortcut sets for users.'),
-    ),
-  );
-}
-
-/**
- * Implements hook_menu().
- */
-function shortcut_menu() {
-  $items['admin/config/user-interface/shortcut'] = array(
-    'title' => 'Shortcuts',
-    'description' => 'Add and modify shortcut sets.',
-    'page callback' => 'shortcut_set_admin',
-    'access arguments' => array('administer shortcuts'),
-    'file' => 'shortcut.admin.inc',
-  );
-  $items['admin/config/user-interface/shortcut/add-set'] = array(
-    'title' => 'Add shortcut set',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_set_add_form'),
-    'access arguments' => array('administer shortcuts'),
-    'type' => MENU_LOCAL_ACTION,
-    'file' => 'shortcut.admin.inc',
-  );
-  $items['admin/config/user-interface/shortcut/%shortcut_set'] = array(
-    'title' => 'Edit shortcuts',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_set_customize', 4),
-    'title callback' => 'shortcut_set_title_callback',
-    'title arguments' => array(4),
-    'access callback' => 'shortcut_set_edit_access',
-    'access arguments' => array(4),
-    'file' => 'shortcut.admin.inc',
-  );
-  $items['admin/config/user-interface/shortcut/%shortcut_set/links'] = array(
-    'title' => 'List links',
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-  );
-  $items['admin/config/user-interface/shortcut/%shortcut_set/edit'] = array(
-    'title' => 'Edit set name',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_set_edit_form', 4),
-    'access callback' => 'shortcut_set_edit_access',
-    'access arguments' => array(4),
-    'type' => MENU_LOCAL_TASK,
-    'file' => 'shortcut.admin.inc',
-    'weight' => 10,
-  );
-  $items['admin/config/user-interface/shortcut/%shortcut_set/delete'] = array(
-    'title' => 'Delete shortcut set',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_set_delete_form', 4),
-    'access callback' => 'shortcut_set_delete_access',
-    'access arguments' => array(4),
-    'file' => 'shortcut.admin.inc',
-  );
-  $items['admin/config/user-interface/shortcut/%shortcut_set/add-link'] = array(
-    'title' => 'Add shortcut',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_link_add', 4),
-    'access callback' => 'shortcut_set_edit_access',
-    'access arguments' => array(4),
-    'type' => MENU_LOCAL_ACTION,
-    'file' => 'shortcut.admin.inc',
-  );
-  $items['admin/config/user-interface/shortcut/%shortcut_set/add-link-inline'] = array(
-    'title' => 'Add shortcut',
-    'page callback' => 'shortcut_link_add_inline',
-    'page arguments' => array(4),
-    'access callback' => 'shortcut_set_edit_access',
-    'access arguments' => array(4),
-    'type' => MENU_CALLBACK,
-    'file' => 'shortcut.admin.inc',
-  );
-  $items['admin/config/user-interface/shortcut/link/%menu_link'] = array(
-    'title' => 'Edit shortcut',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_link_edit', 5),
-    'access callback' => 'shortcut_link_access',
-    'access arguments' => array(5),
-    'file' => 'shortcut.admin.inc',
-  );
-  $items['admin/config/user-interface/shortcut/link/%menu_link/delete'] = array(
-    'title' => 'Delete shortcut',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_link_delete', 5),
-    'access callback' => 'shortcut_link_access',
-    'access arguments' => array(5),
-    'file' => 'shortcut.admin.inc',
-  );
-  $items['user/%user/shortcuts'] = array(
-    'title' => 'Shortcuts',
-    'page callback' => 'backdrop_get_form',
-    'page arguments' => array('shortcut_set_switch', 1),
-    'access callback' => 'shortcut_set_switch_access',
-    'access arguments' => array(1),
-    'type' => MENU_LOCAL_TASK,
-    'file' => 'shortcut.admin.inc',
-  );
-
-  return $items;
-}
-
-/**
- * Implements hook_admin_paths().
- */
-function shortcut_admin_paths() {
-  $paths = array(
-    'user/*/shortcuts' => TRUE,
-  );
-  return $paths;
-}
-
-/**
- * Implements hook_theme().
- */
-function shortcut_theme() {
-  return array(
-    'shortcut_set_customize' => array(
-      'render element' => 'form',
-      'file' => 'shortcut.admin.inc',
-    ),
-  );
-}
-
-/**
- * Implements hook_block_info().
- */
-function shortcut_block_info() {
-  $blocks['shortcuts']['info'] = t('Shortcuts');
-  // Shortcut blocks can't be cached because each menu item can have a custom
-  // access callback. menu.inc manages its own caching.
-  $blocks['shortcuts']['cache'] = BACKDROP_NO_CACHE;
-  return $blocks;
-}
-
-/**
- * Implements hook_block_view().
- */
-function shortcut_block_view($delta = '') {
-  if ($delta == 'shortcuts') {
-    $shortcut_set = shortcut_current_displayed_set();
-    $data['subject'] = t('@shortcut_set shortcuts', array('@shortcut_set' => $shortcut_set->title));
-    $data['content'] = shortcut_renderable_links($shortcut_set);
-    return $data;
-  }
-}
 
 /**
  * Access callback for editing a shortcut set.
@@ -189,10 +28,10 @@ function shortcut_block_view($delta = '') {
 function shortcut_set_edit_access($shortcut_set = NULL) {
   // Sufficiently-privileged users can edit their currently displayed shortcut
   // set, but not other sets. Shortcut administrators can edit any set.
-  if (user_access('administer shortcuts')) {
+  if (user_access('access navbar')) {
     return TRUE;
   }
-  if (user_access('customize shortcut links')) {
+  if (user_access('access navbar')) {
     return !isset($shortcut_set) || $shortcut_set == shortcut_current_displayed_set();
   }
   return FALSE;
@@ -210,7 +49,7 @@ function shortcut_set_edit_access($shortcut_set = NULL) {
  */
 function shortcut_set_delete_access($shortcut_set) {
   // Only admins can delete sets.
-  if (!user_access('administer shortcuts')) {
+  if (!user_access('access navbar')) {
     return FALSE;
   }
 
@@ -237,18 +76,18 @@ function shortcut_set_delete_access($shortcut_set) {
 function shortcut_set_switch_access($account = NULL) {
   global $user;
 
-  if (user_access('administer shortcuts')) {
+  if (user_access('access navbar')) {
     // Administrators can switch anyone's shortcut set.
     return TRUE;
   }
 
-  if (!user_access('switch shortcut sets')) {
+  if (!user_access('access navbar')) {
     // The user has no permission to switch anyone's shortcut set.
     return FALSE;
   }
 
   if (!isset($account) || $user->uid == $account->uid) {
-    // Users with the 'switch shortcut sets' permission can switch their own
+    // Users with the 'access navbar' permission can switch their own
     // shortcuts sets.
     return TRUE;
   }
@@ -606,45 +445,6 @@ function shortcut_renderable_links($shortcut_set = NULL) {
     $shortcut_set = shortcut_current_displayed_set();
   }
   return menu_tree($shortcut_set->set_name);
-}
-
-/**
- * Implements hook_preprocess_page().
- */
-function shortcut_preprocess_page(&$variables) {
-  if (isset($variables['page']['toolbar'])) {
-    // If the toolbar is available, add a pre-render function to display the
-    // current shortcuts in the toolbar drawer.
-    $variables['page']['toolbar']['#pre_render'][] = 'shortcut_toolbar_pre_render';
-  }
-}
-
-/**
- * Pre-render function for adding shortcuts to the toolbar drawer.
- */
-function shortcut_toolbar_pre_render($toolbar) {
-  $links = shortcut_renderable_links();
-  $links['#attached'] = array('css' => array(backdrop_get_path('module', 'shortcut') . '/css/shortcut.css'));
-  $links['#prefix'] = '<div class="toolbar-shortcuts">';
-  $links['#suffix'] = '</div>';
-  $shortcut_set = shortcut_current_displayed_set();
-  $configure_link = NULL;
-  if (shortcut_set_edit_access($shortcut_set)) {
-    $configure_link = array(
-      '#type' => 'link',
-      '#title' => t('Edit shortcuts'),
-      '#href' => 'admin/config/user-interface/shortcut/' . $shortcut_set->set_name,
-      '#options' => array('attributes' => array('id' => 'edit-shortcuts')),
-    );
-  }
-
-  $drawer = array(
-    'shortcuts' => $links,
-    'configure' => $configure_link,
-  );
-
-  $toolbar['toolbar_drawer'][] = $drawer;
-  return $toolbar;
 }
 
 /**

@@ -51,7 +51,7 @@ function shortcut_set_switch($form, &$form_state, $account = NULL) {
   }
 
   // Only administrators can add shortcut sets.
-  $add_access = user_access('administer shortcuts');
+  $add_access = user_access('access navbar');
   if ($add_access) {
     $options['new'] = t('New set');
   }
