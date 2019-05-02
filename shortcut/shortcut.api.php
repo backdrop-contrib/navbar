@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Hooks provided by the Shortcut module.
+ * Hooks provided by the Navbar Shortcut.
  */
 
 /**

@@ -32,6 +32,7 @@ function navbar_install() {
   if (backdrop_installation_attempted()) {
     menu_rebuild();
   }
+  module_load_include('inc', 'navbar', 'shortcut/shortcut');
   shortcut_set_save($shortcut_set);
 }
 
@@ -39,7 +40,7 @@ function navbar_install() {
  * Implements hook_uninstall().
  */
 function navbar_uninstall() {
-  backdrop_load('module', 'shortcut');
+  module_load_include('inc', 'navbar', 'shortcut/shortcut');
   // Delete the menu links associated with each shortcut set.
   foreach (shortcut_sets() as $shortcut_set) {
     menu_delete_links($shortcut_set->set_name);

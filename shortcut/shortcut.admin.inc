@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Administrative page callbacks for the shortcut module.
+ * Administrative page callbacks for the Navbar shortcut.
  */
 
 /**
@@ -83,8 +83,8 @@ function shortcut_set_switch($form, &$form_state, $account = NULL) {
     }
 
     $form['#attached'] = array(
-      'css' => array(backdrop_get_path('module', 'shortcut') . '/css/shortcut.admin.css'),
-      'js' => array(backdrop_get_path('module', 'shortcut') . '/js/shortcut.admin.js'),
+      'css' => array(backdrop_get_path('module', 'navbar') . '/css/shortcut.admin.css'),
+      'js' => array(backdrop_get_path('module', 'navbar') . '/js/shortcut.admin.js'),
     );
 
     $form['actions'] = array('#type' => 'actions');
@@ -296,8 +296,8 @@ function shortcut_set_customize($form, &$form_state, $shortcut_set) {
   }
 
   $form['#attached'] = array(
-    'css' => array(backdrop_get_path('module', 'shortcut') . '/css/shortcut.admin.css'),
-    'js' => array(backdrop_get_path('module', 'shortcut') . '/js/shortcut.admin.js'),
+    'css' => array(backdrop_get_path('module', 'navbar') . '/css/shortcut.admin.css'),
+    'js' => array(backdrop_get_path('module', 'navbar') . '/js/shortcut.admin.js'),
   );
 
   $form['actions'] = array(

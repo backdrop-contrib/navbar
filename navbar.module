@@ -71,7 +71,7 @@ function navbar_theme($existing, $type, $theme, $path) {
   // Shortcut theme.
   $items['shortcut_set_customize'] = array(
     'render element' => 'form',
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   return $items;
 }
@@ -101,7 +101,7 @@ function navbar_menu() {
     'description' => 'Add and modify shortcut sets.',
     'page callback' => 'shortcut_set_admin',
     'access arguments' => array('access navbar'),
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   $items['admin/config/user-interface/shortcut/add-set'] = array(
     'title' => 'Add shortcut set',
@@ -109,7 +109,7 @@ function navbar_menu() {
     'page arguments' => array('shortcut_set_add_form'),
     'access arguments' => array('access navbar'),
     'type' => MENU_LOCAL_ACTION,
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   $items['admin/config/user-interface/shortcut/%shortcut_set'] = array(
     'title' => 'Edit shortcuts',
@@ -119,7 +119,7 @@ function navbar_menu() {
     'title arguments' => array(4),
     'access callback' => 'shortcut_set_edit_access',
     'access arguments' => array(4),
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   $items['admin/config/user-interface/shortcut/%shortcut_set/links'] = array(
     'title' => 'List links',
@@ -132,7 +132,7 @@ function navbar_menu() {
     'access callback' => 'shortcut_set_edit_access',
     'access arguments' => array(4),
     'type' => MENU_LOCAL_TASK,
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
     'weight' => 10,
   );
   $items['admin/config/user-interface/shortcut/%shortcut_set/delete'] = array(
@@ -141,7 +141,7 @@ function navbar_menu() {
     'page arguments' => array('shortcut_set_delete_form', 4),
     'access callback' => 'shortcut_set_delete_access',
     'access arguments' => array(4),
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   $items['admin/config/user-interface/shortcut/%shortcut_set/add-link'] = array(
     'title' => 'Add shortcut',
@@ -150,7 +150,7 @@ function navbar_menu() {
     'access callback' => 'shortcut_set_edit_access',
     'access arguments' => array(4),
     'type' => MENU_LOCAL_ACTION,
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   $items['admin/config/user-interface/shortcut/%shortcut_set/add-link-inline'] = array(
     'title' => 'Add shortcut',
@@ -159,7 +159,7 @@ function navbar_menu() {
     'access callback' => 'shortcut_set_edit_access',
     'access arguments' => array(4),
     'type' => MENU_CALLBACK,
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   $items['admin/config/user-interface/shortcut/link/%menu_link'] = array(
     'title' => 'Edit shortcut',
@@ -167,7 +167,7 @@ function navbar_menu() {
     'page arguments' => array('shortcut_link_edit', 5),
     'access callback' => 'shortcut_link_access',
     'access arguments' => array(5),
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   $items['admin/config/user-interface/shortcut/link/%menu_link/delete'] = array(
     'title' => 'Delete shortcut',
@@ -175,7 +175,7 @@ function navbar_menu() {
     'page arguments' => array('shortcut_link_delete', 5),
     'access callback' => 'shortcut_link_access',
     'access arguments' => array(5),
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   $items['user/%user/shortcuts'] = array(
     'title' => 'Shortcuts',
@@ -184,7 +184,7 @@ function navbar_menu() {
     'access callback' => 'shortcut_set_switch_access',
     'access arguments' => array(1),
     'type' => MENU_LOCAL_TASK,
-    'file' => 'shortcut.admin.inc',
+    'file' => 'shortcut/shortcut.admin.inc',
   );
   return $items;
 }
@@ -432,7 +432,7 @@ function navbar_pre_render($element) {
 
   // Pre-render function for adding shortcuts to the toolbar drawer.
   $links = shortcut_renderable_links();
-  $links['#attached'] = array('css' => array(backdrop_get_path('module', 'shortcut') . '/css/shortcut.css'));
+  $links['#attached'] = array('css' => array(backdrop_get_path('module', 'navbar') . '/css/shortcut.css'));
   $links['#prefix'] = '<div class="toolbar-shortcuts">';
   $links['#suffix'] = '</div>';
   $shortcut_set = shortcut_current_displayed_set();

@@ -168,7 +168,7 @@ function shortcut_set_save(&$shortcut_set) {
   // If links were provided for the set, save them.
   if (isset($shortcut_set->links)) {
     foreach ($shortcut_set->links as &$link) {
-      // Do not specifically associate these links with the shortcut module,
+      // Do not specifically associate these links with the Navbar shortcut,
       // since other modules may make them editable via the menu system.
       // However, we do need to specify the correct menu name.
       $link['menu_name'] = $shortcut_set->set_name;

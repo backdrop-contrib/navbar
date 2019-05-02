@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Tests for shortcut.module.
+ * Tests for shortcut
  */
 
 /**
@@ -31,10 +31,10 @@ class ShortcutTestCase extends BackdropWebTestCase {
   protected $set;
 
   function setUp() {
-    parent::setUp('navbar', 'shortcut');
+    parent::setUp('navbar');
     // Create users.
-    $this->admin_user = $this->backdropCreateUser(array('access navbar', 'administer shortcuts', 'view the administration theme', 'create page content', 'access content overview'));
-    $this->shortcut_user = $this->backdropCreateUser(array('customize shortcut links', 'switch shortcut sets'));
+    $this->admin_user = $this->backdropCreateUser(array('access navbar', 'view the administration theme', 'create page content', 'access content overview'));
+    $this->shortcut_user = $this->backdropCreateUser(array('access navbar'));
 
     // Create a node.
     $this->node = $this->backdropCreateNode(array('type' => 'article'));
