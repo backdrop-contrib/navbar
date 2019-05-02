@@ -224,7 +224,7 @@ function navbar_navbar() {
     }
 
     // Add a shortcuts tab.
-    if (module_exists('shortcut') && in_array('navbar.shortcut', $components)) {
+    if (in_array('navbar.shortcut', $components)) {
       $links = shortcut_renderable_links();
       $shortcut_set = shortcut_current_displayed_set();
       $configure_link = NULL;
