@@ -53,15 +53,6 @@ div.add-or-remove-shortcuts {
   padding-top: 5px;
 }
 
-div.add-or-remove-shortcuts a span.icon {
-  display: block;
-  width: 12px;
-  background: transparent url(images/shortcut.png) no-repeat scroll 0 0;
-  height: 12px;
-  float: left;
-  margin-left:8px;
-}
-
 div.add-shortcut a:focus span.icon,
 div.add-shortcut a:hover span.icon {
   background-position: 0 -12px;
