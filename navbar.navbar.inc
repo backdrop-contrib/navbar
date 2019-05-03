@@ -225,10 +225,10 @@ function navbar_navbar() {
 
     // Add a shortcuts tab.
     if (in_array('navbar.shortcut', $components)) {
-      $links = shortcut_renderable_links();
-      $shortcut_set = shortcut_current_displayed_set();
+      $links = navbar_shortcut_renderable_links();
+      $shortcut_set = navbar_shortcut_current_displayed_set();
       $configure_link = NULL;
-      if (shortcut_set_edit_access($shortcut_set)) {
+      if (navbar_shortcut_set_edit_access($shortcut_set)) {
         $configure_link = array(
           '#type' => 'link',
           '#title' => t('Edit shortcuts'),

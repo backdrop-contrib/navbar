@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Tests for shortcut
+ * Tests for Navbar shortcut
  */
 
 /**
  * Defines base class for shortcut test cases.
  */
-class ShortcutTestCase extends BackdropWebTestCase {
+class NavbarShortcutTestCase extends BackdropWebTestCase {
 
   /**
    * User with permission to administer shortcuts.
@@ -41,8 +41,8 @@ class ShortcutTestCase extends BackdropWebTestCase {
 
     // Log in as admin and grab the default shortcut set.
     $this->backdropLogin($this->admin_user);
-    $this->set = shortcut_set_load(SHORTCUT_DEFAULT_SET_NAME);
-    shortcut_set_assign_user($this->set, $this->admin_user);
+    $this->set = navbar_shortcut_set_load(NAVBAR_SHORTCUT_DEFAULT_SET_NAME);
+    navbar_shortcut_set_assign_user($this->set, $this->admin_user);
   }
 
   /**
@@ -56,7 +56,7 @@ class ShortcutTestCase extends BackdropWebTestCase {
       $set->links[] = $this->generateShortcutLink('node/add');
       $set->links[] = $this->generateShortcutLink('admin/content');
     }
-    shortcut_set_save($set);
+    navbar_shortcut_set_save($set);
 
     return $set;
   }
@@ -99,7 +99,7 @@ class ShortcutTestCase extends BackdropWebTestCase {
 /**
  * Defines shortcut links test cases.
  */
-class ShortcutLinksTestCase extends ShortcutTestCase {
+class NavbarShortcutLinksTestCase extends NavbarShortcutTestCase {
 
   /**
    * Tests that creating a shortcut works properly.
@@ -132,7 +132,7 @@ class ShortcutLinksTestCase extends ShortcutTestCase {
       );
       $this->backdropPost('admin/config/user-interface/shortcut/' . $set->set_name . '/add-link', $form_data, t('Save'));
       $this->assertResponse(200);
-      $saved_set = shortcut_set_load($set->set_name);
+      $saved_set = navbar_shortcut_set_load($set->set_name);
       $paths = $this->getShortcutInformation($saved_set, 'link_path');
       $test_path = empty($test['path']) ? '<front>' : $test['path'];
       $this->assertTrue(in_array(backdrop_get_normal_path($test_path), $paths), 'Shortcut created: ' . $test['path']);
@@ -150,7 +150,7 @@ class ShortcutLinksTestCase extends ShortcutTestCase {
     $new_link_name = $this->randomName(10);
 
     $this->backdropPost('admin/config/user-interface/shortcut/link/' . $set->links[0]['mlid'], array('shortcut_link[link_title]' => $new_link_name, 'shortcut_link[link_path]' => $set->links[0]['link_path']), t('Save'));
-    $saved_set = shortcut_set_load($set->set_name);
+    $saved_set = navbar_shortcut_set_load($set->set_name);
     $titles = $this->getShortcutInformation($saved_set, 'link_title');
     $this->assertTrue(in_array($new_link_name, $titles), 'Shortcut renamed: ' . $new_link_name);
     $this->assertLink($new_link_name, 0, 'Renamed shortcut link appears on the page.');
@@ -166,7 +166,7 @@ class ShortcutLinksTestCase extends ShortcutTestCase {
     $new_link_path = 'admin/config';
 
     $this->backdropPost('admin/config/user-interface/shortcut/link/' . $set->links[0]['mlid'], array('shortcut_link[link_title]' => $set->links[0]['link_title'], 'shortcut_link[link_path]' => $new_link_path), t('Save'));
-    $saved_set = shortcut_set_load($set->set_name);
+    $saved_set = navbar_shortcut_set_load($set->set_name);
     $paths = $this->getShortcutInformation($saved_set, 'link_path');
     $this->assertTrue(in_array($new_link_path, $paths), 'Shortcut path changed: ' . $new_link_path);
     $this->assertLinkByHref($new_link_path, 0, 'Shortcut with new path appears on the page.');
@@ -179,7 +179,7 @@ class ShortcutLinksTestCase extends ShortcutTestCase {
     $set = $this->set;
 
     $this->backdropPost('admin/config/user-interface/shortcut/link/' . $set->links[0]['mlid'] . '/delete', array(), 'Delete');
-    $saved_set = shortcut_set_load($set->set_name);
+    $saved_set = navbar_shortcut_set_load($set->set_name);
     $mlids = $this->getShortcutInformation($saved_set, 'mlid');
     $this->assertFalse(in_array($set->links[0]['mlid'], $mlids), 'Successfully deleted a shortcut.');
   }
@@ -206,14 +206,14 @@ class ShortcutLinksTestCase extends ShortcutTestCase {
 /**
  * Defines shortcut set test cases.
  */
-class ShortcutSetsTestCase extends ShortcutTestCase {
+class NavbarShortcutSetsTestCase extends NavbarShortcutTestCase {
 
   /**
    * Tests creating a shortcut set.
    */
   function testShortcutSetAdd() {
     $new_set = $this->generateShortcutSet($this->randomName(10));
-    $sets = shortcut_sets();
+    $sets = navbar_shortcut_sets();
     $this->assertTrue(isset($sets[$new_set->set_name]), 'Successfully created a shortcut set.');
     $this->backdropGet('user/' . $this->admin_user->uid . '/shortcuts');
     $this->assertText($new_set->title, 'Generated shortcut set was listed as a choice on the user account page.');
@@ -229,7 +229,7 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
     // set.
     $this->backdropPost('user/' . $this->admin_user->uid . '/shortcuts', array('set' => $new_set->set_name), t('Change set'));
     $this->assertResponse(200);
-    $current_set = shortcut_current_displayed_set($this->admin_user);
+    $current_set = navbar_shortcut_current_displayed_set($this->admin_user);
     $this->assertTrue($new_set->set_name == $current_set->set_name, 'Successfully switched own shortcut set.');
   }
 
@@ -239,8 +239,8 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
   function testShortcutSetAssign() {
     $new_set = $this->generateShortcutSet($this->randomName(10));
 
-    shortcut_set_assign_user($new_set, $this->shortcut_user);
-    $current_set = shortcut_current_displayed_set($this->shortcut_user);
+    navbar_shortcut_set_assign_user($new_set, $this->shortcut_user);
+    $current_set = navbar_shortcut_current_displayed_set($this->shortcut_user);
     $this->assertTrue($new_set->set_name == $current_set->set_name, "Successfully switched another user's shortcut set.");
   }
 
@@ -253,7 +253,7 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
       'new' => $this->randomName(10),
     );
     $this->backdropPost('user/' . $this->admin_user->uid . '/shortcuts', $edit, t('Change set'));
-    $current_set = shortcut_current_displayed_set($this->admin_user);
+    $current_set = navbar_shortcut_current_displayed_set($this->admin_user);
     $this->assertNotEqual($current_set->set_name, $this->set->set_name, 'A shortcut set can be switched to at the same time as it is created.');
     $this->assertEqual($current_set->title, $edit['new'], 'The new set is correctly assigned to the user.');
   }
@@ -265,23 +265,23 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
     $edit = array('set' => 'new');
     $this->backdropPost('user/' . $this->admin_user->uid . '/shortcuts', $edit, t('Change set'));
     $this->assertText(t('The new set name is required.'));
-    $current_set = shortcut_current_displayed_set($this->admin_user);
+    $current_set = navbar_shortcut_current_displayed_set($this->admin_user);
     $this->assertEqual($current_set->set_name, $this->set->set_name, 'Attempting to switch to a new shortcut set without providing a set name does not succeed.');
   }
 
   /**
-   * Tests that shortcut_set_save() correctly updates existing links.
+   * Tests that navbar_shortcut_set_save() correctly updates existing links.
    */
   function testShortcutSetSave() {
     $set = $this->set;
     $old_mlids = $this->getShortcutInformation($set, 'mlid');
 
     $set->links[] = $this->generateShortcutLink('admin', $this->randomName(10));
-    shortcut_set_save($set);
-    $saved_set = shortcut_set_load($set->set_name);
+    navbar_shortcut_set_save($set);
+    $saved_set = navbar_shortcut_set_load($set->set_name);
 
     $new_mlids = $this->getShortcutInformation($saved_set, 'mlid');
-    $this->assertTrue(count(array_intersect($old_mlids, $new_mlids)) == count($old_mlids), 'shortcut_set_save() did not inadvertently change existing mlids.');
+    $this->assertTrue(count(array_intersect($old_mlids, $new_mlids)) == count($old_mlids), 'navbar_shortcut_set_save() did not inadvertently change existing mlids.');
   }
 
   /**
@@ -292,7 +292,7 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
 
     $new_title = $this->randomName(10);
     $this->backdropPost('admin/config/user-interface/shortcut/' . $set->set_name . '/edit', array('title' => $new_title), t('Save'));
-    $set = shortcut_set_load($set->set_name);
+    $set = navbar_shortcut_set_load($set->set_name);
     $this->assertTrue($set->title == $new_title, 'Shortcut set has been successfully renamed.');
   }
 
@@ -304,7 +304,7 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
     $existing_title = $this->set->title;
     $this->backdropPost('admin/config/user-interface/shortcut/' . $set->set_name . '/edit', array('title' => $existing_title), t('Save'));
     $this->assertRaw(t('The shortcut set %name already exists. Choose another name.', array('%name' => $existing_title)));
-    $set = shortcut_set_load($set->set_name);
+    $set = navbar_shortcut_set_load($set->set_name);
     $this->assertNotEqual($set->title, $existing_title, format_string('The shortcut set %title cannot be renamed to %new-title because a shortcut set with that title already exists.', array('%title' => $set->title, '%new-title' => $existing_title)));
   }
 
@@ -314,10 +314,10 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
   function testShortcutSetUnassign() {
     $new_set = $this->generateShortcutSet($this->randomName(10));
 
-    shortcut_set_assign_user($new_set, $this->shortcut_user);
-    shortcut_set_unassign_user($this->shortcut_user);
-    $current_set = shortcut_current_displayed_set($this->shortcut_user);
-    $default_set = shortcut_default_set($this->shortcut_user);
+    navbar_shortcut_set_assign_user($new_set, $this->shortcut_user);
+    navbar_shortcut_set_unassign_user($this->shortcut_user);
+    $current_set = navbar_shortcut_current_displayed_set($this->shortcut_user);
+    $default_set = navbar_shortcut_default_set($this->shortcut_user);
     $this->assertTrue($current_set->set_name == $default_set->set_name, "Successfully unassigned another user's shortcut set.");
   }
 
@@ -328,7 +328,7 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
     $new_set = $this->generateShortcutSet($this->randomName(10));
 
     $this->backdropPost('admin/config/user-interface/shortcut/' . $new_set->set_name . '/delete', array(), t('Delete'));
-    $sets = shortcut_sets();
+    $sets = navbar_shortcut_sets();
     $this->assertFalse(isset($sets[$new_set->set_name]), 'Successfully deleted a shortcut set.');
   }
 
@@ -336,7 +336,7 @@ class ShortcutSetsTestCase extends ShortcutTestCase {
    * Tests deleting the default shortcut set.
    */
   function testShortcutSetDeleteDefault() {
-    $this->backdropGet('admin/config/user-interface/shortcut/' . SHORTCUT_DEFAULT_SET_NAME . '/delete');
+    $this->backdropGet('admin/config/user-interface/shortcut/' . NAVBAR_SHORTCUT_DEFAULT_SET_NAME . '/delete');
     $this->assertResponse(403);
   }
 }

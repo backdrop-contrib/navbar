@@ -13,7 +13,7 @@
  * @return
  *   The maximum number of shortcuts allowed to be added to a shortcut set.
  */
-function shortcut_max_slots() {
+function navbar_shortcut_max_slots() {
   return config_get('navbar.settings', 'navbar_shortcut_max_slots');
 }
 
@@ -32,18 +32,18 @@ function shortcut_max_slots() {
  *   An array representing the form definition.
  *
  * @ingroup forms
- * @see shortcut_set_switch_validate()
- * @see shortcut_set_switch_submit()
+ * @see navbar_shortcutut_set_switch_validate()
+ * @see navbar_shortcutut_set_switch_submit()
  */
-function shortcut_set_switch($form, &$form_state, $account = NULL) {
+function navbar_shortcut_set_switch($form, &$form_state, $account = NULL) {
   global $user;
   if (!isset($account)) {
     $account = $user;
   }
 
   // Prepare the list of shortcut sets.
-  $sets = shortcut_sets();
-  $current_set = shortcut_current_displayed_set($account);
+  $sets = navbar_shortcut_sets();
+  $current_set = navbar_shortcut_current_displayed_set($account);
 
   $options = array();
   foreach ($sets as $name => $set) {
@@ -78,7 +78,7 @@ function shortcut_set_switch($form, &$form_state, $account = NULL) {
     );
 
     if ($user->uid != $account->uid) {
-      $default_set = shortcut_default_set($account);
+      $default_set = navbar_shortcut_default_set($account);
       $form['new']['#description'] = t('The new set is created by copying items from the %default set.', array('%default' => $default_set->title));
     }
 
@@ -104,36 +104,36 @@ function shortcut_set_switch($form, &$form_state, $account = NULL) {
 }
 
 /**
- * Validation handler for shortcut_set_switch().
+ * Validation handler for navbar_shortcut_set_switch().
  */
-function shortcut_set_switch_validate($form, &$form_state) {
+function navbar_shortcut_set_switch_validate($form, &$form_state) {
   if ($form_state['values']['set'] == 'new') {
     // Check to prevent creating a shortcut set with an empty title.
     if (trim($form_state['values']['new']) == '') {
       form_set_error('new', t('The new set name is required.'));
     }
     // Check to prevent a duplicate title.
-    if (shortcut_set_title_exists($form_state['values']['new'])) {
+    if (navbar_shortcut_set_title_exists($form_state['values']['new'])) {
       form_set_error('new', t('The shortcut set %name already exists. Choose another name.', array('%name' => $form_state['values']['new'])));
     }
   }
 }
 
 /**
- * Submit handler for shortcut_set_switch().
+ * Submit handler for navbar_shortcut_set_switch().
  */
-function shortcut_set_switch_submit($form, &$form_state) {
+function navbar_shortcut_set_switch_submit($form, &$form_state) {
   global $user;
   $account = $form_state['values']['account'];
 
   if ($form_state['values']['set'] == 'new') {
     // Save a new shortcut set with links copied from the user's default set.
-    $default_set = shortcut_default_set($account);
+    $default_set = navbar_shortcut_default_set($account);
     $set = (object) array(
       'title' => $form_state['values']['new'],
       'links' => menu_links_clone($default_set->links),
     );
-    shortcut_set_save($set);
+    navbar_shortcut_set_save($set);
     $replacements = array(
       '%user' => $account->name,
       '%set_name' => $set->title,
@@ -151,7 +151,7 @@ function shortcut_set_switch_submit($form, &$form_state) {
   }
   else {
     // Switch to a different shortcut set.
-    $set = shortcut_set_load($form_state['values']['set']);
+    $set = navbar_shortcut_set_load($form_state['values']['set']);
     $replacements = array(
       '%user' => $account->name,
       '%set_name' => $set->title,
@@ -160,14 +160,14 @@ function shortcut_set_switch_submit($form, &$form_state) {
   }
 
   // Assign the shortcut set to the provided user account.
-  shortcut_set_assign_user($set, $account);
+  navbar_shortcut_set_assign_user($set, $account);
 }
 
 /**
  * Menu page callback: builds the page for administering shortcut sets.
  */
-function shortcut_set_admin() {
-  $shortcut_sets = shortcut_sets();
+function navbar_shortcut_set_admin() {
+  $shortcut_sets = navbar_shortcut_sets();
   $header = array(t('Name'), array('data' => t('Operations'), 'colspan' => 4));
 
   $rows = array();
@@ -177,7 +177,7 @@ function shortcut_set_admin() {
       l(t('list links'), "admin/config/user-interface/shortcut/$set->set_name"),
       l(t('edit set name'), "admin/config/user-interface/shortcut/$set->set_name/edit"),
     );
-    if (shortcut_set_delete_access($set)) {
+    if (navbar_shortcut_set_delete_access($set)) {
       $row[] = l(t('delete set'), "admin/config/user-interface/shortcut/$set->set_name/delete");
     }
     else {
@@ -202,10 +202,10 @@ function shortcut_set_admin() {
  *   An array representing the form definition.
  *
  * @ingroup forms
- * @see shortcut_set_add_form_validate()
- * @see shortcut_set_add_form_submit()
+ * @see navbar_shortcutut_set_add_form_validate()
+ * @see navbar_shortcutut_set_add_form_submit()
  */
-function shortcut_set_add_form($form, &$form_state) {
+function navbar_shortcut_set_add_form($form, &$form_state) {
   $form['new'] = array(
     '#type' => 'textfield',
     '#title' => t('Set name'),
@@ -223,26 +223,26 @@ function shortcut_set_add_form($form, &$form_state) {
 }
 
 /**
- * Validation handler for shortcut_set_add_form().
+ * Validation handler for navbar_shortcutut_set_add_form().
  */
-function shortcut_set_add_form_validate($form, &$form_state) {
+function navbar_shortcut_set_add_form_validate($form, &$form_state) {
   // Check to prevent a duplicate title.
-  if (shortcut_set_title_exists($form_state['values']['new'])) {
+  if (navbar_shortcut_set_title_exists($form_state['values']['new'])) {
     form_set_error('new', t('The shortcut set %name already exists. Choose another name.', array('%name' => $form_state['values']['new'])));
   }
 }
 
 /**
- * Submit handler for shortcut_set_add_form().
+ * Submit handler for navbar_shortcutut_set_add_form().
  */
-function shortcut_set_add_form_submit($form, &$form_state) {
+function navbar_shortcut_set_add_form_submit($form, &$form_state) {
   // Save a new shortcut set with links copied from the user's default set.
-  $default_set = shortcut_default_set();
+  $default_set = navbar_shortcut_default_set();
   $set = (object) array(
     'title' => $form_state['values']['new'],
     'links' => menu_links_clone($default_set->links),
   );
-  shortcut_set_save($set);
+  navbar_shortcut_set_save($set);
   backdrop_set_message(t('The %set_name shortcut set has been created. You can edit it from this page.', array('%set_name' => $set->title)));
   $form_state['redirect'] = 'admin/config/user-interface/shortcut/' . $set->set_name;
 }
@@ -261,9 +261,9 @@ function shortcut_set_add_form_submit($form, &$form_state) {
  *   An array representing the form definition.
  *
  * @ingroup forms
- * @see shortcut_set_customize_submit()
+ * @see navbar_shortcut_set_customize_submit()
  */
-function shortcut_set_customize($form, &$form_state, $shortcut_set) {
+function navbar_shortcut_set_customize($form, &$form_state, $shortcut_set) {
   $form['#shortcut_set_name'] = $shortcut_set->set_name;
   $form['shortcuts'] = array(
     '#tree' => TRUE,
@@ -313,9 +313,9 @@ function shortcut_set_customize($form, &$form_state, $shortcut_set) {
 }
 
 /**
- * Submit handler for shortcut_set_customize().
+ * Submit handler for navbar_shortcut_set_customize().
  */
-function shortcut_set_customize_submit($form, &$form_state) {
+function navbar_shortcut_set_customize_submit($form, &$form_state) {
   foreach ($form_state['values']['shortcuts'] as $group => $links) {
     foreach ($links as $mlid => $data) {
       $link = menu_link_load($mlid);
@@ -334,10 +334,10 @@ function shortcut_set_customize_submit($form, &$form_state) {
  *   An associative array containing:
  *   - form: A render element representing the form.
  *
- * @see shortcut_set_customize()
+ * @see navbar_shortcut_set_customize()
  * @ingroup themeable
  */
-function theme_shortcut_set_customize($variables) {
+function theme_navbar_shortcut_set_customize($variables) {
   $form = $variables['form'];
   $map = array('disabled' => t('Disabled'), 'enabled' => t('Enabled'));
   $shortcuts_by_status = array(
@@ -374,7 +374,7 @@ function theme_shortcut_set_customize($variables) {
     }
 
     if ($status == 'enabled') {
-      for ($i = 0; $i < shortcut_max_slots(); $i++) {
+      for ($i = 0; $i < navbar_shortcut_max_slots(); $i++) {
         $rows['empty-' . $i] = array(
           'data' => array(array(
             'colspan' => 5,
@@ -385,7 +385,7 @@ function theme_shortcut_set_customize($variables) {
       }
       $count_shortcuts = count($shortcuts_by_status[$status]);
       if (!empty($count_shortcuts)) {
-        for ($i = 0; $i < min($count_shortcuts, shortcut_max_slots()); $i++) {
+        for ($i = 0; $i < min($count_shortcuts, navbar_shortcut_max_slots()); $i++) {
           $rows['empty-' . $i]['class'][] = 'shortcut-slot-hidden';
         }
       }
@@ -413,16 +413,16 @@ function theme_shortcut_set_customize($variables) {
  *   An array representing the form definition.
  *
  * @ingroup forms
- * @see shortcut_link_edit_validate()
- * @see shortcut_link_add_submit()
+ * @see navbar_shortcut_link_edit_validate()
+ * @see navbar_shortcut_link_add_submit()
  */
-function shortcut_link_add($form, &$form_state, $shortcut_set) {
+function navbar_shortcut_link_add($form, &$form_state, $shortcut_set) {
   backdrop_set_title(t('Add new shortcut'));
   $form['shortcut_set'] = array(
     '#type' => 'value',
     '#value' => $shortcut_set,
   );
-  $form += _shortcut_link_form_elements();
+  $form += _navbar_shortcut_link_form_elements();
   return $form;
 }
 
@@ -440,16 +440,16 @@ function shortcut_link_add($form, &$form_state, $shortcut_set) {
  *   An array representing the form definition.
  *
  * @ingroup forms
- * @see shortcut_link_edit_validate()
- * @see shortcut_link_edit_submit()
+ * @see navbar_shortcut_link_edit_validate()
+ * @see navbar_shortcut_link_edit_submit()
  */
-function shortcut_link_edit($form, &$form_state, $shortcut_link) {
+function navbar_shortcut_link_edit($form, &$form_state, $shortcut_link) {
   backdrop_set_title(t('Editing @shortcut', array('@shortcut' => $shortcut_link['link_title'])));
   $form['original_shortcut_link'] = array(
     '#type' => 'value',
     '#value' => $shortcut_link,
   );
-  $form += _shortcut_link_form_elements($shortcut_link);
+  $form += _navbar_shortcut_link_form_elements($shortcut_link);
   return $form;
 }
 
@@ -463,7 +463,7 @@ function shortcut_link_edit($form, &$form_state, $shortcut_link) {
  * @return
  *   An array of form elements.
  */
-function _shortcut_link_form_elements($shortcut_link = NULL) {
+function _navbar_shortcut_link_form_elements($shortcut_link = NULL) {
   if (!isset($shortcut_link)) {
     $shortcut_link = array(
       'link_title' => '',
@@ -495,7 +495,7 @@ function _shortcut_link_form_elements($shortcut_link = NULL) {
     '#default_value' => $shortcut_link['link_path'],
   );
 
-  $form['#validate'][] = 'shortcut_link_edit_validate';
+  $form['#validate'][] = 'navbar_shortcut_link_edit_validate';
 
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
@@ -509,16 +509,16 @@ function _shortcut_link_form_elements($shortcut_link = NULL) {
 /**
  * Validation handler for the shortcut link add and edit forms.
  */
-function shortcut_link_edit_validate($form, &$form_state) {
-  if (!shortcut_valid_link($form_state['values']['shortcut_link']['link_path'])) {
+function navbar_shortcut_link_edit_validate($form, &$form_state) {
+  if (!navbar_shortcut_valid_link($form_state['values']['shortcut_link']['link_path'])) {
     form_set_error('shortcut_link][link_path', t('The link must correspond to a valid path on the site.'));
   }
 }
 
 /**
- * Submit handler for shortcut_link_edit().
+ * Submit handler for navbar_shortcut_link_edit().
  */
-function shortcut_link_edit_submit($form, &$form_state) {
+function navbar_shortcut_link_edit_submit($form, &$form_state) {
   // Normalize the path in case it is an alias.
   $shortcut_path = backdrop_get_normal_path($form_state['values']['shortcut_link']['link_path']);
   if (empty($shortcut_path)) {
@@ -534,15 +534,15 @@ function shortcut_link_edit_submit($form, &$form_state) {
 }
 
 /**
- * Submit handler for shortcut_link_add().
+ * Submit handler for navbar_shortcut_link_add().
  */
-function shortcut_link_add_submit($form, &$form_state) {
+function navbar_shortcut_link_add_submit($form, &$form_state) {
   // Add the shortcut link to the set.
   $shortcut_set = $form_state['values']['shortcut_set'];
   $shortcut_link = $form_state['values']['shortcut_link'];
   $shortcut_link['menu_name'] = $shortcut_set->set_name;
-  shortcut_admin_add_link($shortcut_link, $shortcut_set, shortcut_max_slots());
-  shortcut_set_save($shortcut_set);
+  navbar_shortcut_admin_add_link($shortcut_link, $shortcut_set, navbar_shortcut_max_slots());
+  navbar_shortcut_set_save($shortcut_set);
   $form_state['redirect'] = 'admin/config/user-interface/shortcut/' . $shortcut_link['menu_name'];
   backdrop_set_message(t('Added a shortcut for %title.', array('%title' => $shortcut_link['link_title'])));
 }
@@ -563,7 +563,7 @@ function shortcut_link_add_submit($form, &$form_state) {
  *   exceed the limit will be automatically disabled. If not provided, no limit
  *   will be enforced.
  */
-function shortcut_admin_add_link($shortcut_link, &$shortcut_set, $limit = NULL) {
+function navbar_shortcut_admin_add_link($shortcut_link, &$shortcut_set, $limit = NULL) {
   if (isset($limit)) {
     // Disable any existing links at the end of the list that would cause the
     // limit to be exceeded. Take into account whether or not the new link will
@@ -587,7 +587,7 @@ function shortcut_admin_add_link($shortcut_link, &$shortcut_set, $limit = NULL) 
 
   // Add the link to the end of the list.
   $shortcut_set->links[] = $shortcut_link;
-  shortcut_set_reset_link_weights($shortcut_set);
+  navbar_shortcut_set_reset_link_weights($shortcut_set);
 }
 
 /**
@@ -599,16 +599,16 @@ function shortcut_admin_add_link($shortcut_link, &$shortcut_set, $limit = NULL) 
  *   An associative array containing the current state of the form.
  * @param object $shortcut_set
  *   An object representing the shortcut set, as returned from
- *   shortcut_set_load().
+ *   navbar_shortcutut_set_load().
  *
  * @return
  *   An array representing the form definition.
  *
  * @ingroup forms
- * @see shortcut_set_edit_form_validate()
- * @see shortcut_set_edit_form_submit()
+ * @see navbar_shortcut_set_edit_form_validate()
+ * @see navbar_shortcut_set_edit_form_submit()
  */
-function shortcut_set_edit_form($form, &$form_state, $shortcut_set) {
+function navbar_shortcut_set_edit_form($form, &$form_state, $shortcut_set) {
   $form['shortcut_set'] = array(
     '#type' => 'value',
     '#value' => $shortcut_set,
@@ -632,23 +632,23 @@ function shortcut_set_edit_form($form, &$form_state, $shortcut_set) {
 }
 
 /**
- * Validation handler for shortcut_set_edit_form().
+ * Validation handler for navbar_shortcut_set_edit_form().
  */
-function shortcut_set_edit_form_validate($form, &$form_state) {
+function navbar_shortcut_set_edit_form_validate($form, &$form_state) {
   // Check to prevent a duplicate title, if the title was edited from its
   // original value.
-  if ($form_state['values']['title'] != $form_state['values']['shortcut_set']->title && shortcut_set_title_exists($form_state['values']['title'])) {
+  if ($form_state['values']['title'] != $form_state['values']['shortcut_set']->title && navbar_shortcut_set_title_exists($form_state['values']['title'])) {
     form_set_error('title', t('The shortcut set %name already exists. Choose another name.', array('%name' => $form_state['values']['title'])));
   }
 }
 
 /**
- * Submit handler for shortcut_set_edit_form().
+ * Submit handler for navbar_shortcut_set_edit_form().
  */
-function shortcut_set_edit_form_submit($form, &$form_state) {
+function navbar_shortcut_set_edit_form_submit($form, &$form_state) {
   $shortcut_set = $form_state['values']['shortcut_set'];
   $shortcut_set->title = $form_state['values']['title'];
-  shortcut_set_save($shortcut_set);
+  navbar_shortcut_set_save($shortcut_set);
   backdrop_set_message(t('Updated set name to %set-name.', array('%set-name' => $shortcut_set->title)));
   $form_state['redirect'] = "admin/config/user-interface/shortcut/$shortcut_set->set_name";
 }
@@ -662,15 +662,15 @@ function shortcut_set_edit_form_submit($form, &$form_state) {
  *   An associative array containing the current state of the form.
  * @param object $shortcut_set
  *   An object representing the shortcut set, as returned from
- *   shortcut_set_load().
+ *   navbar_shortcut_set_load().
  *
  * @return
  *   An array representing the form definition.
  *
  * @ingroup forms
- * @see shortcut_set_delete_form_submit()
+ * @see navbar_shortcut_set_delete_form_submit()
  */
-function shortcut_set_delete_form($form, &$form_state, $shortcut_set) {
+function navbar_shortcut_set_delete_form($form, &$form_state, $shortcut_set) {
   $form['shortcut_set'] = array(
     '#type' => 'value',
     '#value' => $shortcut_set->set_name,
@@ -686,9 +686,9 @@ function shortcut_set_delete_form($form, &$form_state, $shortcut_set) {
       '@count users have chosen or been assigned to this shortcut set.') . '</p>';
   }
 
-  // Also, if a module implements hook_shortcut_default_set(), it's possible
+  // Also, if a module implements hook_navbar_shortcut_default_set(), it's possible
   // that this set is being used as a default set. Add a message about that too.
-  if (count(module_implements('shortcut_default_set')) > 0) {
+  if (count(module_implements('navbar_shortcut_default_set')) > 0) {
     $info .= '<p>' . t('If you have chosen this shortcut set as the default for some or all users, they may also be affected by deleting it.') . '</p>';
   }
 
@@ -707,11 +707,11 @@ function shortcut_set_delete_form($form, &$form_state, $shortcut_set) {
 }
 
 /**
- * Submit handler for shortcut_set_delete_form().
+ * Submit handler for navbar_shortcut_set_delete_form().
  */
-function shortcut_set_delete_form_submit($form, &$form_state) {
-  $shortcut_set = shortcut_set_load($form_state['values']['shortcut_set']);
-  shortcut_set_delete($shortcut_set);
+function navbar_shortcut_set_delete_form_submit($form, &$form_state) {
+  $shortcut_set = navbar_shortcut_set_load($form_state['values']['shortcut_set']);
+  navbar_shortcut_set_delete($shortcut_set);
   $form_state['redirect'] = 'admin/config/user-interface/shortcut';
   backdrop_set_message(t('The shortcut set %title has been deleted.', array('%title' => $shortcut_set->title)));
 }
@@ -730,9 +730,9 @@ function shortcut_set_delete_form_submit($form, &$form_state) {
  *   An array representing the form definition.
  *
  * @ingroup forms
- * @see shortcut_link_delete_submit()
+ * @see navbar_shortcut_link_delete_submit()
  */
-function shortcut_link_delete($form, &$form_state, $shortcut_link) {
+function navbar_shortcut_link_delete($form, &$form_state, $shortcut_link) {
   $form['shortcut_link'] = array(
     '#type' => 'value',
     '#value' => $shortcut_link,
@@ -749,9 +749,9 @@ function shortcut_link_delete($form, &$form_state, $shortcut_link) {
 }
 
 /**
- * Submit handler for shortcut_link_delete_submit().
+ * Submit handler for navbar_shortcut_link_delete_submit().
  */
-function shortcut_link_delete_submit($form, &$form_state) {
+function navbar_shortcut_link_delete_submit($form, &$form_state) {
   $shortcut_link = $form_state['values']['shortcut_link'];
   menu_link_delete($shortcut_link['mlid']);
   $form_state['redirect'] = 'admin/config/user-interface/shortcut/' . $shortcut_link['menu_name'];
@@ -764,18 +764,18 @@ function shortcut_link_delete_submit($form, &$form_state) {
  * After completion, redirects the user back to where they came from.
  *
  * @param $shortcut_set
- *   Returned from shortcut_set_load().
+ *   Returned from navbar_shortcut_set_load().
  */
-function shortcut_link_add_inline($shortcut_set) {
-  if (isset($_REQUEST['token']) && backdrop_valid_token($_REQUEST['token'], 'shortcut-add-link') && shortcut_valid_link($_GET['link'])) {
+function navbar_shortcut_link_add_inline($shortcut_set) {
+  if (isset($_REQUEST['token']) && backdrop_valid_token($_REQUEST['token'], 'shortcut-add-link') && navbar_shortcut_valid_link($_GET['link'])) {
     $item = menu_get_item($_GET['link']);
     $title = ($item && $item['title']) ? $item['title'] : $_GET['name'];
     $link = array(
       'link_title' => $title,
       'link_path' => $_GET['link'],
     );
-    shortcut_admin_add_link($link, $shortcut_set, shortcut_max_slots());
-    if (shortcut_set_save($shortcut_set)) {
+    navbar_shortcut_admin_add_link($link, $shortcut_set, navbar_shortcut_max_slots());
+    if (navbar_shortcut_set_save($shortcut_set)) {
       backdrop_set_message(t('Added a shortcut for %title.', array('%title' => $link['link_title'])));
     }
     else {

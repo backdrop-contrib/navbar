@@ -32,7 +32,7 @@ function navbar_install() {
   if (backdrop_installation_attempted()) {
     menu_rebuild();
   }
-  shortcut_set_save($shortcut_set);
+  navbar_shortcut_set_save($shortcut_set);
 }
 
 /**
@@ -41,7 +41,7 @@ function navbar_install() {
 function navbar_uninstall() {
   drupal_load('module', 'navbar');
   // Delete the menu links associated with each shortcut set.
-  foreach (shortcut_sets() as $shortcut_set) {
+  foreach (navbar_shortcut_sets() as $shortcut_set) {
     menu_delete_links($shortcut_set->set_name);
   }
 }

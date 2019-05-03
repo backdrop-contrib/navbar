@@ -1,0 +1,11 @@
+[NavbarShortcutLinksTestCase]
+name = Navbar shortcut link functionality
+description = Create, view, edit, delete, and change shortcut links.
+group = Menu
+file = navbar.test
+
+[NavbarShortcutSetsTestCase]
+name = Navbar shortcut set functionality
+description = Create, view, edit, delete, and change shortcut sets.
+group = Menu
+file = navbar.test

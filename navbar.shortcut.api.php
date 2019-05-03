@@ -30,10 +30,10 @@
  *   The name of the shortcut set that this module recommends for that user, if
  *   there is one.
  */
-function hook_shortcut_default_set($account) {
+function hook_navbar_shortcut_default_set($account) {
   // Use a special set of default shortcuts for administrators only.
   if (in_array(config_get('system.core', 'user_admin_role'), $account->roles)) {
-    return config_get('mymodulename.settings', 'mymodule_shortcut_admin_default_set');
+    return config_get('mymodulename.settings', 'mymodule_navbar_shortcut_admin_default_set');
   }
 }
 
