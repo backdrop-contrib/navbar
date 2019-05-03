@@ -69,7 +69,7 @@ function navbar_theme($existing, $type, $theme, $path) {
   }
 
   // Shortcut theme.
-  $items['shortcut_set_customize'] = array(
+  $items['navbar_shortcut_set_customize'] = array(
     'render element' => 'form',
     'file' => 'navbar.admin.inc',
   );
