@@ -73,7 +73,7 @@ function navbar_shortcut_set_switch($form, &$form_state, $account = NULL) {
       '#type' => 'textfield',
       '#title' => t('Name'),
       '#title_display' => 'invisible',
-      '#description' => t('The new set is created by copying items from your default shortcut set.'),
+      '#description' => t('The new set is created by copying items from your default shortcut set. You may need to ' . l('clear the cache', 'admin/config/development/performance') . ' after change.'),
       '#access' => $add_access,
     );
 
