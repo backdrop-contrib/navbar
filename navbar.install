@@ -50,7 +50,7 @@ function navbar_uninstall() {
  * Implements hook_schema().
  */
 function navbar_schema() {
-  $schema['shortcut_set'] = array(
+  $schema['navbar_shortcut_set'] = array(
     'description' => 'Stores information about sets of shortcuts links.',
     'fields' => array(
       'set_name' => array(
@@ -77,7 +77,7 @@ function navbar_schema() {
     ),
   );
 
-  $schema['shortcut_set_users'] = array(
+  $schema['navbar_shortcut_set_users'] = array(
     'description' => 'Maps users to shortcut sets.',
     'fields' => array(
       'uid' => array(
@@ -105,7 +105,7 @@ function navbar_schema() {
         'columns' => array('uid' => 'uid'),
       ),
       'set_name' => array(
-        'table' => 'shortcut_set',
+        'table' => 'navbar_shortcut_set',
         'columns' => array('set_name' => 'set_name'),
       ),
     ),

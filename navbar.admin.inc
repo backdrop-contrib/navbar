@@ -147,7 +147,7 @@ function navbar_shortcut_set_switch_submit($form, &$form_state) {
     else {
       backdrop_set_message(t('%user is now using a new shortcut set called %set_name. You can edit it from this page.', $replacements));
     }
-    $form_state['redirect'] = 'admin/config/user-interface/shortcut/' . $set->set_name;
+    $form_state['redirect'] = 'admin/config/user-interface/navbar_shortcut/' . $set->set_name;
   }
   else {
     // Switch to a different shortcut set.
@@ -174,11 +174,11 @@ function navbar_shortcut_set_admin() {
   foreach ($shortcut_sets as $set) {
     $row = array(
       check_plain($set->title),
-      l(t('list links'), "admin/config/user-interface/shortcut/$set->set_name"),
-      l(t('edit set name'), "admin/config/user-interface/shortcut/$set->set_name/edit"),
+      l(t('list links'), "admin/config/user-interface/navbar_shortcut/$set->set_name"),
+      l(t('edit set name'), "admin/config/user-interface/navbar_shortcut/$set->set_name/edit"),
     );
     if (navbar_shortcut_set_delete_access($set)) {
-      $row[] = l(t('delete set'), "admin/config/user-interface/shortcut/$set->set_name/delete");
+      $row[] = l(t('delete set'), "admin/config/user-interface/navbar_shortcut/$set->set_name/delete");
     }
     else {
       $row[] = '';
@@ -244,7 +244,7 @@ function navbar_shortcut_set_add_form_submit($form, &$form_state) {
   );
   navbar_shortcut_set_save($set);
   backdrop_set_message(t('The %set_name shortcut set has been created. You can edit it from this page.', array('%set_name' => $set->title)));
-  $form_state['redirect'] = 'admin/config/user-interface/shortcut/' . $set->set_name;
+  $form_state['redirect'] = 'admin/config/user-interface/navbar_shortcut/' . $set->set_name;
 }
 
 /**
@@ -291,8 +291,8 @@ function navbar_shortcut_set_customize($form, &$form_state, $shortcut_set) {
       '#attributes' => array('class' => array('shortcut-status-select')),
     );
 
-    $form['shortcuts'][$status][$mlid]['edit']['#markup'] = l(t('edit'), 'admin/config/user-interface/shortcut/link/' . $mlid);
-    $form['shortcuts'][$status][$mlid]['delete']['#markup'] = l(t('delete'), 'admin/config/user-interface/shortcut/link/' . $mlid . '/delete');
+    $form['shortcuts'][$status][$mlid]['edit']['#markup'] = l(t('edit'), 'admin/config/user-interface/navbar_shortcut/link/' . $mlid);
+    $form['shortcuts'][$status][$mlid]['delete']['#markup'] = l(t('delete'), 'admin/config/user-interface/navbar_shortcut/link/' . $mlid . '/delete');
   }
 
   $form['#attached'] = array(
@@ -393,7 +393,7 @@ function theme_navbar_shortcut_set_customize($variables) {
   }
 
   $header = array(t('Name'), t('Weight'), t('Status'), array('data' => t('Operations'), 'colspan' => 2));
-  $output = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'shortcuts'), 'empty' => t('No shortcuts available. <a href="@link">Add a shortcut</a>.', array('@link' => url('admin/config/user-interface/shortcut/' . $form['#shortcut_set_name'] . '/add-link')))));
+  $output = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'shortcuts'), 'empty' => t('No shortcuts available. <a href="@link">Add a shortcut</a>.', array('@link' => url('admin/config/user-interface/navbar_shortcut/' . $form['#shortcut_set_name'] . '/add-link')))));
   $output .= backdrop_render($form['actions']);
   $output = backdrop_render_children($form) . $output;
   return $output;
@@ -529,7 +529,7 @@ function navbar_shortcut_link_edit_submit($form, &$form_state) {
   $shortcut_link = array_merge($form_state['values']['original_shortcut_link'], $form_state['values']['shortcut_link']);
 
   menu_link_save($shortcut_link);
-  $form_state['redirect'] = 'admin/config/user-interface/shortcut/' . $shortcut_link['menu_name'];
+  $form_state['redirect'] = 'admin/config/user-interface/navbar_shortcut/' . $shortcut_link['menu_name'];
   backdrop_set_message(t('The shortcut %link has been updated.', array('%link' => $shortcut_link['link_title'])));
 }
 
@@ -543,7 +543,7 @@ function navbar_shortcut_link_add_submit($form, &$form_state) {
   $shortcut_link['menu_name'] = $shortcut_set->set_name;
   navbar_shortcut_admin_add_link($shortcut_link, $shortcut_set, navbar_shortcut_max_slots());
   navbar_shortcut_set_save($shortcut_set);
-  $form_state['redirect'] = 'admin/config/user-interface/shortcut/' . $shortcut_link['menu_name'];
+  $form_state['redirect'] = 'admin/config/user-interface/navbar_shortcut/' . $shortcut_link['menu_name'];
   backdrop_set_message(t('Added a shortcut for %title.', array('%title' => $shortcut_link['link_title'])));
 }
 
@@ -650,7 +650,7 @@ function navbar_shortcut_set_edit_form_submit($form, &$form_state) {
   $shortcut_set->title = $form_state['values']['title'];
   navbar_shortcut_set_save($shortcut_set);
   backdrop_set_message(t('Updated set name to %set-name.', array('%set-name' => $shortcut_set->title)));
-  $form_state['redirect'] = "admin/config/user-interface/shortcut/$shortcut_set->set_name";
+  $form_state['redirect'] = "admin/config/user-interface/navbar_shortcut/$shortcut_set->set_name";
 }
 
 /**
@@ -678,7 +678,7 @@ function navbar_shortcut_set_delete_form($form, &$form_state, $shortcut_set) {
 
   // Find out how many users are directly assigned to this shortcut set, and
   // make a message.
-  $number = db_query('SELECT COUNT(*) FROM {shortcut_set_users} WHERE set_name = :name', array(':name' => $shortcut_set->set_name))->fetchField();
+  $number = db_query('SELECT COUNT(*) FROM {navbar_shortcut_set_users} WHERE set_name = :name', array(':name' => $shortcut_set->set_name))->fetchField();
   $info = '';
   if ($number) {
     $info .= '<p>' . format_plural($number,
@@ -699,7 +699,7 @@ function navbar_shortcut_set_delete_form($form, &$form_state, $shortcut_set) {
   return confirm_form(
     $form,
     t('Are you sure you want to delete the shortcut set %title?', array('%title' => $shortcut_set->title)),
-    'admin/config/user-interface/shortcut/' . $shortcut_set->set_name,
+    'admin/config/user-interface/navbar_shortcut/' . $shortcut_set->set_name,
     t('This action cannot be undone.'),
     t('Delete'),
     t('Cancel')
@@ -712,7 +712,7 @@ function navbar_shortcut_set_delete_form($form, &$form_state, $shortcut_set) {
 function navbar_shortcut_set_delete_form_submit($form, &$form_state) {
   $shortcut_set = navbar_shortcut_set_load($form_state['values']['shortcut_set']);
   navbar_shortcut_set_delete($shortcut_set);
-  $form_state['redirect'] = 'admin/config/user-interface/shortcut';
+  $form_state['redirect'] = 'admin/config/user-interface/navbar_shortcut';
   backdrop_set_message(t('The shortcut set %title has been deleted.', array('%title' => $shortcut_set->title)));
 }
 
@@ -741,7 +741,7 @@ function navbar_shortcut_link_delete($form, &$form_state, $shortcut_link) {
   return confirm_form(
     $form,
     t('Are you sure you want to delete the shortcut %title?', array('%title' => $shortcut_link['link_title'])),
-    'admin/config/user-interface/shortcut/' . $shortcut_link['menu_name'],
+    'admin/config/user-interface/navbar_shortcut/' . $shortcut_link['menu_name'],
     t('This action cannot be undone.'),
     t('Delete'),
     t('Cancel')
@@ -754,7 +754,7 @@ function navbar_shortcut_link_delete($form, &$form_state, $shortcut_link) {
 function navbar_shortcut_link_delete_submit($form, &$form_state) {
   $shortcut_link = $form_state['values']['shortcut_link'];
   menu_link_delete($shortcut_link['mlid']);
-  $form_state['redirect'] = 'admin/config/user-interface/shortcut/' . $shortcut_link['menu_name'];
+  $form_state['redirect'] = 'admin/config/user-interface/navbar_shortcut/' . $shortcut_link['menu_name'];
   backdrop_set_message(t('The shortcut %title has been deleted.', array('%title' => $shortcut_link['link_title'])));
 }
 

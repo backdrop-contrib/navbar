@@ -232,7 +232,7 @@ function navbar_navbar() {
         $configure_link = array(
           '#type' => 'link',
           '#title' => t('Edit shortcuts'),
-          '#href' => 'admin/config/user-interface/shortcut/' . $shortcut_set->set_name,
+          '#href' => 'admin/config/user-interface/navbar_shortcut/' . $shortcut_set->set_name,
           '#options' => array('attributes' => array('class' => array('edit-shortcuts'))),
         );
       }
@@ -242,7 +242,7 @@ function navbar_navbar() {
           'tab' => array(
             '#type' => 'link',
             '#title' => t('Shortcuts'),
-            '#href' => 'admin/config/user-interface/shortcut',
+            '#href' => 'admin/config/user-interface/navbar_shortcut',
             '#options' => array(
               'attributes' => array(
                 'title' => t('Shortcuts'),
