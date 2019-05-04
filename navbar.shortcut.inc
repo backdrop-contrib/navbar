@@ -25,15 +25,7 @@ define('NAVBAR_SHORTCUT_DEFAULT_SET_NAME', 'navbar-shortcut-set-1');
  *   otherwise.
  */
 function navbar_shortcut_set_edit_access($shortcut_set = NULL) {
-  // Sufficiently-privileged users can edit their currently displayed shortcut
-  // set, but not other sets. Shortcut administrators can edit any set.
-  if (user_access('access navbar')) {
-    return TRUE;
-  }
-  if (user_access('access navbar')) {
-    return !isset($shortcut_set) || $shortcut_set == navbar_shortcut_current_displayed_set();
-  }
-  return FALSE;
+  return user_access('access navbar');
 }
 
 /**
@@ -73,25 +65,7 @@ function navbar_shortcut_set_delete_access($shortcut_set) {
  *   provided account, FALSE otherwise.
  */
 function navbar_shortcut_set_switch_access($account = NULL) {
-  global $user;
-
-  if (user_access('access navbar')) {
-    // Administrators can switch anyone's shortcut set.
-    return TRUE;
-  }
-
-  if (!user_access('access navbar')) {
-    // The user has no permission to switch anyone's shortcut set.
-    return FALSE;
-  }
-
-  if (!isset($account) || $user->uid == $account->uid) {
-    // Users with the 'access navbar' permission can switch their own
-    // shortcuts sets.
-    return TRUE;
-  }
-
-  return FALSE;
+  return user_access('access navbar');
 }
 
 /**
