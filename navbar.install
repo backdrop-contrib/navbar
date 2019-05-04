@@ -9,6 +9,7 @@
  * Implements hook_install().
  */
 function navbar_install() {
+  module_load_include('inc', 'navbar', 'navbar.shortcut');
   $t = get_t();
   // Create an initial default shortcut set.
   $shortcut_set = new stdClass();
@@ -39,7 +40,7 @@ function navbar_install() {
  * Implements hook_uninstall().
  */
 function navbar_uninstall() {
-  drupal_load('module', 'navbar');
+  module_load_include('inc', 'navbar', 'navbar.shortcut');
   // Delete the menu links associated with each shortcut set.
   foreach (navbar_shortcut_sets() as $shortcut_set) {
     menu_delete_links($shortcut_set->set_name);
