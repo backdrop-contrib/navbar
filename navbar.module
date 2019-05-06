@@ -1651,7 +1651,7 @@ function navbar_theme_settings() {
     '#type' => 'checkboxes',
     '#title' => t('Enabled components'),
     '#options' => array(
-      'navbar.shortcut' => t('Shortcut tray'),
+      'navbar.shortcut' => t('Shortcuts tray'),
       'navbar.user' => t('My account'),
       'navbar.alert' => t('Notification badge about errors'),
       'navbar.users' => t('User counts'),
@@ -1671,7 +1671,7 @@ function navbar_theme_settings() {
 
   $form['link1'] = array(
     '#prefix' => '<p>',
-    '#markup' => l(t('Shortcut tray settings'), 'admin/config/user-interface/navbar_shortcut'),
+    '#markup' => l(t('Shortcuts tray settings'), 'admin/config/user-interface/navbar_shortcut'),
     '#suffix' => '</p>',
   );
 
