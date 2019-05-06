@@ -184,8 +184,7 @@ function navbar_navbar() {
 
     // Add search bar.
     if (in_array('navbar.search', $components)) {
-      $items['right']['tab']['search'] =
-        array(
+      $items['right']['tab']['search'] = array(
           '#prefix' => '<div class="navbar-tools-first-right-component"><ul class="dropdown"><li class="navbar-tools-search">',
           '#suffix' => '</li></ul></div>',
           '#type' => 'search',
@@ -199,11 +198,10 @@ function navbar_navbar() {
     }
 
     // Add user counter.
-    if (in_array('navbar.users', $components) && user_access('administer site configuration')) {
+    if (in_array('navbar.user_count', $components) && user_access('administer site configuration')) {
       // Get Administration bar core module's user counter.
       $counter = admin_bar_links_users();
-      $items['right']['tab']['counter'] =
-        array(
+      $items['right']['tab']['counter'] = array(
           '#prefix' => '<div class="navbar-tools-users navbar-tools-right-component">',
           '#suffix' => '</div>',
           '#type' => 'link',

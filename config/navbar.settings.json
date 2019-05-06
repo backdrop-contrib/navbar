@@ -4,7 +4,7 @@
     "components": [
         "navbar.shortcut",
         "navbar.user",
-        "navbar.users",
+        "navbar.user_count",
         "navbar.alert"
     ]
 }

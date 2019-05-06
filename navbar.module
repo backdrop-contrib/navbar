@@ -1156,13 +1156,6 @@ function navbar_library_info() {
     ),
   );
 
-  // Ensure that each 3rd party library dependency has a default variant.
-  // Convert Libraries module data structures to library data structures.
-  // Modernizr
-  //$libraries['modernizr'] = _navbar_convert_libraries_to_library(libraries_detect('modernizr'), array(
-  //  'group' => JS_LIBRARY,
-  //  'weight' => -100,
-  //));
   $libraries['modernizr'] = array(
     'title' => 'Modernizr',
     'version' => '3.6.0',
@@ -1171,11 +1164,6 @@ function navbar_library_info() {
     ),
   );
 
-  // Underscore
-  //$libraries['underscore'] = _navbar_convert_libraries_to_library(libraries_detect('underscore'), array(
-  //  'group' => JS_LIBRARY,
-  //  'weight' => -20,
-  //));
   $libraries['underscore'] = array(
     'title' => 'Underscore',
     'version' => '1.9.1',
@@ -1184,11 +1172,6 @@ function navbar_library_info() {
     ),
   );
 
-  // Backbone
-  //$libraries['backbone'] = _navbar_convert_libraries_to_library(libraries_detect('backbone'), array(
-  //  'group' => JS_LIBRARY,
-  //  'weight' => -19,
-  //));
   $libraries['backbone'] = array(
     'title' => 'Backbone',
     'version' => '1.4.0',
@@ -1654,7 +1637,7 @@ function navbar_theme_settings() {
       'navbar.shortcut' => t('Shortcuts tray'),
       'navbar.user' => t('My account'),
       'navbar.alert' => t('Notification badge about errors'),
-      'navbar.users' => t('User counts'),
+      'navbar.user_count' => t('User counts'),
       'navbar.search' => t('Search bar'),
     ),
     '#default_value' => $config->get('components'),
