@@ -73,7 +73,7 @@ function navbar_shortcut_set_switch($form, &$form_state, $account = NULL) {
       '#type' => 'textfield',
       '#title' => t('Name'),
       '#title_display' => 'invisible',
-      '#description' => t('The new set is created by copying items from your default shortcut set. You may need to ' . l('clear the cache', 'admin/config/development/performance') . ' after change.'),
+      '#description' => t('The new set is created by copying items from your default shortcut set.'),
       '#access' => $add_access,
     );
 
@@ -81,6 +81,18 @@ function navbar_shortcut_set_switch($form, &$form_state, $account = NULL) {
       $default_set = navbar_shortcut_default_set($account);
       $form['new']['#description'] = t('The new set is created by copying items from the %default set.', array('%default' => $default_set->title));
     }
+
+    $form['link1'] = array(
+      '#prefix' => '<p>',
+      '#markup' => l(t("Navbar module's configure page"), 'admin/config/administration/navbar'),
+      '#suffix' => '</p>',
+    );
+
+    $form['link2'] = array(
+      '#prefix' => '<p>',
+      '#markup' => t('You may need to') . ' ' . l(t('clear the cache'), 'admin/config/development/performance') . ' ' . t('after change.'),
+      '#suffix' => '</p>',
+    );
 
     $form['#attached'] = array(
       'css' => array(backdrop_get_path('module', 'navbar') . '/css/shortcut.admin.css'),

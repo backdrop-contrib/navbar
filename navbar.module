@@ -1643,6 +1643,7 @@ function navbar_init() {
  * Form builder function for module settings.
  */
 function navbar_theme_settings() {
+  global $user;
   $config = config('navbar.settings');
   $form['#config'] = 'navbar.settings';
 
@@ -1668,9 +1669,22 @@ function navbar_theme_settings() {
     '#description' => t('The maximum number of shortcuts allowed to be added to a shortcut set.'),
   );
 
+  $form['link1'] = array(
+    '#prefix' => '<p>',
+    '#markup' => l(t('Shortcut tray settings'), 'admin/config/user-interface/navbar_shortcut'),
+    '#suffix' => '</p>',
+  );
+
+  $form['link2'] = array(
+    '#prefix' => '<p>',
+    '#markup' => l(t('Current shortcut set'), 'user/' . $user->uid . '/navbar_shortcuts'),
+    '#suffix' => '</p>',
+  );
+
   $form['actions'] = array(
     '#type' => 'actions',
   );
+
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save configuration'),
