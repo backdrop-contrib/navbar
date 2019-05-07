@@ -119,13 +119,97 @@ function navbar_schema() {
  * Implements hook_update_N().
  */
 function navbar_update_1700() {
-  $config = config('navbar.settings');
-  $components = $config->get('components');
-  if (in_array('navbar.users', $components)) {
-    // Replace 'navbar.users' with 'navbar.user_count' in the settings.
-    $key = array_search('navbar.users', $components);
-    $components[$key] = 'navbar.user_count';
-    $config->set('components', $components);
-    $config->save();
+  // Switch on some features.
+  $components = array('navbar.user', 'navbar.shortcut', 'navbar.user_count', 'navbar.alert', 'navbar.search');
+  config_set('navbar.settings', 'components', $components);
+  config_set('navbar.settings', 'navbar_shortcut_max_slots', 7);
+  // Create shortcut tables.
+  $schema['navbar_shortcut_set'] = array(
+    'description' => 'Stores information about sets of shortcuts links.',
+    'fields' => array(
+      'set_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => "Primary Key: The {menu_links}.menu_name under which the set's links are stored.",
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The title of the set.',
+      ),
+    ),
+    'primary key' => array('set_name'),
+    'foreign keys' => array(
+      'menu_name' => array(
+        'table' => 'menu_links',
+        'columns' => array('set_name' => 'menu_name'),
+      ),
+    ),
+  );
+  db_create_table('navbar_shortcut_set', $schema['navbar_shortcut_set']);
+
+  $schema['navbar_shortcut_set_users'] = array(
+    'description' => 'Maps users to shortcut sets.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The {users}.uid for this set.',
+      ),
+      'set_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => "The {shortcut_set}.set_name that will be displayed for this user.",
+      ),
+    ),
+    'primary key' => array('uid'),
+    'indexes' => array(
+      'set_name' => array('set_name'),
+    ),
+    'foreign keys' => array(
+      'set_user' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+      'set_name' => array(
+        'table' => 'navbar_shortcut_set',
+        'columns' => array('set_name' => 'set_name'),
+      ),
+    ),
+  );
+  db_create_table('navbar_shortcut_set_users', $schema['navbar_shortcut_set_users']);
+
+  // Create an initial default shortcut set.
+  module_load_include('inc', 'navbar', 'navbar.shortcut');
+  $t = get_t();
+  $shortcut_set = new stdClass();
+  $shortcut_set->title = $t('Default');
+  $shortcut_set->links = array(
+    array(
+      'link_path' => 'node/add',
+      'link_title' => $t('Add content'),
+      'weight' => -20,
+    ),
+    array(
+      'link_path' => 'admin/content',
+      'link_title' => $t('Find content'),
+      'weight' => -19,
+    ),
+  );
+  // If Backdrop is being installed, rebuild the menu before saving the shortcut
+  // set, to make sure the links defined above can be correctly saved. (During
+  // installation, the menu might not have been built at all yet, or it might
+  // have been built but without the node module's links in it.)
+  if (backdrop_installation_attempted()) {
+    menu_rebuild();
   }
+  navbar_shortcut_set_save($shortcut_set);
 }
