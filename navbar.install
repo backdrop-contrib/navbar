@@ -122,8 +122,10 @@ function navbar_update_1700() {
   // Switch on some features.
   $components = array('navbar.user', 'navbar.shortcut', 'navbar.user_count', 'navbar.alert', 'navbar.search');
   config_set('navbar.settings', 'components', $components);
-  config_set('navbar.settings', 'navbar_shortcut_max_slots', 7);
-  // Create shortcut tables.
+  if (!config_get('navbar.settings', 'navbar_shortcut_max_slots')) {
+    config_set('navbar.settings', 'navbar_shortcut_max_slots', 7);
+  }
+  // Create shortcut db tables.
   $schema['navbar_shortcut_set'] = array(
     'description' => 'Stores information about sets of shortcuts links.',
     'fields' => array(
@@ -150,7 +152,10 @@ function navbar_update_1700() {
       ),
     ),
   );
-  db_create_table('navbar_shortcut_set', $schema['navbar_shortcut_set']);
+
+  if (!db_table_exists('navbar_shortcut_set')) {
+    db_create_table('navbar_shortcut_set', $schema['navbar_shortcut_set']);
+  }
 
   $schema['navbar_shortcut_set_users'] = array(
     'description' => 'Maps users to shortcut sets.',
@@ -185,31 +190,44 @@ function navbar_update_1700() {
       ),
     ),
   );
-  db_create_table('navbar_shortcut_set_users', $schema['navbar_shortcut_set_users']);
-
-  // Create an initial default shortcut set.
-  module_load_include('inc', 'navbar', 'navbar.shortcut');
-  $t = get_t();
-  $shortcut_set = new stdClass();
-  $shortcut_set->title = $t('Default');
-  $shortcut_set->links = array(
-    array(
-      'link_path' => 'node/add',
-      'link_title' => $t('Add content'),
-      'weight' => -20,
-    ),
-    array(
-      'link_path' => 'admin/content',
-      'link_title' => $t('Find content'),
-      'weight' => -19,
-    ),
-  );
-  // If Backdrop is being installed, rebuild the menu before saving the shortcut
-  // set, to make sure the links defined above can be correctly saved. (During
-  // installation, the menu might not have been built at all yet, or it might
-  // have been built but without the node module's links in it.)
-  if (backdrop_installation_attempted()) {
-    menu_rebuild();
+  if (!db_table_exists('navbar_shortcut_set_users')) {
+    db_create_table('navbar_shortcut_set_users', $schema['navbar_shortcut_set_users']);
   }
-  navbar_shortcut_set_save($shortcut_set);
+
+  $count = db_select('navbar_shortcut_set', 'ss')
+    ->fields('ss')
+    ->condition('set_name', 'navbar-shortcut-set-1')
+    ->execute()
+    ->rowCount();
+  // Create an initial default shortcut set.
+  if (!$count) {
+    $t = get_t();
+    $shortcut_set = array(
+      array(
+        'link_path' => 'node/add',
+        'link_title' => $t('Add content'),
+        'weight' => -20,
+      ),
+      array(
+        'link_path' => 'admin/content',
+        'link_title' => $t('Find content'),
+        'weight' => -19,
+      ),
+    );
+    // If Backdrop is being installed, rebuild the menu before saving the shortcut
+    // set, to make sure the links defined above can be correctly saved. (During
+    // installation, the menu might not have been built at all yet, or it might
+    // have been built but without the node module's links in it.)
+    if (backdrop_installation_attempted()) {
+      menu_rebuild();
+    }
+    $record['set_name'] = 'navbar-shortcut-set-1';
+    $record['title'] = $t('Default');
+    db_insert('navbar_shortcut_set')->fields($record)->execute();
+    foreach ($shortcut_set as $link) {
+      $link['menu_name'] = 'navbar-shortcut-set-1';
+      $link['plid'] = 0;
+      menu_link_save($link);
+    }
+  }
 }
