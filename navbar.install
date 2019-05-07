@@ -115,3 +115,17 @@ function navbar_schema() {
   return $schema;
 }
 
+/**
+ * Implements hook_update_N().
+ */
+function navbar_update_1700() {
+  $config = config('navbar.settings');
+  $components = $config->get('components');
+  if (in_array('navbar.users', $components)) {
+    // Replace 'navbar.users' with 'navbar.user_count' in the settings.
+    $key = array_search('navbar.users', $components);
+    $components[$key] = 'navbar.user_count';
+    $config->set('components', $components);
+    $config->save();
+  }
+}
