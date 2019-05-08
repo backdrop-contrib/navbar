@@ -11,6 +11,10 @@
 #navbar-administration .navbar-icon.navbar-handle:focus {
   background-color: #323232;
 }
+#navbar-administration .navbar-box a:focus {
+  border-color: #777777;
+  background-color: #323232;
+}
 
 /**
  * Handle.
@@ -28,4 +32,88 @@
 .no-svg #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
   background-image: url("../icons/787878/arrow-right.png");
   background-size: auto auto;
+}
+
+/**
+ * Main menu icons.
+ */
+.navbar-icon-content:active:before,
+.navbar-icon-content.navbar-active:before {
+  background-image: url("../icons/bebebe/file.svg");
+}
+.no-svg .navbar-icon-content:active:before,
+.no-svg .navbar-icon-content.navbar-active:before {
+  background-image: url("../icons/bebebe/file.png");
+}
+.navbar-icon-user-accounts:active:before,
+.navbar-icon-user-accounts.navbar-active:before {
+  background-image: url("../icons/bebebe/people.svg");
+}
+.no-svg .navbar-icon-user-accounts:active:before,
+.no-svg .navbar-icon-user-accounts.navbar-active:before {
+  background-image: url("../icons/bebebe/people.png");
+}
+.navbar-icon-appearance:active:before,
+.navbar-icon-appearance.navbar-active:before {
+  background-image: url("../icons/bebebe/paintbrush.svg");
+}
+.no-svg .navbar-icon-appearance:active:before,
+.no-svg .navbar-icon-appearance.navbar-active:before {
+  background-image: url("../icons/bebebe/paintbrush.png");
+}
+.navbar-icon-functionality:active:before,
+.navbar-icon-functionality.navbar-active:before {
+  background-image: url("../icons/bebebe/puzzlepiece.svg");
+}
+.no-svg .navbar-icon-functionality:active:before,
+.no-svg .navbar-icon-functionality.navbar-active:before {
+  background-image: url("../icons/bebebe/puzzlepiece.png");
+}
+.navbar-icon-structure:active:before,
+.navbar-icon-structure.navbar-active:before {
+  background-image: url("../icons/bebebe/orgchart.svg");
+}
+.no-svg .navbar-icon-structure:active:before,
+.no-svg .navbar-icon-structure.navbar-active:before {
+  background-image: url("../icons/bebebe/orgchart.png");
+}
+.navbar-icon-configuration:active:before,
+.navbar-icon-configuration.navbar-active:before {
+  background-image: url("../icons/bebebe/cog.svg");
+}
+.no-svg .navbar-icon-configuration:active:before,
+.no-svg .navbar-icon-configuration.navbar-active:before {
+  background-image: url("../icons/bebebe/cog.png");
+}
+.navbar-icon-development:active:before,
+.navbar-icon-development.navbar-active:before {
+  background-image: url("../icons/bebebe/devel.svg");
+}
+.no-svg .navbar-icon-development:active:before,
+.no-svg .navbar-icon-development.navbar-active:before {
+  background-image: url("../icons/bebebe/devel.png");
+}
+.navbar-icon-reports:active:before,
+.navbar-icon-reports.navbar-active:before {
+  background-image: url("../icons/bebebe/barchart.svg");
+}
+.no-svg .navbar-icon-reports:active:before,
+.no-svg .navbar-icon-reports.navbar-active:before {
+  background-image: url("../icons/bebebe/barchart.png");
+}
+.navbar-icon-dashboard:active:before,
+.navbar-icon-dashboard.navbar-active:before {
+  background-image: url("../icons/bebebe/dashboard.svg");
+}
+.no-svg .navbar-icon-dashboard:active:before,
+.no-svg .navbar-icon-dashboard.navbar-active:before {
+  background-image: url("../icons/bebebe/dashboard.png");
+}
+.navbar-icon-help:active:before,
+.navbar-icon-help.navbar-active:before {
+  background-image: url("../icons/bebebe/questionmark-disc.svg");
+}
+.no-svg .navbar-icon-help:active:before,
+.no-svg .navbar-icon-help.navbar-active:before {
+  background-image: url("../icons/bebebe/questionmark-disc.png");
 }

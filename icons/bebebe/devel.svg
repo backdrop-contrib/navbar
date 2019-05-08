@@ -41,7 +41,7 @@
      inkscape:cx="22.272212"
      inkscape:cy="3.7313909"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g3759"
      showgrid="false"
      units="px"
      inkscape:window-width="1920"
@@ -57,7 +57,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -67,15 +67,15 @@
      id="layer1"
      transform="translate(0,-292.76665)">
     <g
-       id="g5510"
-       style="fill:#787878;fill-opacity:1">
+       id="g3759"
+       clip-path="url(#clipPath3769)"
+       style="fill:#4e4e4e;fill-opacity:0.76470588">
       <g
-         style="fill:#787878;fill-opacity:1"
-         clip-path="url(#clipPath3769)"
-         id="g3759">
+         id="g5409"
+         style="fill:#bebebe;fill-opacity:1">
         <text
            xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.79702616px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#787878;fill-opacity:1;stroke:none;stroke-width:0.31641889"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.79702616px;line-height:1.25;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#bebebe;fill-opacity:1;stroke:none;stroke-width:0.31641889"
            x="-0.071330532"
            y="238.34134"
            id="text3755"
@@ -84,7 +84,7 @@
              id="tspan3753"
              x="-0.071330532"
              y="238.34134"
-             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.79702616px;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#787878;fill-opacity:1;stroke-width:0.31641889">&lt;/&gt;</tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.79702616px;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#bebebe;fill-opacity:1;stroke-width:0.31641889">&lt;/&gt;</tspan></text>
       </g>
     </g>
   </g>

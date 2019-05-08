@@ -54,9 +54,6 @@
 /**
  * Navbar tray.
  */
-#navbar-administration .navbar-tray {
-  background-color: #ffffff;
-}
 #navbar-administration .navbar-tray-horizontal > .navbar-lining {
   padding-right: 5em; /* LTR */
 }
@@ -86,20 +83,20 @@
   border-left: 1px solid; /* LTR */
 }
 #navbar-administration .navbar-tray-horizontal .navbar-menu .navbar-level-1:last-child {
-  border-right: 1px solid #dddddd; /* LTR */
+  border-right: 1px solid; /* LTR */
 }
 #navbar-administration .navbar-tray-vertical .navbar-menu li + li {
   border-top: 1px solid #dddddd;
 }
 #navbar-administration .navbar-tray-vertical .navbar-menu li:last-child {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid;
 }
 #navbar-administration .navbar-tray-vertical .navbar-menu .navbar-menu li {
   border: 0 none;
 }
 #navbar-administration .navbar-tray-vertical .navbar-menu ul ul {
-  border-bottom: 1px solid #dddddd;
-  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid;
+  border-top: 1px solid;
 }
 #navbar-administration .navbar-tray-vertical .navbar-menu li:last-child > ul {
   border-bottom: 0;
@@ -112,7 +109,6 @@
  * Orientation toggle.
  */
 #navbar-administration .navbar-toggle-orientation {
-  background-color: #f5f5f5;
   padding: 0.6667em;
 }
 #navbar-administration .navbar-tray-horizontal .navbar-toggle-orientation {
@@ -137,9 +133,8 @@
 #navbar-administration .navbar-tray-vertical .edit-shortcuts {
   padding-left: 2.75em; /* LTR */
   padding-right: 4em; /* LTR */
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid;
   width: 100%;
-  background-color: #ffffff;
 }
 
 /**

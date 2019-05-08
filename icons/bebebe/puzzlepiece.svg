@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16"
+   height="16"
+   version="1.1"
+   id="svg5377"
+   sodipodi:docname="puzzlepiece.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata5383">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5381" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1024"
+     id="namedview5379"
+     showgrid="false"
+     inkscape:zoom="52.25"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5377" />
+  <path
+     fill="#787878"
+     d="M11.002 11v2.529c0 .275-.225.471-.5.471h-3c-.827 0-1.112-.754-.604-1.316l.81-.725c.509-.562.513-1.461-.097-2.01-.383-.344-1.027-.728-2.111-.728s-1.727.386-2.109.731c-.609.549-.606 1.45-.097 2.015l.808.717c.509.562.223 1.316-.602 1.316h-3c-.276 0-.5-.193-.5-.471v-9.029c0-.276.224-.5.5-.5h3c.825 0 1.111-.768.602-1.332l-.808-.73c-.51-.563-.513-1.465.097-2.014.382-.344 1.025-.731 2.109-.731s1.728.387 2.111.731c.608.548.606 1.45.097 2.014l-.81.73c-.509.564-.223 1.332.603 1.332h3c.274 0 .5.224.5.5v2.5c0 .825.642 1.111 1.233.602l.771-.808c.599-.51 1.547-.513 2.127.097.364.383.772 1.025.772 2.109s-.408 1.727-.771 2.109c-.58.604-1.529.604-2.127.097l-.77-.808c-.593-.509-1.234-.223-1.234.602z"
+     id="path5375"
+     style="fill:#bebebe;fill-opacity:1" />
+</svg>

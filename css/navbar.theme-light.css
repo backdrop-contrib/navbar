@@ -22,3 +22,38 @@
 #navbar-administration .navbar-tray a.navbar-active {
   color: #000;
 }
+
+/**
+ * Navbar tray.
+ */
+#navbar-administration .navbar-tray {
+  background-color: #ffffff;
+}
+#navbar-administration .navbar-tray-vertical .navbar-menu li:last-child {
+  border-bottom-color: #dddddd;
+}
+#navbar-administration .navbar-tray-vertical .navbar-menu ul ul {
+  border-bottom-color: #dddddd;
+  border-top-color: #dddddd;
+}
+
+/**
+ * Orientation toggle.
+ */
+#navbar-administration .navbar-toggle-orientation {
+  background-color: #f5f5f5;
+}
+#navbar-administration .navbar-tray-horizontal .navbar-toggle-orientation {
+  border-left-color: #c9c9c9; /* LTR */
+}
+#navbar-administration .navbar-tray-horizontal .navbar-menu .navbar-level-1:last-child {
+  border-right-color: #dddddd; /* LTR */
+}
+
+/**
+ * Fix Shortcuts Edit link
+ */
+#navbar-administration .navbar-tray-vertical .edit-shortcuts {
+  border-bottom-color: #dddddd;
+  background-color: #ffffff;
+}
