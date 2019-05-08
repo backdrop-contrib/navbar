@@ -1,0 +1,64 @@
+/**
+ * @file navbar.menu-dark.css
+ */
+
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open {
+  background: #0074bd !important;
+}
+
+.navbar-tray-horizontal .navbar-menu-administration ul ul {
+  background: #323232 !important;
+}
+
+/* Backdrop's active menu item class. */
+#navbar-administration .navbar-tray .active {
+  color: #fff;
+}
+
+/**
+ * Items.
+ */
+#navbar-administration .navbar-level-2 > ul {
+  background-color: #414141;
+  border-bottom-color: #cccccc;
+  border-top-color: #e5e5e5;
+}
+#navbar-administration .navbar-level-3 > ul {
+  background-color: #505050;
+  border-bottom-color: #c5c5c5;
+  border-top-color: #dddddd;
+}
+#navbar-administration .navbar-level-4 > ul {
+  background-color: #5F5F5F;
+  border-bottom-color: #bbbbbb;
+  border-top-color: #d5d5d5;
+}
+#navbar-administration .navbar-level-5 > ul {
+  background-color: #6E6E6E;
+  border-bottom-color: #b5b5b5;
+  border-top-color: #cccccc;
+}
+#navbar-administration .navbar-level-6 > ul {
+  background-color: #505050;
+  border-bottom-color: #aaaaaa;
+  border-top-color: #c5c5c5;
+}
+#navbar-administration .navbar-level-7 > ul {
+  background-color: #414141;
+  border-bottom-color: #b5b5b5;
+  border-top-color: #cccccc;
+}
+#navbar-administration .navbar-level-8 > ul {
+  background-color: #5e5e5e;
+  border-bottom-color: #cccccc;
+  border-top-color: #dddddd;
+}
+
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover > .navbar-box > .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/ffffff/arrow-right.svg") !important;
+}
+
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover > .navbar-box > .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/ffffff/arrow-right.png") !important;
+}

@@ -73,7 +73,6 @@
   background-color: #f5f5f5;
 }
 #navbar-administration .navbar-tray a {
-  color: #565656;
   cursor: pointer;
   text-decoration: none;
 }
@@ -81,14 +80,10 @@
 #navbar-administration .navbar-tray a:active,
 #navbar-administration .navbar-tray a:focus,
 #navbar-administration .navbar-tray a.navbar-active {
-  color: #000;
   text-decoration: underline;
 }
-#navbar-administration .navbar-menu {
-  background-color: #ffffff;
-}
 #navbar-administration .navbar-tray-horizontal .navbar-menu li + li {
-  border-left: 1px solid #dddddd; /* LTR */
+  border-left: 1px solid; /* LTR */
 }
 #navbar-administration .navbar-tray-horizontal .navbar-menu .navbar-level-1:last-child {
   border-right: 1px solid #dddddd; /* LTR */
@@ -111,9 +106,6 @@
 }
 #navbar-administration .navbar-tray-vertical .navbar-menu .navbar-menu .navbar-menu .navbar-menu {
   margin-left: 0.25em; /* LTR */
-}
-#navbar-administration .navbar-menu .navbar-menu a {
-  color: #434343;
 }
 
 /**

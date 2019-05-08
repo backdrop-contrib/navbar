@@ -1,0 +1,31 @@
+/**
+ * @file navbar.icons-dark.css
+ *
+ * Styling for navbar module icons.
+ */
+
+/**
+*  Accessibility/focus
+*/
+
+#navbar-administration .navbar-icon.navbar-handle:focus {
+  background-color: #323232;
+}
+
+/**
+ * Handle.
+ */
+#navbar-administration .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/787878/arrow-right.svg");
+}
+.no-svg #navbar-administration .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/787878/arrow-right.png");
+}
+#navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/787878/arrow-right.svg");
+  background-size: 75%;
+}
+.no-svg #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/787878/arrow-right.png");
+  background-size: auto auto;
+}

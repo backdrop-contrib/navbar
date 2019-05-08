@@ -1016,7 +1016,9 @@ function navbar_library_info() {
     'css' => array(
       $path . '/css/navbar.module.css',
       $path . '/css/navbar.theme.css',
+      $path . '/css/navbar.theme-' . $theme . '.css',
       $path . '/css/navbar.icons.css',
+      $path . '/css/navbar.icons-' . $theme . '.css',
     ),
     'dependencies' => array(
       array('navbar', 'modernizr'),
@@ -1076,6 +1078,7 @@ function navbar_library_info() {
     ),
     'css' => array(
       $path . '/css/navbar.menu.css',
+      $path . '/css/navbar.menu-' . $theme . '.css',
     ),
     'dependencies' => array(
       array('system', 'jquery'),

@@ -1,0 +1,24 @@
+/**
+ * @file navbar.theme-dark.css
+ */
+#navbar-administration .navbar-menu {
+  background-color: #323232;
+}
+#navbar-administration .navbar-tray a {
+  color: #EEEEEE;
+}
+#navbar-administration .navbar-menu .navbar-menu a {
+  color: #EEEEEE;
+}
+#navbar-administration .navbar-tray-horizontal .navbar-menu li + li {
+  border-left-color: #777777; /* LTR */
+}
+#navbar-administration .navbar-tray-vertical .navbar-menu li + li {
+  border-top: 1px solid #777777;
+}
+#navbar-administration .navbar-tray a:hover,
+#navbar-administration .navbar-tray a:active,
+#navbar-administration .navbar-tray a:focus,
+#navbar-administration .navbar-tray a.navbar-active {
+  color: #fff;
+}
