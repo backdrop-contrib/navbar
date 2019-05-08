@@ -1632,7 +1632,7 @@ function navbar_theme_settings() {
 
   $form['components'] = array(
     '#type' => 'checkboxes',
-    '#title' => t('Enabled components'),
+    '#title' => t('Enabled components:'),
     '#options' => array(
       'navbar.shortcut' => t('Shortcuts tray'),
       'navbar.user' => t('My account'),
@@ -1642,6 +1642,15 @@ function navbar_theme_settings() {
     ),
     '#default_value' => $config->get('components'),
     '#description' => t('These features will be enabled/visible in the Navbar module. Untick the boxes to disable/hide them.'),
+  );
+  $form['navbar_theme'] = array(
+    '#title' => t('Theme:'),
+    '#type' => 'radios',
+    '#default_value' => $config->get('navbar_theme'),
+    '#options' =>  array(
+      'light' => l(t('Light'), backdrop_get_path('module', 'navbar') . '/images/screenshot-horizontal.png'),
+      'dark' => l(t('Dark'), backdrop_get_path('module', 'navbar') . '/images/screenshot-horizontal-dark.png'),
+    ),
   );
 
   $form['navbar_shortcut_max_slots'] = array(

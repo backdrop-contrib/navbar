@@ -6,5 +6,6 @@
         "navbar.user",
         "navbar.user_count",
         "navbar.alert"
-    ]
+    ],
+    "navbar_theme": "light"
 }
