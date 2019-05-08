@@ -1,0 +1,26 @@
+
+/**
+ * @file
+ * Navbar search bar list light theme.
+ *
+ * Implementation of Sons of Suckerfish Dropdowns.
+ *
+ * @see www.htmldog.com/articles/suckerfish
+ */
+
+/* Dropdown lists */
+#navbar-tools .dropdown {
+  background-color: white;
+}
+#navbar-tools li > a,
+#navbar-tools li > span {
+  color: #565656;
+}
+#navbar-tools .dropdown li li a {
+  border-bottom-color: #EEEEEE;
+}
+#navbar-tools li.active-search-item > a,
+#navbar-tools li.highlight > a {
+  background-color: #f5f5f5 !important;
+  color: black !important;
+}

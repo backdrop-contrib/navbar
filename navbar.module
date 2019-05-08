@@ -1002,6 +1002,7 @@ function navbar_in_active_trail($path) {
  */
 function navbar_library_info() {
 
+  $theme = config_get('navbar.settings', 'navbar_theme');
   $path = backdrop_get_path('module', 'navbar');
   if (!defined('VERSION')) {
     define('VERSION', system_get_info('module', 'navbar')['version']);
@@ -1059,6 +1060,7 @@ function navbar_library_info() {
     ),
     'css' => array(
       $path . '/css/navbar.tools.css',
+      $path . '/css/navbar.tools-' . $theme . '.css',
     ),
     'dependencies' => array(
       array('system', 'jquery'),
