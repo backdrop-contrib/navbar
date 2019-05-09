@@ -125,71 +125,14 @@ function navbar_update_1700() {
   if (!config_get('navbar.settings', 'navbar_shortcut_max_slots')) {
     config_set('navbar.settings', 'navbar_shortcut_max_slots', 7);
   }
+  if (!config_get('navbar.settings', 'navbar_theme')) {
+    config_set('navbar.settings', 'navbar_theme', 'light');
+  }
   // Create shortcut db tables.
-  $schema['navbar_shortcut_set'] = array(
-    'description' => 'Stores information about sets of shortcuts links.',
-    'fields' => array(
-      'set_name' => array(
-        'type' => 'varchar',
-        'length' => 32,
-        'not null' => TRUE,
-        'default' => '',
-        'description' => "Primary Key: The {menu_links}.menu_name under which the set's links are stored.",
-      ),
-      'title' => array(
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-        'description' => 'The title of the set.',
-      ),
-    ),
-    'primary key' => array('set_name'),
-    'foreign keys' => array(
-      'menu_name' => array(
-        'table' => 'menu_links',
-        'columns' => array('set_name' => 'menu_name'),
-      ),
-    ),
-  );
-
+  $schema=navbar_schema();
   if (!db_table_exists('navbar_shortcut_set')) {
     db_create_table('navbar_shortcut_set', $schema['navbar_shortcut_set']);
   }
-
-  $schema['navbar_shortcut_set_users'] = array(
-    'description' => 'Maps users to shortcut sets.',
-    'fields' => array(
-      'uid' => array(
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-        'description' => 'The {users}.uid for this set.',
-      ),
-      'set_name' => array(
-        'type' => 'varchar',
-        'length' => 32,
-        'not null' => TRUE,
-        'default' => '',
-        'description' => "The {shortcut_set}.set_name that will be displayed for this user.",
-      ),
-    ),
-    'primary key' => array('uid'),
-    'indexes' => array(
-      'set_name' => array('set_name'),
-    ),
-    'foreign keys' => array(
-      'set_user' => array(
-        'table' => 'users',
-        'columns' => array('uid' => 'uid'),
-      ),
-      'set_name' => array(
-        'table' => 'navbar_shortcut_set',
-        'columns' => array('set_name' => 'set_name'),
-      ),
-    ),
-  );
   if (!db_table_exists('navbar_shortcut_set_users')) {
     db_create_table('navbar_shortcut_set_users', $schema['navbar_shortcut_set_users']);
   }
