@@ -19,7 +19,18 @@ Installation
 - Enable Backdrop core's Administration bar module.
 - Install this module using the official Backdrop CMS instructions at
   https://backdropcms.org/guide/modules
-- You can show or hide some components (search bar, notification badge etc.) on the module's "Configure" page.
+- You can show or hide some components (search bar, shortcuts, notification badge etc.) on the module's "Configure" page and switch light/dark theme.
+
+
+Shortcuts tray
+--------------
+It provides a toolbar on the top of the page to which you can add links.
+
+Usage:
+- You can enable the shortcuts tray on module's configure page: Administer >> Configuration >> Administration >> Navbar
+- Go to Administer >> Configuration >> User interface >> Navbar shortcuts. Here you can create and delete shortcut set, and add, modify, delete links of a shortcut set.
+- On the 'List links' page use the 'Show row weights' for more details.
+- You can switch current shortcut set on the user profil page on 'Navbar shortcuts' tab.
 
 
 3rd party JavaScript libraries
@@ -98,8 +109,14 @@ complete text.
 
 Screenshots
 -----------
-Vertical orientation of Navbar:
+Vertical orientation of Navbar (light theme):
 ![Vertical](https://github.com/backdrop-contrib/navbar/blob/1.x-1.x/images/screenshot-vertical.png)
 
-Horizontal orientation of Navbar:
+Horizontal orientation of Navbar (light theme):
 ![Horizontal](https://github.com/backdrop-contrib/navbar/blob/1.x-1.x/images/screenshot-horizontal.png)
+
+Vertical orientation of Navbar (dark theme):
+![Vertical](https://github.com/backdrop-contrib/navbar/blob/1.x-1.x/images/screenshot-vertical-dark.png)
+
+Horizontal orientation of Navbar (dark theme):
+![Horizontal](https://github.com/backdrop-contrib/navbar/blob/1.x-1.x/images/screenshot-horizontal-dark.png)
