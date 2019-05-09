@@ -5,7 +5,8 @@
         "navbar.shortcut",
         "navbar.user",
         "navbar.user_count",
-        "navbar.alert"
+        "navbar.alert",
+        "navbar.search"
     ],
     "navbar_theme": "light"
 }
