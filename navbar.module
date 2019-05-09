@@ -1653,8 +1653,8 @@ function navbar_theme_settings() {
     '#type' => 'radios',
     '#default_value' => $config->get('navbar_theme'),
     '#options' =>  array(
-      'light' => l(t('Light'), backdrop_get_path('module', 'navbar') . '/images/screenshot-horizontal.png'),
-      'dark' => l(t('Dark'), backdrop_get_path('module', 'navbar') . '/images/screenshot-horizontal-dark.png'),
+      'light' => t('Light - ') . l(t('Screenshot'), backdrop_get_path('module', 'navbar') . '/images/screenshot-horizontal.png'),
+      'dark' => t('Dark - ') . l(t('Screenshot'), backdrop_get_path('module', 'navbar') . '/images/screenshot-horizontal-dark.png'),
     ),
   );
 
