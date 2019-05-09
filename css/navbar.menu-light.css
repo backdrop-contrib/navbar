@@ -53,3 +53,7 @@
   border-bottom-color: #cccccc;
   border-top-color: #dddddd;
 }
+
+.navbar-tray-horizontal .navbar-menu-administration ul ul {
+  border-color:#DDDDDD !important;
+}
