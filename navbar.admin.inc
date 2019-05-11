@@ -84,11 +84,17 @@ function navbar_shortcut_set_switch($form, &$form_state, $account = NULL) {
 
     $form['link1'] = array(
       '#prefix' => '<p>',
-      '#markup' => l(t("Navbar module's configure page"), 'admin/config/administration/navbar'),
+      '#markup' => l(t('Shortcuts tray settings'), 'admin/config/user-interface/navbar_shortcut'),
       '#suffix' => '</p>',
     );
 
     $form['link2'] = array(
+      '#prefix' => '<p>',
+      '#markup' => l(t("Navbar module's configure page"), 'admin/config/administration/navbar'),
+      '#suffix' => '</p>',
+    );
+
+    $form['link3'] = array(
       '#prefix' => '<p>',
       '#markup' => t('You may need to') . ' ' . l(t('clear the cache'), 'admin/config/development/performance') . ' ' . t('for the right display of shortcuts after change.'),
       '#suffix' => '</p>',
