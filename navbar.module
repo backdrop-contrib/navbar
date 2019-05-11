@@ -1037,11 +1037,6 @@ function navbar_library_info() {
     ),
   );
 
-  // Only load navbar.overlay if overlay is enabled.
-  if (module_exists('overlay')) {
-    $libraries['navbar']['dependencies'][] = array('navbar', 'navbar.overlay');
-  }
-
   $libraries['navbar.escape_admin'] = array(
     'title' => 'Provides a button to escape the administration area.',
     'version' => VERSION,
@@ -1130,23 +1125,6 @@ function navbar_library_info() {
     ),
   );
 
-  // Override Overlay methods to support displacement.
-  $libraries['navbar.overlay'] = array(
-    'title' => 'Overlay method overrides to support D8 viewport displacement.',
-    'version' => VERSION,
-    'css' => array(
-      $path . '/css/navbar-overlay.css',
-    ),
-    'js' => array(
-      // Load this file well after Overlay code has loaded.
-      $path . '/js/navbar-overlay.js' => array('weight' => 100),
-    ),
-    'dependencies' => array(
-      array('system', 'jquery'),
-      array('navbar', 'navbar.displace'),
-    ),
-  );
-
   // Support Tableheader displacement.
   $libraries['navbar.tableheader'] = array(
     'title' => 'Tableheader method to support D8 viewport displacement.',
@@ -1196,14 +1174,6 @@ function navbar_library_info_alter(&$libraries, $module) {
 
   if ($module == 'system') {
     $jquery_version = $libraries['jquery']['version'];
-  }
-
-  if ($module === 'overlay' && !empty($libraries)) {
-    // Unset the child CSS file from Overlay and add our own.
-    if (!empty($libraries['child']['css'])) {
-      unset($libraries['child']['css']['modules/overlay/overlay-child.css']);
-    }
-    $libraries['child']['css'][backdrop_get_path('module', 'navbar') . '/css/navbar-overlay-child.css'] = array();
   }
 }
 
