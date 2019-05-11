@@ -119,15 +119,6 @@ Backdrop.behaviors.navbar = {
         // Update the model when the viewport offset changes.
         .on('backdropViewportOffsetChange.navbar', function (event, offsets) {
           model.set('offsets', offsets);
-        })
-        // The overlay will hide viewport overflow, potentially stranding tray
-        // items that are offscreen. The navbar will adjust tray presentation
-        // to prevent this when viewport overflow is hidden.
-        .on('backdropOverlayOpen.navbar', function () {
-          model.set('isViewportOverflowConstrained', true);
-        })
-        .on('backdropOverlayClose.navbar', function () {
-          model.set('isViewportOverflowConstrained', false);
         });
 
       // Broadcast model changes to other modules.

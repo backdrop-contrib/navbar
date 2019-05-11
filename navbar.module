@@ -253,11 +253,7 @@ function navbar_element_info() {
       // The id cannot be simply "navbar" or it will clash with the simpletest
       // tests listing which produces a checkbox with attribute id="navbar"
       'id' => 'navbar-administration',
-      // The 'overlay-displace-top' class is necessary in overlay-parent so that
-      // the backdropOverlayResize and backdropOverlayClose events will be bound
-      // to the document. The navbar does not use this class. It is present
-      // to enable compatibility with the Overlay module.
-      'class' => array('backdrop-navbar', 'overlay-displace-top'),
+      'class' => array('backdrop-navbar'),
       'role' => 'navigation',
     ),
     // Metadata for the administration bar.
