@@ -90,7 +90,7 @@ function navbar_shortcut_set_switch($form, &$form_state, $account = NULL) {
 
     $form['link2'] = array(
       '#prefix' => '<p>',
-      '#markup' => t('You may need to') . ' ' . l(t('clear the cache'), 'admin/config/development/performance') . ' ' . t('after change.'),
+      '#markup' => t('You may need to') . ' ' . l(t('clear the cache'), 'admin/config/development/performance') . ' ' . t('for the right display of shortcuts after change.'),
       '#suffix' => '</p>',
     );
 
