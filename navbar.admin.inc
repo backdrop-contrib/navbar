@@ -476,6 +476,7 @@ function navbar_shortcut_link_edit($form, &$form_state, $shortcut_link) {
  *   An array of form elements.
  */
 function _navbar_shortcut_link_form_elements($shortcut_link = NULL) {
+  global $base_url;   // Will point to http://www.example.com
   if (!isset($shortcut_link)) {
     $shortcut_link = array(
       'link_title' => '',
@@ -503,7 +504,7 @@ function _navbar_shortcut_link_form_elements($shortcut_link = NULL) {
     '#description' => t('The path to the shortcut.'),
     '#size' => 40,
     '#maxlength' => 255,
-    '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (config_get('system.core', 'clean_url') ? '' : '?q='),
+    '#field_prefix' => $base_url . '/' . (config_get('system.core', 'clean_url') ? '' : '?q='),
     '#default_value' => $shortcut_link['link_path'],
   );
 
