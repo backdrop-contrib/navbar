@@ -652,7 +652,7 @@ function theme_navbar_tray_heading_wrapper(&$variables) {
 /**
  * Implements hook_system_info_alter().
  *
- * Indicate that the 'page_top' region (in which the navbar will be displayed)
+ * Indicate that the 'page' region (in which the navbar will be displayed)
  * is an overlay supplemental region that should be refreshed whenever its
  * content is updated.
  *
@@ -661,7 +661,7 @@ function theme_navbar_tray_heading_wrapper(&$variables) {
  */
 function navbar_system_info_alter(&$info, $file, $type) {
   if ($type == 'theme') {
-    $info['overlay_supplemental_regions'][] = 'page_top';
+    $info['overlay_supplemental_regions'][] = 'page';
   }
 }
 
