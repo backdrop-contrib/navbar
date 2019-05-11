@@ -118,7 +118,7 @@ function navbar_schema() {
 /**
  * Implements hook_update_N().
  */
-function navbar_update_1700() {
+function navbar_update_1100() {
   // Switch on some features.
   $components = array('navbar.user', 'navbar.shortcut', 'navbar.user_count', 'navbar.alert', 'navbar.search');
   config_set('navbar.settings', 'components', $components);
