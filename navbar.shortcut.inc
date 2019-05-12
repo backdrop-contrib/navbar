@@ -169,12 +169,15 @@ function navbar_shortcut_set_save(&$shortcut_set) {
  * @param $shortcut_set
  *   An object representing the shortcut set to delete.
  *
+ * @param $default
+ *   If it is TRUE, default set is erasable.
+ *
  * @return
  *   TRUE if the set was deleted, FALSE otherwise.
  */
-function navbar_shortcut_set_delete($shortcut_set) {
+function navbar_shortcut_set_delete($shortcut_set, $default = FALSE) {
   // Don't allow deletion of the system default shortcut set.
-  if ($shortcut_set->set_name == NAVBAR_SHORTCUT_DEFAULT_SET_NAME) {
+  if ($shortcut_set->set_name == NAVBAR_SHORTCUT_DEFAULT_SET_NAME && !$default) {
     return FALSE;
   }
 
@@ -466,14 +469,15 @@ function navbar_shortcut_set_config_save() {
   $config = config('navbar.settings');
   $set_names_in_db = array();
   $sets_in_config = $config->get('navbar_shortcut_sets');
+  // Clear config.
   if (!empty($sets_in_config)) {
     foreach ($sets_in_config as $set) {
       $config->clear($set);
     }
     $config->save();
   }
-  $set_in_db = navbar_shortcut_sets();
-  foreach ($set_in_db as $set) {
+  $sets_in_db = navbar_shortcut_sets();
+  foreach ($sets_in_db as $set) {
     $links = navbar_shortcut_set_load($set->set_name);
     $config->set($set->set_name, $links);
     $set_names_in_db[] = $set->set_name;
@@ -482,6 +486,54 @@ function navbar_shortcut_set_config_save() {
   $config->save();
   backdrop_set_message(t('Configure file has been updated.'));
   return;
+}
+
+/**
+ * Update the database according to config.
+ *
+ * @param $user_current_set
+ *   Title of current shortcut set of the current user.
+ */
+function navbar_shortcut_config_to_db($user_current_set, $account = NULL) {
+  global $user;
+  if (!isset($account)) {
+    $account = $user;
+  }
+  $config = config('navbar.settings');
+  $sets_in_config = $config->get('navbar_shortcut_sets');
+
+  // If the config is empty, fill up.
+  if (!$sets_in_config) {
+    navbar_shortcut_set_config_save();
+    return;
+  }
+
+  // If there isn't the default set in the config, insert it.
+  if (!in_array($sets_in_config, NAVBAR_SHORTCUT_DEFAULT_SET_NAME)) {
+    $sets_in_config[] = NAVBAR_SHORTCUT_DEFAULT_SET_NAME;
+    $config->set('navbar_shortcut_sets', $sets_in_config);
+    $links = navbar_shortcut_set_load(NAVBAR_SHORTCUT_DEFAULT_SET_NAME);
+    $config->set(NAVBAR_SHORTCUT_DEFAULT_SET_NAME, $links);
+    $config->save();
+  }
+
+  // Validate the user's current shortcut set.
+  $user_current_set = navbar_shortcut_current_displayed_set($account);
+  $sets_in_config = $config->get('navbar_shortcut_sets');
+  if (!in_array($sets_in_config, $user_current_set)) {
+    navbar_shortcut_set_assign_user($NAVBAR_SHORTCUT_DEFAULT_SET_NAME, $account);
+  }
+
+  // Synchronize config with database.
+  $user_current_set = navbar_shortcut_current_displayed_set($account);
+  navbar_shortcut_set_delete($user_current_set, TRUE);
+  $link_in_config = $config->get($user_current_set);
+  foreach ($link_in_config as $key => $link) {
+    unset($link_in_config[$key]['mlid']);
+  }
+  $shortcut_set->set_name = $user_current_set;
+  $shortcut_set->links = $link_in_config;
+  navbar_shortcut_set_save($shortcut_set);
 }
 
 /**
