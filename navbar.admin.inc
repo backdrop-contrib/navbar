@@ -342,6 +342,7 @@ function navbar_shortcut_set_customize_submit($form, &$form_state) {
       menu_link_save($link);
     }
   }
+  navbar_shortcut_set_config_save();
   backdrop_set_message(t('The shortcut set has been updated.'));
 }
 
@@ -548,6 +549,7 @@ function navbar_shortcut_link_edit_submit($form, &$form_state) {
   $shortcut_link = array_merge($form_state['values']['original_shortcut_link'], $form_state['values']['shortcut_link']);
 
   menu_link_save($shortcut_link);
+  navbar_shortcut_set_config_save();
   $form_state['redirect'] = 'admin/config/user-interface/navbar_shortcut/' . $shortcut_link['menu_name'];
   backdrop_set_message(t('The shortcut %link has been updated.', array('%link' => $shortcut_link['link_title'])));
 }
@@ -773,6 +775,7 @@ function navbar_shortcut_link_delete($form, &$form_state, $shortcut_link) {
 function navbar_shortcut_link_delete_submit($form, &$form_state) {
   $shortcut_link = $form_state['values']['shortcut_link'];
   menu_link_delete($shortcut_link['mlid']);
+  navbar_shortcut_set_config_save();
   $form_state['redirect'] = 'admin/config/user-interface/navbar_shortcut/' . $shortcut_link['menu_name'];
   backdrop_set_message(t('The shortcut %title has been deleted.', array('%title' => $shortcut_link['link_title'])));
 }

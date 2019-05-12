@@ -155,6 +155,9 @@ function navbar_shortcut_set_save(&$shortcut_set) {
       $return = SAVED_UPDATED;
     }
   }
+  if (!empty($return)) {
+    navbar_shortcut_set_config_save();
+  }
   return $return;
 }
 
@@ -189,6 +192,9 @@ function navbar_shortcut_set_delete($shortcut_set) {
     ->condition('set_name', $shortcut_set->set_name)
     ->execute();
 
+  if ($deleted) {
+    navbar_shortcut_set_config_save();
+  }
   return (bool) $deleted;
 }
 
@@ -451,3 +457,47 @@ function navbar_shortcut_set_title($shortcut_set) {
 function navbar_shortcut_set_title_callback($shortcut_set) {
   return $shortcut_set->title;
 }
+
+/**
+ * Save the shortcut's data to the config system.
+ *
+ */
+function navbar_shortcut_set_config_save() {
+  $config = config('navbar.settings');
+  $set_names_in_db = array();
+  $sets_in_config = $config->get('navbar_shortcut_sets');
+  if (!empty($sets_in_config)) {
+    foreach ($sets_in_config as $set) {
+      $config->clear($set);
+    }
+    $config->save();
+  }
+  $set_in_db = navbar_shortcut_sets();
+  foreach ($set_in_db as $set) {
+    $links = navbar_shortcut_set_load($set->set_name);
+    $config->set($set->set_name, $links);
+    $set_names_in_db[] = $set->set_name;
+  }
+  $config->set('navbar_shortcut_sets', $set_names_in_db);
+  $config->save();
+  backdrop_set_message(t('Configure file has been updated.'));
+  return;
+}
+
+/**
+ * Compare function for uasort()
+ */
+/*function navbar_shortcut_link_title_compare($a, $b) {
+    return strcmp($a->link_title, $b->link_title);
+}*/
+
+/**
+ * Prepare to save a shortcut set's links to the config system.
+ *
+ * @param $set_name
+ *   Title of a shortcut set.
+ */
+/*function navbar_shortcut_set_config_save_prepare($set_name) {
+  $links = navbar_shortcut_set_load($set_name);
+  $config->set($set_name, $links);
+}*/
