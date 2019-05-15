@@ -73,6 +73,10 @@
   word-spacing: normal;
 }
 
+[dir="rtl"] #navbar-mainmenu > div {
+  float: right;
+}
+
 /* These styles will cascade. There is no need to star-select child elements. */
 #navbar-administration {
   font-family: sans-serif;
@@ -139,6 +143,10 @@
   border: none;
   list-style: none;
   text-align: left; /* LTR */
+}
+
+[dir="rtl"] #navbar-administration ul.navbar-menu {
+  text-align: right;
 }
 
 /* @end */
@@ -326,6 +334,12 @@ body.navbar-tray-open.navbar-vertical.navbar-fixed {
   right: 0; /* LTR */
   top: auto;
 }
+
+[dir="rtl"] #navbar-administration.navbar-oriented .navbar-tray-horizontal .navbar-toggle-orientation {
+  left: 0;
+  right: auto;
+}
+
 #navbar-administration.navbar-oriented .navbar-tray-vertical .navbar-toggle-orientation {
   float: right; /* LTR */
   width: 100%;

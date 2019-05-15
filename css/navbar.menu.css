@@ -52,7 +52,9 @@
   top: 0;
   z-index: 1000;
 }
-
+[dir="rtl"] #navbar-administration .navbar-icon.navbar-handle {
+  left: -10%;
+}
 /**
  * Styling for Custom Navbar Dropdown. Adapted from Bryant Crayton bccrayton's
  * work at https://www.drupal.org/node/2390047.
@@ -79,6 +81,10 @@
   float: left !important;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul li {
+  float: rigth !important;
 }
 
 .navbar-tray-horizontal .navbar-menu-administration ul li.current-menu-item {
@@ -110,6 +116,11 @@
   left: 100% !important;
 }
 
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul ul ul {
+  top: -1px !important;
+  left: -101% !important;
+}
+
 .navbar-tray-horizontal .navbar-menu-administration ul li:hover > ul {
   display: block !important;
 }
@@ -122,6 +133,14 @@
   background-image: url("../icons/0074bd/arrow-right.svg") !important;
 }
 
-.navbar-tray-horizontal .navbar-menu-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/0074bd/arrow-left.svg") !important;
+}
+
+.no-svg .navbar-tray-horizontal .navbar-menu-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
   background-image: url("../icons/0074bd/arrow-right.png") !important;
+}
+
+[dir="rtl"] .no-svg  .navbar-tray-horizontal .navbar-menu-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/0074bd/arrow-left.png") !important;
 }

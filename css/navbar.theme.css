@@ -57,6 +57,10 @@
 #navbar-administration .navbar-tray-horizontal > .navbar-lining {
   padding-right: 5em; /* LTR */
 }
+[dir="rtl"] #navbar-administration .navbar-tray-horizontal > .navbar-lining {
+  padding-right: 0;
+  padding-left: 5em;
+}
 #navbar-administration .navbar-tray-vertical {
   background-color: #f5f5f5;
   border-right: 1px solid #aaaaaa; /* LTR */

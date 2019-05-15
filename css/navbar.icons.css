@@ -311,6 +311,19 @@
 .no-svg #navbar-administration .navbar-toggle-orientation [value="vertical"]:hover:before {
   background-image: url("../icons/787878/push-left.png"); /* LTR */
 }
+
+[dir="rtl"] #navbar-administration .navbar-toggle-orientation [value="vertical"]:before {
+  background-image: url("../icons/bebebe/push-right.svg");
+}
+[dir="rtl"] #navbar-administration .navbar-toggle-orientation [value="vertical"]:hover:before {
+  background-image: url("../icons/787878/push-right.svg");
+}
+[dir="rtl"] .no-svg #navbar-administration .navbar-toggle-orientation [value="vertical"]:before {
+  background-image: url("../icons/bebebe/push-right.png");
+}
+[dir="rtl"] .no-svg #navbar-administration .navbar-toggle-orientation [value="vertical"]:hover:before {
+  background-image: url("../icons/787878/push-right.png");
+
 #navbar-administration .navbar-toggle-orientation [value="horizontal"]:before {
   background-image: url("../icons/bebebe/push-up.svg");
 }

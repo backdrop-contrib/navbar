@@ -197,6 +197,11 @@
   padding: 0 74px 0 0 !important;
 }
 
+[dir="rtl"] .navbar-tools-first-right-component {
+  float: left !important;
+  padding: 0 10px 0 0 !important;
+}
+
 .navbar-tools-right-component {
   float: right !important;
   padding: 4px 20px 0 0 !important;
@@ -204,6 +209,10 @@
 
 .navbar-tools-right-block {
   float: right !important;
+}
+
+[dir="rtl"] .navbar-tools-right-block {
+  float: left !important;
 }
 
 /* #210615: Mozilla on Mac fix */
