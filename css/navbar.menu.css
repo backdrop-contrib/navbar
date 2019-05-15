@@ -100,6 +100,15 @@
   border: 1px solid !important;
 }
 
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul ul ul {
+  left: auto !important;
+  right: 100% !important;
+}
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul ul {
+  left: auto !important;
+  right: 0 !important;
+}
+
 .navbar-tray-horizontal .navbar-menu-administration ul ul li {
   float: none !important;
   width: 200px !important;
