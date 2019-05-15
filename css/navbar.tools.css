@@ -132,7 +132,6 @@
 }
 [dir="rtl"] #navbar-tools .dropdown li ul {
   left: auto;
-  right: -999em;
 }
 
 /* Extras menu */
