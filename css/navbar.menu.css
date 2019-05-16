@@ -81,10 +81,6 @@
   padding: 0 !important;
 }
 
-[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul li {
-  float: rigth !important;
-}
-
 .navbar-tray-horizontal .navbar-menu-administration ul li.current-menu-item {
   background: #ddd !important;
 }
@@ -96,15 +92,6 @@
   left: 0 !important;
   padding: 0 !important;
   border: 1px solid !important;
-}
-
-[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul ul ul {
-  left: auto !important;
-  right: 100% !important;
-}
-[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul ul {
-  left: auto !important;
-  right: 0 !important;
 }
 
 .navbar-tray-horizontal .navbar-menu-administration ul ul li {
@@ -119,13 +106,8 @@
 }
 
 .navbar-tray-horizontal .navbar-menu-administration ul ul ul {
-  top: -1px !important;
+  top: 0px !important;
   left: 100% !important;
-}
-
-[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul ul ul {
-  top: -1px !important;
-  left: -101% !important;
 }
 
 .navbar-tray-horizontal .navbar-menu-administration ul li:hover > ul {
@@ -161,6 +143,29 @@
 }
 
 [dir="rtl"] #navbar-administration .navbar-icon.navbar-handle {
-  left: -5%;
+  left: -4%;
   right: auto;
+}
+
+/**
+ * Styling for Custom Navbar Dropdown. Adapted from Bryant Crayton bccrayton's
+ * work at https://www.drupal.org/node/2390047.
+ */
+
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration .navbar-level-1 > div:first-child a:first-child {
+  padding: 0 35px 0 15px !important;
+}
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul ul ul {
+  left: auto !important;
+  right: 100% !important;
+}
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul ul {
+  left: auto !important;
+  right: 0 !important;
+}
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul li {
+  float: right !important;
+}
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul {
+  float: right !important;
 }

@@ -33,7 +33,20 @@
   background-image: url("../icons/787878/arrow-right.png");
   background-size: auto auto;
 }
-
+[dir="rtl"] #navbar-administration .navbar-icon.navbar-handle:not(.open):before {
+  background-image: url("../icons/787878/arrow-left.svg");
+}
+[dir="rtl"] .no-svg #navbar-administration .navbar-icon.navbar-handle:not(.open):before {
+  background-image: url("../icons/787878/arrow-left.png");
+}
+[dir="rtl"] #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:not(.open):before {
+  background-image: url("../icons/787878/arrow-left.svg");
+  background-size: 75%;
+}
+[dir="rtl"] .no-svg #navbar-administration .navbar-menu .navbar-menu .navbar-icon.navbar-handle:not(.open):before {
+  background-image: url("../icons/787878/arrow-left.png");
+  background-size: auto auto;
+}
 /**
  * Main menu icons.
  */

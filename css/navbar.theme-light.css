@@ -11,7 +11,7 @@
   color: #434343;
 }
 #navbar-administration .navbar-tray-horizontal .navbar-menu li + li {
-  border-left-color: #dddddd; /* LTR */
+  border-color: #dddddd; /* LTR */
 }
 #navbar-administration .navbar-tray-vertical .navbar-menu li + li {
   border-top: 1px solid #dddddd;
@@ -47,7 +47,7 @@
   border-left-color: #c9c9c9; /* LTR */
 }
 #navbar-administration .navbar-tray-horizontal .navbar-menu .navbar-level-1:last-child {
-  border-right-color: #dddddd; /* LTR */
+  border-color: #dddddd; /* LTR */
 }
 
 /**

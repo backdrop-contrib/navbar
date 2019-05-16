@@ -342,11 +342,11 @@
   padding-right: 1.3333em;
 }
 [dir="rtl"] #navbar-administration .navbar-tray-vertical .navbar-menu ul a {
-  padding-left: 0;
+  padding-left: 35px;
   padding-right: 2.75em;
 }
 [dir="rtl"] #navbar-administration .navbar-tray-vertical .navbar-menu ul ul a {
-  padding-left: 0;
+  padding-left: 35px;
   padding-right: 3.75em;
 }
 [dir="rtl"] #navbar-administration .navbar-tray-vertical .navbar-menu a {
