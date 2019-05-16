@@ -276,10 +276,10 @@
   background-size: auto auto;
 }
 #navbar-administration .navbar-icon-escape-admin:before {
-  background-image: url(../icons/bebebe/chevron-disc-left.svg);
+  background-image: url("../icons/bebebe/chevron-disc-left.svg");
 }
 .no-svg #navbar-administration .navbar-icon-escape-admin:before {
-  background-image: url(../icons/bebebe/chevron-disc-left.png);
+  background-image: url("../icons/bebebe/chevron-disc-left.png");
 }
 
 /**
@@ -312,18 +312,6 @@
   background-image: url("../icons/787878/push-left.png"); /* LTR */
 }
 
-[dir="rtl"] #navbar-administration .navbar-toggle-orientation [value="vertical"]:before {
-  background-image: url("../icons/bebebe/push-right.svg");
-}
-[dir="rtl"] #navbar-administration .navbar-toggle-orientation [value="vertical"]:hover:before {
-  background-image: url("../icons/787878/push-right.svg");
-}
-[dir="rtl"] .no-svg #navbar-administration .navbar-toggle-orientation [value="vertical"]:before {
-  background-image: url("../icons/bebebe/push-right.png");
-}
-[dir="rtl"] .no-svg #navbar-administration .navbar-toggle-orientation [value="vertical"]:hover:before {
-  background-image: url("../icons/787878/push-right.png");
-
 #navbar-administration .navbar-toggle-orientation [value="horizontal"]:before {
   background-image: url("../icons/bebebe/push-up.svg");
 }
@@ -337,3 +325,107 @@
   background-image: url("../icons/787878/push-up.png");
 }
 
+/**
+ * RTL
+ */
+
+[dir="rtl"] #navbar-administration .navbar-icon {
+  padding-left: 1.3333em;
+  padding-right: 2.75em;
+}
+[dir="rtl"] #navbar-administration .navbar-icon:before {
+  left: auto;
+  right: 0.6667em;
+}
+[dir="rtl"] #navbar-administration .navbar-menu ul .navbar-icon {
+  padding-left: 0;
+  padding-right: 1.3333em;
+}
+[dir="rtl"] #navbar-administration .navbar-tray-vertical .navbar-menu ul a {
+  padding-left: 0;
+  padding-right: 2.75em;
+}
+[dir="rtl"] #navbar-administration .navbar-tray-vertical .navbar-menu ul ul a {
+  padding-left: 0;
+  padding-right: 3.75em;
+}
+[dir="rtl"] #navbar-administration .navbar-tray-vertical .navbar-menu a {
+  padding-left: 4em;
+  padding-right: 2.75em;
+}
+/**
+ * Top level icons.
+ */
+[dir="rtl"] #navbar-administration .navbar-icon-escape-admin:before {
+  background-image: url("../icons/bebebe/chevron-disc-right.svg");
+}
+[dir="rtl"] .no-svg #navbar-administration .navbar-icon-escape-admin:before {
+  background-image: url("../icons/bebebe/chevron-disc-right.png");
+}
+
+@media only screen and (min-width: 16.5em) {
+  [dir="rtl"] #navbar-administration .navbar-bar .navbar-icon:before {
+    left: auto;
+    right: 0;
+  }
+}
+
+@media only screen and (min-width: 36em) {
+  [dir="rtl"] #navbar-administration .navbar-bar .navbar-icon {
+    background-position: right center;
+    padding-left: 1.3333em;
+    padding-right: 2.75em;
+  }
+  [dir="rtl"] #navbar-administration .navbar-bar .navbar-icon:before {
+    left: auto;
+    right: 0.6667em;
+  }
+}
+
+/**
+ *  Accessibility/focus
+ */
+[dir="rtl"] #navbar-administration .navbar-tab a {
+  border-left: none;
+  border-right: 2px solid transparent;
+}
+[dir="rtl"] #navbar-administration .navbar-tray-horizontal a,
+[dir="rtl"] #navbar-administration .navbar-box a {
+  border-left: none;
+  border-right: 2px solid transparent;
+}
+
+/**
+ * Handle.
+ */
+[dir="rtl"] #navbar-administration .navbar-icon.navbar-handle:before {
+  left: auto;
+  right: 1.6667em;
+}
+[dir="rtl"] .no-svg #navbar-administration .navbar-icon.navbar-handle:before {
+  left: auto;
+  right: 1.6667em;
+}
+
+/**
+ * Orientation toggle.
+ */
+[dir="rtl"] #navbar-administration .navbar-toggle-orientation button:before {
+  left: auto;
+  right: 0;
+}
+[dir="rtl"] #navbar-administration .navbar-toggle-orientation .navbar-icon {
+  padding-right: 0;
+}
+[dir="rtl"] #navbar-administration .navbar-toggle-orientation [value="vertical"]:before {
+  background-image: url("../icons/bebebe/push-right.svg");
+}
+[dir="rtl"] #navbar-administration .navbar-toggle-orientation [value="vertical"]:hover:before {
+  background-image: url("../icons/787878/push-right.svg");
+}
+[dir="rtl"] .no-svg #navbar-administration .navbar-toggle-orientation [value="vertical"]:before {
+  background-image: url("../icons/bebebe/push-right.png");
+}
+[dir="rtl"] .no-svg #navbar-administration .navbar-toggle-orientation [value="vertical"]:hover:before {
+  background-image: url("../icons/787878/push-right.png");
+}
