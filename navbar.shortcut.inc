@@ -535,7 +535,7 @@ function navbar_shortcut_save_config_to_db($staging_config, $active_config) {
   $sets_in_db = navbar_shortcut_sets();
   foreach ($sets_in_db as $set) {
     $assign_erase = TRUE;
-    if (in_array($set, $sets_in_config)) {
+    if (in_array($set->set_name, $sets_in_config)) {
       $assign_erase = FALSE;
     }
     navbar_shortcut_set_delete($set, TRUE, $assign_erase, FALSE);
