@@ -512,22 +512,23 @@ function navbar_shortcut_set_config_save() {
 function navbar_shortcut_save_config_to_db($staging_config, $active_config) {
   global $user;
   $sets_in_config = $staging_config->get('navbar_shortcut_sets');
-  $default_set = navbar_shortcut_set_load(NAVBAR_SHORTCUT_DEFAULT_SET_NAME);
-  $new_default_set = $staging_config->get(NAVBAR_SHORTCUT_DEFAULT_SET_NAME);
+  $default_set = navbar_default_shortcut_set();
+  $default_set = (array) $default_set;
+  $default_set = array('set_name' => NAVBAR_SHORTCUT_DEFAULT_SET_NAME) + $default_set;
+  $new_def_set = $staging_config->get(NAVBAR_SHORTCUT_DEFAULT_SET_NAME);
 
-  // If there isn't the default set in the config, insert it.
+  // If there isn't the default set in the config or incomplete, insert it.
   if (!in_array(NAVBAR_SHORTCUT_DEFAULT_SET_NAME, $sets_in_config)) {
     $sets_in_config[] = NAVBAR_SHORTCUT_DEFAULT_SET_NAME;
     $staging_config->set('navbar_shortcut_sets', $sets_in_config);
+    $staging_config->save();
   }
-  if (is_null($new_default_set) && $default_set) {
+  if (is_null($new_def_set) || !isset($new_def_set['set_name']) || !isset($new_def_set['title']) || !isset($new_def_set['links'])) {
     $staging_config->set(NAVBAR_SHORTCUT_DEFAULT_SET_NAME, $default_set);
-  }
-  elseif ($new_default_set) {
-    $default_set = $new_default_set;
+    $staging_config->save();
   }
   else {
-    $default_set['links'] = array();
+    $default_set = $new_def_set;
   }
 
   // Delete shortcut sets from database.
@@ -543,8 +544,15 @@ function navbar_shortcut_save_config_to_db($staging_config, $active_config) {
   // Save config into database.
   foreach ($sets_in_config as $set_name) {
     $set = $staging_config->get($set_name);
+    // Repair incomplete data.
     if (!isset($set['links']) || !count($set['links'])) {
       $set['links'] = $default_set['links'];
+    }
+    if (!isset($set['set_name'])) {
+      $set['set_name'] = navbar_shortcut_set_get_unique_name();
+    }
+    if (!isset($set['title'])) {
+      $set['title'] = $set['set_name'];
     }
     $shortcut_set = new stdClass();
     $shortcut_set->set_name = $set['set_name'];
@@ -552,4 +560,26 @@ function navbar_shortcut_save_config_to_db($staging_config, $active_config) {
     $shortcut_set->links = $set['links'];
     navbar_shortcut_set_save($shortcut_set, FALSE);
   }
+}
+
+/**
+ * The initial default shortcut set.
+ */
+function navbar_default_shortcut_set() {
+  $t = get_t();
+  $shortcut_set = new stdClass();
+  $shortcut_set->title = $t('Default');
+  $shortcut_set->links = array(
+    array(
+      'link_path' => 'node/add',
+      'link_title' => $t('Add content'),
+      'weight' => -20,
+    ),
+    array(
+      'link_path' => 'admin/content',
+      'link_title' => $t('Find content'),
+      'weight' => -19,
+    ),
+  );
+  return $shortcut_set;
 }
