@@ -1669,3 +1669,11 @@ function navbar_theme_settings_submit($form, &$form_state) {
   // Save the list of components as a simple array, rather than key/value pair.
   $form_state['values']['components'] = array_keys(array_filter($form_state['values']['components']));
 }
+
+/**
+ * Implements hook_config_update().
+ * Update the database according to config.
+ */
+function navbar_config_update($staging_config, $active_config) {
+  navbar_shortcut_save_config_to_db($staging_config, $active_config);
+}

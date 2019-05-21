@@ -10,22 +10,7 @@
  */
 function navbar_install() {
   module_load_include('inc', 'navbar', 'navbar.shortcut');
-  $t = get_t();
-  // Create an initial default shortcut set.
-  $shortcut_set = new stdClass();
-  $shortcut_set->title = $t('Default');
-  $shortcut_set->links = array(
-    array(
-      'link_path' => 'node/add',
-      'link_title' => $t('Add content'),
-      'weight' => -20,
-    ),
-    array(
-      'link_path' => 'admin/content',
-      'link_title' => $t('Find content'),
-      'weight' => -19,
-    ),
-  );
+  $shortcut_set = navbar_default_shortcut_set();
   // If Backdrop is being installed, rebuild the menu before saving the shortcut
   // set, to make sure the links defined above can be correctly saved. (During
   // installation, the menu might not have been built at all yet, or it might
@@ -119,6 +104,7 @@ function navbar_schema() {
  * Implements hook_update_N().
  */
 function navbar_update_1100() {
+  module_load_include('inc', 'navbar', 'navbar.shortcut');
   // Switch on some features.
   $components = array('navbar.user', 'navbar.shortcut', 'navbar.user_count', 'navbar.alert', 'navbar.search');
   config_set('navbar.settings', 'components', $components);
@@ -139,24 +125,12 @@ function navbar_update_1100() {
 
   $count = db_select('navbar_shortcut_set', 'ss')
     ->fields('ss')
-    ->condition('set_name', 'navbar-shortcut-set-1')
+    ->condition('set_name', NAVBAR_SHORTCUT_DEFAULT_SET_NAME)
     ->execute()
     ->rowCount();
   // Create an initial default shortcut set.
   if (!$count) {
-    $t = get_t();
-    $shortcut_set = array(
-      array(
-        'link_path' => 'node/add',
-        'link_title' => $t('Add content'),
-        'weight' => -20,
-      ),
-      array(
-        'link_path' => 'admin/content',
-        'link_title' => $t('Find content'),
-        'weight' => -19,
-      ),
-    );
+    $shortcut_set = navbar_default_shortcut_set();
     // If Backdrop is being installed, rebuild the menu before saving the shortcut
     // set, to make sure the links defined above can be correctly saved. (During
     // installation, the menu might not have been built at all yet, or it might
@@ -164,13 +138,24 @@ function navbar_update_1100() {
     if (backdrop_installation_attempted()) {
       menu_rebuild();
     }
-    $record['set_name'] = 'navbar-shortcut-set-1';
-    $record['title'] = $t('Default');
+    $record['set_name'] = NAVBAR_SHORTCUT_DEFAULT_SET_NAME;
+    $record['title'] = $shortcut_set->title;
     db_insert('navbar_shortcut_set')->fields($record)->execute();
-    foreach ($shortcut_set as $link) {
-      $link['menu_name'] = 'navbar-shortcut-set-1';
+    foreach ($shortcut_set->links as $link) {
+      $link['menu_name'] = NAVBAR_SHORTCUT_DEFAULT_SET_NAME;
       $link['plid'] = 0;
       menu_link_save($link);
     }
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function navbar_update_1101() {
+  module_load_include('inc', 'navbar', 'navbar.shortcut');
+  // Insert shortcut sets into configuration.
+  if (!config_get('navbar.settings', 'navbar_shortcut_sets')) {
+    navbar_shortcut_set_config_save();
   }
 }

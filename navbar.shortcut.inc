@@ -123,16 +123,22 @@ function navbar_shortcut_set_load($set_name) {
  *     - 'link_title': The title of the link.
  *     Any other keys accepted by menu_link_save() may also be provided.
  *
+ * @param $save_config
+ *   If it is TRUE, the configuration will be updated.
+ *
  * @return
  *   A constant which is either SAVED_NEW or SAVED_UPDATED depending on whether
  *   a new set was created or an existing one was updated.
  *
  * @see menu_link_save()
  */
-function navbar_shortcut_set_save(&$shortcut_set) {
+function navbar_shortcut_set_save(&$shortcut_set, $save_config = TRUE) {
   // First save the shortcut set itself.
-  if (isset($shortcut_set->set_name)) {
+  if (isset($shortcut_set->set_name) && $save_config) {
     $return = backdrop_write_record('navbar_shortcut_set', $shortcut_set, 'set_name');
+  }
+  elseif (isset($shortcut_set->set_name) && !$save_config) {
+    $return = backdrop_write_record('navbar_shortcut_set', $shortcut_set);
   }
   else {
     $shortcut_set->set_name = navbar_shortcut_set_get_unique_name();
@@ -155,6 +161,9 @@ function navbar_shortcut_set_save(&$shortcut_set) {
       $return = SAVED_UPDATED;
     }
   }
+  if (!empty($return) && $save_config) {
+    navbar_shortcut_set_config_save();
+  }
   return $return;
 }
 
@@ -166,20 +175,31 @@ function navbar_shortcut_set_save(&$shortcut_set) {
  * @param $shortcut_set
  *   An object representing the shortcut set to delete.
  *
+ * @param $default_erase
+ *   If it is TRUE, default set is erasable.
+ *
+ * @param $assign_erase
+ *   If it is TRUE, user assignments are erasable.
+ *
+ * @param $save_config
+ *   If it is TRUE, the configuration will be updated.
+ *
  * @return
  *   TRUE if the set was deleted, FALSE otherwise.
  */
-function navbar_shortcut_set_delete($shortcut_set) {
+function navbar_shortcut_set_delete($shortcut_set, $default_erase = FALSE, $assign_erase = TRUE, $save_config = TRUE) {
   // Don't allow deletion of the system default shortcut set.
-  if ($shortcut_set->set_name == NAVBAR_SHORTCUT_DEFAULT_SET_NAME) {
+  if ($shortcut_set->set_name == NAVBAR_SHORTCUT_DEFAULT_SET_NAME && !$default_erase) {
     return FALSE;
   }
 
   // First, delete any user assignments for this set, so that each of these
   // users will go back to using whatever default set applies.
-  db_delete('navbar_shortcut_set_users')
-    ->condition('set_name', $shortcut_set->set_name)
-    ->execute();
+  if ($assign_erase) {
+    db_delete('navbar_shortcut_set_users')
+      ->condition('set_name', $shortcut_set->set_name)
+      ->execute();
+  }
 
   // Next, delete the menu links for this set.
   menu_delete_links($shortcut_set->set_name);
@@ -189,6 +209,9 @@ function navbar_shortcut_set_delete($shortcut_set) {
     ->condition('set_name', $shortcut_set->set_name)
     ->execute();
 
+  if ($deleted && $save_config) {
+    navbar_shortcut_set_config_save();
+  }
   return (bool) $deleted;
 }
 
@@ -450,4 +473,113 @@ function navbar_shortcut_set_title($shortcut_set) {
  */
 function navbar_shortcut_set_title_callback($shortcut_set) {
   return $shortcut_set->title;
+}
+
+/**
+ * Save the shortcut's data to the config system.
+ *
+ */
+function navbar_shortcut_set_config_save() {
+  $config = config('navbar.settings');
+  $set_names_in_db = array();
+  $sets_in_config = $config->get('navbar_shortcut_sets');
+  // Clear config.
+  if (!empty($sets_in_config)) {
+    foreach ($sets_in_config as $set) {
+      $config->clear($set);
+    }
+    $config->save();
+  }
+  $sets_in_db = navbar_shortcut_sets();
+  foreach ($sets_in_db as $set) {
+    $links = navbar_shortcut_set_load($set->set_name);
+    // Remove 'mlid' from link's attributes.
+    foreach ($links->links as $key => $link) {
+      unset($links->links[$key]['mlid']);
+    }
+    $config->set($set->set_name, $links);
+    $set_names_in_db[] = $set->set_name;
+  }
+  $config->set('navbar_shortcut_sets', $set_names_in_db);
+  $config->save();
+  return;
+}
+
+/**
+ * Update the database according to config.
+ *
+ */
+function navbar_shortcut_save_config_to_db($staging_config, $active_config) {
+  global $user;
+  $sets_in_config = $staging_config->get('navbar_shortcut_sets');
+  $default_set = navbar_default_shortcut_set();
+  $default_set = (array) $default_set;
+  $default_set = array('set_name' => NAVBAR_SHORTCUT_DEFAULT_SET_NAME) + $default_set;
+  $new_def_set = $staging_config->get(NAVBAR_SHORTCUT_DEFAULT_SET_NAME);
+
+  // If there isn't the default set in the config or incomplete, insert it.
+  if (!in_array(NAVBAR_SHORTCUT_DEFAULT_SET_NAME, $sets_in_config)) {
+    $sets_in_config[] = NAVBAR_SHORTCUT_DEFAULT_SET_NAME;
+    $staging_config->set('navbar_shortcut_sets', $sets_in_config);
+    $staging_config->save();
+  }
+  if (is_null($new_def_set) || !isset($new_def_set['set_name']) || !isset($new_def_set['title']) || !isset($new_def_set['links'])) {
+    $staging_config->set(NAVBAR_SHORTCUT_DEFAULT_SET_NAME, $default_set);
+    $staging_config->save();
+  }
+  else {
+    $default_set = $new_def_set;
+  }
+
+  // Delete shortcut sets from database.
+  $sets_in_db = navbar_shortcut_sets();
+  foreach ($sets_in_db as $set) {
+    $assign_erase = TRUE;
+    if (in_array($set->set_name, $sets_in_config)) {
+      $assign_erase = FALSE;
+    }
+    navbar_shortcut_set_delete($set, TRUE, $assign_erase, FALSE);
+  }
+
+  // Save config into database.
+  foreach ($sets_in_config as $set_name) {
+    $set = $staging_config->get($set_name);
+    // Repair incomplete data.
+    if (!isset($set['links']) || !count($set['links'])) {
+      $set['links'] = $default_set['links'];
+    }
+    if (!isset($set['set_name'])) {
+      $set['set_name'] = navbar_shortcut_set_get_unique_name();
+    }
+    if (!isset($set['title'])) {
+      $set['title'] = $set['set_name'];
+    }
+    $shortcut_set = new stdClass();
+    $shortcut_set->set_name = $set['set_name'];
+    $shortcut_set->title = $set['title'];
+    $shortcut_set->links = $set['links'];
+    navbar_shortcut_set_save($shortcut_set, FALSE);
+  }
+}
+
+/**
+ * The initial default shortcut set.
+ */
+function navbar_default_shortcut_set() {
+  $t = get_t();
+  $shortcut_set = new stdClass();
+  $shortcut_set->title = $t('Default');
+  $shortcut_set->links = array(
+    array(
+      'link_path' => 'node/add',
+      'link_title' => $t('Add content'),
+      'weight' => -20,
+    ),
+    array(
+      'link_path' => 'admin/content',
+      'link_title' => $t('Find content'),
+      'weight' => -19,
+    ),
+  );
+  return $shortcut_set;
 }
