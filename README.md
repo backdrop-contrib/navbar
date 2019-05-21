@@ -65,7 +65,7 @@ If you add a top-level menu item that requires an associated icon, you can add t
 function workbench_navbar() {
   $items['workbench'] = array(
     '#attached' => array(
-      'css' => array(drupal_get_path('module', 'workbench') . '/workbench.navbar.icons.css'),
+      'css' => array(backdrop_get_path('module', 'workbench') . '/workbench.navbar.icons.css'),
     ),
   );
   return $items;
