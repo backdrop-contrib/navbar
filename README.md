@@ -27,10 +27,11 @@ Shortcuts tray
 It provides a toolbar on the top of the page to which you can add links.
 
 Usage:
-- You can enable the shortcuts tray on module's configure page: Administer >> Configuration >> Administration >> Navbar
-- Go to Administer >> Configuration >> User interface >> Navbar shortcuts. Here you can create and delete shortcut set, and add, modify, delete links of a shortcut set.
+- You can enable the shortcuts tray on module's configure page: Administration > Configuration > Administration > Navbar
+- Go to Administration > Configuration > User interface > Navbar shortcuts. Here you can create and delete shortcut set, and add, modify, delete links of a shortcut set.
 - On the 'List links' page use the 'Show row weights' for more details.
 - You can switch current shortcut set on the user profil page on 'Navbar shortcuts' tab.
+- Shortcut sets can be imported, exported by Configuration management: Administration > Configuration > Development > Configuration management
 
 
 3rd party JavaScript libraries
@@ -77,7 +78,7 @@ Icons
 
 The toolbar uses the SVG icons designed by ry5n: [https://github.com/ry5n/libricons](https://github.com/ry5n/libricons)  
 Recommended application for create an icon: [Inkscape](https://inkscape.org/)  
-Set the page size to 16x16px (Inkscape: File -> Document Properties -> Width: 16, Height: 16, Units: px)
+Set the page size to 16x16px (Inkscape: File > Document Properties > Width: 16, Height: 16, Units: px)
 
 
 Issues
