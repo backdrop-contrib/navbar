@@ -50,82 +50,125 @@
 /**
  * Main menu icons.
  */
+
+/* Hover on menu and submenu. */
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-content:before,
+/* Hover on result list sets 'open' class. */
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-content:before,
 .navbar-icon-content:active:before,
 .navbar-icon-content.navbar-active:before {
   background-image: url("../icons/bebebe/file.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-content:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-content:before,
 .no-svg .navbar-icon-content:active:before,
 .no-svg .navbar-icon-content.navbar-active:before {
   background-image: url("../icons/bebebe/file.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-user-accounts:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-user-accounts:before,
 .navbar-icon-user-accounts:active:before,
 .navbar-icon-user-accounts.navbar-active:before {
   background-image: url("../icons/bebebe/people.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-user-accounts:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-user-accounts:before,
 .no-svg .navbar-icon-user-accounts:active:before,
 .no-svg .navbar-icon-user-accounts.navbar-active:before {
   background-image: url("../icons/bebebe/people.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-appearance:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-appearance:before,
 .navbar-icon-appearance:active:before,
 .navbar-icon-appearance.navbar-active:before {
   background-image: url("../icons/bebebe/paintbrush.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-appearance:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-appearance:before,
 .no-svg .navbar-icon-appearance:active:before,
 .no-svg .navbar-icon-appearance.navbar-active:before {
   background-image: url("../icons/bebebe/paintbrush.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-functionality:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-functionality:before,
 .navbar-icon-functionality:active:before,
 .navbar-icon-functionality.navbar-active:before {
   background-image: url("../icons/bebebe/puzzlepiece.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-functionality:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-functionality:before,
 .no-svg .navbar-icon-functionality:active:before,
 .no-svg .navbar-icon-functionality.navbar-active:before {
   background-image: url("../icons/bebebe/puzzlepiece.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-structure:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-structure:before,
 .navbar-icon-structure:active:before,
 .navbar-icon-structure.navbar-active:before {
   background-image: url("../icons/bebebe/orgchart.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-structure:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-structure:before,
 .no-svg .navbar-icon-structure:active:before,
 .no-svg .navbar-icon-structure.navbar-active:before {
   background-image: url("../icons/bebebe/orgchart.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-configuration:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-configuration:before,
 .navbar-icon-configuration:active:before,
 .navbar-icon-configuration.navbar-active:before {
   background-image: url("../icons/bebebe/cog.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-configuration:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-configuration:before,
 .no-svg .navbar-icon-configuration:active:before,
 .no-svg .navbar-icon-configuration.navbar-active:before {
   background-image: url("../icons/bebebe/cog.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-development:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-development:before,
 .navbar-icon-development:active:before,
 .navbar-icon-development.navbar-active:before {
   background-image: url("../icons/bebebe/devel.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-development:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-development:before,
 .no-svg .navbar-icon-development:active:before,
 .no-svg .navbar-icon-development.navbar-active:before {
   background-image: url("../icons/bebebe/devel.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-reports:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-reports:before,
 .navbar-icon-reports:active:before,
 .navbar-icon-reports.navbar-active:before {
   background-image: url("../icons/bebebe/barchart.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-reports:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-reports:before,
 .no-svg .navbar-icon-reports:active:before,
 .no-svg .navbar-icon-reports.navbar-active:before {
   background-image: url("../icons/bebebe/barchart.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-dashboard:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-dashboard:before,
 .navbar-icon-dashboard:active:before,
 .navbar-icon-dashboard.navbar-active:before {
   background-image: url("../icons/bebebe/dashboard.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-dashboard:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-dashboard:before,
 .no-svg .navbar-icon-dashboard:active:before,
 .no-svg .navbar-icon-dashboard.navbar-active:before {
   background-image: url("../icons/bebebe/dashboard.png");
 }
+.navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-help:before,
+.navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-help:before,
 .navbar-icon-help:active:before,
 .navbar-icon-help.navbar-active:before {
   background-image: url("../icons/bebebe/questionmark-disc.svg");
 }
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover .navbar-icon-help:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open .navbar-icon-help:before,
 .no-svg .navbar-icon-help:active:before,
 .no-svg .navbar-icon-help.navbar-active:before {
   background-image: url("../icons/bebebe/questionmark-disc.png");

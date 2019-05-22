@@ -59,10 +59,12 @@
   border-color:#777777 !important;
 }
 
+.navbar-tray-horizontal .navbar-menu-administration ul li.open > .navbar-box > .navbar-icon.navbar-handle:before,
 .navbar-tray-horizontal .navbar-menu-administration ul li:hover > .navbar-box > .navbar-icon.navbar-handle:before {
   background-image: url("../icons/ffffff/arrow-right.svg") !important;
 }
 
-.navbar-tray-horizontal .navbar-menu-administration ul li:hover > .navbar-box > .navbar-icon.navbar-handle:before {
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open > .navbar-box > .navbar-icon.navbar-handle:before,
+.no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover > .navbar-box > .navbar-icon.navbar-handle:before {
   background-image: url("../icons/ffffff/arrow-right.png") !important;
 }
