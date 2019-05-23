@@ -68,3 +68,13 @@
 .no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover > .navbar-box > .navbar-icon.navbar-handle:before {
   background-image: url("../icons/ffffff/arrow-right.png") !important;
 }
+
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul li.open > .navbar-box > .navbar-icon.navbar-handle:before,
+[dir="rtl"] .navbar-tray-horizontal .navbar-menu-administration ul li:hover > .navbar-box > .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/ffffff/arrow-left.svg") !important;
+}
+
+[dir="rtl"] .no-svg .navbar-tray-horizontal .navbar-menu-administration ul li.open > .navbar-box > .navbar-icon.navbar-handle:before,
+[dir="rtl"] .no-svg .navbar-tray-horizontal .navbar-menu-administration ul li:hover > .navbar-box > .navbar-icon.navbar-handle:before {
+  background-image: url("../icons/ffffff/arrow-left.png") !important;
+}
