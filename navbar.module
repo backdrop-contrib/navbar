@@ -1600,10 +1600,10 @@ function navbar_theme_settings() {
   global $user;
   $config = config('navbar.settings');
   $form['#config'] = 'navbar.settings';
-  $screenshots1 = l(t('Screenshot #1'), 'https://github.com/backdrop-contrib/navbar/raw/1.x-1.x/images/screenshot-vertical.png');
-  $screenshots1 .= ', ' . l(t('Screenshot #2'), 'https://github.com/backdrop-contrib/navbar/raw/1.x-1.x/images/screenshot-horizontal.png');
-  $screenshots2 = l(t('Screenshot #1'), 'https://github.com/backdrop-contrib/navbar/raw/1.x-1.x/images/screenshot-vertical-dark.png');
-  $screenshots2 .= ', ' . l(t('Screenshot #2'), 'https://github.com/backdrop-contrib/navbar/raw/1.x-1.x/images/screenshot-horizontal-dark.png');
+  $screenshots1 = l(t('Screenshot') . ' #1', 'https://github.com/backdrop-contrib/navbar/raw/1.x-1.x/images/screenshot-vertical.png');
+  $screenshots1 .= ', ' . l(t('Screenshot') . ' #2', 'https://github.com/backdrop-contrib/navbar/raw/1.x-1.x/images/screenshot-horizontal.png');
+  $screenshots2 = l(t('Screenshot') . ' #1', 'https://github.com/backdrop-contrib/navbar/raw/1.x-1.x/images/screenshot-vertical-dark.png');
+  $screenshots2 .= ', ' . l(t('Screenshot') . ' #2', 'https://github.com/backdrop-contrib/navbar/raw/1.x-1.x/images/screenshot-horizontal-dark.png');
 
   $form['components'] = array(
     '#type' => 'checkboxes',
