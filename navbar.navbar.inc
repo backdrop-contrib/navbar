@@ -49,6 +49,88 @@ function navbar_navbar() {
     // Add attributes to the links before rendering.
     navbar_menu_navigation_links($tree);
 
+    $tree = navbar_menu_tree_build($tree);
+
+    // Add links under Dashboard.
+    $new_menu_item = FALSE;
+    reset($tree);
+    $first_key = key($tree);
+    if ($tree[$first_key]['#title'] == 'Dashboard') {
+      // Add link to manually run cron.
+      if (user_access('administer site configuration')) {
+        $new_menu_item = TRUE;
+        // Set cron link.
+        $tree[$first_key]['#below']['cron'] = array(
+          '#theme' => 'menu_link__management',
+          '#title' => t('Run cron'),
+          '#href' => 'admin/reports/status/run-cron',
+          '#below' => array(),
+          '#attributes' => array(
+            'class' => array(
+              '0' => 'leaf',
+            ),
+          ),
+          '#localized_options' => array(
+            'alias' => TRUE,
+            'attributes' => array(
+              'id' => 'navbar-link-admin-dashboard-cron',
+              'title' => 'Run cron manually',
+              'class' => array(
+                '0' => 'navbar-icon',
+                '1' => 'navbar-icon-cron',
+              ),
+            ),
+          ),
+        );
+      }
+
+      // Add link to run update.php.
+      if ($GLOBALS['user']->uid == 1 || settings_get('update_free_access') || user_access('administer software updates')) {
+        $new_menu_item = TRUE;
+        // Set update link.
+        $tree[$first_key]['#below']['update'] = array(
+          '#theme' => 'menu_link__management',
+          '#title' => t('Run updates'),
+          '#href' => base_path() . 'core/update.php',
+          '#options' => array(
+            'external' => TRUE,
+          ),
+          '#below' => array(),
+          '#attributes' => array(
+            'class' => array(
+              '0' => 'leaf',
+            ),
+          ),
+          '#localized_options' => array(
+            'external' => TRUE,
+            'alias' => TRUE,
+            'attributes' => array(
+              'id' => 'navbar-link-admin-dashboard-update',
+              'title' => 'Run core/update.php',
+              'class' => array(
+                '0' => 'navbar-icon',
+                '1' => 'navbar-icon-update',
+              ),
+            ),
+          ),
+        );
+      }
+
+      if ($new_menu_item) {
+        //Move the 'last' class.
+        foreach ($tree[$first_key]['#below'] as $key => $value) {
+          if (isset($tree[$first_key]['#below'][$key]['#attributes']['class'][0])) {
+            if ($tree[$first_key]['#below'][$key]['#attributes']['class'][0] == 'last') {
+              unset($tree[$first_key]['#below'][$key]['#attributes']['class'][0]);
+            }
+          }
+        }
+        end($tree[$first_key]['#below']);
+        $last_below_key = key($tree[$first_key]['#below']);
+        $tree[$first_key]['#below'][$last_below_key]['#attributes']['class'][] = 'last';
+      }
+    }
+
     $menu = array(
       '#heading' => t('Administration menu'),
       'navbar_administration' => array(
@@ -58,7 +140,7 @@ function navbar_navbar() {
         '#attributes' => array(
           'class' => array('navbar-menu-administration'),
         ),
-        'administration_menu' => navbar_menu_tree_build($tree),
+        'administration_menu' => $tree,
       ),
     );
 
