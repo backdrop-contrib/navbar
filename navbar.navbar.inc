@@ -14,6 +14,7 @@ function navbar_navbar() {
   $items = array();
   $config = config('navbar.settings');
   $components = $config->get('components');
+  $destination = backdrop_get_destination();
 
   // Provides a simple link to escape the administration area.
   $items['home'] = array(
@@ -51,19 +52,52 @@ function navbar_navbar() {
 
     $tree = navbar_menu_tree_build($tree);
 
-    // Add links under Dashboard.
-    $new_menu_item = FALSE;
+    // Add links under 'Dashboard'.
     reset($tree);
     $first_key = key($tree);
     if ($tree[$first_key]['#title'] == 'Dashboard') {
-      // Add link to manually run cron.
-      if (user_access('administer site configuration')) {
-        $new_menu_item = TRUE;
-        // Set cron link.
-        $tree[$first_key]['#below']['cron'] = array(
+      // Set 'Flush all caches' link.
+      $tree[$first_key]['#below']['flush-cache'] = array(
+        '#theme' => 'menu_link__management',
+        '#title' => t('Flush all caches'),
+        '#href' => 'admin_bar/flush-cache',
+        '#access' => user_access('flush caches'),
+        '#below' => array(),
+        '#attributes' => array(
+          'class' => array(
+            '0' => 'leaf',
+          ),
+        ),
+        '#localized_options' => array(
+          'query' => $destination + array('token' => backdrop_get_token('admin_bar/flush-cache')),
+          'alias' => TRUE,
+          'attributes' => array(
+            'id' => 'navbar-link-admin-dashboard-flush-cache',
+            'title' => t('Flush all caches'),
+            'class' => array(
+              '0' => 'navbar-icon',
+              '1' => 'navbar-icon-flush-cache',
+            ),
+          ),
+        ),
+        '#below' => array(
+          '#sorted' => TRUE,
+          '#depth' => 2,
+          '#theme_wrappers' => array(
+            '0' => 'menu_tree__management',
+          ),
+        ),
+      );
+
+      // Set submenu of the 'Flush all caches'.
+      $caches = module_invoke_all('admin_bar_cache_info');
+      asort($caches);
+      $first_cache_key = key($caches);
+      foreach ($caches as $name => $cache) {
+        $tree[$first_key]['#below']['flush-cache']['#below'][$name] = array(
           '#theme' => 'menu_link__management',
-          '#title' => t('Run cron'),
-          '#href' => 'admin/reports/status/run-cron',
+          '#title' => $cache['title'],
+          '#href' => 'admin_bar/flush-cache/' . $name,
           '#below' => array(),
           '#attributes' => array(
             'class' => array(
@@ -71,64 +105,88 @@ function navbar_navbar() {
             ),
           ),
           '#localized_options' => array(
+            'query' => $destination + array('token' => backdrop_get_token('admin_bar/flush-cache/' . $name)),
             'alias' => TRUE,
             'attributes' => array(
-              'id' => 'navbar-link-admin-dashboard-cron',
-              'title' => 'Run cron manually',
+              'id' => 'navbar-link-admin-dashboard-flush-cache-' . $name,
+              'title' => t('Flush cache') . ' ' . $name,
               'class' => array(
                 '0' => 'navbar-icon',
-                '1' => 'navbar-icon-cron',
+                '1' => 'navbar-icon-flush-cache-' . $name,
               ),
             ),
           ),
         );
       }
+      // First child of 'Flush all caches' gets 'first' class.
+      $tree[$first_key]['#below']['flush-cache']['#below'][$first_cache_key]['#attributes']['class'][] = 'first';
+      // Last child of 'Flush all caches' gets 'last' class.
+      end($tree[$first_key]['#below']['flush-cache']['#below']);
+      $last_below_key = key($tree[$first_key]['#below']['flush-cache']['#below']);
+      $tree[$first_key]['#below']['flush-cache']['#below'][$last_below_key]['#attributes']['class'][] = 'last';
+
+      // Add link to manually run cron.
+      $tree[$first_key]['#below']['cron'] = array(
+        '#theme' => 'menu_link__management',
+        '#title' => t('Run cron'),
+        '#href' => 'admin/reports/status/run-cron',
+        '#access' => user_access('administer site configuration'),
+        '#below' => array(),
+        '#attributes' => array(
+          'class' => array(
+            '0' => 'leaf',
+          ),
+        ),
+        '#localized_options' => array(
+          'alias' => TRUE,
+          'attributes' => array(
+            'id' => 'navbar-link-admin-dashboard-cron',
+            'title' => t('Run cron manually'),
+            'class' => array(
+              '0' => 'navbar-icon',
+              '1' => 'navbar-icon-cron',
+            ),
+          ),
+        ),
+      );
 
       // Add link to run update.php.
-      if ($GLOBALS['user']->uid == 1 || settings_get('update_free_access') || user_access('administer software updates')) {
-        $new_menu_item = TRUE;
-        // Set update link.
-        $tree[$first_key]['#below']['update'] = array(
-          '#theme' => 'menu_link__management',
-          '#title' => t('Run updates'),
-          '#href' => base_path() . 'core/update.php',
-          '#options' => array(
-            'external' => TRUE,
+      $tree[$first_key]['#below']['update'] = array(
+        '#theme' => 'menu_link__management',
+        '#title' => t('Run updates'),
+        '#href' => base_path() . 'core/update.php',
+        '#access' => $GLOBALS['user']->uid == 1 || settings_get('update_free_access') || user_access('administer software updates'),
+        '#below' => array(),
+        '#attributes' => array(
+          'class' => array(
+            '0' => 'leaf',
           ),
-          '#below' => array(),
-          '#attributes' => array(
+        ),
+        '#localized_options' => array(
+          'external' => TRUE,
+          'alias' => TRUE,
+          'attributes' => array(
+            'id' => 'navbar-link-admin-dashboard-update',
+            'title' => t('Run core/update.php'),
             'class' => array(
-              '0' => 'leaf',
+              '0' => 'navbar-icon',
+              '1' => 'navbar-icon-update',
             ),
           ),
-          '#localized_options' => array(
-            'external' => TRUE,
-            'alias' => TRUE,
-            'attributes' => array(
-              'id' => 'navbar-link-admin-dashboard-update',
-              'title' => 'Run core/update.php',
-              'class' => array(
-                '0' => 'navbar-icon',
-                '1' => 'navbar-icon-update',
-              ),
-            ),
-          ),
-        );
-      }
+        ),
+      );
 
-      if ($new_menu_item) {
-        //Move the 'last' class.
-        foreach ($tree[$first_key]['#below'] as $key => $value) {
-          if (isset($tree[$first_key]['#below'][$key]['#attributes']['class'][0])) {
-            if ($tree[$first_key]['#below'][$key]['#attributes']['class'][0] == 'last') {
-              unset($tree[$first_key]['#below'][$key]['#attributes']['class'][0]);
-            }
+      //Move the 'last' class.
+      foreach ($tree[$first_key]['#below'] as $key => $value) {
+        if (isset($tree[$first_key]['#below'][$key]['#attributes']['class'][0])) {
+          if ($tree[$first_key]['#below'][$key]['#attributes']['class'][0] == 'last') {
+            unset($tree[$first_key]['#below'][$key]['#attributes']['class'][0]);
           }
         }
-        end($tree[$first_key]['#below']);
-        $last_below_key = key($tree[$first_key]['#below']);
-        $tree[$first_key]['#below'][$last_below_key]['#attributes']['class'][] = 'last';
       }
+      end($tree[$first_key]['#below']);
+      $last_below_key = key($tree[$first_key]['#below']);
+      $tree[$first_key]['#below'][$last_below_key]['#attributes']['class'][] = 'last';
     }
 
     $menu = array(
