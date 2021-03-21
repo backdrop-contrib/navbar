@@ -159,3 +159,10 @@ function navbar_update_1101() {
     navbar_shortcut_set_config_save();
   }
 }
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function navbar_update_last_removed() {
+  return 7001;
+}
