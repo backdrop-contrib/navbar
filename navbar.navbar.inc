@@ -345,7 +345,7 @@ function navbar_navbar() {
           '#prefix' => '<div class="navbar-tools-users navbar-tools-right-component">',
           '#suffix' => '</div>',
           '#type' => 'link',
-          '#title' => $counter['user-counter']['#title'],
+          '#title' => strip_tags($counter['user-counter']['#title']),
           '#description' => $counter['user-counter']['#description'],
           '#href' => $counter['user-counter']['#href'],
           '#options' => array(
