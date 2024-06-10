@@ -1611,6 +1611,7 @@ function navbar_theme_settings() {
     '#options' => array(
       'navbar.shortcut' => t('Shortcuts tray'),
       'navbar.user' => t('My account'),
+      'navbar.this_page' => t('"This page" tray'),
       'navbar.alert' => t('Notification badge about errors'),
       'navbar.user_count' => t('User counts'),
       'navbar.search' => t('Search bar'),

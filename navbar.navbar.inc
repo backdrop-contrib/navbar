@@ -282,7 +282,7 @@ function navbar_navbar() {
             ),
           ),
         ),
-        '#weight' => 100,
+        '#weight' => -8,
       );
     }
 
@@ -399,6 +399,72 @@ function navbar_navbar() {
           '#weight' => -10,
         );
       }
+    }
+
+    // Add "This page" tray.
+    if (in_array('navbar.this_page', $components)) {
+      // Get Administration bar core module's "This page" links.
+      $links = admin_bar_links_page();
+
+      // Set defaults. It is necessary for the self-test.
+      $page_theme_title = isset($links['page']['page-theme']['#title']) ? $links['page']['page-theme']['#title'] : t('Theme');
+      $page_theme_href = isset($links['page']['page-theme']['#href']) ? $links['page']['page-theme']['#href'] : 'admin/appearance';
+      $page_layout_title = isset($links['page']['page-layout']['#title']) ? $links['page']['page-layout']['#title'] : t('Layout');
+      $page_layout_href = isset($links['page']['page-layout']['#href']) ? $links['page']['page-layout']['#href'] : 'admin/structure/layouts';
+      $page_layout_configure_title = t('Configure Layout');
+      $page_layout_configure_href = isset($links['page']['page-layout']['configure']['#href']) ? $links['page']['page-layout']['configure']['#href'] : 'admin/structure/layouts';
+      $page_title = isset($links['page']['#title']) ? $links['page']['#title'] : t('This page');
+
+      $this_page_links['page-theme'] = array(
+        'title' => $page_theme_title,
+        'href' => $page_theme_href,
+        'html' => true,
+        'attributes' => array(
+          'title' => $page_theme_title,
+        ),
+      );
+      $this_page_links['page-layout'] = array(
+        'title' => $page_layout_title,
+        'href' => $page_layout_href,
+        'html' => true,
+        'attributes' => array(
+          'title' => $page_layout_title,
+        ),
+      );
+      $this_page_links['page-layout-configure'] = array(
+        'title' => $page_layout_configure_title,
+        'href' => $page_layout_configure_href,
+        'html' => true,
+        'attributes' => array(
+          'title' => $page_layout_configure_title,
+        ),
+      );
+
+      $items['this_page'] = array(
+        '#type' => 'navbar_item',
+        'tab' => array(
+          '#type' => 'link',
+          '#title' => $page_title,
+          '#href' => current_path(),
+          '#options' => array(
+            'attributes' => array(
+              'title' => $page_title,
+              'class' => array('navbar-icon', 'navbar-icon-this-page',),
+            ),
+          ),
+        ),
+        'tray' => array(
+          '#heading' => t('Information about this page'),
+          'this_page_links' => array(
+            '#theme' => 'links__navbar_user',
+            '#links' => $this_page_links,
+            '#attributes' => array(
+              'class' => array('navbar-menu', 'navbar-menu-this-page'),
+            ),
+          ),
+        ),
+        '#weight' => -5,
+      );
     }
   }
   return $items;
