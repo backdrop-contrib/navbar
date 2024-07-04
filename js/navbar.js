@@ -135,7 +135,7 @@ Backdrop.behaviors.navbar = {
     });
 
     // Invoke the Navbar menu script for core modules.
-    $('.navbar-menu-user').backdropNavbarMenu();
+    $('.navbar-menu-user, .navbar-menu-this-page').backdropNavbarMenu();
     $('.navbar-menu-shortcuts .navbar-lining > .navbar-menu').backdropNavbarMenu();
   }
 };

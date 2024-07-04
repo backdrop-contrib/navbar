@@ -4,6 +4,7 @@
     "components": [
         "navbar.shortcut",
         "navbar.user",
+        "navbar.this_page",
         "navbar.user_count",
         "navbar.alert",
         "navbar.search"

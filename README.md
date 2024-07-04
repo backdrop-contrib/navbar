@@ -19,7 +19,7 @@ Installation
 - Enable Backdrop core's Administration bar module.
 - Install this module using the official Backdrop CMS instructions at
   https://backdropcms.org/guide/modules
-- You can show or hide some components (search bar, shortcuts, notification badge etc.) on the module's "Configure" page and switch light/dark theme.
+- You can show or hide some components (search bar, shortcuts, notification badge, my account, user counts, "This page" tray) on the module's "Configure" page and switch light/dark theme.
 
 
 Shortcuts tray

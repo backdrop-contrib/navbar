@@ -64,6 +64,20 @@
 .no-svg .navbar-bar .navbar-icon-menu.navbar-active:before {
   background-image: url("../icons/ffffff/hamburger.png");
 }
+.navbar-bar .navbar-icon-this-page:before {
+  background-image: url("../icons/bebebe/page.svg");
+}
+.no-svg .navbar-bar .navbar-icon-this-page:before {
+  background-image: url("../icons/bebebe/page.png");
+}
+.navbar-bar .navbar-icon-this-page:active:before,
+.navbar-bar .navbar-icon-this-page.navbar-active:before {
+  background-image: url("../icons/ffffff/page.svg");
+}
+.no-svg .navbar-bar .navbar-icon-this-page:active:before,
+.no-svg .navbar-bar .navbar-icon-this-page.navbar-active:before {
+  background-image: url("../icons/ffffff/page.png");
+}
 .navbar-bar .navbar-icon-help:before {
   background-image: url("../icons/bebebe/questionmark-disc.svg");
 }
